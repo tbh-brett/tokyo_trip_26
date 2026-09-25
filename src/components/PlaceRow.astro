@@ -1,0 +1,83 @@
+---
+import StationBadge from './StationBadge.astro';
+import type { Line, Place } from '../lib/data';
+import { closedText, hoursText } from '../lib/time';
+
+interface Props {
+  place: Place;
+  line: Line;
+}
+
+const { place: p, line } = Astro.props;
+const schedule = [hoursText(p.hours), closedText(p.closed_days)].filter(Boolean).join(' · ');
+---
+
+<li
+  class="row"
+  data-place={p.id}
+  data-zone={p.zone}
+  data-hours={JSON.stringify(p.hours)}
+  data-closed={p.closed_days.join(',')}
+  data-verified={String(p.hours_verified)}
+>
+  <a href={`/p/${p.id}/`}>
+    <span class="head">
+      <span class="names t20 w500">
+        <span class="en">{p.name_en}</span>
+        {p.name_ja !== p.name_en && <span class="ja" lang="ja">{p.name_ja}</span>}
+      </span>
+      <span class="tag" data-tag hidden></span>
+    </span>
+    <span class="rec">{p.recognition}</span>
+    <span class="why">{p.why}</span>
+    <span class="meta">
+      <StationBadge line={line} station={p.station} />
+      <span class="mono">{p.price}</span>
+      {p.book_ahead && <span class="t13 w500">Book ahead</span>}
+    </span>
+    <span class="t13 muted"><span class="open w500" data-open></span>{schedule}</span>
+  </a>
+</li>
+
+<style>
+  .row a {
+    display: block;
+    padding: calc(var(--u) * 2) var(--g);
+    border-bottom: 1px solid var(--grey-2);
+    text-decoration: none;
+  }
+  .row a > span {
+    display: block;
+  }
+  .row a > span + span {
+    margin-top: 4px;
+  }
+  .head {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--g);
+  }
+  .names > span {
+    display: block;
+    line-height: 1.25;
+  }
+  .rec {
+    font-weight: 500;
+  }
+  .meta {
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: var(--g);
+    row-gap: 4px;
+    margin-top: var(--u) !important;
+  }
+  .open:not(:empty)::after {
+    content: ' · ';
+    font-weight: 400;
+  }
+  .row[data-mark='skip'] a {
+    opacity: 0.55;
+  }
+</style>

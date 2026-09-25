@@ -1,0 +1,100 @@
+[
+  {
+    "id": "jimbocho-kissaten",
+    "title": "Jimbocho kissaten crawl",
+    "zone": "base",
+    "mode": "walk",
+    "when": "Any weekday morning; most are shut Sundays",
+    "why": "Seven of the national top-100 kissaten inside a few blocks. Pick three, not seven.",
+    "stops": [
+      "ladrio",
+      "milonga",
+      "brazil",
+      "koseto",
+      "saboru",
+      "troisbagues",
+      "katsumoto",
+      "bondy"
+    ],
+    "order_verified": false
+  },
+  {
+    "id": "aoyama-ginkgo-morning",
+    "title": "Ginkgo morning, Aoyama day",
+    "zone": "omote",
+    "mode": "walk",
+    "when": "Sat 28 Nov, start 07:45 at Gaienmae (G03)",
+    "why": "Leaves before the crowds, then the best coffee and tea concentration in Tokyo, all on foot.",
+    "stops": [
+      "gaien",
+      "kasa",
+      "philocoffea",
+      "mameya",
+      "sakurai"
+    ],
+    "order_verified": false
+  },
+  {
+    "id": "yanesen-walk",
+    "title": "Yanesen on foot",
+    "zone": "yanesen",
+    "mode": "walk",
+    "when": "Sun 29 Nov, from 08:00",
+    "why": "Old wooden Tokyo, a lacquered shrine, and a kissaten that opens early enough to beat the queue.",
+    "stops": [
+      "kayaba",
+      "nezu",
+      "ignis"
+    ],
+    "order_verified": false
+  },
+  {
+    "id": "kappabashi-kuramae",
+    "title": "Knives and Kuramae",
+    "zone": "asakusa",
+    "mode": "walk",
+    "when": "Wed 2 Dec, 10:30",
+    "why": "Kappabashi in its quiet window, top-100 ramen or tonkatsu for lunch, done by mid-afternoon.",
+    "stops": [
+      "kappabashi",
+      "kamaasa",
+      "tsubaya",
+      "mitsui",
+      "sugita"
+    ],
+    "order_verified": false
+  },
+  {
+    "id": "ginza-evening",
+    "title": "Ginza into the night",
+    "zone": "ginza",
+    "mode": "walk",
+    "when": "Thu 3 Dec, from 15:00",
+    "why": "Aged coffee, the food hall before close, two illuminations, then a proper bar.",
+    "stops": [
+      "lambre",
+      "mitsukoshi",
+      "marunouchi-il",
+      "hibiya-il",
+      "oldimperial",
+      "moribar"
+    ],
+    "order_verified": false
+  },
+  {
+    "id": "home-turf-morning",
+    "title": "Home-turf morning",
+    "zone": "base",
+    "mode": "walk",
+    "when": "Any morning from the hotel",
+    "why": "Shrine, Confucian temple, top-100 kissaten, then soba — all inside a 15-minute radius of the hotel.",
+    "stops": [
+      "myojin",
+      "yushima",
+      "takayama",
+      "yabusoba",
+      "matsuya"
+    ],
+    "order_verified": false
+  }
+]

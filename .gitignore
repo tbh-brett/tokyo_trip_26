@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.astro/
+src/fonts/
+.wrangler/
+.dev.vars*
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db

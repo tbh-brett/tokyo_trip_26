@@ -1,0 +1,98 @@
+---
+import Base from '../../layouts/Base.astro';
+import PlaceRow from '../../components/PlaceRow.astro';
+import { KINDS, loadData, zoneShort, type Kind } from '../../lib/data';
+
+export function getStaticPaths() {
+  return KINDS.map((k) => ({ params: { kind: k.id } }));
+}
+
+const kind = Astro.params.kind as Kind;
+const data = await loadData();
+const label = KINDS.find((k) => k.id === kind)!.label;
+const list = data.places.filter((p) => p.kind === kind);
+const kinds = KINDS.map((k) => ({ ...k, n: data.places.filter((p) => p.kind === k.id).length }));
+const zones = data.zones
+  .map((z) => ({ id: z.id, name: zoneShort(z), n: list.filter((p) => p.zone === z.id).length }))
+  .filter((z) => z.n > 0);
+---
+
+<Base title={label} tab="places">
+  <header class="page-head">
+    <h1 class="t40 w700">{label}</h1>
+  </header>
+
+  <nav class="wrap" aria-label="Kind of place">
+    <div class="chips">
+      {
+        kinds.map((k) => (
+          <a class="chip" href={`/places/${k.id}/`} data-kind-link aria-current={k.id === kind ? 'page' : undefined}>
+            {k.label} <span class="n">{k.n}</span>
+          </a>
+        ))
+      }
+    </div>
+  </nav>
+
+  <div class="wrap area">
+    <span class="label" id="area-label">Area</span>
+    <div class="chips" role="group" aria-labelledby="area-label">
+      <button type="button" class="chip" data-zone-filter="" aria-pressed="true">
+        All <span class="n">{list.length}</span>
+      </button>
+      {
+        zones.map((z) => (
+          <button type="button" class="chip" data-zone-filter={z.id} aria-pressed="false">
+            {z.name} <span class="n">{z.n}</span>
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  <p class="wrap t13 muted count" aria-live="polite" data-count>{list.length} places</p>
+  <ul class="rows">
+    {list.map((p) => <PlaceRow place={p} line={data.line(p.line)} />)}
+  </ul>
+</Base>
+
+<style>
+  .area {
+    margin-top: calc(var(--u) * 3);
+  }
+  .area .label {
+    margin-bottom: var(--u);
+  }
+  .count {
+    margin-top: calc(var(--u) * 3);
+    padding-bottom: var(--u);
+    border-bottom: 1px solid var(--ink);
+  }
+</style>
+
+<script>
+  import { watchRows } from '../../scripts/rows';
+
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-zone-filter]')];
+  const rows = [...document.querySelectorAll<HTMLElement>('[data-place]')];
+  const count = document.querySelector<HTMLElement>('[data-count]');
+  const kindLinks = [...document.querySelectorAll<HTMLAnchorElement>('[data-kind-link]')];
+
+  function apply(zone: string) {
+    if (!buttons.some((b) => b.dataset.zoneFilter === zone)) zone = '';
+    for (const b of buttons) b.setAttribute('aria-pressed', String(b.dataset.zoneFilter === zone));
+    let shown = 0;
+    for (const r of rows) {
+      r.hidden = zone !== '' && r.dataset.zone !== zone;
+      if (!r.hidden) shown++;
+    }
+    if (count) count.textContent = `${shown} ${shown === 1 ? 'place' : 'places'}`;
+    const query = zone ? `?zone=${zone}` : '';
+    for (const a of kindLinks) a.search = query;
+    history.replaceState(null, '', location.pathname + query);
+  }
+
+  for (const b of buttons) b.addEventListener('click', () => apply(b.dataset.zoneFilter ?? ''));
+  apply(new URLSearchParams(location.search).get('zone') ?? '');
+  watchRows();
+</script>

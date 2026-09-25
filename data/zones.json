@@ -1,0 +1,102 @@
+[
+  {
+    "id": "base",
+    "name_en": "Kanda · Akihabara · Ueno · Jimbocho",
+    "name_ja": "神田・秋葉原・上野・神保町",
+    "badge": "Your doorstep",
+    "paragraphs": [
+      "You did not pick a bad base. Jimbocho alone holds seven of the national top-100 kissaten — the densest concentration of old coffee houses in Japan — and it is two stops away. Four top-100 tonkatsu and two top-100 ramen sit within a fifteen-minute walk.",
+      "The trade: it empties at night and there is no bar scene to speak of. Eat here, drink elsewhere."
+    ]
+  },
+  {
+    "id": "yanesen",
+    "name_en": "Yanaka · Nezu · Sendagi",
+    "name_ja": "谷根千",
+    "badge": "Tabelog avg 3.34",
+    "paragraphs": [
+      "Wooden houses, a cemetery full of cats, and a Tabelog average that beats Shimokitazawa and Asakusa. Analysts note it quietly outperforms the more touristed alternatives.",
+      "Half a day on foot: Nezu Shrine, Yanaka Ginza at dusk, Kayaba Coffee for the egg sandwich, Ignis for the Panama. Walkable from Ueno."
+    ]
+  },
+  {
+    "id": "asakusa",
+    "name_en": "Asakusa · Kuramae · Kiyosumi",
+    "name_ja": "浅草・蔵前・清澄白河",
+    "badge": "Kissaten + coffee",
+    "paragraphs": [
+      "Asakusa holds four top-100 kissaten. Kuramae is the leather-and-coffee craft strip. Kiyosumi-Shirakawa is where third-wave coffee landed in Tokyo and never left.",
+      "Kappabashi sits between them. One long day does the lot if you start at 10:30 on a weekday."
+    ]
+  },
+  {
+    "id": "ginza",
+    "name_en": "Ginza · Shimbashi · Marunouchi · Tsukiji",
+    "name_ja": "銀座・新橋・丸の内・築地",
+    "badge": "Bars + kissaten",
+    "paragraphs": [
+      "Two of Tokyo's three Asia's 50 Best bars are here, along with Café de l'Ambre, which has been serving deliberately aged coffee since 1948 and has no equivalent anywhere.",
+      "Do it as one long evening: Tsukiji in the morning if you're up, depachika late afternoon, illuminations at dusk, a bar after."
+    ]
+  },
+  {
+    "id": "azabu",
+    "name_en": "Azabudai · Roppongi · Hiroo · Azabu-Juban",
+    "name_ja": "麻布台・六本木・広尾・麻布十番",
+    "badge": "Tabelog avg 3.47 / 3.42",
+    "paragraphs": [
+      "Azabudai and Hiroo top the Tabelog neighbourhood rankings — around 40% of their restaurants clear 3.5, a bar almost nowhere else in Tokyo meets. Wealth and exclusivity, rather than footfall, is what the data rewards.",
+      "Gen Yamamoto's eight seats and Sodden Frog under Florilège are the reason to come at night."
+    ]
+  },
+  {
+    "id": "shibuya",
+    "name_en": "Shibuya · Nakameguro · Daikanyama · Ebisu",
+    "name_ja": "渋谷・中目黒・代官山・恵比寿",
+    "badge": "Bars + sushi",
+    "paragraphs": [
+      "Ignore the scramble. Nakameguro has two top-100 sushi counters at prices that aren't ridiculous; Ebisu has Bar Trench, where the bartenders drink.",
+      "Chatei Hatou is two minutes from Shibuya station and a hundred years from it in feel."
+    ]
+  },
+  {
+    "id": "omote",
+    "name_en": "Omotesando · Aoyama · Harajuku",
+    "name_ja": "表参道・青山・原宿",
+    "badge": "Coffee + tea",
+    "paragraphs": [
+      "The best-concentrated coffee and tea in Tokyo: Philocoffea for the 4:6 method from the man who invented it, Koffee Mameya for beans, Sakurai for a tea omakase that is genuinely one of the city's best meals.",
+      "And it's where the ginkgo avenue is. Do leaves at 08:00, coffee at 10:00, tea at 15:00 — one perfect day."
+    ]
+  },
+  {
+    "id": "shinjuku",
+    "name_en": "Shinjuku · Yoyogi · Kagurazaka",
+    "name_ja": "新宿・代々木・神楽坂",
+    "badge": "Bars",
+    "paragraphs": [
+      "Benfiddich is the single most distinctive cocktail bar in Japan — a farmer-bartender grinding his own herbs, no menu, tell him a mood.",
+      "Kagurazaka is the other half: stone alleys, former geisha district, back-alley reservation-only places, and a Tabelog average of 3.31."
+    ]
+  },
+  {
+    "id": "west",
+    "name_en": "Shimokitazawa · Sangenjaya · Kichijoji · Nishi-Ogikubo",
+    "name_ja": "下北沢・三軒茶屋・吉祥寺・西荻窪",
+    "badge": "Tabelog avg 3.26–3.28",
+    "paragraphs": [
+      "Culture-rich and food-modest by the numbers, but the specific places are excellent: Trois Chambres and Kugutsusou for kissaten, Saten for single-origin tea, Little Soul Cafe for 14,000 records.",
+      "Best used as a Saturday-afternoon-into-evening rather than a destination meal."
+    ]
+  },
+  {
+    "id": "away",
+    "name_en": "Out of town",
+    "name_ja": "日帰り",
+    "badge": "Day trips",
+    "paragraphs": [
+      "Kamakura and Mt Takao are both peaking while you're there. Hakone and Nikko are not — both peak early-to-mid November and will be bare.",
+      "Go on a weekday. Autumn weekends at either are genuinely unpleasant."
+    ]
+  }
+]

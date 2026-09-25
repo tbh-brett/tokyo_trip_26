@@ -1,0 +1,72 @@
+[
+  {
+    "group": "Book",
+    "item": "Rikugien night illumination ticket (online, ¥1,000)",
+    "due": "now"
+  },
+  {
+    "group": "Book",
+    "item": "Sakurai tea counter and Gen Yamamoto",
+    "due": "now"
+  },
+  {
+    "group": "Book",
+    "item": "TableCheck, Tabelog and OMAKASE accounts created with a working card",
+    "due": "2026-10-31"
+  },
+  {
+    "group": "Book",
+    "item": "December dinners at 10:00 JST / 09:00 HKT",
+    "due": "2026-11-01"
+  },
+  {
+    "group": "Phone",
+    "item": "Site installed to Home Screen on both phones and logged in",
+    "due": "2026-11-20"
+  },
+  {
+    "group": "Phone",
+    "item": "Trip calendar subscribed on both phones; test one alert",
+    "due": "2026-11-20"
+  },
+  {
+    "group": "Phone",
+    "item": "Open the site once in airplane mode to confirm it works offline",
+    "due": "2026-11-20"
+  },
+  {
+    "group": "Phone",
+    "item": "Download a Google Maps offline area for central Tokyo",
+    "due": "2026-11-25"
+  },
+  {
+    "group": "Phone",
+    "item": "Data eSIM or pocket Wi-Fi sorted",
+    "due": "2026-11-25"
+  },
+  {
+    "group": "Phone",
+    "item": "Transit card in the phone wallet (confirm current Suica/PASMO options for your phone)",
+    "due": "2026-11-25"
+  },
+  {
+    "group": "Travel",
+    "item": "Entry and customs registration done (confirm current Japan arrival requirements for your passport)",
+    "due": "2026-11-24"
+  },
+  {
+    "group": "Money",
+    "item": "Cash in yen — several kissaten and Kappabashi shops are cash-only",
+    "due": "2026-11-26"
+  },
+  {
+    "group": "Money",
+    "item": "Physical passport on you for tax-free purchases over ¥5,500 (photos not accepted)",
+    "due": "trip"
+  },
+  {
+    "group": "Pack",
+    "item": "Space in checked luggage for knives — never carry-on",
+    "due": "2026-12-04"
+  }
+]

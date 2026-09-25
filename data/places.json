@@ -1,0 +1,3939 @@
+[
+  {
+    "id": "saboru",
+    "name_ja": "さぼうる",
+    "name_en": "Saboru",
+    "kind": "coffee",
+    "zone": "base",
+    "station": "Jimbocho",
+    "line": "hanzomon",
+    "recognition": "喫茶店百名店 2026",
+    "why": "1955. Log-cabin interior, graffitied walls, cream soda in a chalice. Jimbocho's totem.",
+    "note": null,
+    "price": "¥600–1,200",
+    "slots": [
+      "breakfast",
+      "coffee",
+      "lunch"
+    ],
+    "hours": [
+      [
+        "09:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0051 東京都千代田区神田神保町1-11",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "ladrio",
+    "name_ja": "ラドリオ",
+    "name_en": "Ladrio",
+    "kind": "coffee",
+    "zone": "base",
+    "station": "Jimbocho",
+    "line": "hanzomon",
+    "recognition": "喫茶店百名店 2026",
+    "why": "Where Vienna coffee entered Japan, allegedly. Dark, narrow, unchanged since 1949.",
+    "note": null,
+    "price": "¥600–1,100",
+    "slots": [
+      "coffee",
+      "lunch"
+    ],
+    "hours": [
+      [
+        "09:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0051 東京都千代田区神田神保町1-3",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "milonga",
+    "name_ja": "ミロンガ ヌオーバ",
+    "name_en": "Milonga Nueva",
+    "kind": "coffee",
+    "zone": "base",
+    "station": "Jimbocho",
+    "line": "hanzomon",
+    "recognition": "喫茶店百名店 2026",
+    "why": "Tango on the speakers all day, a wall of world beers, alley seating. Next door to Ladrio.",
+    "note": null,
+    "price": "¥700–1,400",
+    "slots": [
+      "coffee",
+      "lunch"
+    ],
+    "hours": [
+      [
+        "09:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0051 東京都千代田区神田神保町1-3",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "brazil",
+    "name_ja": "神田伯剌西爾",
+    "name_en": "Kanda Brazil",
+    "kind": "coffee",
+    "zone": "base",
+    "station": "Jimbocho",
+    "line": "hanzomon",
+    "recognition": "喫茶店百名店 2026",
+    "why": "Second floor, deep roast, serious about the bean rather than the nostalgia.",
+    "note": null,
+    "price": "¥700–1,300",
+    "slots": [
+      "coffee"
+    ],
+    "hours": [
+      [
+        "09:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0051 東京都千代田区神田神保町1-7",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "koseto",
+    "name_ja": "古瀬戸珈琲店",
+    "name_en": "Koseto Coffee",
+    "kind": "coffee",
+    "zone": "base",
+    "station": "Jimbocho",
+    "line": "hanzomon",
+    "recognition": "喫茶店百名店 2026",
+    "why": "Coffee in handmade ceramics, siphon-quiet. The calm one of the Jimbocho set.",
+    "note": null,
+    "price": "¥700–1,400",
+    "slots": [
+      "coffee"
+    ],
+    "hours": [
+      [
+        "09:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0051 東京都千代田区神田神保町1-7",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "troisbagues",
+    "name_ja": "カフェ・トロワバグ",
+    "name_en": "Trois Bagues",
+    "kind": "coffee",
+    "zone": "base",
+    "station": "Jimbocho",
+    "line": "hanzomon",
+    "recognition": "喫茶店百名店 2026",
+    "why": "Basement, hand-drip, no rush. Five of the national top 100 are within 200m of here.",
+    "note": null,
+    "price": "¥700–1,300",
+    "slots": [
+      "coffee"
+    ],
+    "hours": [
+      [
+        "09:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0051 東京都千代田区神田神保町1-12",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "kurajimbo",
+    "name_ja": "珈琲舎 蔵",
+    "name_en": "Coffee-sha Kura",
+    "kind": "coffee",
+    "zone": "base",
+    "station": "Jimbocho",
+    "line": "hanzomon",
+    "recognition": "喫茶店百名店 2026",
+    "why": "Dark wood, thick toast, bookshop crowd. The seventh Hyakumeiten kissaten in Jimbocho.",
+    "note": null,
+    "price": "¥600–1,200",
+    "slots": [
+      "breakfast",
+      "coffee"
+    ],
+    "hours": [
+      [
+        "09:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0051 東京都千代田区神田神保町2丁目",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "takayama",
+    "name_ja": "高山珈琲",
+    "name_en": "Takayama Coffee",
+    "kind": "coffee",
+    "zone": "base",
+    "station": "Awajicho",
+    "line": "marunouchi",
+    "recognition": "喫茶店百名店 2026",
+    "why": "Eight minutes from your door. Self-roasted, old-school, almost no tourists.",
+    "note": null,
+    "price": "¥600–1,100",
+    "slots": [
+      "coffee"
+    ],
+    "hours": [
+      [
+        "09:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0054 東京都千代田区神田錦町",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "zehn",
+    "name_ja": "ツェーンコーヒー",
+    "name_en": "Zehn Coffee",
+    "kind": "coffee",
+    "zone": "base",
+    "station": "Yushima",
+    "line": "chiyoda",
+    "recognition": "喫茶店百名店 2026",
+    "why": "Ten minutes up the hill from the hotel. Quiet, precise, and nobody's Instagram knows it.",
+    "note": null,
+    "price": "¥600–1,200",
+    "slots": [
+      "breakfast",
+      "coffee"
+    ],
+    "hours": [
+      [
+        "09:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒113-0034 東京都文京区湯島3丁目",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "lapin",
+    "name_ja": "カフェ・ラパン",
+    "name_en": "Cafe Lapin",
+    "kind": "coffee",
+    "zone": "base",
+    "station": "Ueno-Hirokoji",
+    "line": "ginza",
+    "recognition": "喫茶店百名店 2026 · 初選出",
+    "why": "New to the national 100 this year — drip coffee and thick toast with egg. Fifteen minutes away.",
+    "note": null,
+    "price": "¥600–1,100",
+    "slots": [
+      "breakfast",
+      "coffee"
+    ],
+    "hours": [
+      [
+        "09:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒110-0005 東京都台東区上野",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "ojo",
+    "name_ja": "珈琲 王城",
+    "name_en": "Coffee Ojo",
+    "kind": "coffee",
+    "zone": "base",
+    "station": "Ueno",
+    "line": "yamanote",
+    "recognition": "喫茶店百名店 2026",
+    "why": "Chandeliers, red velvet, pudding à la mode. Showa-era grandeur straight off the Ueno platform.",
+    "note": null,
+    "price": "¥700–1,400",
+    "slots": [
+      "breakfast",
+      "coffee"
+    ],
+    "hours": [
+      [
+        "09:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒110-0005 東京都台東区上野6-8-15",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "kayaba",
+    "name_ja": "カヤバ珈琲",
+    "name_en": "Kayaba Coffee",
+    "kind": "coffee",
+    "zone": "yanesen",
+    "station": "Nezu",
+    "line": "chiyoda",
+    "recognition": "喫茶店百名店 2026",
+    "why": "1938 townhouse on the Yanaka corner. Egg sandwich and a russian. Queue by 10:00.",
+    "note": null,
+    "price": "¥700–1,600",
+    "slots": [
+      "breakfast",
+      "coffee",
+      "lunch"
+    ],
+    "hours": [
+      [
+        "08:00",
+        "18:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒110-0001 東京都台東区谷中6-1-29",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "bach",
+    "name_ja": "カフェ・バッハ",
+    "name_en": "Cafe Bach",
+    "kind": "coffee",
+    "zone": "asakusa",
+    "station": "Minami-Senju",
+    "line": "hibiya",
+    "recognition": "喫茶店百名店 2026",
+    "why": "The roastery that taught a generation of Japanese roasters. A pilgrimage, not a pit stop.",
+    "note": null,
+    "price": "¥700–1,500",
+    "slots": [
+      "coffee"
+    ],
+    "hours": [
+      [
+        "08:30",
+        "17:00"
+      ]
+    ],
+    "closed_days": [
+      "Mon"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒111-0021 東京都台東区日本堤1-23-9",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "lambre",
+    "name_ja": "カフェ・ド・ランブル",
+    "name_en": "Café de l'Ambre",
+    "kind": "coffee",
+    "zone": "ginza",
+    "station": "Shimbashi",
+    "line": "ginza",
+    "recognition": "喫茶店百名店 2026",
+    "why": "Since 1948, aged coffee only — beans held years, some decades. There is nothing else like it.",
+    "note": null,
+    "price": "¥900–3,000",
+    "slots": [
+      "coffee",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "12:00",
+        "22:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒104-0061 東京都中央区銀座8-10-15",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "you",
+    "name_ja": "YOU",
+    "name_en": "Kissa You",
+    "kind": "eat",
+    "zone": "ginza",
+    "station": "Higashi-Ginza",
+    "line": "hibiya",
+    "recognition": "喫茶店百名店 2026",
+    "why": "The omurice. Soufflé-soft egg split open at the table. Behind the Kabukiza, always a queue.",
+    "note": null,
+    "price": "¥1,200–1,800",
+    "slots": [
+      "lunch",
+      "coffee"
+    ],
+    "hours": [
+      [
+        "11:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒104-0061 東京都中央区銀座4-13-17",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "american",
+    "name_ja": "アメリカン",
+    "name_en": "American",
+    "kind": "eat",
+    "zone": "ginza",
+    "station": "Higashi-Ginza",
+    "line": "hibiya",
+    "recognition": "喫茶店百名店 2026",
+    "why": "Sandwiches the size of a brick, for about ¥800. Absurd, beloved, sells out by early afternoon.",
+    "note": null,
+    "price": "¥800–1,400",
+    "slots": [
+      "breakfast",
+      "lunch"
+    ],
+    "hours": [
+      [
+        "08:00",
+        "15:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒104-0061 東京都中央区銀座4-11-7",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "hatou",
+    "name_ja": "茶亭 羽當",
+    "name_en": "Chatei Hatou",
+    "kind": "coffee",
+    "zone": "shibuya",
+    "station": "Shibuya",
+    "line": "yamanote",
+    "recognition": "喫茶店百名店 2026",
+    "why": "Hand-drip theatre in antique cups, two minutes from the scramble and a world away from it.",
+    "note": null,
+    "price": "¥900–1,800",
+    "slots": [
+      "coffee",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:00",
+        "23:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒150-0002 東京都渋谷区渋谷1-15-19",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "satera",
+    "name_ja": "喫茶サテラ",
+    "name_en": "Kissa Satera",
+    "kind": "coffee",
+    "zone": "shibuya",
+    "station": "Shibuya",
+    "line": "yamanote",
+    "recognition": "喫茶店百名店 2026 · 初選出",
+    "why": "First time on the national 100 this year — condensed milk coffee and a cream cheese pudding.",
+    "note": null,
+    "price": "¥700–1,400",
+    "slots": [
+      "coffee"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒150-0002 東京都渋谷区",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "kasa",
+    "name_ja": "カフェ香咲",
+    "name_en": "Cafe Kasa",
+    "kind": "coffee",
+    "zone": "omote",
+    "station": "Gaienmae",
+    "line": "ginza",
+    "recognition": "喫茶店百名店 2026",
+    "why": "Marmalade and apple pie, hidden in Aoyama. Four minutes from the ginkgo avenue — pair them.",
+    "note": null,
+    "price": "¥900–1,800",
+    "slots": [
+      "coffee",
+      "lunch"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒107-0061 東京都港区北青山3丁目",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "akaishi",
+    "name_ja": "ロッジ赤石",
+    "name_en": "Lodge Akaishi",
+    "kind": "eat",
+    "zone": "asakusa",
+    "station": "Asakusa",
+    "line": "ginza",
+    "recognition": "喫茶店百名店 2026",
+    "why": "Open past midnight, does everything from napolitan to curry. Asakusa's late-night kissaten.",
+    "note": null,
+    "price": "¥900–1,800",
+    "slots": [
+      "lunch",
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "01:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒111-0032 東京都台東区浅草3丁目",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "tengoku",
+    "name_ja": "珈琲 天国",
+    "name_en": "Coffee Tengoku",
+    "kind": "coffee",
+    "zone": "asakusa",
+    "station": "Asakusa",
+    "line": "ginza",
+    "recognition": "喫茶店百名店 2026",
+    "why": "Hotcakes branded 天国 — heaven — in the batter. Tiny, and entirely the point of an Asakusa morning.",
+    "note": null,
+    "price": "¥700–1,200",
+    "slots": [
+      "breakfast",
+      "coffee"
+    ],
+    "hours": [
+      [
+        "12:00",
+        "18:00"
+      ]
+    ],
+    "closed_days": [
+      "Tue"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒111-0032 東京都台東区浅草1丁目",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "kugutsusou",
+    "name_ja": "COFFEE HALL くぐつ草",
+    "name_en": "Kugutsusou",
+    "kind": "coffee",
+    "zone": "west",
+    "station": "Kichijoji",
+    "line": "jr",
+    "recognition": "喫茶店百名店 2026",
+    "why": "A cave beneath Kichijoji, run by a puppet troupe. Curry and coffee in near-darkness.",
+    "note": null,
+    "price": "¥900–1,800",
+    "slots": [
+      "coffee",
+      "lunch"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "22:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒180-0004 東京都武蔵野市吉祥寺本町1-7-7",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "troischambres",
+    "name_ja": "トロワ・シャンブル",
+    "name_en": "Trois Chambres",
+    "kind": "coffee",
+    "zone": "west",
+    "station": "Shimokitazawa",
+    "line": "odakyu",
+    "recognition": "喫茶店百名店 2026",
+    "why": "Shimokita's grown-up corner — classical music, lace, proper cake. The antidote to the vintage shops.",
+    "note": null,
+    "price": "¥800–1,600",
+    "slots": [
+      "coffee"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒155-0031 東京都世田谷区北沢",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "verde",
+    "name_ja": "ヴェルデ",
+    "name_en": "Verde",
+    "kind": "coffee",
+    "zone": "shibuya",
+    "station": "Daikanyama",
+    "line": "toyoko",
+    "recognition": "喫茶店百名店 2026",
+    "why": "Daikanyama's holdout — a genuine old kissaten in the most style-conscious postcode in Tokyo.",
+    "note": null,
+    "price": "¥700–1,400",
+    "slots": [
+      "coffee"
+    ],
+    "hours": [
+      [
+        "09:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒150-0034 東京都渋谷区代官山町",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "glitch",
+    "name_ja": "グリッチコーヒー",
+    "name_en": "Glitch Coffee",
+    "kind": "coffee",
+    "zone": "base",
+    "station": "Jimbocho",
+    "line": "hanzomon",
+    "recognition": "Light-roast standard-setter",
+    "why": "Light-roast single origins, strict about it. Opens 08:00 on weekdays — your nearest serious cup.",
+    "note": null,
+    "price": "¥700–1,400",
+    "slots": [
+      "breakfast",
+      "coffee"
+    ],
+    "hours": [
+      [
+        "08:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0054 東京都千代田区神田錦町3-16",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "philocoffea",
+    "name_ja": "フィロコフィア",
+    "name_en": "Philocoffea",
+    "kind": "coffee",
+    "zone": "omote",
+    "station": "Omotesando",
+    "line": "ginza",
+    "recognition": "Tetsu Kasuya · World Brewers Cup 2016 champion",
+    "why": "The man who invented the 4:6 method pours here. If you only do one third-wave shop, this one.",
+    "note": null,
+    "price": "¥700–1,500",
+    "slots": [
+      "breakfast",
+      "coffee"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒150-0001 東京都渋谷区神宮前",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "mameya",
+    "name_ja": "Koffee Mameya",
+    "name_en": "Koffee Mameya",
+    "kind": "coffee",
+    "zone": "omote",
+    "station": "Omotesando",
+    "line": "ginza",
+    "recognition": "Bean counter, no seats",
+    "why": "They ask how you brew at home, then match a roast to it. Buy beans; don't expect to sit.",
+    "note": null,
+    "price": "beans ¥1,500+ · ¥390 FastPass",
+    "slots": [
+      "coffee"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒150-0001 東京都渋谷区神宮前4-15-3",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "kakeru",
+    "name_ja": "Koffee Mameya Kakeru",
+    "name_en": "Mameya Kakeru",
+    "kind": "coffee",
+    "zone": "asakusa",
+    "station": "Kiyosumi-Shirakawa",
+    "line": "oedo",
+    "recognition": "Tasting-course format",
+    "why": "A coffee course in a warehouse — one bean, several preparations, seated around the baristas.",
+    "note": null,
+    "price": "¥2,000–4,500",
+    "slots": [
+      "coffee"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒135-0021 東京都江東区白河",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "leaves",
+    "name_ja": "Leaves Coffee Roasters",
+    "name_en": "Leaves Coffee",
+    "kind": "coffee",
+    "zone": "asakusa",
+    "station": "Honjo-Azumabashi",
+    "line": "asakusa",
+    "recognition": "Owner 2nd · Japan Brewers Cup 2025",
+    "why": "Roasts on a 1956 Probat. Owner is an ex-professional boxer. Open Friday to Monday only.",
+    "note": null,
+    "price": "¥600–1,200",
+    "slots": [
+      "coffee"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "17:00"
+      ]
+    ],
+    "closed_days": [
+      "Tue",
+      "Wed",
+      "Thu"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒130-0004 東京都墨田区本所",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "onibus",
+    "name_ja": "オニバスコーヒー",
+    "name_en": "Onibus Coffee",
+    "kind": "coffee",
+    "zone": "shibuya",
+    "station": "Nakameguro",
+    "line": "toyoko",
+    "recognition": "Publishes annual sourcing transparency reports",
+    "why": "Two-storey wooden house beside the tracks. Upstairs window seat as the train goes past.",
+    "note": null,
+    "price": "¥500–900",
+    "slots": [
+      "breakfast",
+      "coffee"
+    ],
+    "hours": [
+      [
+        "09:00",
+        "18:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒153-0051 東京都目黒区上目黒2-14-1",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "fuglen",
+    "name_ja": "フグレン",
+    "name_en": "Fuglen Sangubashi",
+    "kind": "coffee",
+    "zone": "shinjuku",
+    "station": "Sangubashi",
+    "line": "odakyu",
+    "recognition": "Oslo roaster · 8-seat counter",
+    "why": "59-year-old wooden house, stone counter, handmade ceramics. Reserve, and bring a card — cashless.",
+    "note": null,
+    "price": "¥800–1,800",
+    "slots": [
+      "coffee"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒151-0053 東京都渋谷区代々木",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "ignis",
+    "name_ja": "Ignis",
+    "name_en": "Ignis",
+    "kind": "coffee",
+    "zone": "yanesen",
+    "station": "Sendagi",
+    "line": "chiyoda",
+    "recognition": "Panama specialist · Esmeralda, Abu",
+    "why": "Walkable from your side of town on a Yanaka morning. Hosts cuppings.",
+    "note": null,
+    "price": "¥800–2,500",
+    "slots": [
+      "breakfast",
+      "coffee"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒113-0022 東京都文京区千駄木",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "county",
+    "name_ja": "Coffee County Tokyo",
+    "name_en": "Coffee County",
+    "kind": "coffee",
+    "zone": "west",
+    "station": "Shimokitazawa",
+    "line": "odakyu",
+    "recognition": "Kurume roaster",
+    "why": "Curved glass block and dark plaster. Opens 08:30, which almost nothing good in Tokyo does.",
+    "note": null,
+    "price": "¥600–1,200",
+    "slots": [
+      "breakfast",
+      "coffee"
+    ],
+    "hours": [
+      [
+        "08:30",
+        "18:00"
+      ]
+    ],
+    "closed_days": [
+      "Mon"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒155-0031 東京都世田谷区北沢",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "apollons",
+    "name_ja": "Apollon's Gold",
+    "name_en": "Apollon's Gold Kitanomaru",
+    "kind": "coffee",
+    "zone": "base",
+    "station": "Takebashi",
+    "line": "tozai",
+    "recognition": "Reservation-only tasting room",
+    "why": "Coffee paired with custom mineral water, served in Burgundy glasses. A rainy-afternoon card.",
+    "note": null,
+    "price": "¥3,000+",
+    "slots": [
+      "coffee"
+    ],
+    "hours": [
+      [
+        "11:00",
+        "17:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒102-0091 東京都千代田区北の丸公園",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "kuromame",
+    "name_ja": "Kuro Mame Tokyo",
+    "name_en": "Kuro Mame",
+    "kind": "coffee",
+    "zone": "azabu",
+    "station": "Kamiyacho",
+    "line": "hibiya",
+    "recognition": "Zurich's MAME · competition champions",
+    "why": "No menu. The barista picks for you based on what you say you like.",
+    "note": null,
+    "price": "¥800–2,000",
+    "slots": [
+      "coffee"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒105-0001 東京都港区虎ノ門",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "acid",
+    "name_ja": "Acid Coffee",
+    "name_en": "Acid Coffee",
+    "kind": "coffee",
+    "zone": "shinjuku",
+    "station": "Yoyogi-Uehara",
+    "line": "odakyu",
+    "recognition": "Fermentation-forward light roast",
+    "why": "Fruit, ferment and lively acidity, unapologetically. Espresso sister shop nearby.",
+    "note": null,
+    "price": "¥700–1,500",
+    "slots": [
+      "coffee"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒151-0064 東京都渋谷区上原",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "sakurai",
+    "name_ja": "櫻井焙煎研究所",
+    "name_en": "Sakurai Tea Experience",
+    "kind": "tea",
+    "zone": "omote",
+    "station": "Omotesando",
+    "line": "ginza",
+    "recognition": "Eight-seat tea counter · English-speaking",
+    "why": "The serious one. A tea course served like an omakase, roasting done in front of you. Book it.",
+    "note": null,
+    "price": "¥3,000–6,000",
+    "slots": [
+      "coffee",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒107-0062 東京都港区南青山5丁目",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "saboe",
+    "name_ja": "茶方薈 SABOE",
+    "name_en": "Saboe",
+    "kind": "tea",
+    "zone": "azabu",
+    "station": "Kamiyacho",
+    "line": "hibiya",
+    "recognition": "High-end tea selection with tasting",
+    "why": "Azabudai Hills. Quiet luxury rather than a café — you come to taste and to buy leaf.",
+    "note": null,
+    "price": "¥1,500–5,000",
+    "slots": [
+      "coffee"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "17:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒106-0041 東京都港区麻布台1-3-1",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "chokeikyo",
+    "name_ja": "聴景居",
+    "name_en": "Chokeikyo",
+    "kind": "tea",
+    "zone": "shibuya",
+    "station": "Daikanyama",
+    "line": "toyoko",
+    "recognition": "Gyokuro and sencha depth",
+    "why": "Underground tea bar. Gyokuro served closer to a broth than a drink. For the properly curious.",
+    "note": null,
+    "price": "¥2,000–5,000",
+    "slots": [
+      "coffee",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "12:00",
+        "20:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒150-0034 東京都渋谷区代官山町",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "yamamotoyama",
+    "name_ja": "山本山 ふじヱ茶房",
+    "name_en": "Yamamotoyama Fujie Sabo",
+    "kind": "tea",
+    "zone": "ginza",
+    "station": "Nihonbashi",
+    "line": "ginza",
+    "recognition": "Founded 1690 · Japan's oldest tea merchant",
+    "why": "Sencha tasting flights and tea-with-nori pairings. Three hundred years of practice behind it.",
+    "note": null,
+    "price": "¥1,500–4,000",
+    "slots": [
+      "coffee",
+      "lunch"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "17:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒103-0027 東京都中央区日本橋2-5-2",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "hatoya",
+    "name_ja": "八十八 浅草",
+    "name_en": "Hatoya Asakusa",
+    "kind": "tea",
+    "zone": "asakusa",
+    "station": "Asakusa",
+    "line": "ginza",
+    "recognition": "First-harvest matcha, whisked to order",
+    "why": "Every bowl whisked when you order it, from ichibancha. Not a latte shop.",
+    "note": null,
+    "price": "¥1,000–2,500",
+    "slots": [
+      "coffee"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "17:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒111-0032 東京都台東区浅草",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "ateliermatcha",
+    "name_ja": "ATELIER MATCHA",
+    "name_en": "Atelier Matcha",
+    "kind": "tea",
+    "zone": "ginza",
+    "station": "Tsukiji",
+    "line": "hibiya",
+    "recognition": "Kyoto wholesaler's own café",
+    "why": "A Kyoto tea house's Tokyo outpost, two minutes from Tsukiji. Pairs with a market breakfast.",
+    "note": null,
+    "price": "¥900–2,000",
+    "slots": [
+      "breakfast",
+      "coffee"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "17:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒104-0045 東京都中央区築地",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "maruni",
+    "name_ja": "MATCHA STAND MARUNI",
+    "name_en": "Matcha Stand Maruni",
+    "kind": "tea",
+    "zone": "ginza",
+    "station": "Tsukiji",
+    "line": "hibiya",
+    "recognition": "Whisked in front of you",
+    "why": "Standing counter, iced matcha latte done properly. Cheap and quick — the everyday version.",
+    "note": null,
+    "price": "¥600–1,200",
+    "slots": [
+      "breakfast",
+      "coffee"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "17:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒104-0045 東京都中央区築地",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "three",
+    "name_ja": "THREE",
+    "name_en": "Three",
+    "kind": "tea",
+    "zone": "west",
+    "station": "Sangenjaya",
+    "line": "toyoko",
+    "recognition": "Top-grade Fukuoka matcha",
+    "why": "Highest-grade Yame matcha, whisked at the counter. The neighbourhood is the other reason to go.",
+    "note": null,
+    "price": "¥900–2,000",
+    "slots": [
+      "coffee"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒154-0004 東京都世田谷区太子堂",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "saten",
+    "name_ja": "Saten japanese tea",
+    "name_en": "Saten",
+    "kind": "tea",
+    "zone": "west",
+    "station": "Nishi-Ogikubo",
+    "line": "jr",
+    "recognition": "Single-origin tea · unsweetened matcha latte",
+    "why": "Where Tokyo's tea nerds actually drink. Single-origin leaf, no sugar in anything.",
+    "note": null,
+    "price": "¥700–1,600",
+    "slots": [
+      "breakfast",
+      "coffee"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒167-0042 東京都杉並区西荻北",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "matsubaya",
+    "name_ja": "松葉屋茶寮",
+    "name_en": "Matsubaya Saryo",
+    "kind": "tea",
+    "zone": "omote",
+    "station": "Omotesando",
+    "line": "ginza",
+    "recognition": "Tea with bonsai in a gallery",
+    "why": "Bonsai viewing and tea in an art space. Reserve — it is small and it is not a walk-in.",
+    "note": null,
+    "price": "¥2,000–5,000",
+    "slots": [
+      "coffee"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "17:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒107-0062 東京都港区南青山",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "wacha",
+    "name_ja": "神楽坂 和茶",
+    "name_en": "Kagurazaka Wacha",
+    "kind": "tea",
+    "zone": "shinjuku",
+    "station": "Kagurazaka",
+    "line": "tozai",
+    "recognition": "Signature 米の花 dessert",
+    "why": "Calm room on a Kagurazaka slope. Pair it with an afternoon walking the stone alleys.",
+    "note": null,
+    "price": "¥1,500–3,000",
+    "slots": [
+      "coffee"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒162-0825 東京都新宿区神楽坂",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "punchroom",
+    "name_ja": "Punch Room Tokyo",
+    "name_en": "Punch Room",
+    "kind": "bar",
+    "zone": "ginza",
+    "station": "Ginza",
+    "line": "ginza",
+    "recognition": "Asia's 50 Best Bars 2026 · No. 23",
+    "why": "Tokyo Edition Ginza. Punch bowls made for sharing, which suits two people better than a list of singles.",
+    "note": null,
+    "price": "¥2,500–4,000 a drink",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "18:00",
+        "01:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒104-0061 東京都中央区銀座",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "virtu",
+    "name_ja": "Virtù",
+    "name_en": "Virtu",
+    "kind": "bar",
+    "zone": "ginza",
+    "station": "Otemachi",
+    "line": "marunouchi",
+    "recognition": "Asia's 50 Best Bars 2026 · No. 26",
+    "why": "Four Seasons Otemachi. French aperitifs against Japanese whisky, with the skyline underneath.",
+    "note": null,
+    "price": "¥3,000–5,000 a drink",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "18:00",
+        "01:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒100-0004 東京都千代田区大手町1-2-1",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "barlibre",
+    "name_ja": "Bar Libre",
+    "name_en": "Bar Libre",
+    "kind": "bar",
+    "zone": "shinjuku",
+    "station": "Ikebukuro",
+    "line": "yamanote",
+    "recognition": "Asia's 50 Best Bars 2026 · No. 39",
+    "why": "Basement in Ikebukuro. Fresh fruit and smoking-gun theatrics, served in Japanese ceramics.",
+    "note": null,
+    "price": "¥2,000–3,500 a drink",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "18:00",
+        "01:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒171-0022 東京都豊島区南池袋",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "benfiddich",
+    "name_ja": "Bar Benfiddich",
+    "name_en": "Benfiddich",
+    "kind": "bar",
+    "zone": "shinjuku",
+    "station": "Shinjuku",
+    "line": "marunouchi",
+    "recognition": "Farm-to-glass · no menu",
+    "why": "Hiroyasu Kayama grinds herbs from his own farm with a pestle at the bar. Tell him a mood.",
+    "note": null,
+    "price": "¥2,500–4,000 a drink",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "18:00",
+        "01:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒160-0023 東京都新宿区西新宿1-13-7",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "genyamamoto",
+    "name_ja": "Gen Yamamoto",
+    "name_en": "Gen Yamamoto",
+    "kind": "bar",
+    "zone": "azabu",
+    "station": "Azabu-Juban",
+    "line": "oedo",
+    "recognition": "Eight seats · omakase cocktail flight",
+    "why": "Four to six cocktails built around whatever fruit arrived that week. Book a week ahead.",
+    "note": null,
+    "price": "¥5,000–8,000 for the flight",
+    "slots": [
+      "dinner"
+    ],
+    "hours": [
+      [
+        "15:00",
+        "21:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒106-0045 東京都港区麻布十番1-6-4",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "trench",
+    "name_ja": "Bar Trench",
+    "name_en": "Bar Trench",
+    "kind": "bar",
+    "zone": "shibuya",
+    "station": "Ebisu",
+    "line": "yamanote",
+    "recognition": "Largest bitters collection in Japan",
+    "why": "Twenty-three square metres, absinthe-leaning, no ceremony. The one bartenders drink at.",
+    "note": null,
+    "price": "¥1,800–3,000 a drink",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "18:00",
+        "01:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒150-0021 東京都渋谷区恵比寿西1-5-8",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "sgclub",
+    "name_ja": "The SG Club",
+    "name_en": "SG Club",
+    "kind": "bar",
+    "zone": "shibuya",
+    "station": "Shibuya",
+    "line": "fukutoshin",
+    "recognition": "Shingo Gokan · three venues in one",
+    "why": "Guzzle upstairs is loose and easy; Sip downstairs is the serious room. Start up, move down.",
+    "note": null,
+    "price": "¥1,800–3,000 a drink",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "18:00",
+        "01:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒150-0042 東京都渋谷区宇田川町",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "bellwood",
+    "name_ja": "The Bellwood",
+    "name_en": "The Bellwood",
+    "kind": "bar",
+    "zone": "shibuya",
+    "station": "Shibuya",
+    "line": "yamanote",
+    "recognition": "Taisho-era kissaten setting",
+    "why": "Wood-panelled, tea- and coffee-forward cocktails, and food worth ordering. Relaxed dress.",
+    "note": null,
+    "price": "¥1,600–2,800 a drink",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "18:00",
+        "01:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒150-0042 東京都渋谷区宇田川町41-31",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "ishinohana",
+    "name_ja": "Bar Ishinohana",
+    "name_en": "Ishinohana",
+    "kind": "bar",
+    "zone": "shibuya",
+    "station": "Shibuya",
+    "line": "yamanote",
+    "recognition": "Umami old fashioned",
+    "why": "Shiitake-steeped Hakushu in an old fashioned. Sounds like a stunt; isn't. Menu changes monthly.",
+    "note": null,
+    "price": "¥1,800–3,000 a drink",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "18:00",
+        "01:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒150-0013 東京都渋谷区恵比寿南",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "moribar",
+    "name_ja": "Mori Bar Gran",
+    "name_en": "Mori Bar Gran",
+    "kind": "bar",
+    "zone": "ginza",
+    "station": "Ginza",
+    "line": "ginza",
+    "recognition": "Takeshi Mori · rooftop",
+    "why": "Martinis with Ki No Bi, Tokyo Tower and Skytree on the terrace. The Ginza martini benchmark.",
+    "note": null,
+    "price": "¥2,500–4,000 a drink",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "18:00",
+        "01:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒104-0061 東京都中央区銀座",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "oldimperial",
+    "name_ja": "オールドインペリアルバー",
+    "name_en": "Old Imperial Bar",
+    "kind": "bar",
+    "zone": "ginza",
+    "station": "Hibiya",
+    "line": "hibiya",
+    "recognition": "Est. 1923 · Frank Lloyd Wright room",
+    "why": "Salvaged Wright masonry from the 1923 hotel. Order the Mount Fuji cocktail; it started here.",
+    "note": null,
+    "price": "¥2,500–4,500 a drink",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "11:30",
+        "00:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒100-8558 東京都千代田区内幸町1-1-1",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "folklore",
+    "name_ja": "Folklore",
+    "name_en": "Folklore",
+    "kind": "bar",
+    "zone": "ginza",
+    "station": "Hibiya",
+    "line": "hibiya",
+    "recognition": "Japanese terroir · cocktail flights",
+    "why": "Reclaimed shrine wood, sake and shochu bases, avant-garde without being silly.",
+    "note": null,
+    "price": "¥3,000–6,000",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "18:00",
+        "01:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒100-0006 東京都千代田区有楽町",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "soddenfrog",
+    "name_ja": "Sodden Frog",
+    "name_en": "Sodden Frog",
+    "kind": "bar",
+    "zone": "azabu",
+    "station": "Kamiyacho",
+    "line": "hibiya",
+    "recognition": "Beneath Michelin-starred Florilège",
+    "why": "Set cocktail omakase, four to seven courses. A dinner substitute more than a nightcap.",
+    "note": null,
+    "price": "¥6,000–12,000",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "18:00",
+        "01:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒106-0041 東京都港区麻布台1-3-1",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "littlesoul",
+    "name_ja": "Little Soul Cafe",
+    "name_en": "Little Soul Cafe",
+    "kind": "bar",
+    "zone": "west",
+    "station": "Shimokitazawa",
+    "line": "odakyu",
+    "recognition": "Listening bar · 14,000 records",
+    "why": "Eight-seat counter, rum, and Nobuo Miyamae picking the record. Ask him for something.",
+    "note": null,
+    "price": "¥1,200–2,200 a drink",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "18:00",
+        "01:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒155-0031 東京都世田谷区北沢",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "ahirusha",
+    "name_ja": "アヒル社",
+    "name_en": "Ahiru Sha",
+    "kind": "bar",
+    "zone": "shinjuku",
+    "station": "Kagurazaka",
+    "line": "tozai",
+    "recognition": "Listening bar above a ramen shop",
+    "why": "Showa vinyl, whisky and mezcal, up a staircase in Kagurazaka. Smoking permitted — check before you sit.",
+    "note": null,
+    "price": "¥1,200–2,200 a drink",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "18:00",
+        "01:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒162-0825 東京都新宿区神楽坂",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "barnica",
+    "name_ja": "Bar Nica",
+    "name_en": "Bar Nica",
+    "kind": "bar",
+    "zone": "shinjuku",
+    "station": "Shinjuku",
+    "line": "marunouchi",
+    "recognition": "Seven seats · no loud conversation",
+    "why": "Photos discouraged, voices down, whisky and craft gin. Go when you want to actually talk quietly.",
+    "note": null,
+    "price": "¥1,500–3,000 a drink",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "18:00",
+        "01:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒160-0021 東京都新宿区歌舞伎町",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "janai",
+    "name_ja": "Janai Coffee",
+    "name_en": "Janai Coffee",
+    "kind": "bar",
+    "zone": "shibuya",
+    "station": "Ebisu",
+    "line": "yamanote",
+    "recognition": "Speakeasy behind a coffee shop",
+    "why": "Solve the puzzle on their site to get the entry. Coffee-based cocktails once you're through.",
+    "note": null,
+    "price": "¥1,500–2,800 a drink",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "18:00",
+        "01:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒150-0011 東京都渋谷区東",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "cielo",
+    "name_ja": "Coffee Bar Cielo",
+    "name_en": "Cielo",
+    "kind": "bar",
+    "zone": "west",
+    "station": "Sangenjaya",
+    "line": "toyoko",
+    "recognition": "House-roasted coffee cocktails",
+    "why": "Kumiko joinery, flame-lit coffee drinks, herby espresso martinis. Worth the trip west.",
+    "note": null,
+    "price": "¥1,200–2,200 a drink",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "18:00",
+        "01:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒154-0004 東京都世田谷区太子堂",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "honda",
+    "name_ja": "麺処 ほん田 秋葉原本店",
+    "name_en": "Menya Honda",
+    "kind": "eat",
+    "zone": "base",
+    "station": "Akihabara",
+    "line": "yamanote",
+    "recognition": "ラーメン TOKYO 百名店 2025",
+    "why": "Top-100 ramen, five minutes from your door. Go at opening or expect the queue.",
+    "note": null,
+    "price": "¥1,100–1,800",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:00",
+        "22:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0021 東京都千代田区外神田",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "katsumoto",
+    "name_ja": "つけそば 神田 勝本",
+    "name_en": "Katsumoto",
+    "kind": "eat",
+    "zone": "base",
+    "station": "Jimbocho",
+    "line": "hanzomon",
+    "recognition": "ラーメン TOKYO 百名店 2025",
+    "why": "Tsukesoba of unusual refinement. The Jimbocho stop between a kissaten and a bookshop.",
+    "note": null,
+    "price": "¥1,100–1,700",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:00",
+        "21:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0051 東京都千代田区神田神保町",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "mitsui",
+    "name_ja": "麺 みつヰ",
+    "name_en": "Men Mitsui",
+    "kind": "eat",
+    "zone": "asakusa",
+    "station": "Tawaramachi",
+    "line": "ginza",
+    "recognition": "ラーメン TOKYO 百名店 2025",
+    "why": "Clear shoyu, hand-cut noodles, on the walk between Kappabashi and Asakusa.",
+    "note": null,
+    "price": "¥1,000–1,600",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:00",
+        "21:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒111-0041 東京都台東区元浅草",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "fuunji",
+    "name_ja": "風雲児 新宿本店",
+    "name_en": "Fuunji",
+    "kind": "eat",
+    "zone": "shinjuku",
+    "station": "Shinjuku",
+    "line": "odakyu",
+    "recognition": "ラーメン TOKYO 百名店 2025",
+    "why": "The tsukemen that made chicken-and-fish broth famous. Queue is permanent; turnover is fast.",
+    "note": null,
+    "price": "¥1,000–1,500",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:00",
+        "21:30"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒151-0053 東京都渋谷区代々木2-14-3",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "mintora",
+    "name_ja": "三ん寅",
+    "name_en": "Mintora",
+    "kind": "eat",
+    "zone": "shinjuku",
+    "station": "Edogawabashi",
+    "line": "yurakucho",
+    "recognition": "ラーメン TOKYO 百名店 2025",
+    "why": "Sapporo miso ramen made by a Sumire alumnus. The best cold-night bowl in Tokyo.",
+    "note": null,
+    "price": "¥1,100–1,700",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:00",
+        "21:00"
+      ]
+    ],
+    "closed_days": [
+      "Mon"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒112-0014 東京都文京区関口",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "marugo",
+    "name_ja": "とんかつ 丸五",
+    "name_en": "Tonkatsu Marugo",
+    "kind": "eat",
+    "zone": "base",
+    "station": "Akihabara",
+    "line": "yamanote",
+    "recognition": "とんかつ 百名店 2026",
+    "why": "National top-100 tonkatsu, ten minutes from the hotel. Expect a line at both services.",
+    "note": null,
+    "price": "¥2,000–4,000",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:30",
+        "14:00"
+      ],
+      [
+        "17:00",
+        "21:30"
+      ]
+    ],
+    "closed_days": [
+      "Mon",
+      "Tue"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0021 東京都千代田区外神田1-8-14",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "ponchiken",
+    "name_ja": "ポンチ軒",
+    "name_en": "Ponchiken",
+    "kind": "eat",
+    "zone": "base",
+    "station": "Ogawamachi",
+    "line": "marunouchi",
+    "recognition": "とんかつ 百名店 2026",
+    "why": "The other top-100 katsu on your doorstep, and usually the shorter queue of the two.",
+    "note": null,
+    "price": "¥1,800–3,500",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:30",
+        "14:00"
+      ],
+      [
+        "17:00",
+        "21:30"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0052 東京都千代田区神田小川町2-8",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "yamaichi",
+    "name_ja": "とんかつ やまいち",
+    "name_en": "Tonkatsu Yamaichi",
+    "kind": "eat",
+    "zone": "base",
+    "station": "Awajicho",
+    "line": "marunouchi",
+    "recognition": "とんかつ 百名店 2026",
+    "why": "Three top-100 tonkatsu within a fifteen-minute walk of your hotel. This is the third.",
+    "note": null,
+    "price": "¥1,800–3,000",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:30",
+        "14:00"
+      ],
+      [
+        "17:00",
+        "21:30"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0054 東京都千代田区神田錦町",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "tonpachi",
+    "name_ja": "とん八亭",
+    "name_en": "Tonpachitei",
+    "kind": "eat",
+    "zone": "base",
+    "station": "Ueno-Okachimachi",
+    "line": "ginza",
+    "recognition": "とんかつ 百名店 2026",
+    "why": "And the fourth. Okachimachi, old-school, famous for the menchi-katsu as much as the loin.",
+    "note": null,
+    "price": "¥1,800–3,200",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:30",
+        "14:00"
+      ],
+      [
+        "17:00",
+        "21:30"
+      ]
+    ],
+    "closed_days": [
+      "Mon"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒110-0005 東京都台東区上野",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "sugita",
+    "name_ja": "すぎ田",
+    "name_en": "Sugita",
+    "kind": "eat",
+    "zone": "asakusa",
+    "station": "Kuramae",
+    "line": "oedo",
+    "recognition": "とんかつ 百名店 2026",
+    "why": "Kuramae, tiny, revered. Worth building a Kappabashi morning around.",
+    "note": null,
+    "price": "¥2,500–4,500",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:30",
+        "14:00"
+      ],
+      [
+        "17:00",
+        "21:30"
+      ]
+    ],
+    "closed_days": [
+      "Mon"
+    ],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒111-0051 東京都台東区蔵前",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "nishimura",
+    "name_ja": "にし邑",
+    "name_en": "Nishimura",
+    "kind": "eat",
+    "zone": "ginza",
+    "station": "Higashi-Ginza",
+    "line": "hibiya",
+    "recognition": "とんかつ 百名店 2026",
+    "why": "Ginza's top-100 katsu. Low-temperature cooked, closer to a kappo counter than a cutlet shop.",
+    "note": null,
+    "price": "¥3,500–7,000",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:30",
+        "14:00"
+      ],
+      [
+        "17:00",
+        "21:30"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒104-0061 東京都中央区銀座",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "narikura",
+    "name_ja": "とんかつ成蔵",
+    "name_en": "Tonkatsu Narikura",
+    "kind": "eat",
+    "zone": "west",
+    "station": "Minami-Asagaya",
+    "line": "marunouchi",
+    "recognition": "とんかつ 百名店 2026",
+    "why": "The hardest katsu reservation in Tokyo. If you want one trophy booking, make it this.",
+    "note": null,
+    "price": "¥3,000–5,000",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:30",
+        "14:00"
+      ],
+      [
+        "17:00",
+        "21:30"
+      ]
+    ],
+    "closed_days": [
+      "Mon"
+    ],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒166-0004 東京都杉並区阿佐谷南",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "tokiwa",
+    "name_ja": "巣鴨ときわ食堂 本店",
+    "name_en": "Sugamo Tokiwa Shokudo",
+    "kind": "eat",
+    "zone": "yanesen",
+    "station": "Koshinzuka",
+    "line": "toden",
+    "recognition": "食堂 百名店 2026",
+    "why": "Fried horse mackerel, grilled fish, rice, pickles, under ¥1,500. Pairs with Rikugien.",
+    "note": null,
+    "price": "¥900–1,800",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "10:30",
+        "21:30"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒170-0002 東京都豊島区巣鴨",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "katsuo",
+    "name_ja": "かつお食堂",
+    "name_en": "Katsuo Shokudo",
+    "kind": "eat",
+    "zone": "shibuya",
+    "station": "Shibuya",
+    "line": "yamanote",
+    "recognition": "食堂 百名店 2026",
+    "why": "One woman, one theme: katsuobushi shaved in front of you over rice. Mornings only, and it sells out.",
+    "note": null,
+    "price": "¥1,200–1,800",
+    "slots": [
+      "breakfast",
+      "lunch"
+    ],
+    "hours": [
+      [
+        "08:00",
+        "13:00"
+      ]
+    ],
+    "closed_days": [
+      "Mon",
+      "Tue"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒150-0011 東京都渋谷区東",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "uokyu",
+    "name_ja": "魚久 あじみせ 本店",
+    "name_en": "Uokyu Ajimise",
+    "kind": "eat",
+    "zone": "ginza",
+    "station": "Ningyocho",
+    "line": "hibiya",
+    "recognition": "食堂 百名店 2026",
+    "why": "Kasuzuke — fish cured in sake lees — as a counter lunch. Ningyocho at its most itself.",
+    "note": null,
+    "price": "¥1,200–2,500",
+    "slots": [
+      "lunch"
+    ],
+    "hours": [
+      [
+        "11:00",
+        "14:30"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒103-0013 東京都中央区日本橋人形町",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "hishidaya",
+    "name_ja": "菱田屋",
+    "name_en": "Hishidaya",
+    "kind": "eat",
+    "zone": "shibuya",
+    "station": "Komaba-todaimae",
+    "line": "keio",
+    "recognition": "食堂 百名店 2026",
+    "why": "University-district shokudo, enormous portions, ninety years of it. Pork ginger is the order.",
+    "note": null,
+    "price": "¥1,200–2,200",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:30",
+        "14:00"
+      ],
+      [
+        "17:00",
+        "21:30"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒153-0041 東京都目黒区駒場",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "takeda",
+    "name_ja": "かつれつ四谷たけだ",
+    "name_en": "Yotsuya Takeda",
+    "kind": "eat",
+    "zone": "shinjuku",
+    "station": "Yotsuya",
+    "line": "marunouchi",
+    "recognition": "食堂 百名店 2026",
+    "why": "Katsuretsu done the old western-style way. Counter only, cash, lunch queue.",
+    "note": null,
+    "price": "¥1,500–2,800",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:30",
+        "14:00"
+      ],
+      [
+        "17:00",
+        "21:30"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒160-0004 東京都新宿区四谷",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "yabusoba",
+    "name_ja": "かんだやぶそば",
+    "name_en": "Kanda Yabu Soba",
+    "kind": "eat",
+    "zone": "base",
+    "station": "Awajicho",
+    "line": "marunouchi",
+    "recognition": "Since 1880",
+    "why": "Seiro soba and a beer, twenty minutes, done. Rebuilt after the 2013 fire, unchanged in spirit.",
+    "note": null,
+    "price": "¥1,500–3,000",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:30",
+        "13:30"
+      ],
+      [
+        "17:00",
+        "20:30"
+      ]
+    ],
+    "closed_days": [
+      "Wed"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0051 東京都千代田区神田淡路町2-10",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "matsuya",
+    "name_ja": "神田まつや",
+    "name_en": "Kanda Matsuya",
+    "kind": "eat",
+    "zone": "base",
+    "station": "Awajicho",
+    "line": "marunouchi",
+    "recognition": "Since 1884",
+    "why": "Shared tables, hand-cut soba, old boys drinking at 3pm. The other half of the pilgrimage.",
+    "note": null,
+    "price": "¥1,200–2,500",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:00",
+        "20:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0051 東京都千代田区神田須田町1-13",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "maruka",
+    "name_ja": "丸香",
+    "name_en": "Maruka",
+    "kind": "eat",
+    "zone": "base",
+    "station": "Jimbocho",
+    "line": "hanzomon",
+    "recognition": "Sanuki udon benchmark",
+    "why": "Lunch only, and the queue is the point — be there at 11:00 or skip it.",
+    "note": null,
+    "price": "¥800–1,500",
+    "slots": [
+      "lunch"
+    ],
+    "hours": [
+      [
+        "11:00",
+        "15:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0051 東京都千代田区神田小川町3-16-1",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "bondy",
+    "name_ja": "欧風カレー ボンディ",
+    "name_en": "Bondy",
+    "kind": "eat",
+    "zone": "base",
+    "station": "Jimbocho",
+    "line": "hanzomon",
+    "recognition": "Since 1973",
+    "why": "European-style curry with a boiled potato and butter served first. Jimbocho's lunch.",
+    "note": null,
+    "price": "¥1,500–2,200",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:00",
+        "22:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0051 東京都千代田区神田神保町2-3 神田古書センター2F",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "daitoryo",
+    "name_ja": "大統領",
+    "name_en": "Daitoryo",
+    "kind": "eat",
+    "zone": "base",
+    "station": "Ueno",
+    "line": "yamanote",
+    "recognition": "Ameyoko standing institution, 1950",
+    "why": "Horse motsu-nikomi, standing, loud, cramped. Exactly right on night one.",
+    "note": null,
+    "price": "¥2,000–3,500",
+    "slots": [
+      "dinner"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "22:30"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒110-0005 東京都台東区上野6-10-14",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "general-knowledge"
+  },
+  {
+    "id": "izuei",
+    "name_ja": "伊豆栄 本店",
+    "name_en": "Izuei Honten",
+    "kind": "eat",
+    "zone": "base",
+    "station": "Ueno",
+    "line": "yamanote",
+    "recognition": "Edo-period unagi lineage",
+    "why": "Unagi over Shinobazu Pond. The splurge lunch that doesn't need a reservation.",
+    "note": null,
+    "price": "¥4,000–9,000",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:00",
+        "21:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒110-0007 東京都台東区上野2-12-22",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "general-knowledge"
+  },
+  {
+    "id": "shinodazushi",
+    "name_ja": "神田志乃多寿司",
+    "name_en": "Kanda Shinodazushi",
+    "kind": "eat",
+    "zone": "base",
+    "station": "Awajicho",
+    "line": "marunouchi",
+    "recognition": "Since 1902",
+    "why": "Inarizushi and norimaki to take away, boxed beautifully. Carry it onto a day-trip train.",
+    "note": null,
+    "price": "¥800–2,000",
+    "slots": [
+      "breakfast",
+      "lunch"
+    ],
+    "hours": [
+      [
+        "07:00",
+        "17:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0051 東京都千代田区神田淡路町2-2",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "tsubomi",
+    "name_ja": "鮨 つぼみ",
+    "name_en": "Sushi Tsubomi",
+    "kind": "eat",
+    "zone": "shibuya",
+    "station": "Nakameguro",
+    "line": "toyoko",
+    "recognition": "寿司 TOKYO 百名店 2025",
+    "why": "Top-100 sushi at a price that isn't absurd. A realistic anchor booking for Wed 2 Dec.",
+    "note": null,
+    "price": "¥15,000–25,000",
+    "slots": [
+      "dinner"
+    ],
+    "hours": [
+      [
+        "17:30",
+        "23:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒153-0051 東京都目黒区上目黒",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "naomitsu",
+    "name_ja": "鮨 尚充",
+    "name_en": "Sushi Naomitsu",
+    "kind": "eat",
+    "zone": "shibuya",
+    "station": "Nakameguro",
+    "line": "toyoko",
+    "recognition": "寿司 TOKYO 百名店 2025",
+    "why": "The other Nakameguro top-100 counter. Book both dates and keep whichever answers first.",
+    "note": null,
+    "price": "¥18,000–28,000",
+    "slots": [
+      "dinner"
+    ],
+    "hours": [
+      [
+        "17:30",
+        "23:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒153-0051 東京都目黒区上目黒",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "keita",
+    "name_ja": "鮨桂太",
+    "name_en": "Sushi Keita",
+    "kind": "eat",
+    "zone": "ginza",
+    "station": "Tsukiji",
+    "line": "hibiya",
+    "recognition": "寿司 TOKYO 百名店 2025",
+    "why": "Tsukiji, top-100, and more approachable than the Ginza names above it on the list.",
+    "note": null,
+    "price": "¥18,000–30,000",
+    "slots": [
+      "dinner"
+    ],
+    "hours": [
+      [
+        "17:30",
+        "23:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒104-0045 東京都中央区築地",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "ozasa",
+    "name_ja": "小笹寿し",
+    "name_en": "Ozasa Zushi",
+    "kind": "eat",
+    "zone": "west",
+    "station": "Shimokitazawa",
+    "line": "odakyu",
+    "recognition": "寿司 TOKYO 百名店 2025",
+    "why": "Top-100 sushi in Shimokitazawa, of all places. Cheaper than its Ginza equivalents.",
+    "note": null,
+    "price": "¥12,000–20,000",
+    "slots": [
+      "dinner"
+    ],
+    "hours": [
+      [
+        "17:30",
+        "23:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒155-0031 東京都世田谷区北沢",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "yunrin",
+    "name_ja": "神田雲林",
+    "name_en": "Kandayunrin",
+    "kind": "eat",
+    "zone": "base",
+    "station": "Kanda",
+    "line": "yamanote",
+    "recognition": "Bookable, near the hotel",
+    "why": "Serious Chinese, counter and tables. A low-stress anchor dinner ten minutes from bed.",
+    "note": null,
+    "price": "¥8,000–12,000",
+    "slots": [
+      "dinner"
+    ],
+    "hours": [
+      [
+        "17:30",
+        "23:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒101-0044 東京都千代田区鍛冶町2-13-5",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "ameyoko",
+    "name_ja": "アメヤ横丁",
+    "name_en": "Ameyoko",
+    "kind": "eat",
+    "zone": "base",
+    "station": "Ueno",
+    "line": "yamanote",
+    "recognition": "Post-war market arcade",
+    "why": "Standing seafood, kebabs, dried fish, cheap beer from mid-afternoon under the tracks.",
+    "note": null,
+    "price": "¥1,000–3,000",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "21:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒110-0005 東京都台東区上野4丁目",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "general-knowledge"
+  },
+  {
+    "id": "tsukiji",
+    "name_ja": "築地場外市場",
+    "name_en": "Tsukiji Outer Market",
+    "kind": "eat",
+    "zone": "ginza",
+    "station": "Tsukiji",
+    "line": "hibiya",
+    "recognition": "Morning eating",
+    "why": "Tamagoyaki, uni, grilled scallops, standing up. Dead by 14:00 — it's a breakfast plan.",
+    "note": null,
+    "price": "¥1,500–4,000",
+    "slots": [
+      "breakfast",
+      "lunch"
+    ],
+    "hours": [
+      [
+        "05:00",
+        "14:00"
+      ]
+    ],
+    "closed_days": [
+      "Wed"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒104-0045 東京都中央区築地4丁目",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "general-knowledge"
+  },
+  {
+    "id": "mitsukoshi",
+    "name_ja": "三越銀座 デパ地下",
+    "name_en": "Ginza Mitsukoshi depachika",
+    "kind": "eat",
+    "zone": "ginza",
+    "station": "Ginza",
+    "line": "ginza",
+    "recognition": "The heavyweight food basement",
+    "why": "Go an hour before closing for the marked-down bento shelf. Dinner without sitting down.",
+    "note": null,
+    "price": "¥1,000–5,000",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "20:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒104-8212 東京都中央区銀座4-6-16",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "general-knowledge"
+  },
+  {
+    "id": "gaien",
+    "name_ja": "神宮外苑いちょう並木",
+    "name_en": "Jingu Gaien ginkgo avenue",
+    "kind": "see",
+    "zone": "omote",
+    "station": "Gaienmae",
+    "line": "ginza",
+    "recognition": "Forecast peak ~26 Nov 2026",
+    "why": "146 ginkgo in a tunnel. Ginza line straight from Suehirocho — no changes, about 20 minutes.",
+    "note": "Go at first light. Sources are unanimous that midday on a peak weekend is a crush. The Ginkgo Festival has not run under that name since 2019, so food stalls are not guaranteed.",
+    "price": "free",
+    "slots": [
+      "breakfast",
+      "coffee",
+      "lunch"
+    ],
+    "hours": [
+      [
+        "06:00",
+        "17:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒107-0061 東京都港区北青山2丁目",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "rikugien",
+    "name_ja": "六義園 紅葉のライトアップ",
+    "name_en": "Rikugien night illumination",
+    "kind": "see",
+    "zone": "yanesen",
+    "station": "Komagome",
+    "line": "namboku",
+    "recognition": "25 Nov – 6 Dec 2026",
+    "why": "Maples lit over water in a 1700s daimyo garden. The best-value booked thing in this guide.",
+    "note": "18:00–20:30, last entry 19:30. Advance online ¥1,000; at the gate ¥1,200 and cash only. Runs every night of your trip.",
+    "price": "¥1,000 advance · ¥1,200 door",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "18:00",
+        "20:30"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒113-0021 東京都文京区本駒込6-16-3",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "korakuen",
+    "name_ja": "小石川後楽園",
+    "name_en": "Koishikawa Korakuen",
+    "kind": "see",
+    "zone": "base",
+    "station": "Iidabashi",
+    "line": "oedo",
+    "recognition": "Laid out 1629",
+    "why": "Maples against a Chinese-style landscape. Smaller and calmer than Rikugien, and closer.",
+    "note": null,
+    "price": "¥300",
+    "slots": [
+      "lunch",
+      "coffee"
+    ],
+    "hours": [
+      [
+        "09:00",
+        "17:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒112-0004 東京都文京区後楽1-6-6",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "kiyosumiteien",
+    "name_ja": "清澄庭園",
+    "name_en": "Kiyosumi Teien",
+    "kind": "see",
+    "zone": "asakusa",
+    "station": "Kiyosumi-Shirakawa",
+    "line": "oedo",
+    "recognition": "Stepping-stone pond garden",
+    "why": "Stones across a pond full of turtles, framed by maples. Pairs with the coffee district above it.",
+    "note": null,
+    "price": "¥150",
+    "slots": [
+      "lunch",
+      "coffee"
+    ],
+    "hours": [
+      [
+        "09:00",
+        "17:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒135-0024 東京都江東区清澄3-3-9",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "gyoen",
+    "name_ja": "新宿御苑",
+    "name_en": "Shinjuku Gyoen",
+    "kind": "see",
+    "zone": "shinjuku",
+    "station": "Shinjuku-gyoemmae",
+    "line": "marunouchi",
+    "recognition": "58 hectares · late maples",
+    "why": "No alcohol allowed, which keeps it quiet. Greenhouse for a cold afternoon.",
+    "note": null,
+    "price": "¥500",
+    "slots": [
+      "lunch",
+      "coffee"
+    ],
+    "hours": [
+      [
+        "09:00",
+        "17:00"
+      ]
+    ],
+    "closed_days": [
+      "Mon"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒160-0014 東京都新宿区内藤町11",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "marunouchi-il",
+    "name_ja": "丸の内イルミネーション",
+    "name_en": "Marunouchi Illumination",
+    "kind": "see",
+    "zone": "ginza",
+    "station": "Tokyo",
+    "line": "marunouchi",
+    "recognition": "From 12 Nov 2026",
+    "why": "1.2km of champagne-gold along Naka-dori. Lit every night you're there.",
+    "note": null,
+    "price": "free",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "16:00",
+        "23:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒100-0005 東京都千代田区丸の内 仲通り",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "hibiya-il",
+    "name_ja": "東京ミッドタウン日比谷",
+    "name_en": "Midtown Hibiya illumination",
+    "kind": "see",
+    "zone": "ginza",
+    "station": "Hibiya",
+    "line": "hibiya",
+    "recognition": "From 12 Nov 2026",
+    "why": "Blue-toned lights over the plaza. Ten minutes from the Marunouchi run — do both in one loop.",
+    "note": null,
+    "price": "free",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "16:00",
+        "23:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒100-0006 東京都千代田区有楽町1-1-2",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "keyakizaka",
+    "name_ja": "六本木けやき坂",
+    "name_en": "Roppongi Keyakizaka",
+    "kind": "see",
+    "zone": "azabu",
+    "station": "Roppongi",
+    "line": "hibiya",
+    "recognition": "Runs to 14 Feb 2027",
+    "why": "The blue slope with Tokyo Tower framed at the bottom. Midtown Roppongi is lit from 26 Nov.",
+    "note": null,
+    "price": "free",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "17:00",
+        "23:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒106-0032 東京都港区六本木6丁目",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "myojin",
+    "name_ja": "神田明神",
+    "name_en": "Kanda Myojin",
+    "kind": "see",
+    "zone": "base",
+    "station": "Suehirocho",
+    "line": "ginza",
+    "recognition": "Founded 730",
+    "why": "Your local shrine, patron of the electronics quarter below it. Five minutes from the door.",
+    "note": null,
+    "price": "free",
+    "slots": [
+      "breakfast",
+      "coffee",
+      "lunch"
+    ],
+    "hours": [
+      [
+        "06:00",
+        "18:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0021 東京都千代田区外神田2-16-2",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "yushima",
+    "name_ja": "湯島聖堂",
+    "name_en": "Yushima Seido",
+    "kind": "see",
+    "zone": "base",
+    "station": "Ochanomizu",
+    "line": "chiyoda",
+    "recognition": "Confucian temple, 1690",
+    "why": "Black-lacquered halls in a dark grove. Almost nobody goes. Two minutes from Kanda Myojin.",
+    "note": null,
+    "price": "free",
+    "slots": [
+      "breakfast",
+      "coffee",
+      "lunch"
+    ],
+    "hours": [
+      [
+        "09:00",
+        "17:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒113-0034 東京都文京区湯島1-4-25",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "nezu",
+    "name_ja": "根津神社",
+    "name_en": "Nezu Shrine",
+    "kind": "see",
+    "zone": "yanesen",
+    "station": "Nezu",
+    "line": "chiyoda",
+    "recognition": "1705 complex, survived the war",
+    "why": "A tunnel of small torii and a lacquered gate, without the Kyoto queue. Anchor a Yanesen walk here.",
+    "note": null,
+    "price": "free",
+    "slots": [
+      "breakfast",
+      "coffee",
+      "lunch"
+    ],
+    "hours": [
+      [
+        "06:00",
+        "17:30"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒113-0031 東京都文京区根津1-28-9",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "general-knowledge"
+  },
+  {
+    "id": "kamakura",
+    "name_ja": "鎌倉",
+    "name_en": "Kamakura",
+    "kind": "see",
+    "zone": "away",
+    "station": "Kamakura",
+    "line": "jr",
+    "recognition": "One of Japan's latest maple peaks",
+    "why": "Temple colour holds into the first week of December. An hour from Shinjuku.",
+    "note": "Hasedera lights its maples from sunset, late Nov–early Dec, ¥400. Confirm this year's dates on the temple's own site before committing the evening.",
+    "price": "from ¥945 each way",
+    "slots": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "06:00",
+        "22:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒248-0006 神奈川県鎌倉市",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "takao",
+    "name_ja": "高尾山",
+    "name_en": "Mt Takao",
+    "kind": "see",
+    "zone": "away",
+    "station": "Takaosanguchi",
+    "line": "keio",
+    "recognition": "Michelin-listed for maples",
+    "why": "55 minutes from Shinjuku, ¥580, with an onsen at the bottom for afterwards.",
+    "note": "Peak late Nov–early Dec. It is the most crowded mountain on earth on an autumn weekend — weekday or not at all.",
+    "price": "¥580 each way",
+    "slots": [
+      "breakfast",
+      "lunch"
+    ],
+    "hours": [
+      [
+        "06:00",
+        "17:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒193-0844 東京都八王子市高尾町",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "nagatoro",
+    "name_ja": "長瀞",
+    "name_en": "Nagatoro",
+    "kind": "see",
+    "zone": "away",
+    "station": "Nagatoro",
+    "line": "seibu",
+    "recognition": "Peak mid Nov – early Dec",
+    "why": "Maples from a riverboat, suspension bridges, lit park after dark. 1h40 from Ikebukuro, and quiet.",
+    "note": null,
+    "price": "¥1,400–2,130 each way",
+    "slots": [
+      "breakfast",
+      "lunch"
+    ],
+    "hours": [
+      [
+        "08:00",
+        "20:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒369-1305 埼玉県秩父郡長瀞町",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "kappabashi",
+    "name_ja": "かっぱ橋道具街",
+    "name_en": "Kappabashi Kitchen Town",
+    "kind": "buy",
+    "zone": "asakusa",
+    "station": "Tawaramachi",
+    "line": "ginza",
+    "recognition": "800m of restaurant supply",
+    "why": "Knives, copper pans, ceramics, plastic food. Walkable from Ueno.",
+    "note": "Weekday mornings 10:30–12:00 are quietest; many shops shut Sundays. Tax-free over ¥5,500 with the physical passport — a photo will not do. Bring cash; several are cash-only.",
+    "price": "—",
+    "slots": [
+      "breakfast",
+      "lunch"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "17:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒111-0036 東京都台東区松が谷",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "kamaasa",
+    "name_ja": "釜浅商店",
+    "name_en": "Kama-Asa",
+    "kind": "buy",
+    "zone": "asakusa",
+    "station": "Tawaramachi",
+    "line": "ginza",
+    "recognition": "80+ knife types · free engraving",
+    "why": "Start here: English- and French-speaking staff, no pressure, and they teach you the vocabulary.",
+    "note": "Engraving takes 1–3 days, so buy early in the trip. Knives go in checked luggage only — never carry-on.",
+    "price": "¥10,000–80,000",
+    "slots": [
+      "breakfast",
+      "lunch"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "17:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒111-0036 東京都台東区松が谷2-24-1",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "tsubaya",
+    "name_ja": "つば屋包丁店",
+    "name_en": "Tsubaya",
+    "kind": "buy",
+    "zone": "asakusa",
+    "station": "Tawaramachi",
+    "line": "ginza",
+    "recognition": "Lifetime resharpening on purchases",
+    "why": "Sharpening specialists. Worth it if the knife is going to get used rather than displayed.",
+    "note": null,
+    "price": "¥10,000–60,000",
+    "slots": [
+      "breakfast",
+      "lunch"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "17:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒111-0036 東京都台東区西浅草",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "jimbochobooks",
+    "name_ja": "神保町古書店街",
+    "name_en": "Jimbocho book district",
+    "kind": "buy",
+    "zone": "base",
+    "station": "Jimbocho",
+    "line": "hanzomon",
+    "recognition": "~170 second-hand bookshops",
+    "why": "Art and photography books are the ones worth the suitcase weight. Sanseido reopened in March 2026.",
+    "note": null,
+    "price": "—",
+    "slots": [
+      "lunch",
+      "coffee"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "19:00"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒101-0051 東京都千代田区神田神保町",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "researched-2026-09-24"
+  },
+  {
+    "id": "matsuzakaya",
+    "name_ja": "松坂屋上野店 デパ地下",
+    "name_en": "Matsuzakaya depachika",
+    "kind": "buy",
+    "zone": "base",
+    "station": "Ueno-Hirokoji",
+    "line": "ginza",
+    "recognition": "Your nearest food hall",
+    "why": "Best souvenir food within walking distance, and dinner when you're too tired to sit down.",
+    "note": null,
+    "price": "¥1,000–5,000",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "20:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒110-8503 東京都台東区上野3-29-5",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "general-knowledge"
+  }
+]

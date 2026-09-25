@@ -1,0 +1,28 @@
+{
+  "name": "tokyo-2026",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "fonts": "node scripts/subset-fonts.mjs",
+    "predev": "npm run fonts",
+    "dev": "astro dev",
+    "prebuild": "node scripts/check-json.mjs && npm run fonts",
+    "build": "astro check && astro build",
+    "preview": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/ibm-plex-sans-jp": "^5.3.0",
+    "astro": "^7.3.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "subset-font": "^2.9.0",
+    "typescript": "^6.0.3",
+    "wrangler": "^4.140.0"
+  },
+  "engines": {
+    "node": ">=22.12"
+  }
+}

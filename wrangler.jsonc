@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Static site only: no Worker script, just the built files in ./dist.
+  "name": "tokyo-2026",
+  "compatibility_date": "2026-09-25",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  // Production lives on workers.dev behind Cloudflare Access.
+  // Per-version preview URLs are off so there is no second, unprotected address.
+  "workers_dev": true,
+  "preview_urls": false
+}

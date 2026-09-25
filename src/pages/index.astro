@@ -1,0 +1,246 @@
+---
+// Today. The page is built once, so which view shows is decided in the
+// browser from the date in Japan: countdown before, "Day N of 8" during,
+// a look back after. Without JavaScript the countdown view stays visible.
+import Base from '../layouts/Base.astro';
+import StationBadge from '../components/StationBadge.astro';
+import { bookingDate, loadData, shortDate } from '../lib/data';
+
+const data = await loadData();
+const { days, base } = data;
+const first = days[0].date;
+const last = days[days.length - 1].date;
+const year = Number(first.slice(0, 4));
+const range = `${shortDate(first).slice(4)} – ${shortDate(last).slice(4)} ${year}`;
+
+const bookings = data.bookings.map((b) => ({ ...b, date: bookingDate(b.when, year) }));
+const rank = (b: (typeof bookings)[number]) => (b.when === 'Now' ? 0 : b.date ? 1 : 2);
+bookings.sort((a, b) => rank(a) - rank(b) || (a.date ?? '').localeCompare(b.date ?? ''));
+
+const prep = [...data.prep].sort((a, b) => {
+  const key = (d: string) => (d === 'now' ? '0' : d === 'trip' ? '9' : d);
+  return key(a.due).localeCompare(key(b.due));
+});
+const dueLabel = (due: string) => (due === 'now' ? 'Now' : due === 'trip' ? 'On the trip' : shortDate(due));
+---
+
+<Base title="Tokyo 2026" tab="today">
+  <header class="page-head head">
+    <span class="label">Tokyo 2026</span>
+    <p class="t28 w700">{range}</p>
+    <div class="home">
+      <StationBadge line={data.line(base.line)} station={base.name_en} code={base.code} large />
+      <span class="t20 w500" lang="ja">{base.name_ja}</span>
+    </div>
+  </header>
+
+  <!-- Before the trip -->
+  <div data-view="before">
+    <section class="section">
+      <p class="count">
+        <span class="t40 w700 mono" data-countdown>—</span>
+        <span class="t20" data-countdown-unit>days to go</span>
+      </p>
+      <p class="muted" data-countdown-first>First day: {shortDate(first)}. {days[0].title}.</p>
+    </section>
+
+    <section class="section" aria-labelledby="book-h">
+      <h2 class="label" id="book-h">Book next</h2>
+      <ul class="list">
+        {
+          bookings.map((b) => (
+            <li data-booking-date={b.date ?? ''}>
+              <span class="when">
+                <span class="mono w500">{b.date ? shortDate(b.date) : b.when}</span>
+                <span class="t13 muted" data-relative />
+              </span>
+              <span class="w500 t20">{b.what}</span>
+              <span>{b.detail}</span>
+              <span class="t13 muted">{b.where}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="section" aria-labelledby="prep-h">
+      <h2 class="label" id="prep-h">Before you fly</h2>
+      <ul class="list">
+        {
+          prep.map((p) => (
+            <li data-prep-due={p.due}>
+              <span class="when">
+                <span class="mono w500">{dueLabel(p.due)}</span>
+                <span class="t13 muted">{p.group}</span>
+              </span>
+              <span>{p.item}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+
+  <!-- During the trip: one card per day, the script reveals today's -->
+  <div data-view="during" hidden>
+    {
+      days.map((d, i) => (
+        <article class="section day" data-day={d.date} hidden>
+          <p class="label">
+            Day {i + 1} of {days.length} · {shortDate(d.date)}
+          </p>
+          <h2 class="t40 w700">{d.title}</h2>
+          <p class="anchor t20 w500">{d.anchor}</p>
+          <ul class="notes">
+            {d.notes.map((n) => (
+              <li>{n}</li>
+            ))}
+          </ul>
+          {days[i + 1] && (
+            <p class="next">
+              <span class="label">Tomorrow · {shortDate(days[i + 1].date)}</span>
+              <span class="t20 w500">{days[i + 1].title}</span>
+              <span>{days[i + 1].anchor}</span>
+            </p>
+          )}
+        </article>
+      ))
+    }
+  </div>
+
+  <!-- After the trip -->
+  <section class="section" data-view="after" hidden>
+    <p class="t28 w700">Home again.</p>
+    <p>{days.length} days in Tokyo, {range}.</p>
+  </section>
+
+  <section class="section" aria-labelledby="days-h" data-days-overview>
+    <h2 class="label" id="days-h">The {days.length} days</h2>
+    <ol class="list days">
+      {
+        days.map((d) => (
+          <li data-overview-day={d.date}>
+            <span class="when">
+              <span class="mono w500">{shortDate(d.date)}</span>
+            </span>
+            <span class="t20 w500">{d.title}</span>
+            <span>{d.anchor}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</Base>
+
+<style>
+  .head > * + * {
+    margin-top: var(--u);
+  }
+  .home {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--u) var(--g);
+    margin-top: calc(var(--u) * 2) !important;
+  }
+  .count {
+    display: flex;
+    align-items: baseline;
+    gap: var(--u);
+    padding-top: var(--u);
+    border-top: 1px solid var(--ink);
+  }
+  .count + p {
+    margin-top: var(--u);
+  }
+  .list > li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: calc(var(--u) * 2) 0;
+    border-bottom: 1px solid var(--grey-2);
+  }
+  .when {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 var(--u);
+  }
+  .days li[aria-current='date'] {
+    background: var(--grey-1);
+    margin-inline: calc(var(--g) * -1);
+    padding-inline: var(--g);
+  }
+  .day .label {
+    padding-bottom: var(--u);
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: calc(var(--u) * 2);
+  }
+  .anchor {
+    margin-top: calc(var(--u) * 2);
+    padding: var(--u) var(--g);
+    margin-inline: calc(var(--g) * -1);
+    background: var(--signal);
+    color: var(--on-signal);
+  }
+  .notes {
+    margin-top: calc(var(--u) * 2);
+  }
+  .notes li {
+    padding: var(--u) 0;
+    border-bottom: 1px solid var(--grey-2);
+  }
+  .next {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: calc(var(--u) * 3);
+  }
+</style>
+
+<script>
+  import { daysBetween, jstNow } from '../lib/time';
+
+  function render() {
+    const today = jstNow().date;
+    const dayCards = [...document.querySelectorAll<HTMLElement>('[data-day]')];
+    const first = dayCards[0]?.dataset.day ?? today;
+    const last = dayCards[dayCards.length - 1]?.dataset.day ?? today;
+    const view = today < first ? 'before' : today > last ? 'after' : 'during';
+
+    for (const el of document.querySelectorAll<HTMLElement>('[data-view]')) el.hidden = el.dataset.view !== view;
+    for (const card of dayCards) card.hidden = card.dataset.day !== today;
+    for (const li of document.querySelectorAll<HTMLElement>('[data-overview-day]')) {
+      if (li.dataset.overviewDay === today) li.setAttribute('aria-current', 'date');
+      else li.removeAttribute('aria-current');
+    }
+
+    if (view === 'before') {
+      const n = daysBetween(today, first);
+      const countdown = document.querySelector('[data-countdown]');
+      const unit = document.querySelector('[data-countdown-unit]');
+      if (countdown) countdown.textContent = String(n);
+      if (unit) unit.textContent = n === 1 ? 'day to go' : 'days to go';
+
+      // Bookings: hide windows that have passed, say how far away the rest are.
+      for (const li of document.querySelectorAll<HTMLElement>('[data-booking-date]')) {
+        const date = li.dataset.bookingDate;
+        const rel = li.querySelector('[data-relative]');
+        if (!date) continue;
+        const d = daysBetween(today, date);
+        li.hidden = d < 0;
+        if (rel) rel.textContent = d === 0 ? 'Today' : d === 1 ? 'Tomorrow' : `In ${d} days`;
+      }
+      for (const li of document.querySelectorAll<HTMLElement>('[data-prep-due]')) {
+        const due = li.dataset.prepDue ?? '';
+        li.hidden = /^\d{4}-/.test(due) && due < today;
+      }
+    }
+  }
+
+  render();
+  // An installed app can sit open across midnight.
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') render();
+  });
+</script>

@@ -1,0 +1,57 @@
+---
+import '@fontsource/ibm-plex-sans-jp/latin-400.css';
+import '@fontsource/ibm-plex-sans-jp/latin-500.css';
+import '@fontsource/ibm-plex-sans-jp/latin-700.css';
+import '../styles/fonts.css';
+import '@fontsource/ibm-plex-mono/latin-400.css';
+import '@fontsource/ibm-plex-mono/latin-500.css';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  /** Which tab is current, if any. */
+  tab?: 'today' | 'places';
+  /** false hides the tab bar (Show to staff). */
+  showTabs?: boolean;
+  bodyClass?: string;
+}
+
+const { title, tab, showTabs = true, bodyClass } = Astro.props;
+const tabs = [
+  { id: 'today', label: 'Today', href: '/' },
+  { id: 'places', label: 'Places', href: '/places/eat/' },
+] as const;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title === 'Tokyo 2026' ? title : `${title} · Tokyo 2026`}</title>
+  </head>
+  <body class={bodyClass}>
+    <a class="skip" href="#main">Skip to content</a>
+    <main id="main">
+      <slot />
+    </main>
+    {
+      showTabs && (
+        <nav class="tabbar" aria-label="Sections">
+          {tabs.map((t) => (
+            <a href={t.href} aria-current={t.id === tab ? 'page' : undefined}>
+              {t.label}
+            </a>
+          ))}
+        </nav>
+      )
+    }
+  </body>
+</html>

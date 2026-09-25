@@ -1,0 +1,58 @@
+---
+// Line colour appears only here: a Tokyo Metro-style ring with the line code.
+import type { Line } from '../lib/data';
+
+interface Props {
+  line: Line;
+  station: string;
+  /** Full station code, e.g. "G14". Without it the ring shows the line letter. */
+  code?: string;
+  large?: boolean;
+}
+
+const { line, station, code, large = false } = Astro.props;
+const letters = code ? code.replace(/\d+$/, '') : line.code;
+const number = code ? code.slice(letters?.length ?? 0) : '';
+---
+
+<span class:list={['badge', { large }]}>
+  <span class="ring mono" style={`--line: ${line.colour}`} aria-hidden="true">
+    {letters && <span>{letters}</span>}
+    {number && <span>{number}</span>}
+  </span>
+  <span class="name">{station}<span class="sr-only">, {line.name}{code ? ` ${code}` : ''}</span></span>
+</span>
+
+<style>
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--u);
+  }
+  .ring {
+    flex: none;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 4px solid var(--line);
+    border-radius: 50%;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: var(--t13);
+    font-weight: 700;
+    line-height: 1;
+  }
+  .large .ring {
+    width: 48px;
+    height: 48px;
+    border-width: 5px;
+    font-size: var(--t16);
+  }
+  .large .name {
+    font-size: var(--t20);
+    font-weight: 500;
+  }
+</style>

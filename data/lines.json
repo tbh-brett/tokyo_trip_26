@@ -1,0 +1,23 @@
+[
+  { "id": "ginza", "name": "Ginza line", "code": "G", "colour": "#FF9500" },
+  { "id": "hibiya", "name": "Hibiya line", "code": "H", "colour": "#B5B5AC" },
+  { "id": "yamanote", "name": "JR Yamanote line", "code": "JY", "colour": "#9ACD32" },
+  { "id": "chiyoda", "name": "Chiyoda line", "code": "C", "colour": "#00BB85" },
+  { "id": "marunouchi", "name": "Marunouchi line", "code": "M", "colour": "#F62E36" },
+  { "id": "hanzomon", "name": "Hanzomon line", "code": "Z", "colour": "#8F76D6" },
+  { "id": "oedo", "name": "Toei Oedo line", "code": "E", "colour": "#B6007A" },
+  { "id": "namboku", "name": "Namboku line", "code": "N", "colour": "#00AC9B" },
+  { "id": "tozai", "name": "Tozai line", "code": "T", "colour": "#009BBF" },
+  { "id": "asakusa", "name": "Toei Asakusa line", "code": "A", "colour": "#EC6E67" },
+  { "id": "keio", "name": "Keio line", "code": "KO", "colour": "#DD0077" },
+  { "id": "jr", "name": "JR", "code": null, "colour": "#004098" },
+  { "id": "toyoko", "name": "Tokyu Toyoko line", "code": "TY", "colour": "#DA0442" },
+  { "id": "shinjuku", "name": "Toei Shinjuku line", "code": "S", "colour": "#6CBB5A" },
+  { "id": "odakyu", "name": "Odakyu line", "code": "OH", "colour": "#2478BC" },
+  { "id": "seibu", "name": "Seibu line", "code": null, "colour": "#F3A22E" },
+  { "id": "fukutoshin", "name": "Fukutoshin line", "code": "F", "colour": "#9C5E31" },
+  { "id": "mita", "name": "Toei Mita line", "code": "I", "colour": "#006AB8" },
+  { "id": "yurakucho", "name": "Yurakucho line", "code": "Y", "colour": "#C1A470" },
+  { "id": "tsukuba", "name": "Tsukuba Express", "code": "TX", "colour": "#0F6CBD" },
+  { "id": "toden", "name": "Tokyo Sakura Tram", "code": "SA", "colour": "#E8739A" }
+]
