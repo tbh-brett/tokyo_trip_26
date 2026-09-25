@@ -36,6 +36,7 @@ const schedule = [hoursText(p.hours), closedText(p.closed_days)].filter(Boolean)
       {p.book_ahead && <span class="t13 w500">Book ahead</span>}
     </span>
     <span class="t13 muted"><span class="open w500" data-open></span>{schedule}</span>
+    <span class="t13 w500" data-planned hidden></span>
   </a>
 </li>
 

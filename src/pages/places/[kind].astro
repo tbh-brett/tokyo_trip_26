@@ -50,6 +50,12 @@ const zones = data.zones
     </div>
   </div>
 
+  <section class="wrap mine" aria-labelledby="mine-h">
+    <h2 class="label" id="mine-h">Added by you</h2>
+    <ul class="rows-lite" data-mine-list={kind}></ul>
+    <p class="btns"><a class="btn" href={`/add/?kind=${kind}`}>Add a place that isn't listed <span class="hint">→</span></a></p>
+  </section>
+
   <p class="wrap t13 muted count" aria-live="polite" data-count>{list.length} places</p>
   <ul class="rows">
     {list.map((p) => <PlaceRow place={p} line={data.line(p.line)} />)}
@@ -63,6 +69,16 @@ const zones = data.zones
   .area .label {
     margin-bottom: var(--u);
   }
+  .mine {
+    margin-top: calc(var(--u) * 3);
+  }
+  .mine .label {
+    padding-bottom: var(--u);
+    border-bottom: 1px solid var(--ink);
+  }
+  .mine .btns {
+    margin-top: var(--u);
+  }
   .count {
     margin-top: calc(var(--u) * 3);
     padding-bottom: var(--u);
@@ -71,7 +87,11 @@ const zones = data.zones
 </style>
 
 <script>
-  import { watchRows } from '../../scripts/rows';
+  import { itemsForPlace } from '../../lib/plan';
+  import { shortDate } from '../../lib/time';
+  import { getPlan } from '../../scripts/store';
+  import { html, mount } from '../../scripts/ui';
+  import { wirePlaceRows } from '../../scripts/widgets';
 
   const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-zone-filter]')];
   const rows = [...document.querySelectorAll<HTMLElement>('[data-place]')];
@@ -94,5 +114,21 @@ const zones = data.zones
 
   for (const b of buttons) b.addEventListener('click', () => apply(b.dataset.zoneFilter ?? ''));
   apply(new URLSearchParams(location.search).get('zone') ?? '');
-  watchRows();
+  wirePlaceRows();
+
+  // Your own places of this kind.
+  const mine = document.querySelector<HTMLElement>('[data-mine-list]')!;
+  mount(mine, () => {
+    const plan = getPlan();
+    const places = plan.places.filter((p) => p.kind === mine.dataset.mineList);
+    if (!places.length) return html`<li class="muted">None yet.</li>`;
+    return html`${places.map((p) => {
+      const days = [...new Set(itemsForPlace(plan, p.id).map((i) => shortDate(i.day)))];
+      const mark = plan.marks[p.id]?.mark;
+      return html`<li><a href="/p/mine/?id=${p.id}">
+        <span class="w500">${p.name}</span>${p.name_ja ? html` <span lang="ja">${p.name_ja}</span>` : ''}
+        <span class="t13 muted">Added by ${p.by}${days.length ? ` · Planned · ${days.join(', ')}` : ''}${mark ? ` · ${mark}` : ''}</span>
+      </a></li>`;
+    })}`;
+  });
 </script>

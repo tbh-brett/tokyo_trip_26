@@ -31,9 +31,6 @@ function jsonArray(opts: { idFrom?: (item: Record<string, unknown>, index: numbe
   };
 }
 
-// Files without ids get their position as the id.
-const byPosition = (_: unknown, i: number) => String(i).padStart(3, '0');
-
 const places = defineCollection({
   loader: file('data/places.json', { parser: jsonArray() }),
   schema: z
@@ -82,6 +79,8 @@ const days = defineCollection({
       title: z.string().min(1),
       anchor: z.string().min(1),
       notes: z.array(z.string().min(1)),
+      /** Places the notes mention, offered as ideas on the day's page. */
+      places: z.array(slug),
     })
     .refine(
       (d) => WEEKDAYS[new Date(`${d.date}T12:00:00Z`).getUTCDay()] === d.weekday,
@@ -90,10 +89,10 @@ const days = defineCollection({
 });
 
 const bookings = defineCollection({
-  loader: file('data/bookings.json', { parser: jsonArray({ idFrom: byPosition }) }),
+  loader: file('data/bookings.json', { parser: jsonArray() }),
   schema: z.strictObject({
     position: z.number().int(),
-    id: z.string(),
+    id: slug,
     when: z
       .string()
       .regex(
@@ -107,10 +106,10 @@ const bookings = defineCollection({
 });
 
 const prep = defineCollection({
-  loader: file('data/prep.json', { parser: jsonArray({ idFrom: byPosition }) }),
+  loader: file('data/prep.json', { parser: jsonArray() }),
   schema: z.strictObject({
     position: z.number().int(),
-    id: z.string(),
+    id: slug,
     group: z.string().min(1),
     item: z.string().min(1),
     due: z.union([z.literal('now'), z.literal('trip'), isoDate]),
@@ -155,6 +154,15 @@ const lines = defineCollection({
   }),
 });
 
+const travellers = defineCollection({
+  loader: file('data/travellers.json', { parser: jsonArray() }),
+  schema: z.strictObject({
+    position: z.number().int(),
+    id: slug,
+    name: z.string().min(1).max(20),
+  }),
+});
+
 const trip = defineCollection({
   loader: file('data/trip.json'),
   schema: z.strictObject({
@@ -166,4 +174,4 @@ const trip = defineCollection({
   }),
 });
 
-export const collections = { places, days, bookings, prep, routes, zones, lines, trip };
+export const collections = { places, days, bookings, prep, routes, zones, lines, travellers, trip };

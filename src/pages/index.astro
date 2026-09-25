@@ -1,7 +1,7 @@
 ---
 // Today. The page is built once, so which view shows is decided in the
 // browser from the date in Japan: countdown before, "Day N of 8" during,
-// a look back after. Without JavaScript the countdown view stays visible.
+// a look back after. The shared plan fills in what you've decided.
 import Base from '../layouts/Base.astro';
 import StationBadge from '../components/StationBadge.astro';
 import { bookingDate, loadData, shortDate } from '../lib/data';
@@ -41,43 +41,60 @@ const dueLabel = (due: string) => (due === 'now' ? 'Now' : due === 'trip' ? 'On 
         <span class="t40 w700 mono" data-countdown>—</span>
         <span class="t20" data-countdown-unit>days to go</span>
       </p>
-      <p class="muted" data-countdown-first>First day: {shortDate(first)}. {days[0].title}.</p>
+      <p class="muted">First day: {shortDate(first)}. <span data-day-title={first}>{days[0].title}</span>.</p>
+    </section>
+
+    <section class="section" aria-labelledby="feed-h">
+      <h2 class="label" id="feed-h">Latest changes</h2>
+      <ol class="feed" data-feed="5"></ol>
     </section>
 
     <section class="section" aria-labelledby="book-h">
       <h2 class="label" id="book-h">Book next</h2>
-      <ul class="list">
+      <ul class="checklist">
         {
           bookings.map((b) => (
-            <li data-booking-date={b.date ?? ''}>
-              <span class="when">
-                <span class="mono w500">{b.date ? shortDate(b.date) : b.when}</span>
-                <span class="t13 muted" data-relative />
-              </span>
-              <span class="w500 t20">{b.what}</span>
-              <span>{b.detail}</span>
-              <span class="t13 muted">{b.where}</span>
+            <li data-check-row data-booking-date={b.date ?? ''}>
+              <label class="check">
+                <input type="checkbox" data-check={`booking:${b.id}`} />
+                <span class="check-body">
+                  <span class="when">
+                    <span class="mono w500">{b.date ? shortDate(b.date) : b.when}</span>
+                    <span class="t13 muted" data-relative />
+                  </span>
+                  <span class="w500 t20 item-text">{b.what}</span>
+                  <span>{b.detail}</span>
+                  <span class="t13 muted">{b.where}</span>
+                </span>
+              </label>
             </li>
           ))
         }
       </ul>
+      <p class="t13 muted more" data-done-note hidden></p>
     </section>
 
     <section class="section" aria-labelledby="prep-h">
       <h2 class="label" id="prep-h">Before you fly</h2>
-      <ul class="list">
+      <ul class="checklist">
         {
           prep.map((p) => (
-            <li data-prep-due={p.due}>
-              <span class="when">
-                <span class="mono w500">{dueLabel(p.due)}</span>
-                <span class="t13 muted">{p.group}</span>
-              </span>
-              <span>{p.item}</span>
+            <li data-check-row data-prep-due={p.due}>
+              <label class="check">
+                <input type="checkbox" data-check={`prep:${p.id}`} />
+                <span class="check-body">
+                  <span class="when">
+                    <span class="mono w500">{dueLabel(p.due)}</span>
+                    <span class="t13 muted">{p.group}</span>
+                  </span>
+                  <span class="item-text">{p.item}</span>
+                </span>
+              </label>
             </li>
           ))
         }
       </ul>
+      <p class="t13 muted more"><a href="/plan/">Everything, including what's done, is on Plan →</a></p>
     </section>
   </div>
 
@@ -89,20 +106,37 @@ const dueLabel = (due: string) => (due === 'now' ? 'Now' : due === 'trip' ? 'On 
           <p class="label">
             Day {i + 1} of {days.length} · {shortDate(d.date)}
           </p>
-          <h2 class="t40 w700">{d.title}</h2>
-          <p class="anchor t20 w500">{d.anchor}</p>
+          <h2 class="t40 w700" data-day-title={d.date}>
+            {d.title}
+          </h2>
+          <p class="anchor t20 w500" data-day-anchor={d.date}>
+            {d.anchor}
+          </p>
+          <div class="next-up" data-next-up={d.date} />
+          <h3 class="label sub">Today's plan</h3>
+          <div class="preview" data-day-preview={d.date} data-max="20" />
+          <p class="btns edit">
+            <a class="btn primary" href={`/day/${d.date}/`}>
+              Change today's plan <span class="hint">→</span>
+            </a>
+          </p>
+          <h3 class="label sub">Notes</h3>
           <ul class="notes">
             {d.notes.map((n) => (
               <li>{n}</li>
             ))}
           </ul>
           {days[i + 1] && (
-            <p class="next">
+            <a class="next" href={`/day/${days[i + 1].date}/`}>
               <span class="label">Tomorrow · {shortDate(days[i + 1].date)}</span>
-              <span class="t20 w500">{days[i + 1].title}</span>
-              <span>{days[i + 1].anchor}</span>
-            </p>
+              <span class="t20 w500" data-day-title={days[i + 1].date}>
+                {days[i + 1].title}
+              </span>
+              <span class="preview" data-day-preview={days[i + 1].date} data-max="3" />
+            </a>
           )}
+          <h3 class="label sub">Latest changes</h3>
+          <ol class="feed" data-feed="5" />
         </article>
       ))
     }
@@ -114,17 +148,19 @@ const dueLabel = (due: string) => (due === 'now' ? 'Now' : due === 'trip' ? 'On 
     <p>{days.length} days in Tokyo, {range}.</p>
   </section>
 
-  <section class="section" aria-labelledby="days-h" data-days-overview>
+  <section class="section last" aria-labelledby="days-h" data-days-overview>
     <h2 class="label" id="days-h">The {days.length} days</h2>
-    <ol class="list days">
+    <ol class="days">
       {
         days.map((d) => (
           <li data-overview-day={d.date}>
-            <span class="when">
+            <a href={`/day/${d.date}/`}>
               <span class="mono w500">{shortDate(d.date)}</span>
-            </span>
-            <span class="t20 w500">{d.title}</span>
-            <span>{d.anchor}</span>
+              <span class="t20 w500" data-day-title={d.date}>
+                {d.title}
+              </span>
+              <span class="preview" data-day-preview={d.date} data-max="3" />
+            </a>
           </li>
         ))
       }
@@ -153,25 +189,29 @@ const dueLabel = (due: string) => (due === 'now' ? 'Now' : due === 'trip' ? 'On 
   .count + p {
     margin-top: var(--u);
   }
-  .list > li {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: calc(var(--u) * 2) 0;
-    border-bottom: 1px solid var(--grey-2);
-  }
   .when {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
     gap: 0 var(--u);
   }
-  .days li[aria-current='date'] {
+  .more {
+    margin-top: var(--u);
+  }
+  .days a {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: calc(var(--u) * 2) 0;
+    border-bottom: 1px solid var(--grey-2);
+    text-decoration: none;
+  }
+  .days li[aria-current='date'] a {
     background: var(--grey-1);
     margin-inline: calc(var(--g) * -1);
     padding-inline: var(--g);
   }
-  .day .label {
+  .day > .label:first-child {
     padding-bottom: var(--u);
     border-bottom: 1px solid var(--ink);
     margin-bottom: calc(var(--u) * 2);
@@ -183,7 +223,18 @@ const dueLabel = (due: string) => (due === 'now' ? 'Now' : due === 'trip' ? 'On 
     background: var(--signal);
     color: var(--on-signal);
   }
-  .notes {
+  .next-up:not(:empty) {
+    margin-top: calc(var(--u) * 2);
+  }
+  .sub {
+    margin-top: calc(var(--u) * 3);
+    padding-bottom: var(--u);
+    border-bottom: 1px solid var(--ink);
+  }
+  .preview {
+    padding-top: var(--u);
+  }
+  .edit {
     margin-top: calc(var(--u) * 2);
   }
   .notes li {
@@ -195,14 +246,48 @@ const dueLabel = (due: string) => (due === 'now' ? 'Now' : due === 'trip' ? 'On 
     flex-direction: column;
     gap: 4px;
     margin-top: calc(var(--u) * 3);
+    text-decoration: none;
+  }
+  .last {
+    padding-bottom: calc(var(--u) * 5);
   }
 </style>
 
 <script>
+  import { dayItems, itemLabel } from '../lib/plan';
   import { daysBetween, jstNow } from '../lib/time';
+  import { getPlan, subscribe } from '../scripts/store';
+  import { html, mount, placeView } from '../scripts/ui';
+  import { wireChecklists, wireDayHeadlines, wireDayPreviews, wireFeeds } from '../scripts/widgets';
+
+  wireDayHeadlines();
+  wireDayPreviews();
+  wireChecklists();
+  wireFeeds();
+
+  // "Next up": the next timed thing today, from the shared plan.
+  for (const el of document.querySelectorAll<HTMLElement>('[data-next-up]')) {
+    const date = el.dataset.nextUp!;
+    mount(el, () => {
+      const plan = getPlan();
+      const now = jstNow();
+      if (now.date !== date) return html``;
+      const hhmm = `${String(Math.floor(now.minutes / 60)).padStart(2, '0')}:${String(now.minutes % 60).padStart(2, '0')}`;
+      const next = dayItems(plan, date).timed.find((i) => i.time! >= hhmm);
+      if (!next) return html``;
+      const place = placeView(plan, next.place);
+      return html`<a class="nextup" href="${place?.href ?? `/day/${date}/`}">
+        <span class="label">Next up</span>
+        <span class="t28 w700"><span class="mono">${next.time}</span> ${itemLabel(plan, next)}</span>
+        ${place?.nameJa ? html`<span class="t20" lang="ja">${place.nameJa}</span>` : ''}
+        ${next.note ? html`<span>${next.note}</span>` : ''}
+      </a>`;
+    });
+  }
 
   function render() {
     const today = jstNow().date;
+    const plan = getPlan();
     const dayCards = [...document.querySelectorAll<HTMLElement>('[data-day]')];
     const first = dayCards[0]?.dataset.day ?? today;
     const last = dayCards[dayCards.length - 1]?.dataset.day ?? today;
@@ -214,33 +299,35 @@ const dueLabel = (due: string) => (due === 'now' ? 'Now' : due === 'trip' ? 'On 
       if (li.dataset.overviewDay === today) li.setAttribute('aria-current', 'date');
       else li.removeAttribute('aria-current');
     }
+    if (view !== 'before') return;
 
-    if (view === 'before') {
-      const n = daysBetween(today, first);
-      const countdown = document.querySelector('[data-countdown]');
-      const unit = document.querySelector('[data-countdown-unit]');
-      if (countdown) countdown.textContent = String(n);
-      if (unit) unit.textContent = n === 1 ? 'day to go' : 'days to go';
+    const n = daysBetween(today, first);
+    document.querySelector('[data-countdown]')!.textContent = String(n);
+    document.querySelector('[data-countdown-unit]')!.textContent = n === 1 ? 'day to go' : 'days to go';
 
-      // Bookings: hide windows that have passed, say how far away the rest are.
-      for (const li of document.querySelectorAll<HTMLElement>('[data-booking-date]')) {
-        const date = li.dataset.bookingDate;
-        const rel = li.querySelector('[data-relative]');
-        if (!date) continue;
-        const d = daysBetween(today, date);
-        li.hidden = d < 0;
-        if (rel) rel.textContent = d === 0 ? 'Today' : d === 1 ? 'Tomorrow' : `In ${d} days`;
-      }
-      for (const li of document.querySelectorAll<HTMLElement>('[data-prep-due]')) {
-        const due = li.dataset.prepDue ?? '';
-        li.hidden = /^\d{4}-/.test(due) && due < today;
-      }
+    // Book next: hide windows that have passed and anything already done.
+    let done = 0;
+    for (const li of document.querySelectorAll<HTMLElement>('[data-booking-date]')) {
+      const key = li.querySelector<HTMLInputElement>('[data-check]')!.dataset.check!;
+      const date = li.dataset.bookingDate;
+      const d = date ? daysBetween(today, date) : null;
+      const isDone = Boolean(plan.checks[key]);
+      if (isDone) done++;
+      li.hidden = isDone || (d !== null && d < 0);
+      const rel = li.querySelector('[data-relative]');
+      if (rel && d !== null) rel.textContent = d === 0 ? 'Today' : d === 1 ? 'Tomorrow' : d > 0 ? `In ${d} days` : '';
+    }
+    const doneNote = document.querySelector<HTMLElement>('[data-done-note]')!;
+    doneNote.hidden = !done;
+    doneNote.textContent = `${done} already done. They're ticked off on Plan.`;
+
+    for (const li of document.querySelectorAll<HTMLElement>('[data-prep-due]')) {
+      const due = li.dataset.prepDue ?? '';
+      const key = li.querySelector<HTMLInputElement>('[data-check]')!.dataset.check!;
+      li.hidden = Boolean(plan.checks[key]) || (/^\d{4}-/.test(due) && due < today);
     }
   }
 
   render();
-  // An installed app can sit open across midnight.
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') render();
-  });
+  subscribe(render);
 </script>

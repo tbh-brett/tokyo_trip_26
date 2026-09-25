@@ -1,0 +1,182 @@
+---
+import Base from '../../layouts/Base.astro';
+import { bookingDate, loadData, shortDate } from '../../lib/data';
+import { claudeCodeUrl } from '../../lib/ask';
+
+const data = await loadData();
+const { days } = data;
+const year = Number(days[0].date.slice(0, 4));
+const bookings = data.bookings.map((b) => ({ ...b, date: bookingDate(b.when, year) }));
+const dueLabel = (due: string) => (due === 'now' ? 'Now' : due === 'trip' ? 'On the trip' : shortDate(due));
+const names = data.travellers.map((t) => t.name).join(' and ');
+---
+
+<Base title="Plan" tab="plan">
+  <header class="page-head">
+    <h1 class="t40 w700">Plan</h1>
+    <p class="muted">Shared by {names}. A change on one phone shows on the other within seconds.</p>
+  </header>
+
+  <section class="section" aria-labelledby="days-h">
+    <h2 class="label" id="days-h">The {days.length} days</h2>
+    <ol class="daylist">
+      {
+        days.map((d, i) => (
+          <li>
+            <a href={`/day/${d.date}/`}>
+              <span class="when">
+                <span class="mono w500">{shortDate(d.date)}</span>
+                <span class="t13 muted">Day {i + 1}</span>
+              </span>
+              <span class="t20 w500" data-day-title={d.date}>
+                {d.title}
+              </span>
+              <span data-day-anchor={d.date}>{d.anchor}</span>
+              <span class="preview" data-day-preview={d.date} data-max="5" />
+              <span class="open-day w500">Open day →</span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="section" aria-labelledby="want-h">
+    <h2 class="label" id="want-h">Want list</h2>
+    <p class="t13 muted hint">Places either of you marked Want. Open one to add it to a day.</p>
+    <ul class="rows-lite" data-wantlist></ul>
+  </section>
+
+  <section class="section" aria-labelledby="book-h">
+    <h2 class="label" id="book-h">Bookings</h2>
+    <ul class="checklist">
+      {
+        bookings.map((b) => (
+          <li data-check-row>
+            <label class="check">
+              <input type="checkbox" data-check={`booking:${b.id}`} />
+              <span class="check-body">
+                <span class="mono w500">{b.date ? shortDate(b.date) : b.when}</span>
+                <span class="w500 item-text">{b.what}</span>
+                <span>{b.detail}</span>
+                <span class="t13 muted">{b.where}</span>
+                <span class="t13 w500" data-check-by />
+              </span>
+            </label>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="prep-h">
+    <h2 class="label" id="prep-h">Before you fly</h2>
+    <ul class="checklist">
+      {
+        data.prep.map((p) => (
+          <li data-check-row>
+            <label class="check">
+              <input type="checkbox" data-check={`prep:${p.id}`} />
+              <span class="check-body">
+                <span class="mono w500">{dueLabel(p.due)}</span>
+                <span class="item-text">{p.item}</span>
+                <span class="t13 muted">{p.group}</span>
+                <span class="t13 w500" data-check-by />
+              </span>
+            </label>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="feed-h">
+    <h2 class="label" id="feed-h">Latest changes</h2>
+    <ol class="feed" data-feed="20"></ol>
+  </section>
+
+  <section class="section last" aria-labelledby="claude-h">
+    <h2 class="label" id="claude-h">Bigger changes</h2>
+    <p>
+      For research, like finding a place properly, checking opening hours or changing how the site works, ask Claude Code.
+      It opens on this site's code, follows the rules in CLAUDE.md, and the site updates about a minute after you accept
+      its change.
+    </p>
+    <p class="btns">
+      <a class="btn" href={claudeCodeUrl('Read CLAUDE.md. I want to: ')}>
+        Ask Claude Code <span class="hint">Opens claude.ai ↗</span>
+      </a>
+    </p>
+  </section>
+</Base>
+
+<style>
+  .page-head p {
+    margin-top: var(--u);
+  }
+  .daylist > li > a {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: calc(var(--u) * 2) 0;
+    border-bottom: 1px solid var(--grey-2);
+    text-decoration: none;
+  }
+  .when {
+    display: flex;
+    gap: var(--u);
+    align-items: baseline;
+  }
+  .preview {
+    margin-top: 4px;
+  }
+  .open-day {
+    margin-top: 4px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .hint {
+    margin: var(--u) 0 0;
+  }
+  .last {
+    padding-bottom: calc(var(--u) * 5);
+  }
+  .last p + p {
+    margin-top: calc(var(--u) * 2);
+  }
+  .last > p:first-of-type {
+    margin-top: calc(var(--u) * 2);
+  }
+</style>
+
+<script>
+  import { PLACE_BY_ID } from '../../lib/catalog';
+  import { itemsForPlace } from '../../lib/plan';
+  import { shortDate } from '../../lib/time';
+  import { getPlan } from '../../scripts/store';
+  import { html, mount, placeView } from '../../scripts/ui';
+  import { wireChecklists, wireDayHeadlines, wireDayPreviews, wireFeeds } from '../../scripts/widgets';
+
+  wireDayHeadlines();
+  wireDayPreviews();
+  wireChecklists();
+  wireFeeds();
+
+  mount(document.querySelector<HTMLElement>('[data-wantlist]')!, () => {
+    const plan = getPlan();
+    const wants = Object.entries(plan.marks)
+      .filter(([, m]) => m.mark === 'want')
+      .sort((a, b) => b[1].at - a[1].at)
+      .map(([ref, m]) => ({ view: placeView(plan, ref), m, ref }))
+      .filter((w) => w.view);
+    if (!wants.length) return html`<li class="muted">Nothing yet. Tap Want on any place and it appears here for both of you.</li>`;
+    return html`${wants.map(({ view, m, ref }) => {
+      const days = [...new Set(itemsForPlace(plan, ref).map((i) => shortDate(i.day)))];
+      const station = PLACE_BY_ID.get(ref)?.station;
+      return html`<li><a href="${view!.href}">
+        <span class="w500">${view!.name}</span>${view!.nameJa ? html` <span lang="ja">${view!.nameJa}</span>` : ''}
+        <span class="t13 muted">${station ? `${station} · ` : ''}${days.length ? `Planned · ${days.join(', ')}` : 'Not planned yet'} · marked by ${m.by}</span>
+      </a></li>`;
+    })}`;
+  });
+</script>

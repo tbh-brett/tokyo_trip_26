@@ -1,70 +1,84 @@
 [
   {
+    "id": "rikugien-ticket",
     "group": "Book",
     "item": "Rikugien night illumination ticket (online, ¥1,000)",
     "due": "now"
   },
   {
+    "id": "sakurai-gen",
     "group": "Book",
     "item": "Sakurai tea counter and Gen Yamamoto",
     "due": "now"
   },
   {
+    "id": "booking-accounts",
     "group": "Book",
     "item": "TableCheck, Tabelog and OMAKASE accounts created with a working card",
     "due": "2026-10-31"
   },
   {
+    "id": "december-dinners",
     "group": "Book",
     "item": "December dinners at 10:00 JST / 09:00 HKT",
     "due": "2026-11-01"
   },
   {
+    "id": "home-screen",
     "group": "Phone",
     "item": "Site installed to Home Screen on both phones and logged in",
     "due": "2026-11-20"
   },
   {
+    "id": "calendar",
     "group": "Phone",
     "item": "Trip calendar subscribed on both phones; test one alert",
     "due": "2026-11-20"
   },
   {
+    "id": "offline-test",
     "group": "Phone",
     "item": "Open the site once in airplane mode to confirm it works offline",
     "due": "2026-11-20"
   },
   {
+    "id": "maps-offline",
     "group": "Phone",
     "item": "Download a Google Maps offline area for central Tokyo",
     "due": "2026-11-25"
   },
   {
+    "id": "data-sim",
     "group": "Phone",
     "item": "Data eSIM or pocket Wi-Fi sorted",
     "due": "2026-11-25"
   },
   {
+    "id": "transit-card",
     "group": "Phone",
     "item": "Transit card in the phone wallet (confirm current Suica/PASMO options for your phone)",
     "due": "2026-11-25"
   },
   {
+    "id": "arrival-forms",
     "group": "Travel",
     "item": "Entry and customs registration done (confirm current Japan arrival requirements for your passport)",
     "due": "2026-11-24"
   },
   {
+    "id": "cash",
     "group": "Money",
     "item": "Cash in yen — several kissaten and Kappabashi shops are cash-only",
     "due": "2026-11-26"
   },
   {
+    "id": "passport",
     "group": "Money",
     "item": "Physical passport on you for tax-free purchases over ¥5,500 (photos not accepted)",
     "due": "trip"
   },
   {
+    "id": "knife-luggage",
     "group": "Pack",
     "item": "Space in checked luggage for knives — never carry-on",
     "due": "2026-12-04"

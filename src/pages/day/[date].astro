@@ -1,0 +1,378 @@
+---
+import Base from '../../layouts/Base.astro';
+import StationBadge from '../../components/StationBadge.astro';
+import { loadData, shortDate } from '../../lib/data';
+
+export async function getStaticPaths() {
+  const data = await loadData();
+  return data.days.map((d) => ({ params: { date: d.date } }));
+}
+
+const data = await loadData();
+const date = Astro.params.date!;
+const index = data.days.findIndex((d) => d.date === date);
+const day = data.days[index];
+const prev = data.days[index - 1];
+const next = data.days[index + 1];
+const ideas = day.places.map((id) => data.place(id));
+---
+
+<Base title={`${shortDate(date)} · ${day.title}`} tab="plan">
+  <nav class="wrap daynav" aria-label="Days">
+    <a href="/plan/">← Plan</a>
+    <span>
+      {prev && <a href={`/day/${prev.date}/`}>‹ {shortDate(prev.date).slice(0, 3)}</a>}
+      {next && <a href={`/day/${next.date}/`}>{shortDate(next.date).slice(0, 3)} ›</a>}
+    </span>
+  </nav>
+
+  <header class="page-head">
+    <p class="label">Day {index + 1} of {data.days.length} · {shortDate(date)}</p>
+    <h1 class="t40 w700" data-day-title={date}>{day.title}</h1>
+  </header>
+  <p class="anchor t20 w500" data-day-anchor={date}>{day.anchor}</p>
+
+  <div class="wrap">
+    <details class="headline-edit" data-headline={date}>
+      <summary class="w500">Edit the headline</summary>
+      <form data-form="headline">
+        <label class="field"><span>Title</span><input type="text" name="title" maxlength="80" /></label>
+        <label class="field"><span>Main plan</span><textarea name="anchor" maxlength="240" rows="3"></textarea></label>
+        <div class="btn-row">
+          <button class="btn small primary" type="submit">Save</button>
+          <button class="btn small" type="button" data-reset>Back to original</button>
+        </div>
+      </form>
+    </details>
+  </div>
+
+  <section class="section" aria-labelledby="plan-h">
+    <h2 class="label" id="plan-h">Your plan</h2>
+    <div data-day-items={date}></div>
+    <p class="btns ask"><a class="btn" data-ask-day href="https://claude.ai/new">Ask Claude about this day <span class="hint">↗</span></a></p>
+  </section>
+
+  <section class="section" aria-labelledby="add-h" data-adder={date}>
+    <h2 class="label" id="add-h">Add to this day</h2>
+    <label class="field first"><span>Time (optional, for the next thing you add)</span><input type="time" name="time" data-add-time /></label>
+    <label class="field"><span>Find a place</span><input type="search" name="q" placeholder="Name, station or area" autocomplete="off" data-search /></label>
+    <ul class="picks" data-results></ul>
+
+    <form data-form="custom-item" class="custom">
+      <label class="field"><span>Or something that isn't a place</span><input type="text" name="title" maxlength="120" placeholder="Check in, rest at the hotel, meet Clara…" /></label>
+      <button class="btn small" type="submit">Add it</button>
+    </form>
+    <p class="btns"><a class="btn" href={`/add/?day=${date}`}>Add a place that isn't listed <span class="hint">→</span></a></p>
+    <p class="t13 w500" data-add-status aria-live="polite"></p>
+
+    <h3 class="label sub">From your Want list</h3>
+    <ul class="picks" data-wants></ul>
+
+    <h3 class="label sub">Ideas for this day</h3>
+    <ul class="picks">
+      {
+        ideas.map((p) => (
+          <li data-idea={p.id}>
+            <a href={`/p/${p.id}/`} class="pick-name">
+              <span class="w500">{p.name_en}</span>
+              {p.name_ja !== p.name_en && <span lang="ja">{p.name_ja}</span>}
+              <span class="t13">{p.recognition}</span>
+              <StationBadge line={data.line(p.line)} station={p.station} />
+            </a>
+            <button type="button" class="chip" data-action="add" data-ref={p.id}>
+              Add
+            </button>
+          </li>
+        ))
+      }
+    </ul>
+    <h3 class="label sub">Notes from the research</h3>
+    <ul class="notes">{day.notes.map((n) => <li>{n}</li>)}</ul>
+  </section>
+</Base>
+
+<style>
+  .daynav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .daynav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap);
+    padding-top: var(--u);
+    font-weight: 500;
+  }
+  .daynav span a + a {
+    margin-left: var(--g);
+  }
+  .page-head {
+    padding-top: var(--u);
+  }
+  .page-head .label {
+    margin-bottom: var(--u);
+  }
+  .anchor {
+    max-width: 44rem;
+    padding: var(--u) var(--g);
+    background: var(--signal);
+    color: var(--on-signal);
+  }
+  .headline-edit summary {
+    display: flex;
+    align-items: center;
+    min-height: var(--tap);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .headline-edit form {
+    padding-bottom: calc(var(--u) * 2);
+  }
+  .ask {
+    margin-top: calc(var(--u) * 2);
+  }
+  .first {
+    margin-top: calc(var(--u) * 2);
+  }
+  .custom {
+    margin-top: calc(var(--u) * 3);
+  }
+  .custom .btn {
+    margin-top: var(--u);
+  }
+  [data-adder] > .btns {
+    margin-top: calc(var(--u) * 2);
+  }
+  .sub {
+    margin-top: calc(var(--u) * 4);
+    padding-bottom: var(--u);
+    border-bottom: 1px solid var(--ink);
+  }
+  .notes li {
+    padding: var(--u) 0;
+    border-bottom: 1px solid var(--grey-2);
+  }
+  section:last-of-type {
+    padding-bottom: calc(var(--u) * 5);
+  }
+</style>
+
+<script>
+  import { askAboutDay } from '../../lib/ask';
+  import { DAYS, PLACES } from '../../lib/catalog';
+  import { dayItems, itemLabel, type PlanItem, type PlanState } from '../../lib/plan';
+  import { shortDate } from '../../lib/time';
+  import { dispatch, getPlan, newId, subscribe } from '../../scripts/store';
+  import { dayHeadline, dayOptions, html, mount, onAction, onForm, placeView } from '../../scripts/ui';
+  import { dayLines, wireDayHeadlines } from '../../scripts/widgets';
+
+  const date = document.querySelector<HTMLElement>('[data-day-items]')!.dataset.dayItems!;
+  const list = document.querySelector<HTMLElement>('[data-day-items]')!;
+  const adder = document.querySelector<HTMLElement>('[data-adder]')!;
+  const status = adder.querySelector<HTMLElement>('[data-add-status]')!;
+  const timeInput = adder.querySelector<HTMLInputElement>('[data-add-time]')!;
+  const search = adder.querySelector<HTMLInputElement>('[data-search]')!;
+
+  wireDayHeadlines();
+
+  const say = (text: string) => (status.textContent = text);
+  const onThisDay = (plan: PlanState, ref: string) => plan.items.some((i) => i.day === date && i.place === ref);
+
+  // ── Your plan ──────────────────────────────────────────────────────────
+  const row = (plan: PlanState, item: PlanItem, movable: { up: boolean; down: boolean } | null) => {
+    const place = placeView(plan, item.place);
+    return html`<li><details data-key="${item.id}">
+      <summary>
+        <span class="t mono w500">${item.time ?? 'Any time'}</span>
+        <span class="what">
+          <span class="w500">${itemLabel(plan, item)}</span>
+          ${place?.nameJa ? html`<span lang="ja">${place.nameJa}</span>` : ''}
+          ${item.note ? html`<span class="note">${item.note}</span>` : ''}
+          <span class="t13 muted">added by ${item.by}</span>
+        </span>
+        <span class="edit t13 w500">Edit</span>
+      </summary>
+      <div class="controls">
+        <form data-form="item" data-id="${item.id}">
+          <div class="row2">
+            <label class="field"><span>Time</span><input type="time" name="time" value="${item.time ?? ''}" /></label>
+            <label class="field"><span>Day</span><select name="day">${dayOptions(item.day)}</select></label>
+          </div>
+          <label class="field"><span>Note</span><textarea name="note" rows="2" maxlength="500" placeholder="Booked for 2, ask for the counter…">${item.note ?? ''}</textarea></label>
+          <button class="btn small primary" type="submit">Save changes</button>
+        </form>
+        <div class="btn-row">
+          ${movable ? html`<button class="btn small" type="button" data-action="up" data-id="${item.id}" ${movable.up ? '' : html`disabled`}>Move up</button>
+            <button class="btn small" type="button" data-action="down" data-id="${item.id}" ${movable.down ? '' : html`disabled`}>Move down</button>` : ''}
+          ${place ? html`<a class="btn small" href="${place.href}">Open place</a>` : ''}
+          <button class="btn small" type="button" data-action="remove" data-id="${item.id}">Remove</button>
+        </div>
+      </div>
+    </details></li>`;
+  };
+
+  mount(list, () => {
+    const plan = getPlan();
+    const { timed, anytime } = dayItems(plan, date);
+    if (!timed.length && !anytime.length) {
+      return html`<p class="empty muted">Nothing planned yet. Add something below: search, your Want list, or the ideas from the research.</p>`;
+    }
+    return html`
+      ${timed.length ? html`<ol class="plan-list">${timed.map((i) => row(plan, i, null))}</ol>` : ''}
+      ${anytime.length ? html`${timed.length ? html`<h3 class="label anytime">Any time</h3>` : ''}<ol class="plan-list">${anytime.map((i, n) =>
+        row(plan, i, { up: n > 0, down: n < anytime.length - 1 }),
+      )}</ol>` : ''}
+      <p class="t13 muted legend">Timed things follow the clock. Use Move up and Move down to order the rest.</p>`;
+  });
+
+  onForm(list, {
+    item: (form, data) => {
+      const error = dispatch({
+        type: 'item.update',
+        id: form.dataset.id!,
+        time: String(data.get('time') ?? '') || null,
+        day: String(data.get('day')),
+        note: String(data.get('note') ?? ''),
+      });
+      if (error) say(error);
+      else (form.closest('details') as HTMLDetailsElement).open = false;
+    },
+  });
+
+  onAction(list, {
+    up: (el) => dispatch({ type: 'item.move', id: el.dataset.id!, dir: -1 }),
+    down: (el) => dispatch({ type: 'item.move', id: el.dataset.id!, dir: 1 }),
+    remove: (el) => {
+      // Ask twice instead of a dialog.
+      if (el.dataset.armed !== 'true') {
+        el.dataset.armed = 'true';
+        el.textContent = 'Tap again to remove';
+        setTimeout(() => {
+          el.dataset.armed = 'false';
+          el.textContent = 'Remove';
+        }, 3000);
+        return;
+      }
+      dispatch({ type: 'item.remove', id: el.dataset.id! });
+    },
+  });
+
+  // "Ask Claude about this day" carries the current plan.
+  const ask = document.querySelector<HTMLAnchorElement>('[data-ask-day]')!;
+  const paintAsk = () => {
+    const plan = getPlan();
+    const lines = dayLines(plan, date).map((l) => `${l.time ?? 'Any time'}: ${l.label}`);
+    ask.href = askAboutDay(shortDate(date), dayHeadline(plan, date).anchor, lines);
+  };
+  paintAsk();
+  subscribe(paintAsk);
+
+  // ── Headline ───────────────────────────────────────────────────────────
+  const headline = document.querySelector<HTMLDetailsElement>('[data-headline]')!;
+  const original = DAYS.find((d) => d.date === date)!;
+  headline.addEventListener('toggle', () => {
+    if (!headline.open) return;
+    const now = dayHeadline(getPlan(), date);
+    (headline.querySelector('[name=title]') as HTMLInputElement).value = now.title;
+    (headline.querySelector('[name=anchor]') as HTMLTextAreaElement).value = now.anchor;
+  });
+  onForm(headline, {
+    headline: (_form, data) => {
+      const title = String(data.get('title') ?? '').trim();
+      const anchor = String(data.get('anchor') ?? '').trim();
+      const error = dispatch({
+        type: 'day.edit',
+        day: date,
+        title: title && title !== original.title ? title : null,
+        anchor: anchor && anchor !== original.anchor ? anchor : null,
+      });
+      if (!error) headline.open = false;
+    },
+  });
+  headline.querySelector('[data-reset]')!.addEventListener('click', () => {
+    dispatch({ type: 'day.edit', day: date, title: null, anchor: null });
+    headline.open = false;
+  });
+
+  // ── Adding ─────────────────────────────────────────────────────────────
+  const add = (item: { place?: string; title?: string }) => {
+    const time = timeInput.value || null;
+    const error = dispatch({ type: 'item.add', id: newId(), day: date, time, ...item });
+    if (error) return say(error);
+    timeInput.value = '';
+    const label = item.title ?? placeView(getPlan(), item.place ?? null)?.name ?? 'It';
+    say(`${label} added${time ? ` at ${time}` : ''}.`);
+  };
+
+  onAction(adder, { add: (el) => add({ place: el.dataset.ref! }) });
+  onForm(adder, {
+    'custom-item': (form, data) => {
+      const title = String(data.get('title') ?? '').trim();
+      if (!title) return say('Type what it is first.');
+      add({ title });
+      form.reset();
+    },
+  });
+
+  const pick = (plan: PlanState, ref: string, name: string, extra: ReturnType<typeof html> | string, href: string) =>
+    html`<li><a href="${href}" class="pick-name"><span class="w500">${name}</span>${extra}</a>${
+      onThisDay(plan, ref)
+        ? html`<span class="t13 w500 added">On this day</span>`
+        : html`<button type="button" class="chip" data-action="add" data-ref="${ref}">Add</button>`
+    }</li>`;
+
+  // Search the researched places and your own.
+  const norm = (s: string) => s.toLowerCase().normalize('NFKC');
+  const results = adder.querySelector<HTMLElement>('[data-results]')!;
+  const repaintResults = mount(results, () => {
+    const q = norm(search.value.trim());
+    if (q.length < 1) return html``;
+    const plan = getPlan();
+    const mine = plan.places.map((p) => ({ ref: p.id, name: p.name, ja: p.name_ja ?? '', where: p.address ?? '', href: `/p/mine/?id=${p.id}` }));
+    const listed = PLACES.map((p) => ({ ref: p.id, name: p.name_en, ja: p.name_ja !== p.name_en ? p.name_ja : '', where: p.station, href: `/p/${p.id}/` }));
+    const found = [...mine, ...listed]
+      .map((p) => {
+        const hay = norm(`${p.name} ${p.ja} ${p.where}`);
+        const score = norm(p.name).startsWith(q) || norm(p.ja).startsWith(q) ? 0 : hay.includes(q) ? 1 : 2;
+        return { p, score };
+      })
+      .filter((x) => x.score < 2)
+      .sort((a, b) => a.score - b.score)
+      .slice(0, 8);
+    if (!found.length) return html`<li class="muted">No match. Try the station name, or add it as a new place.</li>`;
+    return html`${found.map(({ p }) =>
+      pick(plan, p.ref, p.name, html`${p.ja ? html`<span lang="ja">${p.ja}</span>` : ''}<span class="t13 muted">${p.where}</span>`, p.href),
+    )}`;
+  });
+  search.addEventListener('input', repaintResults);
+
+  // Want list, minus what's already on this day.
+  mount(adder.querySelector<HTMLElement>('[data-wants]')!, () => {
+    const plan = getPlan();
+    const wants = Object.entries(plan.marks)
+      .filter(([ref, m]) => m.mark === 'want' && !onThisDay(plan, ref))
+      .map(([ref]) => placeView(plan, ref))
+      .filter((v) => v !== null);
+    if (!wants.length) return html`<li class="muted">Nothing on the Want list that isn't already here.</li>`;
+    return html`${wants.map((v) => pick(plan, v.ref, v.name, v.nameJa ? html`<span lang="ja">${v.nameJa}</span>` : '', v.href))}`;
+  });
+
+  // Ideas: swap Add for "On this day" once added.
+  const paintIdeas = () => {
+    const plan = getPlan();
+    for (const li of adder.querySelectorAll<HTMLElement>('[data-idea]')) {
+      const ref = li.dataset.idea!;
+      const has = onThisDay(plan, ref);
+      const btn = li.querySelector<HTMLElement>('[data-action=add], .added');
+      if (has && btn?.tagName === 'BUTTON') btn.outerHTML = '<span class="t13 w500 added">On this day</span>';
+      if (!has && btn?.tagName !== 'BUTTON') {
+        btn?.remove();
+        li.insertAdjacentHTML('beforeend', `<button type="button" class="chip" data-action="add" data-ref="${ref}">Add</button>`);
+      }
+    }
+  };
+  paintIdeas();
+  subscribe(paintIdeas);
+</script>

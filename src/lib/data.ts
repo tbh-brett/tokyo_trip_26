@@ -2,6 +2,10 @@
 // agree with each other (a route stop that isn't a place, a zone that doesn't
 // exist). Any problem throws, which fails the build.
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { mapsSearchUrl, mapsTransitUrl } from './maps';
+import { shortDate } from './time';
+
+export { shortDate };
 
 export type Place = CollectionEntry<'places'>['data'];
 export type Day = CollectionEntry<'days'>['data'];
@@ -11,6 +15,7 @@ export type Route = CollectionEntry<'routes'>['data'];
 export type Zone = CollectionEntry<'zones'>['data'];
 export type Line = CollectionEntry<'lines'>['data'];
 export type Base = CollectionEntry<'trip'>['data'];
+export type Traveller = CollectionEntry<'travellers'>['data'];
 export type Kind = Place['kind'];
 
 export const KINDS: ReadonlyArray<{ id: Kind; label: string }> = [
@@ -35,6 +40,7 @@ export interface TripData {
   routes: Route[];
   zones: Zone[];
   lines: Line[];
+  travellers: Traveller[];
   base: Base;
   place: (id: string) => Place;
   zone: (id: string) => Zone;
@@ -48,7 +54,7 @@ async function load(): Promise<TripData> {
   // Everything keeps the order it has in its file.
   const inFileOrder = <T extends { data: { position: number } }>(entries: T[]) =>
     entries.sort((a, b) => a.data.position - b.data.position);
-  const [places, days, bookings, prep, routes, zones, lines, trip] = await Promise.all([
+  const [places, days, bookings, prep, routes, zones, lines, travellers, trip] = await Promise.all([
     getCollection('places').then(inFileOrder),
     getCollection('days').then(inFileOrder),
     getCollection('bookings').then(inFileOrder),
@@ -56,6 +62,7 @@ async function load(): Promise<TripData> {
     getCollection('routes').then(inFileOrder),
     getCollection('zones').then(inFileOrder),
     getCollection('lines').then(inFileOrder),
+    getCollection('travellers').then(inFileOrder),
     getCollection('trip'),
   ]);
 
@@ -65,7 +72,7 @@ async function load(): Promise<TripData> {
   const lineMap = byId(lines.map((e) => e.data));
 
   const problems: string[] = [];
-  const counts = { places, days, bookings, prep, routes, zones, lines };
+  const counts = { places, days, bookings, prep, routes, zones, lines, travellers };
   for (const [name, entries] of Object.entries(counts)) {
     if (entries.length === 0) problems.push(`${name}.json: no entries (unreadable file?)`);
   }
@@ -74,6 +81,7 @@ async function load(): Promise<TripData> {
   else if (!lineMap.has(base.line)) problems.push(`trip.json: base line "${base.line}" is not in lines.json`);
 
   for (const p of placeMap.values()) {
+    if (p.id === 'mine') problems.push('places.json: the id "mine" is reserved for your own places (/p/mine/)');
     if (!zoneMap.has(p.zone)) problems.push(`places.json ${p.id}: zone "${p.zone}" is not in zones.json`);
     if (!lineMap.has(p.line)) problems.push(`places.json ${p.id}: line "${p.line}" is not in lines.json`);
   }
@@ -81,6 +89,11 @@ async function load(): Promise<TripData> {
     if (!zoneMap.has(r.zone)) problems.push(`routes.json ${r.id}: zone "${r.zone}" is not in zones.json`);
     for (const stop of r.stops) {
       if (!placeMap.has(stop)) problems.push(`routes.json ${r.id}: stop "${stop}" is not in places.json`);
+    }
+  }
+  for (const { data: d } of days) {
+    for (const id of d.places) {
+      if (!placeMap.has(id)) problems.push(`days.json ${d.date}: place "${id}" is not in places.json`);
     }
   }
   for (let i = 1; i < days.length; i++) {
@@ -104,6 +117,7 @@ async function load(): Promise<TripData> {
     routes: routes.map((e) => e.data),
     zones: zones.map((e) => e.data),
     lines: lines.map((e) => e.data),
+    travellers: travellers.map((e) => e.data),
     base,
     place: need(placeMap, 'place'),
     zone: need(zoneMap, 'zone'),
@@ -121,17 +135,9 @@ export function bookingDate(when: string, tripYear: number): string | null {
   return `${tripYear}-${String(month).padStart(2, '0')}-${m[1].padStart(2, '0')}`;
 }
 
-/** "2026-11-27" → "Fri 27 Nov" */
-export function shortDate(iso: string): string {
-  const d = new Date(`${iso}T12:00:00Z`);
-  return `${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d.getUTCDay()]} ${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]}`;
-}
 
-// Google Maps deep links. Navigation is Google's job; these open the app on a phone.
-export const mapsPlaceUrl = (p: Place) =>
-  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${p.name_ja} ${p.address_ja}`)}`;
+// Google Maps deep links for researched places.
+export const mapsPlaceUrl = (p: Place) => mapsSearchUrl(`${p.name_ja} ${p.address_ja}`);
 
-export const mapsTransitUrl = (p: Place) => {
-  const destination = p.lat !== null && p.lng !== null ? `${p.lat},${p.lng}` : `${p.name_ja} ${p.address_ja}`;
-  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}&travelmode=transit`;
-};
+export const mapsTransitUrlFor = (p: Place) =>
+  mapsTransitUrl(p.lat !== null && p.lng !== null ? { lat: p.lat, lng: p.lng } : `${p.name_ja} ${p.address_ja}`);

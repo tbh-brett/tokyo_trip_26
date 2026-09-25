@@ -348,3 +348,257 @@ button {
   color: var(--grey-3);
   margin-bottom: 4px;
 }
+
+/* ── Live plan ─────────────────────────────────────────────────────────── */
+
+/* One-time "who's using this phone" question */
+.whoami {
+  padding: calc(var(--u) * 2) var(--g);
+  background: var(--grey-1);
+  border-bottom: 1px solid var(--ink);
+}
+.whoami > * + * {
+  margin-top: var(--u);
+}
+
+/* Status line above the tabs: saving, no signal, the other phone's news */
+.syncbar {
+  position: fixed;
+  inset: auto 0 calc(var(--nav-h) + env(safe-area-inset-bottom)) 0;
+  z-index: 11;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--g);
+  min-height: 52px;
+  padding: 4px var(--g);
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 500;
+}
+.syncbar[data-tone='alert'] {
+  background: var(--signal);
+  color: var(--on-signal);
+}
+.syncbar button {
+  flex: none;
+  min-height: var(--tap);
+  padding: 0 var(--g);
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  background: transparent;
+  font-weight: 500;
+  cursor: pointer;
+}
+body.has-syncbar {
+  padding-bottom: calc(var(--nav-h) + 60px + env(safe-area-inset-bottom));
+}
+
+/* Forms */
+.field {
+  display: block;
+  margin-top: calc(var(--u) * 1.5);
+}
+.field > span {
+  display: block;
+  margin-bottom: 4px;
+  font-size: var(--t13);
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--grey-3);
+}
+input[type='text'],
+input[type='search'],
+input[type='url'],
+input[type='time'],
+select,
+textarea {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--t16); /* 16px keeps iOS from zooming in */
+}
+textarea {
+  resize: vertical;
+}
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--u);
+}
+.btn.small {
+  min-height: var(--tap);
+  font-size: var(--t16);
+}
+.btn[disabled] {
+  border-color: var(--grey-2);
+  color: var(--grey-3);
+  cursor: default;
+}
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--u);
+  margin-top: calc(var(--u) * 1.5);
+}
+.btn-row .btn {
+  width: auto;
+  flex: 1 1 auto;
+}
+form .btn.small {
+  margin-top: calc(var(--u) * 1.5);
+}
+
+/* A day's plan */
+.plan-list > li {
+  border-bottom: 1px solid var(--grey-2);
+}
+.plan-list summary {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr auto;
+  gap: var(--u);
+  align-items: start;
+  min-height: 56px;
+  padding: 12px 0;
+  cursor: pointer;
+  list-style: none;
+}
+.plan-list summary::-webkit-details-marker {
+  display: none;
+}
+.plan-list .what > * {
+  display: block;
+}
+.plan-list .note {
+  margin-top: 2px;
+}
+.plan-list .edit {
+  padding-top: 2px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.plan-list details[open] .edit {
+  text-decoration: none;
+}
+.plan-list .controls {
+  padding: 0 0 calc(var(--u) * 2);
+}
+.anytime {
+  margin-top: calc(var(--u) * 2);
+  padding-bottom: var(--u);
+  border-bottom: 1px solid var(--grey-2);
+}
+.legend,
+.empty {
+  margin-top: var(--u);
+}
+
+/* Lists of places to pick from, with an Add button */
+.picks > li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--g);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--grey-2);
+}
+.pick-name {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-decoration: none;
+  min-width: 0;
+}
+.picks .chip,
+.picks .added {
+  flex: none;
+}
+.picks .muted {
+  display: block;
+}
+
+/* Simple link lists: Want list, your own places */
+.rows-lite > li > a {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--grey-2);
+  text-decoration: none;
+}
+.rows-lite > li.muted {
+  padding: 12px 0;
+}
+
+/* Where a place already is in the plan */
+.inplan li a {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--u);
+  align-items: baseline;
+  min-height: var(--tap);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--grey-2);
+}
+
+/* Compact day summary */
+.preview-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.preview-list .mono {
+  display: inline-block;
+  min-width: 3.5rem;
+}
+
+/* Next timed thing on Today */
+.nextup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px var(--g);
+  margin-inline: calc(var(--g) * -1);
+  border-bottom: 1px solid var(--ink);
+  text-decoration: none;
+}
+
+/* Shared checklists: bookings and prep */
+.check {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: calc(var(--u) * 2) 0;
+  border-bottom: 1px solid var(--grey-2);
+  cursor: pointer;
+}
+.check input {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  accent-color: var(--ink);
+}
+.check-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.done .item-text {
+  text-decoration: line-through;
+  color: var(--grey-3);
+}
+
+/* Who changed what */
+.feed > li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--grey-2);
+}

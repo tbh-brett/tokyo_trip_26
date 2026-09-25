@@ -7,7 +7,7 @@
     "predev": "npm run fonts",
     "dev": "astro dev",
     "prebuild": "node scripts/check-json.mjs && npm run fonts",
-    "build": "astro check && astro build",
+    "build": "astro check && tsc -p worker && astro build",
     "preview": "wrangler dev",
     "deploy": "wrangler deploy"
   },

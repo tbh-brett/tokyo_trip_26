@@ -10,8 +10,8 @@ import '../styles/global.css';
 interface Props {
   title: string;
   /** Which tab is current, if any. */
-  tab?: 'today' | 'places';
-  /** false hides the tab bar (Show to staff). */
+  tab?: 'today' | 'plan' | 'places';
+  /** false hides the tab bar and live sync (Show to staff). */
   showTabs?: boolean;
   bodyClass?: string;
 }
@@ -19,6 +19,7 @@ interface Props {
 const { title, tab, showTabs = true, bodyClass } = Astro.props;
 const tabs = [
   { id: 'today', label: 'Today', href: '/' },
+  { id: 'plan', label: 'Plan', href: '/plan/' },
   { id: 'places', label: 'Places', href: '/places/eat/' },
 ] as const;
 ---
@@ -37,21 +38,105 @@ const tabs = [
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>{title === 'Tokyo 2026' ? title : `${title} · Tokyo 2026`}</title>
   </head>
-  <body class={bodyClass}>
+  <body class={bodyClass} data-live={showTabs ? 'on' : 'off'}>
     <a class="skip" href="#main">Skip to content</a>
+    {showTabs && <div class="whoami" data-whoami hidden />}
     <main id="main">
       <slot />
     </main>
     {
       showTabs && (
-        <nav class="tabbar" aria-label="Sections">
-          {tabs.map((t) => (
-            <a href={t.href} aria-current={t.id === tab ? 'page' : undefined}>
-              {t.label}
-            </a>
-          ))}
-        </nav>
+        <>
+          <div class="syncbar" data-syncbar role="status" hidden />
+          <nav class="tabbar" aria-label="Sections">
+            {tabs.map((t) => (
+              <a href={t.href} aria-current={t.id === tab ? 'page' : undefined}>
+                {t.label}
+              </a>
+            ))}
+          </nav>
+        </>
       )
     }
   </body>
 </html>
+
+<script>
+  import { TRAVELLERS } from '../lib/catalog';
+  import { dismiss, getNews, getSync, me, setMe, start, subscribe } from '../scripts/store';
+  import { html } from '../scripts/ui';
+
+  if (document.body.dataset.live === 'on') {
+    start();
+
+    // Status line above the tabs: saving, no signal, errors, and the other phone's news.
+    const bar = document.querySelector<HTMLElement>('[data-syncbar]')!;
+    let savingSince = 0;
+    const paintBar = () => {
+      const s = getSync();
+      const news = getNews();
+      let text = '';
+      let tone = '';
+      let button = '';
+      if (s.kind === 'saving') {
+        savingSince ||= Date.now();
+        // Only mention saving if it's taking a moment.
+        if (Date.now() - savingSince > 800) text = 'Saving…';
+        else setTimeout(paintBar, 900);
+      } else savingSince = 0;
+      if (s.kind === 'offline') {
+        const since = s.since ? new Date(s.since).toTimeString().slice(0, 5) : null;
+        text = s.waiting
+          ? `No signal · ${s.waiting} ${s.waiting === 1 ? 'change' : 'changes'} will sync when you're back online`
+          : since
+            ? `No signal · showing the plan as of ${since}`
+            : 'No signal · the shared plan will load when you are back online';
+      } else if (s.kind === 'signin') {
+        text = 'Your login has expired.';
+        button = 'reload';
+        tone = 'alert';
+      } else if (s.kind === 'error') {
+        text = s.message;
+        button = 'dismiss';
+        tone = 'alert';
+      } else if (s.kind === 'live' && news) {
+        text = news.text;
+        button = 'dismiss';
+        tone = 'news';
+      }
+      bar.hidden = !text;
+      bar.dataset.tone = tone;
+      document.body.classList.toggle('has-syncbar', Boolean(text));
+      bar.innerHTML = html`<span>${text}</span>${
+        button === 'reload'
+          ? html`<button type="button" data-bar="reload">Sign in again</button>`
+          : button === 'dismiss'
+            ? html`<button type="button" data-bar="dismiss">OK</button>`
+            : ''
+      }`.value;
+    };
+    bar.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLElement>('[data-bar]');
+      if (b?.dataset.bar === 'reload') location.reload();
+      if (b?.dataset.bar === 'dismiss') dismiss();
+    });
+    paintBar();
+    subscribe(paintBar);
+
+    // Who is using this phone? Asked once, so changes say "Clara added…".
+    const who = document.querySelector<HTMLElement>('[data-whoami]')!;
+    const paintWho = () => {
+      who.hidden = Boolean(me());
+      if (who.hidden) return;
+      who.innerHTML = html`<p class="w500">Who's using this phone?</p>
+        <p class="t13 muted">So the other phone sees who changed what.</p>
+        <div class="chips">${TRAVELLERS.map((name) => html`<button type="button" class="chip" data-me="${name}">I'm ${name}</button>`)}</div>`.value;
+    };
+    who.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLElement>('[data-me]');
+      if (b) setMe(b.dataset.me!);
+    });
+    paintWho();
+    subscribe(paintWho);
+  }
+</script>

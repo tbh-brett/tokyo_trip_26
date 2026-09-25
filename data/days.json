@@ -8,6 +8,12 @@
       "Drop bags, then Ueno on foot — Ameyoko is 12 minutes from the door.",
       "大統領 for motsu-nikomi, or Kanda for soba if you land early.",
       "Do not schedule anything. The trip is long enough."
+    ],
+    "places": [
+      "ameyoko",
+      "daitoryo",
+      "yabusoba",
+      "matsuya"
     ]
   },
   {
@@ -21,6 +27,14 @@
       "カフェ香咲 is four minutes away and on the national top-100 kissaten list.",
       "Then Philocoffea, and 櫻井焙煎研究所 for tea if you booked it.",
       "Evening: Marunouchi and Midtown Hibiya illuminations in one loop, then a Ginza bar."
+    ],
+    "places": [
+      "gaien",
+      "kasa",
+      "philocoffea",
+      "sakurai",
+      "marunouchi-il",
+      "hibiya-il"
     ]
   },
   {
@@ -33,6 +47,13 @@
       "カヤバ珈琲 opens at 08:00 — get there before the queue.",
       "Ignis in Sendagi for Panama coffee. All of it walkable from your side of town.",
       "Dinner: Nakameguro if the sushi booking landed, otherwise Kanda."
+    ],
+    "places": [
+      "kayaba",
+      "nezu",
+      "ignis",
+      "tsubomi",
+      "naomitsu"
     ]
   },
   {
@@ -45,6 +66,12 @@
       "Daytime: Kiyosumi-Shirakawa for Mameya Kakeru's coffee course and the garden.",
       "巣鴨ときわ食堂 near Komagome for a top-100 shokudo dinner after the lights.",
       "Komagome is 12 minutes on the Yamanote from Okachimachi."
+    ],
+    "places": [
+      "rikugien",
+      "kakeru",
+      "kiyosumiteien",
+      "tokiwa"
     ]
   },
   {
@@ -57,6 +84,11 @@
       "Kamakura peaks late — one of the last in Japan, holding into December.",
       "Alternative: Mt Takao, 55 min and ¥580, if you'd rather walk than look.",
       "Take 神田志乃多寿司 inarizushi on the train."
+    ],
+    "places": [
+      "kamakura",
+      "takao",
+      "shinodazushi"
     ]
   },
   {
@@ -69,6 +101,12 @@
       "Buy today if you want engraving — 1 to 3 days.",
       "Lunch: すぎ田 in Kuramae, top-100 tonkatsu, if you booked. Otherwise 麺 みつヰ.",
       "Afternoon: Kiyosumi or back through Asakusa for its four top-100 kissaten."
+    ],
+    "places": [
+      "kappabashi",
+      "kamaasa",
+      "sugita",
+      "mitsui"
     ]
   },
   {
@@ -81,6 +119,12 @@
       "Depachika crawl at Mitsukoshi Ginza before closing.",
       "Punch Room or Mori Bar Gran after dinner. Punch bowls suit two people.",
       "Last chance for anything you saw and didn't buy."
+    ],
+    "places": [
+      "lambre",
+      "mitsukoshi",
+      "punchroom",
+      "moribar"
     ]
   },
   {
@@ -91,6 +135,10 @@
     "notes": [
       "Dried fish, sesame, knives already boxed. Matsuzakaya depachika does the rest.",
       "Knives in checked luggage. Every time."
+    ],
+    "places": [
+      "ameyoko",
+      "matsuzakaya"
     ]
   }
 ]

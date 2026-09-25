@@ -45,6 +45,17 @@ Today is late September. Code freeze **20 Nov 2026**. Fly **27 Nov**. Five short
 
 **Done when:** both of you can log in on your phones over 4G; a deliberately broken JSON edit fails the build and the live site keeps serving the previous version.
 
+## Phase 1b — the shared live plan ✓ (25 Sep 2026)
+
+Brett asked for a site you edit rather than read: add and remove places, set times, move things between days, and see each other's changes live.
+
+- Shared plan in a Durable Object behind `/api/*`; one reducer (`src/lib/plan.ts`) in the browser and on the server.
+- Plan tab and day pages; add your own places; shared Want / Booked / Skip; bookings and prep as shared checklists; feed of who changed what; "Who's using this phone?" asked once.
+- Changes show instantly, wait on the phone with no signal, and reach the other phone within ~8 s.
+- "Ask Claude" links on places and days; "Ask Claude Code" on Plan for research and code changes.
+
+**Done when:** a change on one phone appears on the other without reloading; a change made with no signal syncs when signal returns.
+
 ## Phase 2 — coordinates, map, near me
 
 - For the 69 `address_precision: "district"` places, find the full street address from the Tabelog listing or the shop's own site. Update the JSON.
@@ -56,7 +67,7 @@ Today is late September. Code freeze **20 Nov 2026**. Fly **27 Nov**. Five short
 
 ## Phase 3 — offline and install
 
-- PWA manifest, icons, `@vite-pwa/astro` precaching of pages, data and fonts.
+- PWA manifest, icons, `@vite-pwa/astro` precaching of pages, data and fonts. Never cache `/api/*`: the plan already keeps its own copy on the phone.
 - Self-host IBM Plex Sans JP and Plex Mono via Fontsource.
 
 **Done when:** airplane mode, every page still opens; the site installs to the Home Screen with a proper icon and opens full-screen.
@@ -64,7 +75,7 @@ Today is late September. Code freeze **20 Nov 2026**. Fly **27 Nov**. Five short
 ## Phase 4 — routes and calendar
 
 - Route pages from `routes.json`: numbered stops, straight-line map, "Walk this in Google Maps" split into ≤ 3-waypoint legs. Optimise stop order once coordinates exist (`order_verified`).
-- `.ics` feed at `/cal/<CAL_TOKEN>.ics`: bookings with alerts, daily anchors, timed events. Access **Bypass** on `/cal/*`.
+- `.ics` feed at `/cal/<CAL_TOKEN>.ics`: bookings with alerts, daily anchors, and the timed items from the shared plan (so it must be served by the Worker, not built statically). Access **Bypass** on `/cal/*`; with the Worker-wide Access policy, check a path bypass actually wins before relying on it.
 
 **Done when:** the calendar is subscribed on both phones and a test alert fires.
 

@@ -7,7 +7,7 @@ Read `PLAN.md` for phases and acceptance criteria. This file is the standing rul
 ## Hard constraints
 
 - **Used on phones in Japan, not laptops.** Design at 390×844 first. Everything must work one-handed on a train.
-- **Zero maintenance during the trip.** No server to babysit, no API keys, no billing accounts, no database in v1. After the code freeze (20 Nov 2026) only files in `/data` change.
+- **Zero maintenance during the trip.** No server to babysit, no API keys, no paid services. The one piece of server state is the shared plan (below), on Cloudflare's free tier. After the code freeze (20 Nov 2026) only files in `/data` change; the plan changes live through the site.
 - **A bad edit must never take the site down.** Schema validation fails the build; the host only replaces the live site on a successful build.
 - **Private.** The data includes where the hotel is and when the flat is empty. The site sits behind Cloudflare Access. Nothing is indexed.
 - **Works offline** once opened. Subway gaps and roaming glitches are normal.
@@ -23,12 +23,22 @@ Read `PLAN.md` for phases and acceptance criteria. This file is the standing rul
 | Offline | `@vite-pwa/astro` (Workbox), precache app shell + data + fonts | Opens instantly, survives no signal |
 | Fonts | IBM Plex Sans JP + IBM Plex Mono via Fontsource, self-hosted. Japanese glyphs are subset at build time to the characters in `/data` and `/src` (`scripts/subset-fonts.mjs`) | One family covering Latin and Japanese; ~37 KB per weight instead of ~900 KB; cacheable offline |
 | Alerts | Subscribed calendar feed (`.ics`) generated at build | Native phone alerts with no push server. Web push on iOS needs Home Screen install + a VAPID server — not worth it |
-| Hosting | Cloudflare Workers with static assets (`wrangler.jsonc`, no Worker script), deployed by Workers Builds from the private GitHub repo `tbh-brett/toyko_trip_26` | Cloudflare's recommended path for new sites (chosen over Pages on 25 Sep 2026). Free static requests, no deploy cap, a failed build never deploys |
-| Access | Cloudflare Access on the `workers.dev` hostname, email one-time PIN, two allowed emails. Preview URLs are off (`preview_urls: false`) so there is no unprotected second address | Real login for free; no passwords to manage |
+| Hosting | Cloudflare Workers: static assets for every page, plus a small Worker (`worker/`) that only handles `/api/*` (`run_worker_first`). Deployed by Workers Builds from the private GitHub repo `tbh-brett/toyko_trip_26` to the Worker `tokyo-trip-26` | Cloudflare's recommended path for new sites (chosen over Pages on 25 Sep 2026). Free static requests, no deploy cap, a failed build never deploys |
+| Shared plan | One SQLite-backed Durable Object (`TripStore`, `worker/trip-store.ts`) holding the plan as one JSON document, plus a log of every change (`ops` table). Added 25 Sep 2026 at Brett's request so both phones can edit the itinerary live | Strict ordering of edits from two phones, no database to provision, free tier (100k requests/day) |
+| Access | Cloudflare Access on the whole Worker ("Protect all Workers", All traffic, policy "Brett and Clara"), email one-time PIN. Preview URLs are off (`preview_urls: false`) so there is no unprotected second address | Real login for free; no passwords to manage |
+
+### Two kinds of data
+
+- **Research** lives in `/data`: places, days, bookings, prep, zones, routes. Validated at build, changed through Git (Claude Code), never edited from the site.
+- **Decisions** live in the shared plan: which places go on which day and when, notes, your own places (ids `m-…`), Want / Booked / Skip marks, ticked-off bookings and prep, headline edits, and who changed what. Edited live from either phone.
+
+The plan's rules are one pure reducer, `src/lib/plan.ts`, used by both the browser (instant, works with no signal) and the Durable Object (final say). Every change is an `Op` with a unique `opId`; the server applies each `opId` once, so retries are safe. The browser (`src/scripts/store.ts`) keeps unsent changes in `localStorage`, sends them when there's signal, and polls `/api/state?since=<version>` every 8 s while the page is visible. `/api/ops` only accepts same-origin JSON with the `X-Trip-Client: 1` header.
+
+When changing the plan's shape, keep old stored plans loading: the store spreads saved JSON over `emptyPlan()`, so add fields with defaults rather than renaming.
 
 ### Build pipeline
 
-`npm run build` = `check-json` (malformed JSON fails fast; Astro's loader would otherwise keep stale data) → `subset-fonts` → `astro check` → `astro build`. Schemas live in `src/content.config.ts`; cross-file checks (zones, lines, route stops, consecutive days, empty files) in `src/lib/data.ts`. The loader adds a `position` field to every array item so pages keep file order; never write `position` in the JSON.
+`npm run build` = `check-json` (malformed JSON fails fast; Astro's loader would otherwise keep stale data) → `subset-fonts` → `astro check` → `tsc -p worker` → `astro build`. Workers Builds then runs `npx wrangler deploy`, which bundles the Worker. Rerun `npx wrangler types worker/worker-configuration.d.ts` after changing `wrangler.jsonc`. Run everything locally with `npx wrangler dev`. Schemas live in `src/content.config.ts`; cross-file checks (zones, lines, route stops, consecutive days, empty files) in `src/lib/data.ts`. The loader adds a `position` field to every array item so pages keep file order; never write `position` in the JSON.
 
 ## Data rules
 
@@ -56,14 +66,16 @@ Swiss / International Typographic Style meets Tokyo Metro wayfinding. Restraint 
 
 ## Modules
 
+Tabs: Today · Plan · Places. Day pages at `/day/<date>/`; your own places at `/p/mine/?id=…`; add one at `/add/`.
+
 1. **Today** — date-aware header (countdown before the trip; "Day 3 of 8" during). Today's anchor. Next timed item. **Near me now**: three places max, sorted by open-now then distance (Geolocation API; fall back to a zone picker if denied). Walking time = distance × 1.3 ÷ 80 m/min, labelled "about".
-2. **Plan** — eight day cards (anchor + notes + linked places), the booking calendar with countdowns, the prep checklist.
+2. **Plan** — eight days with what you've planned, the shared Want list, bookings and prep as shared checklists, the feed of changes. Each day page: your plan (timed items by the clock, the rest in your order), edit time / day / note, move up / down, remove (tap twice), edit the headline, add by search / Want list / the day's ideas (`days.json` `places`) / free text, and Ask Claude about the day.
 3. **Map** — every place as a black dot, selected in orange; filter by kind with text chips; overlay one route at a time; "Near me" recentres.
 4. **Places** — by kind (Eat, Coffee, Tea, Bars, See, Buy), filter by zone, recognition shown on every row. Static detail page per place (`/p/[id]`).
 5. **Routes** — curated walks from `/data/routes.json`. Stops numbered on the map, joined by straight lines (label them "not street routing"). "Walk this in Google Maps" splits into legs of **≤ 3 waypoints** (Google's mobile limit).
 6. **Areas** — zone guides from `/data/zones.json`.
 
-Place detail must include: **Show to staff** (full-screen, white on black, `name_ja` at 48px+, address below, request a screen wake lock and tolerate refusal), **Open in Google Maps**, **Directions from here** (transit), **Copy address**, and per-device Want / Booked / Skip marks in `localStorage` (wrapped in try/catch; losing them is acceptable).
+Place detail must include: **Show to staff** (full-screen, white on black, `name_ja` at 48px+, address below, request a screen wake lock and tolerate refusal), **Open in Google Maps**, **Directions from here** (transit), **Copy address**, Want / Booked / Skip marks shared through the plan, **In your plan** with **Add to plan** (day + optional time), and **Ask Claude about it** (`src/lib/ask.ts`: a `claude.ai/new?q=` link with the question filled in; no API key).
 
 ### Google Maps link formats
 
@@ -83,7 +95,7 @@ Generate `/cal/<token>.ics` at build (token from the `CAL_TOKEN` env var, so the
 ## Don't
 
 - Add the Google Maps JavaScript API, Places API, or any client-side key.
-- Add web push, a backend, a database, analytics or third-party trackers in v1.
+- Add web push, analytics, third-party trackers or any paid service. The shared plan is the only server state; don't add more without asking.
 - Change code after 20 Nov 2026 unless something is broken. Data only.
 - Mark anything verified that you didn't verify.
 

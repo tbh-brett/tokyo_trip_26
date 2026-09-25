@@ -1,65 +1,76 @@
 [
   {
+    "id": "rikugien-tickets",
     "when": "Now",
     "what": "Rikugien night illumination",
     "detail": "¥1,000 online vs ¥1,200 cash at the gate. Runs 25 Nov–6 Dec, so any night works — Mon 30 Nov is the least crowded of yours.",
     "where": "Tokyo Parks official site"
   },
   {
+    "id": "sakurai",
     "when": "Now",
     "what": "櫻井焙煎研究所 (Sakurai tea)",
     "detail": "Eight seats, English-speaking, a tea course rather than a café. One of the few genuinely unmissable bookings in this guide.",
     "where": "Shop's own booking page"
   },
   {
+    "id": "gen-yamamoto",
     "when": "Now",
     "what": "Gen Yamamoto",
     "detail": "Eight seats, seasonal cocktail flight. Asks for seven or more days' notice; in practice book further out.",
     "where": "Shop's own booking page"
   },
   {
+    "id": "december-early",
     "when": "1 Oct",
     "what": "December dates, 1st-of-month rule",
     "detail": "Some counters open the whole of December two months ahead, on 1 Oct at 10:00 JST. Worth a look for 2–3 Dec.",
     "where": "Restaurant's own site / TableCheck"
   },
   {
+    "id": "sat-dinner",
     "when": "28 Oct",
     "what": "Sat 28 Nov dinner",
     "detail": "Exactly one month out. Saturdays fill first — if you want a booked Saturday, this is the day.",
     "where": "TableCheck · Tabelog · OMAKASE"
   },
   {
+    "id": "december-opens",
     "when": "1 Nov",
     "what": "★ The key date — December opens",
     "detail": "Many Tokyo restaurants release the following month on the 1st at 10:00 JST. That is 09:00 Hong Kong. Alarm set, account already made, site already open.",
     "where": "TableCheck · Tabelog · OMAKASE"
   },
   {
+    "id": "dinner-wed",
     "when": "2 Nov",
     "what": "Anchor dinner #1 — Wed 2 Dec",
     "detail": "Target 鮨 つぼみ or 鮨 尚充 in Nakameguro, both 寿司 TOKYO 百名店 at ¥15–25k. Book both, keep whichever answers.",
     "where": "OMAKASE (prepaid) or TableCheck"
   },
   {
+    "id": "narikura",
     "when": "2 Nov",
     "what": "とんかつ成蔵 — if you want a trophy",
     "detail": "The hardest tonkatsu reservation in Tokyo. Low odds, near-zero cost to try.",
     "where": "Its own reservation system"
   },
   {
+    "id": "dinner-thu",
     "when": "3 Nov",
     "what": "Anchor dinner #2 — Thu 3 Dec",
     "detail": "にし邑 in Ginza (とんかつ百名店, kappo-style) or a yakiniku. Leave one dinner unbooked to follow your nose.",
     "where": "TableCheck · Tabelog"
   },
   {
+    "id": "benfiddich",
     "when": "Any time",
     "what": "Bar Benfiddich",
     "detail": "Reservations via TableCheck. No menu — you describe a mood and he builds it.",
     "where": "TableCheck"
   },
   {
+    "id": "fuglen",
     "when": "Any time",
     "what": "Fuglen Sangubashi",
     "detail": "Eight seats, cashless only.",

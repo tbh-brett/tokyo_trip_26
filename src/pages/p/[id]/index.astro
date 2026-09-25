@@ -1,8 +1,9 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import StationBadge from '../../../components/StationBadge.astro';
-import { kindLabel, loadData, mapsPlaceUrl, mapsTransitUrl } from '../../../lib/data';
-import { MARKS, MARK_LABEL } from '../../../lib/marks';
+import { kindLabel, loadData, mapsPlaceUrl, mapsTransitUrlFor } from '../../../lib/data';
+import { askAboutPlace } from '../../../lib/ask';
+import { MARKS, MARK_LABEL } from '../../../lib/plan';
 import { closedText, hoursText } from '../../../lib/time';
 
 export async function getStaticPaths() {
@@ -56,16 +57,19 @@ const addressNote =
     <a class="btn" href={mapsPlaceUrl(p)}>
       Open in Google Maps <span class="hint" aria-hidden="true">↗</span>
     </a>
-    <a class="btn" href={mapsTransitUrl(p)}>
+    <a class="btn" href={mapsTransitUrlFor(p)}>
       Directions from here <span class="hint">Transit ↗</span>
     </a>
     <button class="btn" type="button" data-copy={p.address_ja}>
       Copy address <span class="hint" data-copy-status aria-live="polite"></span>
     </button>
+    <a class="btn" href={askAboutPlace({ name: p.name_en, nameJa: p.name_ja, address: p.address_ja, why: p.why })}>
+      Ask Claude about it <span class="hint">↗</span>
+    </a>
   </div>
 
   <div class="wrap marks">
-    <span class="label" id="mark-label">Mark on this phone</span>
+    <span class="label" id="mark-label">Mark for both of you</span>
     <div class="seg" role="group" aria-labelledby="mark-label" data-marks={p.id}>
       {
         MARKS.map((m) => (
@@ -75,6 +79,20 @@ const addressNote =
         ))
       }
     </div>
+    <p class="t13 muted by" data-mark-by></p>
+  </div>
+
+  <div class="wrap plan">
+    <span class="label">In your plan</span>
+    <div data-in-plan={p.id}></div>
+    <form class="addplan" data-add-to-plan={p.id}>
+      <div class="row2">
+        <label class="field"><span>Day</span><select name="day"></select></label>
+        <label class="field"><span>Time (optional)</span><input type="time" name="time" /></label>
+      </div>
+      <button class="btn small primary" type="submit">Add to plan</button>
+      <p class="t13 w500" data-status aria-live="polite"></p>
+    </form>
   </div>
 
   <dl class="wrap facts">
@@ -153,11 +171,19 @@ const addressNote =
   .actions {
     margin-top: calc(var(--u) * 3);
   }
-  .marks {
+  .marks,
+  .plan {
     margin-top: calc(var(--u) * 3);
   }
-  .marks .label {
+  .marks .label,
+  .plan .label {
     margin-bottom: var(--u);
+  }
+  .by {
+    margin-top: 4px;
+  }
+  .addplan {
+    margin-top: var(--u);
   }
   .facts {
     margin-top: calc(var(--u) * 3);
@@ -169,54 +195,11 @@ const addressNote =
 </style>
 
 <script>
-  import { readMarks, writeMark, type Mark } from '../../../lib/marks';
-  import { watchRows } from '../../../scripts/rows';
+  import { wireCopyButtons } from '../../../scripts/device';
+  import { wireAddToPlan, wireMarks, wirePlaceRows } from '../../../scripts/widgets';
 
-  watchRows();
-
-  // Want / Booked / Skip: tap again to clear.
-  const group = document.querySelector<HTMLElement>('[data-marks]');
-  if (group) {
-    const id = group.dataset.marks!;
-    const buttons = [...group.querySelectorAll<HTMLButtonElement>('button')];
-    const show = (mark: Mark | undefined) => {
-      for (const b of buttons) b.setAttribute('aria-pressed', String(b.dataset.mark === mark));
-    };
-    show(readMarks()[id]);
-    for (const b of buttons) {
-      b.addEventListener('click', () => {
-        const next = b.getAttribute('aria-pressed') === 'true' ? null : (b.dataset.mark as Mark);
-        writeMark(id, next);
-        show(next ?? undefined);
-      });
-    }
-  }
-
-  // Copy address, with a fallback for browsers without the async clipboard.
-  const copy = document.querySelector<HTMLButtonElement>('[data-copy]');
-  const status = document.querySelector<HTMLElement>('[data-copy-status]');
-  copy?.addEventListener('click', async () => {
-    const text = copy.dataset.copy ?? '';
-    let ok = false;
-    try {
-      await navigator.clipboard.writeText(text);
-      ok = true;
-    } catch {
-      const area = document.createElement('textarea');
-      area.value = text;
-      area.setAttribute('readonly', '');
-      area.style.position = 'fixed';
-      area.style.opacity = '0';
-      document.body.append(area);
-      area.select();
-      try {
-        // Deprecated, but still the only copy path on older iOS Safari.
-        ok = document.execCommand('copy');
-      } catch {
-        ok = false;
-      }
-      area.remove();
-    }
-    if (status) status.textContent = ok ? 'Copied' : 'Press and hold the address below';
-  });
+  wirePlaceRows(); // the "Now" line
+  wireMarks();
+  wireAddToPlan();
+  wireCopyButtons();
 </script>

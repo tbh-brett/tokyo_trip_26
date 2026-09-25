@@ -1,0 +1,123 @@
+---
+import Base from '../../layouts/Base.astro';
+import { KINDS, loadData, shortDate } from '../../lib/data';
+
+const data = await loadData();
+---
+
+<Base title="Add a place" tab="places">
+  <nav class="wrap back" aria-label="Back"><a href="/places/eat/" data-back>← Places</a></nav>
+  <header class="page-head">
+    <h1 class="t40 w700">Add a place</h1>
+    <p class="muted">Somewhere you found that isn't in the list. You'll both see it straight away.</p>
+  </header>
+
+  <form class="wrap addform" data-add-place>
+    <label class="field">
+      <span>Name</span>
+      <input type="text" name="name" required maxlength="120" autocomplete="off" placeholder="Tsuta, the bar by the station…" />
+    </label>
+    <label class="field">
+      <span>Japanese name (optional)</span>
+      <input type="text" name="name_ja" maxlength="120" lang="ja" autocomplete="off" />
+      <small class="t13 muted">Shown to staff, and the best thing to search Maps with.</small>
+    </label>
+    <label class="field">
+      <span>Address (optional)</span>
+      <input type="text" name="address" maxlength="200" autocomplete="off" />
+      <small class="t13 muted">Japanese is best. Copy it from Google Maps or Tabelog.</small>
+    </label>
+    <label class="field">
+      <span>Google Maps link (optional)</span>
+      <input type="url" name="maps" maxlength="600" inputmode="url" autocomplete="off" placeholder="https://maps.app.goo.gl/…" />
+      <small class="t13 muted">In Google Maps: Share, then Copy link.</small>
+    </label>
+    <label class="field">
+      <span>Kind</span>
+      <select name="kind">{KINDS.map((k) => <option value={k.id}>{k.label}</option>)}</select>
+    </label>
+    <label class="field">
+      <span>Note (optional)</span>
+      <textarea name="note" rows="3" maxlength="500" placeholder="Why it's worth it, what to order…"></textarea>
+    </label>
+    <div class="row2">
+      <label class="field">
+        <span>Add to a day</span>
+        <select name="day">
+          <option value="">Not yet</option>
+          {data.days.map((d) => <option value={d.date}>{shortDate(d.date)} · {d.title}</option>)}
+        </select>
+      </label>
+      <label class="field"><span>Time</span><input type="time" name="time" /></label>
+    </div>
+    <button class="btn primary" type="submit">Add place</button>
+    <p class="t13 w500" data-status aria-live="polite"></p>
+  </form>
+</Base>
+
+<style>
+  .back a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap);
+    padding-top: var(--u);
+    font-weight: 500;
+  }
+  .page-head p {
+    margin-top: var(--u);
+  }
+  .addform {
+    padding-bottom: calc(var(--u) * 5);
+  }
+  .addform .btn {
+    margin-top: calc(var(--u) * 3);
+  }
+  small {
+    display: block;
+    margin-top: 4px;
+  }
+</style>
+
+<script>
+  import { KIND_IDS } from '../../lib/catalog';
+  import { dispatch, newId } from '../../scripts/store';
+
+  const form = document.querySelector<HTMLFormElement>('[data-add-place]')!;
+  const status = form.querySelector<HTMLElement>('[data-status]')!;
+  const params = new URLSearchParams(location.search);
+  const kind = params.get('kind');
+  const day = params.get('day');
+  if (kind) (form.elements.namedItem('kind') as HTMLSelectElement).value = kind;
+  if (day) {
+    (form.elements.namedItem('day') as HTMLSelectElement).value = day;
+    document.querySelector<HTMLAnchorElement>('[data-back]')!.href = `/day/${day}/`;
+    document.querySelector<HTMLAnchorElement>('[data-back]')!.textContent = '← Back to the day';
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const value = (name: string) => String(data.get(name) ?? '').trim() || null;
+    const id = newId('m-');
+    const error = dispatch({
+      type: 'place.add',
+      id,
+      name: value('name') ?? '',
+      name_ja: value('name_ja'),
+      address: value('address'),
+      maps: value('maps'),
+      kind: KIND_IDS.find((k) => k === data.get('kind')) ?? 'eat',
+      note: value('note'),
+    });
+    if (error) {
+      status.textContent = error;
+      return;
+    }
+    const chosenDay = value('day');
+    if (chosenDay) {
+      const planError = dispatch({ type: 'item.add', id: newId(), day: chosenDay, time: value('time'), place: id });
+      if (planError) status.textContent = planError;
+    }
+    location.href = `/p/mine/?id=${id}`;
+  });
+</script>

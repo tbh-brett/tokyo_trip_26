@@ -1,0 +1,240 @@
+---
+// One page for every place you add yourselves (/p/mine/?id=…), filled in
+// from the shared plan in the browser.
+import Base from '../../../layouts/Base.astro';
+import { KINDS } from '../../../lib/data';
+import { MARKS, MARK_LABEL } from '../../../lib/plan';
+---
+
+<Base title="Your place" tab="places">
+  <nav class="wrap back" aria-label="Back"><a href="/places/eat/" data-f-back>← Places</a></nav>
+
+  <p class="wrap muted missing" data-missing hidden></p>
+
+  <article data-mine hidden>
+    <header class="page-head head">
+      <h1 class="t28 w700"><span data-f="name"></span><span lang="ja" data-f="name_ja"></span></h1>
+      <p class="t13 muted" data-f="meta"></p>
+    </header>
+    <div class="wrap"><p class="t20" data-f="note"></p></div>
+
+    <div class="wrap btns actions">
+      <a class="btn primary" data-l="staff" href="#">Show to staff <span class="hint">Full screen</span></a>
+      <a class="btn" data-l="maps" href="#">Open in Google Maps <span class="hint">↗</span></a>
+      <a class="btn" data-l="directions" href="#">Directions from here <span class="hint">Transit ↗</span></a>
+      <button class="btn" type="button" data-copy="">Copy address <span class="hint" data-copy-status aria-live="polite"></span></button>
+      <a class="btn" data-l="ask" href="#">Ask Claude about it <span class="hint">↗</span></a>
+    </div>
+
+    <div class="wrap block">
+      <span class="label" id="mark-label">Mark for both of you</span>
+      <div class="seg" role="group" aria-labelledby="mark-label" data-marks="">
+        {MARKS.map((m) => <button type="button" data-mark={m} aria-pressed="false">{MARK_LABEL[m]}</button>)}
+      </div>
+      <p class="t13 muted by" data-mark-by></p>
+    </div>
+
+    <div class="wrap block">
+      <span class="label">In your plan</span>
+      <div data-in-plan=""></div>
+      <form class="addplan" data-add-to-plan="">
+        <div class="row2">
+          <label class="field"><span>Day</span><select name="day"></select></label>
+          <label class="field"><span>Time (optional)</span><input type="time" name="time" /></label>
+        </div>
+        <button class="btn small primary" type="submit">Add to plan</button>
+        <p class="t13 w500" data-status aria-live="polite"></p>
+      </form>
+    </div>
+
+    <dl class="wrap facts">
+      <div><dt>Address</dt><dd lang="ja" data-f="address"></dd></div>
+      <div><dt>Kind</dt><dd data-f="kind"></dd></div>
+      <div><dt>Link</dt><dd class="t13" data-f="link"></dd></div>
+    </dl>
+
+    <div class="wrap block">
+      <details class="edit" data-edit>
+        <summary class="w500">Edit this place</summary>
+        <form data-edit-form>
+          <label class="field"><span>Name</span><input type="text" name="name" required maxlength="120" /></label>
+          <label class="field"><span>Japanese name</span><input type="text" name="name_ja" maxlength="120" lang="ja" /></label>
+          <label class="field"><span>Address</span><input type="text" name="address" maxlength="200" /></label>
+          <label class="field"><span>Google Maps link</span><input type="url" name="maps" maxlength="600" inputmode="url" /></label>
+          <label class="field"><span>Kind</span><select name="kind">{KINDS.map((k) => <option value={k.id}>{k.label}</option>)}</select></label>
+          <label class="field"><span>Note</span><textarea name="note" rows="3" maxlength="500"></textarea></label>
+          <button class="btn small primary" type="submit">Save</button>
+          <p class="t13 w500" data-edit-status aria-live="polite"></p>
+        </form>
+      </details>
+      <button class="btn small delete" type="button" data-delete>Delete this place</button>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .back a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap);
+    padding-top: var(--u);
+    font-weight: 500;
+  }
+  .missing {
+    padding-top: calc(var(--u) * 3);
+  }
+  .head {
+    padding-top: var(--u);
+  }
+  .head h1 span {
+    display: block;
+  }
+  .head p {
+    margin-top: var(--u);
+  }
+  .actions,
+  .block {
+    margin-top: calc(var(--u) * 3);
+  }
+  .block > .label {
+    margin-bottom: var(--u);
+  }
+  .by {
+    margin-top: 4px;
+  }
+  .addplan {
+    margin-top: var(--u);
+  }
+  .facts {
+    margin-top: calc(var(--u) * 3);
+  }
+  .facts > div:first-child {
+    border-top: 1px solid var(--ink);
+  }
+  .edit summary {
+    display: flex;
+    align-items: center;
+    min-height: var(--tap);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .edit form .btn {
+    margin-top: calc(var(--u) * 2);
+  }
+  .delete {
+    margin: calc(var(--u) * 3) 0 calc(var(--u) * 5);
+  }
+</style>
+
+<script>
+  import { askAboutPlace } from '../../../lib/ask';
+  import { KIND_IDS } from '../../../lib/catalog';
+  import { mapsSearchUrl, mapsTransitUrl } from '../../../lib/maps';
+  import { getPlan, dispatch, hasServerCopy, subscribe } from '../../../scripts/store';
+  import { wireCopyButtons } from '../../../scripts/device';
+  import { wireAddToPlan, wireMarks } from '../../../scripts/widgets';
+  import { ago } from '../../../scripts/ui';
+
+  const LABELS: Record<string, string> = { eat: 'Eat', coffee: 'Coffee', tea: 'Tea', bar: 'Bars', see: 'See', buy: 'Buy' };
+  const id = new URLSearchParams(location.search).get('id') ?? '';
+  const article = document.querySelector<HTMLElement>('[data-mine]')!;
+  const missing = document.querySelector<HTMLElement>('[data-missing]')!;
+  const field = (name: string) => article.querySelector<HTMLElement>(`[data-f="${name}"]`)!;
+  const link = (name: string) => article.querySelector<HTMLAnchorElement>(`[data-l="${name}"]`)!;
+
+  // The widgets find their place by these attributes.
+  article.querySelector<HTMLElement>('[data-marks]')!.dataset.marks = id;
+  article.querySelector<HTMLElement>('[data-in-plan]')!.dataset.inPlan = id;
+  article.querySelector<HTMLElement>('[data-add-to-plan]')!.dataset.addToPlan = id;
+  wireMarks();
+  wireAddToPlan();
+
+  let wired = false;
+  const paint = () => {
+    const place = getPlan().places.find((p) => p.id === id);
+    article.hidden = !place;
+    missing.hidden = Boolean(place);
+    if (!place) {
+      missing.textContent = hasServerCopy() ? 'This place was deleted, or the link is wrong.' : 'Loading…';
+      return;
+    }
+    document.title = `${place.name} · Tokyo 2026`;
+    field('name').textContent = place.name;
+    field('name_ja').textContent = place.name_ja ?? '';
+    field('meta').textContent = `Added by ${place.by} · ${ago(place.at)}`;
+    field('note').textContent = place.note ?? '';
+    field('address').textContent = place.address ?? 'No address yet. Edit the place to add one.';
+    field('kind').textContent = LABELS[place.kind] ?? place.kind;
+    field('link').innerHTML = '';
+    if (place.maps) {
+      const a = document.createElement('a');
+      a.href = place.maps;
+      a.textContent = place.maps;
+      field('link').append(a);
+    } else field('link').textContent = 'None';
+    (document.querySelector('[data-f-back]') as HTMLAnchorElement).href = `/places/${place.kind}/`;
+
+    const query = [place.name_ja ?? place.name, place.address].filter(Boolean).join(' ');
+    link('staff').href = `/p/mine/staff/?id=${place.id}`;
+    link('maps').href = place.maps ?? mapsSearchUrl(query);
+    link('directions').href = mapsTransitUrl(query);
+    link('ask').href = askAboutPlace({ name: place.name, nameJa: place.name_ja, address: place.address, why: place.note });
+    const copy = article.querySelector<HTMLButtonElement>('[data-copy]')!;
+    copy.hidden = !place.address;
+    copy.dataset.copy = place.address ?? '';
+
+    if (!wired) {
+      wired = true;
+      wireCopyButtons();
+    }
+  };
+  paint();
+  subscribe(paint);
+
+  // Edit: fill the form when it opens, so it starts from what's saved now.
+  const edit = article.querySelector<HTMLDetailsElement>('[data-edit]')!;
+  const form = article.querySelector<HTMLFormElement>('[data-edit-form]')!;
+  edit.addEventListener('toggle', () => {
+    const place = getPlan().places.find((p) => p.id === id);
+    if (!edit.open || !place) return;
+    for (const name of ['name', 'name_ja', 'address', 'maps', 'kind', 'note'] as const) {
+      (form.elements.namedItem(name) as HTMLInputElement).value = place[name] ?? '';
+    }
+  });
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const value = (name: string) => String(data.get(name) ?? '').trim() || null;
+    const kind = String(data.get('kind'));
+    const error = dispatch({
+      type: 'place.update',
+      id,
+      name: value('name') ?? '',
+      name_ja: value('name_ja'),
+      address: value('address'),
+      maps: value('maps'),
+      kind: KIND_IDS.find((k) => k === kind) ?? 'eat',
+      note: value('note'),
+    });
+    form.querySelector('[data-edit-status]')!.textContent = error ?? '';
+    if (!error) edit.open = false;
+  });
+
+  // Delete: tap twice, no dialog.
+  const del = article.querySelector<HTMLButtonElement>('[data-delete]')!;
+  del.addEventListener('click', () => {
+    if (del.dataset.armed !== 'true') {
+      del.dataset.armed = 'true';
+      del.textContent = 'Tap again to delete it and remove it from the plan';
+      setTimeout(() => {
+        del.dataset.armed = 'false';
+        del.textContent = 'Delete this place';
+      }, 4000);
+      return;
+    }
+    const kind = getPlan().places.find((p) => p.id === id)?.kind ?? 'eat';
+    dispatch({ type: 'place.remove', id });
+    location.href = `/places/${kind}/`;
+  });
+</script>
