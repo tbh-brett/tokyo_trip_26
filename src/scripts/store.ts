@@ -42,6 +42,8 @@ let outbox: Envelope[] = read<Envelope[]>(KEYS.outbox) ?? [];
 let view: PlanState = rebase();
 let sync: Sync = { kind: 'live' };
 let news: { text: string; at: number } | null = null;
+/** Changes made on this phone, so they're never announced back as news. */
+const mine = new Set(outbox.map((e) => e.opId));
 const listeners = new Set<() => void>();
 
 function rebase(): PlanState {
@@ -96,6 +98,7 @@ export function dispatch(op: Op): string | null {
     if (e instanceof PlanError) return e.message;
     throw e;
   }
+  mine.add(env.opId);
   outbox = [...outbox, env];
   write(KEYS.outbox, outbox);
   notify();
@@ -107,7 +110,7 @@ export function dispatch(op: Op): string | null {
 function accept(state: PlanState) {
   if (state.version < confirmed.version) return;
   const known = new Set(confirmed.activity.map((a) => a.id));
-  const theirs = state.activity.filter((a) => !known.has(a.id) && a.by !== me());
+  const theirs = state.activity.filter((a) => !known.has(a.id) && !mine.has(a.id));
   if (theirs.length && syncedAt !== null) news = { text: `${theirs[0].by} ${theirs[0].text}`, at: Date.now() };
   confirmed = state;
   syncedAt = Date.now();
