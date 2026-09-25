@@ -4,7 +4,7 @@
 const TRIP = 'We are two people in Tokyo from 27 Nov to 4 Dec 2026, staying in Soto-Kanda near Suehirocho station (Ginza line, G14).';
 
 /** The GitHub repo the site is built from, for "change the site" requests. */
-export const REPO = 'tbh-brett/toyko_trip_26';
+export const REPO = 'tbh-brett/tokyo_trip_26';
 
 export const askClaudeUrl = (question: string) => `https://claude.ai/new?q=${encodeURIComponent(question)}`;
 
