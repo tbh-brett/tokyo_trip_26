@@ -1,14 +1,15 @@
 ---
-import '@fontsource/ibm-plex-sans-jp/latin-400.css';
-import '@fontsource/ibm-plex-sans-jp/latin-500.css';
-import '@fontsource/ibm-plex-sans-jp/latin-700.css';
 import '../styles/fonts.css';
 import '@fontsource/ibm-plex-mono/latin-400.css';
 import '@fontsource/ibm-plex-mono/latin-500.css';
 import '../styles/global.css';
+import U from '../components/U.astro';
+import { ui } from '../i18n/ui';
 
 interface Props {
+  /** Page title in English, and in Chinese if it differs. */
   title: string;
+  titleZh?: string;
   /** Which tab is current, if any. */
   tab?: 'today' | 'plan' | 'places';
   /** false hides the tab bar and live sync (Show to staff). */
@@ -16,11 +17,14 @@ interface Props {
   bodyClass?: string;
 }
 
-const { title, tab, showTabs = true, bodyClass } = Astro.props;
+const { title, titleZh, tab, showTabs = true, bodyClass } = Astro.props;
+const full = (t: string, app: string) => (t === app ? t : `${t} · ${app}`);
+const titleEn = full(title, ui('appName', 'en'));
+const titleZhFull = full(titleZh ?? title, ui('appName', 'zh'));
 const tabs = [
-  { id: 'today', label: 'Today', href: '/' },
-  { id: 'plan', label: 'Plan', href: '/plan/' },
-  { id: 'places', label: 'Places', href: '/places/eat/' },
+  { id: 'today', key: 'tab.today', href: '/' },
+  { id: 'plan', key: 'tab.plan', href: '/plan/' },
+  { id: 'places', key: 'tab.places', href: '/places/eat/' },
 ] as const;
 ---
 
@@ -42,10 +46,22 @@ const tabs = [
     <meta name="apple-mobile-web-app-title" content="Tokyo" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>{title === 'Tokyo 2026' ? title : `${title} · Tokyo 2026`}</title>
+    <meta name="title-en" content={titleEn} />
+    <meta name="title-zh" content={titleZhFull} />
+    <title>{titleEn}</title>
+    <!-- Pick this phone's language before anything paints. Same key as src/scripts/lang.ts. -->
+    <script is:inline>
+      try {
+        if (localStorage.getItem('tokyo2026:lang') === 'zh') {
+          document.documentElement.dataset.lang = 'zh';
+          document.documentElement.lang = 'zh-Hant';
+          document.title = document.querySelector('meta[name="title-zh"]').content;
+        }
+      } catch (e) {}
+    </script>
   </head>
   <body class={bodyClass} data-live={showTabs ? 'on' : 'off'}>
-    <a class="skip" href="#main">Skip to content</a>
+    <a class="skip" href="#main"><U k="skip" /></a>
     {showTabs && <div class="whoami" data-whoami hidden />}
     <main id="main">
       <slot />
@@ -57,9 +73,20 @@ const tabs = [
           <nav class="tabbar" aria-label="Sections">
             {tabs.map((t) => (
               <a href={t.href} aria-current={t.id === tab ? 'page' : undefined}>
-                {t.label}
+                <U k={t.key} />
               </a>
             ))}
+            <button
+              type="button"
+              class="langbtn"
+              data-lang-toggle
+              aria-label={ui('lang.switch', 'en')}
+              data-aria-en={ui('lang.switch', 'en')}
+              data-aria-zh={ui('lang.switch', 'zh')}
+            >
+              <span data-l="en" lang="zh-Hant">{ui('lang.other', 'en')}</span>
+              <span data-l="zh" lang="en">{ui('lang.other', 'zh')}</span>
+            </button>
           </nav>
         </>
       )
@@ -68,12 +95,20 @@ const tabs = [
 </html>
 
 <script>
+  import { activityText } from '../lib/activity';
   import { TRAVELLERS } from '../lib/catalog';
-  import { dismiss, getNews, getSync, me, setMe, start, subscribe } from '../scripts/store';
+  import { applyLang, lang, onLang, setLang, t } from '../scripts/lang';
+  import { dismiss, getNews, getSync, me, refresh, setMe, start, subscribe } from '../scripts/store';
   import { html } from '../scripts/ui';
+
+  applyLang();
 
   // Save the whole site on the phone for no-signal use (scripts/build-sw.mjs).
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
+
+  // The language button in the tab bar.
+  document.querySelector('[data-lang-toggle]')?.addEventListener('click', () => setLang(lang() === 'zh' ? 'en' : 'zh'));
+  onLang(refresh);
 
   if (document.body.dataset.live === 'on') {
     start();
@@ -90,26 +125,28 @@ const tabs = [
       if (s.kind === 'saving') {
         savingSince ||= Date.now();
         // Only mention saving if it's taking a moment.
-        if (Date.now() - savingSince > 800) text = 'Saving…';
+        if (Date.now() - savingSince > 800) text = t('sync.saving');
         else setTimeout(paintBar, 900);
       } else savingSince = 0;
       if (s.kind === 'offline') {
         const since = s.since ? new Date(s.since).toTimeString().slice(0, 5) : null;
         text = s.waiting
-          ? `No signal · ${s.waiting} ${s.waiting === 1 ? 'change' : 'changes'} will sync when you're back online`
+          ? s.waiting === 1
+            ? t('sync.waiting1')
+            : t('sync.waitingN', { n: s.waiting })
           : since
-            ? `No signal · showing the plan as of ${since}`
-            : 'No signal · the shared plan will load when you are back online';
+            ? t('sync.asOf', { time: since })
+            : t('sync.notYet');
       } else if (s.kind === 'signin') {
-        text = 'Your login has expired.';
-        button = 'reload';
+        text = t('sync.expired');
+        button = 'signin';
         tone = 'alert';
       } else if (s.kind === 'error') {
         text = s.message;
         button = 'dismiss';
         tone = 'alert';
       } else if (s.kind === 'live' && news) {
-        text = news.text;
+        text = `${news.act.by} ${activityText(news.act, lang())}`;
         button = 'dismiss';
         tone = 'news';
       }
@@ -117,17 +154,17 @@ const tabs = [
       bar.dataset.tone = tone;
       document.body.classList.toggle('has-syncbar', Boolean(text));
       bar.innerHTML = html`<span>${text}</span>${
-        button === 'reload'
-          ? html`<button type="button" data-bar="reload">Sign in again</button>`
+        button === 'signin'
+          ? html`<button type="button" data-bar="signin">${t('sync.signIn')}</button>`
           : button === 'dismiss'
-            ? html`<button type="button" data-bar="dismiss">OK</button>`
+            ? html`<button type="button" data-bar="dismiss">${t('sync.ok')}</button>`
             : ''
       }`.value;
     };
     bar.addEventListener('click', (e) => {
       const b = (e.target as HTMLElement).closest<HTMLElement>('[data-bar]');
       // Pages come from the phone's saved copy, so go via the network to meet the login.
-      if (b?.dataset.bar === 'reload') location.href = `/api/signin?to=${encodeURIComponent(location.pathname + location.search)}`;
+      if (b?.dataset.bar === 'signin') location.href = `/api/signin?to=${encodeURIComponent(location.pathname + location.search)}`;
       if (b?.dataset.bar === 'dismiss') dismiss();
     });
     paintBar();
@@ -138,9 +175,9 @@ const tabs = [
     const paintWho = () => {
       who.hidden = Boolean(me());
       if (who.hidden) return;
-      who.innerHTML = html`<p class="w500">Who's using this phone?</p>
-        <p class="t13 muted">So the other phone sees who changed what.</p>
-        <div class="chips">${TRAVELLERS.map((name) => html`<button type="button" class="chip" data-me="${name}">I'm ${name}</button>`)}</div>`.value;
+      who.innerHTML = html`<p class="w500">${t('who.q')}</p>
+        <p class="t13 muted">${t('who.why')}</p>
+        <div class="chips">${TRAVELLERS.map((name) => html`<button type="button" class="chip" data-me="${name}">${t('who.me', { name })}</button>`)}</div>`.value;
     };
     who.addEventListener('click', (e) => {
       const b = (e.target as HTMLElement).closest<HTMLElement>('[data-me]');

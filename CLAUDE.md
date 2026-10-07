@@ -46,10 +46,20 @@ When changing the plan's shape, keep old stored plans loading: the store spreads
 
 Because pages come from the phone, a reload never meets Cloudflare Access. When the plan API reports the login has expired, the "Sign in again" button goes to `/api/signin?to=<page>`, which always hits the network: Access shows its login if needed, then the Worker sends you back. The manifest link uses `crossorigin="use-credentials"` so it's fetched with the login cookie. Home Screen icons are in `public/icons/`. A Home Screen install on iPhone has its own storage: sign in and pick your name once more inside it. The Plan page's "On this phone" section says whether the site is saved for offline use.
 
+### Two languages: English and Traditional Chinese
+
+Every page carries both; a phone shows one. The 中文 / EN button in the tab bar sets `tokyo2026:lang` in `localStorage`; an inline script in `Base.astro` applies it before paint (`html[data-lang="zh"]`, `lang="zh-Hant"`), and CSS hides the other language's `[data-l]` spans. Each phone keeps its own choice; URLs are the same in both.
+
+- **Interface text** lives only in `src/i18n/ui.ts` as `[English, Chinese]` pairs (Hong Kong written Chinese). Pages use `<U k="key" />`; pairs of content use `<T en zh />`; browser code uses `t("key")` from `src/scripts/lang.ts`. Add both languages whenever you add text. `<option>` text, placeholders and the page title switch through `data-text-*`, `data-ph-*` and `meta[name=title-*]`.
+- **Research translations** live in `data/i18n/zh-Hant.json` (places: why / note / recognition / price; days: title / anchor / notes; bookings; prep; zone names). Every field is optional and falls back to English. The build fails if a key doesn't match an English entry, a translated note has no English note, or a day's translated notes don't line up one-to-one. When you change English research, change the Chinese with it, or delete the stale translation so the English shows.
+- Award and list names stay literal in both languages (`喫茶店百名店 2026`, `Asia's 50 Best Bars`). Place names stay English + Japanese. Text typed into the plan is shown as typed.
+- The feed stores each change as a kind plus details (`src/lib/activity.ts`), so each phone renders it in its own language; entries from before 7 Oct 2026 are English text only.
+- Chinese renders in the phone's Traditional Chinese font (`--sans-zh`: Plex Latin, then PingFang TC / Noto Sans TC); Japanese names keep Plex Sans JP. Keep Chinese characters out of `/src` outside `src/i18n`, or the Japanese font subset grows for nothing.
+
 ## Data rules
 
 - `/data/*.json` is the only place content lives. Components never hardcode a place, day, route or booking.
-- **Never invent** a place, award, price, hour or address. A new place needs a real source; set `source` to the URL or `general-knowledge`.
+- **Never invent** a place, award, price, hour or address. A new place needs a real source; set `source` to the URL or `general-knowledge`. Translations must say exactly what the English says: same times, prices and dates, nothing added.
 - `hours_verified: false` means the hours are an estimate. The UI must then say **"likely open" / "likely closed"**, never "open".
 - `address_precision: "district"` means the address stops at the neighbourhood. **Do not geocode those** — the pin would land in the middle of the ward. Find the full street address first (Tabelog listing or the shop's own site), then geocode.
 - Geocode street-level Japanese addresses with the GSI (国土地理院) address search API. Store `lat`/`lng`, set `coords_verified: true` only after a spot-check against Google Maps.

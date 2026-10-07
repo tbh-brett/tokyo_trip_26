@@ -1,0 +1,24 @@
+---
+// Text in both languages; the page shows the one this phone chose
+// (html[data-lang], src/scripts/lang.ts). With no Chinese version the
+// English shows in both.
+interface Props {
+  en: string;
+  zh?: string | null;
+}
+const { en, zh } = Astro.props;
+const both = Boolean(zh) && zh !== en;
+---
+
+{
+  both ? (
+    <>
+      <span data-l="en">{en}</span>
+      <span data-l="zh" lang="zh-Hant">
+        {zh}
+      </span>
+    </>
+  ) : (
+    en
+  )
+}

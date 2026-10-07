@@ -1,14 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
+import U from '../components/U.astro';
+import { ui } from '../i18n/ui';
 ---
 
-<Base title="Not found">
+<Base title={ui('nf.short', 'en')} titleZh={ui('nf.short', 'zh')}>
   <header class="page-head">
-    <h1 class="t40 w700">Not here.</h1>
+    <h1 class="t40 w700"><U k="nf.title" /></h1>
   </header>
   <div class="wrap stack">
-    <p class="t20">That page doesn't exist, or it moved when the data changed.</p>
-    <p><a class="btn" href="/">Go to Today</a></p>
-    <p><a class="btn" href="/places/eat/">Go to Places</a></p>
+    <p class="t20"><U k="nf.text" /></p>
+    <p><a class="btn" href="/"><U k="nf.today" /></a></p>
+    <p><a class="btn" href="/places/eat/"><U k="nf.places" /></a></p>
   </div>
 </Base>

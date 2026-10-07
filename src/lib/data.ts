@@ -2,6 +2,8 @@
 // agree with each other (a route stop that isn't a place, a zone that doesn't
 // exist). Any problem throws, which fails the build.
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { z } from 'astro/zod';
+import zhJson from '../../data/i18n/zh-Hant.json';
 import { mapsSearchUrl, mapsTransitUrl } from './maps';
 import { shortDate } from './time';
 
@@ -17,6 +19,18 @@ export type Line = CollectionEntry<'lines'>['data'];
 export type Base = CollectionEntry<'trip'>['data'];
 export type Traveller = CollectionEntry<'travellers'>['data'];
 export type Kind = Place['kind'];
+
+// Traditional Chinese translations of the research (data/i18n/zh-Hant.json).
+// Everything is optional: anything missing shows in English.
+const zhText = z.string().min(1);
+const ZhSchema = z.strictObject({
+  places: z.record(z.string(), z.strictObject({ why: zhText.optional(), note: zhText.optional(), recognition: zhText.optional(), price: zhText.optional() })),
+  days: z.record(z.string(), z.strictObject({ title: zhText, anchor: zhText, notes: z.array(zhText) })),
+  bookings: z.record(z.string(), z.strictObject({ what: zhText, detail: zhText, where: zhText })),
+  prep: z.record(z.string(), z.strictObject({ group: zhText, item: zhText })),
+  zones: z.record(z.string(), z.strictObject({ name: zhText, full: zhText })),
+});
+export type Zh = z.infer<typeof ZhSchema>;
 
 export const KINDS: ReadonlyArray<{ id: Kind; label: string }> = [
   { id: 'eat', label: 'Eat' },
@@ -42,6 +56,7 @@ export interface TripData {
   lines: Line[];
   travellers: Traveller[];
   base: Base;
+  zh: Zh;
   place: (id: string) => Place;
   zone: (id: string) => Zone;
   line: (id: string) => Line;
@@ -101,7 +116,29 @@ async function load(): Promise<TripData> {
     const next = Date.parse(`${days[i].data.date}T00:00:00Z`);
     if (next - prev !== 86_400_000) problems.push(`days.json: ${days[i].data.date} does not follow ${days[i - 1].data.date}`);
   }
-  if (problems.length || !base) throw new Error(`Data check failed:\n  ${problems.join('\n  ')}`);
+  const zhParsed = ZhSchema.safeParse(zhJson);
+  if (!zhParsed.success) {
+    for (const issue of zhParsed.error.issues) problems.push(`i18n/zh-Hant.json ${issue.path.join('.')}: ${issue.message}`);
+  } else {
+    const zh = zhParsed.data;
+    const dayMap = new Map(days.map((e) => [e.data.date, e.data]));
+    const unknown = (section: string, keys: string[], known: (k: string) => boolean) => {
+      for (const k of keys) if (!known(k)) problems.push(`i18n/zh-Hant.json ${section}.${k}: no such entry in the English data`);
+    };
+    unknown('places', Object.keys(zh.places), (k) => placeMap.has(k));
+    unknown('days', Object.keys(zh.days), (k) => dayMap.has(k));
+    unknown('bookings', Object.keys(zh.bookings), (k) => bookings.some((e) => e.data.id === k));
+    unknown('prep', Object.keys(zh.prep), (k) => prep.some((e) => e.data.id === k));
+    unknown('zones', Object.keys(zh.zones), (k) => zoneMap.has(k));
+    for (const [id, t] of Object.entries(zh.places)) {
+      if (t.note && !placeMap.get(id)?.note) problems.push(`i18n/zh-Hant.json places.${id}.note: the English place has no note`);
+    }
+    for (const [date, t] of Object.entries(zh.days)) {
+      const en = dayMap.get(date);
+      if (en && t.notes.length !== en.notes.length) problems.push(`i18n/zh-Hant.json days.${date}.notes: ${t.notes.length} notes, English has ${en.notes.length}`);
+    }
+  }
+  if (problems.length || !base || !zhParsed.success) throw new Error(`Data check failed:\n  ${problems.join('\n  ')}`);
 
   const need = <T>(map: Map<string, T>, what: string) => (id: string) => {
     const item = map.get(id);
@@ -119,6 +156,7 @@ async function load(): Promise<TripData> {
     lines: lines.map((e) => e.data),
     travellers: travellers.map((e) => e.data),
     base,
+    zh: zhParsed.data,
     place: need(placeMap, 'place'),
     zone: need(zoneMap, 'zone'),
     line: need(lineMap, 'line'),

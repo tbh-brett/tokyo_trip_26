@@ -1,3 +1,5 @@
+import { ui, weekdayIn, type Lang, type UIKey } from '../i18n/ui';
+
 // Time helpers shared by the build and the browser. Everything is Japan time:
 // the trip is in Tokyo, and hours in /data are JST.
 
@@ -76,21 +78,21 @@ export function openState(hours: Hours, closedDays: readonly string[], now: JstN
 }
 
 /** Unverified hours only ever say "likely". */
-export function openLabel(state: OpenState, verified: boolean): string {
-  const open = verified ? 'Open' : 'Likely open';
-  const closed = verified ? 'Closed' : 'Likely closed';
-  if (state.open) return `${open} · until ${state.until}`;
-  if ('opensAt' in state) return `${closed} · opens ${state.opensAt}`;
-  return state.closedToday ? `${closed} today` : `${closed} for the day`;
+export function openLabel(state: OpenState, verified: boolean, lang: Lang = 'en'): string {
+  const v = verified ? 'sure' : 'likely';
+  if (state.open) return ui(`open.${v}` as UIKey, lang, { t: state.until });
+  if ('opensAt' in state) return ui(`opens.${v}` as UIKey, lang, { t: state.opensAt });
+  return ui((state.closedToday ? `closedToday.${v}` : `closedNow.${v}`) as UIKey, lang);
 }
 
 /** "09:00–19:00, 21:00–01:00" */
-export function hoursText(hours: Hours): string {
-  return hours.length ? hours.map(([a, b]) => `${a}–${b}`).join(', ') : 'No hours listed';
+export function hoursText(hours: Hours, lang: Lang = 'en'): string {
+  return hours.length ? hours.map(([a, b]) => `${a}–${b}`).join(', ') : ui('hours.none', lang);
 }
 
-/** "Closed Sun, Mon" or "" */
-export function closedText(closedDays: readonly string[]): string {
+/** "Closed Sun, Mon" (or the Chinese), or "" */
+export function closedText(closedDays: readonly string[], lang: Lang = 'en'): string {
   const ordered = WEEKDAYS.filter((d) => closedDays.includes(d));
-  return ordered.length ? `Closed ${ordered.join(', ')}` : '';
+  if (!ordered.length) return '';
+  return ui('hours.closed', lang, { days: ordered.map((d) => weekdayIn(d, lang)).join(ui('list.sep', lang)) });
 }

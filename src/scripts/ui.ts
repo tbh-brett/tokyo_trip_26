@@ -1,7 +1,7 @@
 // Small helpers for rendering the live parts of pages without a framework.
-import { DAYS, PLACE_BY_ID, type Kind } from '../lib/catalog';
+import { DAYS, PLACE_BY_ID, ZH_DAYS, type Kind } from '../lib/catalog';
 import { isMine, type PlanState } from '../lib/plan';
-import { shortDate } from '../lib/time';
+import { date, lang, t } from './lang';
 import { subscribe } from './store';
 
 /** Markup that is already safe to insert. */
@@ -58,19 +58,19 @@ export function mount(el: HTMLElement, render: () => Safe): () => void {
   return paint;
 }
 
-/** "just now", "5 min ago", "3 h ago", "Sun 29 Nov" */
+/** "just now", "5 min ago", "3 h ago", "Sun 29 Nov" — in this phone's language */
 export function ago(at: number): string {
   const s = (Date.now() - at) / 1000;
-  if (s < 60) return 'just now';
-  if (s < 3600) return `${Math.floor(s / 60)} min ago`;
-  if (s < 86_400) return `${Math.floor(s / 3600)} h ago`;
+  if (s < 60) return t('ago.now');
+  if (s < 3600) return t('ago.min', { n: Math.floor(s / 60) });
+  if (s < 86_400) return t('ago.h', { n: Math.floor(s / 3600) });
   const d = new Date(at);
-  return shortDate(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`);
+  return date(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`);
 }
 
 export function dayOptions(selected: string | null): Safe {
   return html`${DAYS.map(
-    (d) => html`<option value="${d.date}" ${d.date === selected ? new Safe('selected') : ''}>${shortDate(d.date)} · ${d.title}</option>`,
+    (d) => html`<option value="${d.date}" ${d.date === selected ? new Safe('selected') : ''}>${date(d.date)} · ${dayHeadline(null, d.date).title}</option>`,
   )}`;
 }
 
@@ -102,11 +102,16 @@ export function placeView(plan: PlanState, ref: string | null): PlaceView | null
   };
 }
 
-/** The day's title and main plan, with your edits applied. */
-export function dayHeadline(plan: PlanState, date: string) {
-  const base = DAYS.find((d) => d.date === date)!;
-  const edit = plan.days[date];
-  return { title: edit?.title ?? base.title, anchor: edit?.anchor ?? base.anchor, edited: Boolean(edit) };
+/** The day's title and main plan: your edits if any, else the research in this phone's language. */
+export function dayHeadline(plan: PlanState | null, day: string) {
+  const base = DAYS.find((d) => d.date === day)!;
+  const zh = lang() === 'zh' ? ZH_DAYS[day] : undefined;
+  const edit = plan?.days[day];
+  return {
+    title: edit?.title ?? zh?.title ?? base.title,
+    anchor: edit?.anchor ?? zh?.anchor ?? base.anchor,
+    edited: Boolean(edit),
+  };
 }
 
 /** Delegate clicks on [data-action] inside root. */

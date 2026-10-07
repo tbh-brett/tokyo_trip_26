@@ -5,7 +5,7 @@
 // Nothing here touches the DOM, storage or the network.
 
 import { CHECKS, DAY_DATES, KIND_IDS, PLACE_BY_ID, type Kind } from './catalog';
-import { shortDate } from './time';
+import { activityText, type ActArgs, type ActKind } from './activity';
 
 export type Mark = 'want' | 'booked' | 'skip';
 export const MARKS: readonly Mark[] = ['want', 'booked', 'skip'];
@@ -45,7 +45,9 @@ export interface Stamp {
 
 export interface Activity extends Stamp {
   id: string;
-  text: string;
+  text: string; // English, for older phones
+  k?: ActKind;
+  a?: ActArgs;
 }
 
 export interface PlanState {
@@ -195,7 +197,7 @@ export function applyOp(prev: PlanState, env: Envelope, now: number): PlanState 
     days: { ...prev.days },
     checks: { ...prev.checks },
   };
-  let say: string | null = null;
+  let act: { k: ActKind; a: ActArgs } | null = null;
 
   const findItem = (itemId: string) => {
     const index = s.items.findIndex((i) => i.id === itemId);
@@ -203,7 +205,6 @@ export function applyOp(prev: PlanState, env: Envelope, now: number): PlanState 
     return { index, item: s.items[index] };
   };
   const nextOrder = (d: string) => Math.max(0, ...s.items.filter((i) => i.day === d).map((i) => i.order)) + 1;
-  const at = (t: string | null) => (t ? ` at ${t}` : '');
 
   switch (op?.type) {
     case 'item.add': {
@@ -224,7 +225,7 @@ export function applyOp(prev: PlanState, env: Envelope, now: number): PlanState 
       if (!item.place && !item.title) throw new PlanError('add a place or a title');
       item.order = nextOrder(item.day);
       s.items.push(item);
-      say = `added ${itemLabel(s, item)} to ${shortDate(item.day)}${at(item.time)}`;
+      act = { k: 'item.add', a: { label: itemLabel(s, item), day: item.day, time: item.time ?? undefined } };
       break;
     }
     case 'item.update': {
@@ -248,10 +249,11 @@ export function applyOp(prev: PlanState, env: Envelope, now: number): PlanState 
       if (newNote) next.note = text(op.note, 'note', 500);
       s.items[index] = next;
       const label = itemLabel(s, next);
-      if (movedDay) say = `moved ${label} from ${shortDate(item.day)} to ${shortDate(next.day)}${at(next.time)}`;
-      else if (newTime) say = next.time ? `set ${label} for ${next.time} on ${shortDate(next.day)}` : `took the time off ${label} on ${shortDate(next.day)}`;
-      else if (newNote) say = next.note ? `added a note to ${label}: ${next.note}` : `removed the note from ${label}`;
-      if (say && newNote && (movedDay || newTime)) say += ', with a note';
+      const base: ActArgs = { label, day: item.day };
+      if (movedDay) act = { k: 'item.move', a: { ...base, to: next.day, time: next.time ?? undefined } };
+      else if (newTime) act = next.time ? { k: 'item.time', a: { ...base, day: next.day, t: next.time } } : { k: 'item.untime', a: { ...base, day: next.day } };
+      else if (newNote) act = next.note ? { k: 'item.note', a: { ...base, note: next.note } } : { k: 'item.unnote', a: base };
+      if (act && newNote && (movedDay || newTime)) act.a.withNote = '1';
       break;
     }
     case 'item.move': {
@@ -271,7 +273,7 @@ export function applyOp(prev: PlanState, env: Envelope, now: number): PlanState 
       const found = s.items.find((i) => i.id === op.id);
       if (!found) return prev;
       s.items = s.items.filter((i) => i.id !== found.id);
-      say = `removed ${itemLabel(prev, found)} from ${shortDate(found.day)}`;
+      act = { k: 'item.remove', a: { label: itemLabel(prev, found), day: found.day } };
       break;
     }
     case 'place.add': {
@@ -291,7 +293,7 @@ export function applyOp(prev: PlanState, env: Envelope, now: number): PlanState 
         at: now,
       };
       s.places.push(place);
-      say = `added a new place: ${place.name}`;
+      act = { k: 'place.add', a: { label: place.name } };
       break;
     }
     case 'place.update': {
@@ -305,7 +307,7 @@ export function applyOp(prev: PlanState, env: Envelope, now: number): PlanState 
       if (op.kind !== undefined) p.kind = kind(op.kind);
       if (op.note !== undefined) p.note = text(op.note, 'note', 500);
       s.places[index] = p;
-      say = `edited ${p.name}`;
+      act = { k: 'place.edit', a: { label: p.name } };
       break;
     }
     case 'place.remove': {
@@ -314,7 +316,7 @@ export function applyOp(prev: PlanState, env: Envelope, now: number): PlanState 
       s.places = s.places.filter((p) => p.id !== place.id);
       s.items = s.items.filter((i) => i.place !== place.id);
       delete s.marks[place.id];
-      say = `deleted ${place.name}`;
+      act = { k: 'place.remove', a: { label: place.name } };
       break;
     }
     case 'mark.set': {
@@ -323,12 +325,12 @@ export function applyOp(prev: PlanState, env: Envelope, now: number): PlanState 
       if (op.mark === null) {
         if (!s.marks[ref]) return prev;
         delete s.marks[ref];
-        say = `cleared the mark on ${placeName(s, ref)}`;
+        act = { k: 'mark.clear', a: { label: placeName(s, ref) ?? '' } };
       } else {
         if (!MARKS.includes(op.mark)) throw new PlanError('unknown mark');
         if (s.marks[ref]?.mark === op.mark) return prev;
         s.marks[ref] = { mark: op.mark, by, at: now };
-        say = `marked ${placeName(s, ref)} as ${MARK_LABEL[op.mark]}`;
+        act = { k: 'mark.set', a: { label: placeName(s, ref) ?? '', mark: op.mark } };
       }
       break;
     }
@@ -348,10 +350,10 @@ export function applyOp(prev: PlanState, env: Envelope, now: number): PlanState 
       if (next.title === undefined && next.anchor === undefined) {
         if (!s.days[d]) return prev;
         delete s.days[d];
-        say = `put back the original headline for ${shortDate(d)}`;
+        act = { k: 'day.reset', a: { day: d } };
       } else {
         s.days[d] = next;
-        say = `changed the headline for ${shortDate(d)}`;
+        act = { k: 'day.edit', a: { day: d } };
       }
       break;
     }
@@ -361,7 +363,7 @@ export function applyOp(prev: PlanState, env: Envelope, now: number): PlanState 
       if (op.done === Boolean(s.checks[op.key])) return prev;
       if (op.done) s.checks[op.key] = { by, at: now };
       else delete s.checks[op.key];
-      say = `${op.done ? 'ticked off' : 'unticked'}: ${label}`;
+      act = { k: op.done ? 'check.on' : 'check.off', a: { key: op.key } };
       break;
     }
     default:
@@ -369,8 +371,9 @@ export function applyOp(prev: PlanState, env: Envelope, now: number): PlanState 
   }
 
   s.version = prev.version + 1;
-  if (say) {
-    s.activity = [{ id: env.opId, at: now, by, text: say }, ...prev.activity].slice(0, LIMITS.activity);
+  if (act) {
+    const entry: Activity = { id: env.opId, at: now, by, text: activityText(act, 'en'), k: act.k, a: act.a };
+    s.activity = [entry, ...prev.activity].slice(0, LIMITS.activity);
   }
   return s;
 }

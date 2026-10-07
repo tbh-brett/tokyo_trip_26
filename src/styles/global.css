@@ -11,6 +11,8 @@
 
   --sans: 'IBM Plex Sans JP', system-ui, -apple-system, 'Hiragino Sans', 'Yu Gothic', sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  /* Chinese: Plex for Latin, then the phone's Traditional Chinese font. */
+  --sans-zh: 'Plex Latin', 'PingFang TC', 'PingFang HK', 'Noto Sans TC', 'Noto Sans CJK TC', 'Microsoft JhengHei', 'Heiti TC', system-ui, sans-serif;
 
   --t13: 0.8125rem;
   --t16: 1rem;
@@ -98,6 +100,20 @@ button {
 
 [hidden] {
   display: none !important;
+}
+
+/* Two languages on every page: each phone shows the one it chose (src/scripts/lang.ts). */
+html[data-lang='zh'] [data-l='en'],
+html:not([data-lang='zh']) [data-l='zh'] {
+  display: none !important;
+}
+html[data-lang='zh'] body,
+[data-l='zh'] {
+  font-family: var(--sans-zh);
+}
+/* Japanese names keep Japanese glyphs in either language. */
+:lang(ja) {
+  font-family: var(--sans);
 }
 
 .sr-only {
@@ -217,6 +233,19 @@ button {
 }
 .tabbar a + a {
   border-left: 1px solid var(--grey-2);
+}
+.tabbar .langbtn {
+  flex: none;
+  min-width: 72px;
+  min-height: var(--nav-h);
+  padding: 0 var(--g);
+  border: 0;
+  border-left: 1px solid var(--grey-2);
+  background: transparent;
+  color: var(--ink);
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
 }
 .tabbar a[aria-current='page'] {
   background: var(--signal);

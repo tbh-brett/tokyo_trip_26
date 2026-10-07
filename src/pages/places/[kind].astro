@@ -1,7 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PlaceRow from '../../components/PlaceRow.astro';
+import T from '../../components/T.astro';
+import U from '../../components/U.astro';
 import { KINDS, loadData, zoneShort, type Kind } from '../../lib/data';
+import { KIND_LABEL } from '../../i18n/ui';
 
 export function getStaticPaths() {
   return KINDS.map((k) => ({ params: { kind: k.id } }));
@@ -9,17 +12,17 @@ export function getStaticPaths() {
 
 const kind = Astro.params.kind as Kind;
 const data = await loadData();
-const label = KINDS.find((k) => k.id === kind)!.label;
+const [label, labelZh] = KIND_LABEL[kind];
 const list = data.places.filter((p) => p.kind === kind);
-const kinds = KINDS.map((k) => ({ ...k, n: data.places.filter((p) => p.kind === k.id).length }));
+const kinds = KINDS.map((k) => ({ ...k, zh: KIND_LABEL[k.id][1], n: data.places.filter((p) => p.kind === k.id).length }));
 const zones = data.zones
-  .map((z) => ({ id: z.id, name: zoneShort(z), n: list.filter((p) => p.zone === z.id).length }))
+  .map((z) => ({ id: z.id, name: zoneShort(z), zh: data.zh.zones[z.id]?.name, n: list.filter((p) => p.zone === z.id).length }))
   .filter((z) => z.n > 0);
 ---
 
-<Base title={label} tab="places">
+<Base title={label} titleZh={labelZh} tab="places">
   <header class="page-head">
-    <h1 class="t40 w700">{label}</h1>
+    <h1 class="t40 w700"><T en={label} zh={labelZh} /></h1>
   </header>
 
   <nav class="wrap" aria-label="Kind of place">
@@ -27,7 +30,7 @@ const zones = data.zones
       {
         kinds.map((k) => (
           <a class="chip" href={`/places/${k.id}/`} data-kind-link aria-current={k.id === kind ? 'page' : undefined}>
-            {k.label} <span class="n">{k.n}</span>
+            <T en={k.label} zh={k.zh} /> <span class="n">{k.n}</span>
           </a>
         ))
       }
@@ -35,15 +38,15 @@ const zones = data.zones
   </nav>
 
   <div class="wrap area">
-    <span class="label" id="area-label">Area</span>
+    <span class="label" id="area-label"><U k="places.area" /></span>
     <div class="chips" role="group" aria-labelledby="area-label">
       <button type="button" class="chip" data-zone-filter="" aria-pressed="true">
-        All <span class="n">{list.length}</span>
+        <U k="places.all" /> <span class="n">{list.length}</span>
       </button>
       {
         zones.map((z) => (
           <button type="button" class="chip" data-zone-filter={z.id} aria-pressed="false">
-            {z.name} <span class="n">{z.n}</span>
+            <T en={z.name} zh={z.zh} /> <span class="n">{z.n}</span>
           </button>
         ))
       }
@@ -51,14 +54,14 @@ const zones = data.zones
   </div>
 
   <section class="wrap mine" aria-labelledby="mine-h">
-    <h2 class="label" id="mine-h">Added by you</h2>
+    <h2 class="label" id="mine-h"><U k="places.mine" /></h2>
     <ul class="rows-lite" data-mine-list={kind}></ul>
-    <p class="btns"><a class="btn" href={`/add/?kind=${kind}`}>Add a place that isn't listed <span class="hint">→</span></a></p>
+    <p class="btns"><a class="btn" href={`/add/?kind=${kind}`}><U k="day.addUnlisted" /> <span class="hint">→</span></a></p>
   </section>
 
-  <p class="wrap t13 muted count" aria-live="polite" data-count>{list.length} places</p>
+  <p class="wrap t13 muted count" aria-live="polite" data-count><U k="places.count" v={{ n: list.length }} /></p>
   <ul class="rows">
-    {list.map((p) => <PlaceRow place={p} line={data.line(p.line)} />)}
+    {list.map((p) => <PlaceRow place={p} line={data.line(p.line)} zh={data.zh.places[p.id]} />)}
   </ul>
 </Base>
 
@@ -88,7 +91,8 @@ const zones = data.zones
 
 <script>
   import { itemsForPlace } from '../../lib/plan';
-  import { shortDate } from '../../lib/time';
+  import { MARK_TEXT, pick } from '../../i18n/ui';
+  import { date, lang, onLang, t } from '../../scripts/lang';
   import { getPlan } from '../../scripts/store';
   import { html, mount } from '../../scripts/ui';
   import { wirePlaceRows } from '../../scripts/widgets';
@@ -106,13 +110,14 @@ const zones = data.zones
       r.hidden = zone !== '' && r.dataset.zone !== zone;
       if (!r.hidden) shown++;
     }
-    if (count) count.textContent = `${shown} ${shown === 1 ? 'place' : 'places'}`;
+    if (count) count.textContent = shown === 1 ? t('places.count1') : t('places.count', { n: shown });
     const query = zone ? `?zone=${zone}` : '';
     for (const a of kindLinks) a.search = query;
     history.replaceState(null, '', location.pathname + query);
   }
 
   for (const b of buttons) b.addEventListener('click', () => apply(b.dataset.zoneFilter ?? ''));
+  onLang(() => apply(buttons.find((b) => b.getAttribute('aria-pressed') === 'true')?.dataset.zoneFilter ?? ''));
   apply(new URLSearchParams(location.search).get('zone') ?? '');
   wirePlaceRows();
 
@@ -121,13 +126,13 @@ const zones = data.zones
   mount(mine, () => {
     const plan = getPlan();
     const places = plan.places.filter((p) => p.kind === mine.dataset.mineList);
-    if (!places.length) return html`<li class="muted">None yet.</li>`;
+    if (!places.length) return html`<li class="muted">${t('places.none')}</li>`;
     return html`${places.map((p) => {
-      const days = [...new Set(itemsForPlace(plan, p.id).map((i) => shortDate(i.day)))];
+      const days = [...new Set(itemsForPlace(plan, p.id).map((i) => date(i.day)))];
       const mark = plan.marks[p.id]?.mark;
       return html`<li><a href="/p/mine/?id=${p.id}">
         <span class="w500">${p.name}</span>${p.name_ja ? html` <span lang="ja">${p.name_ja}</span>` : ''}
-        <span class="t13 muted">Added by ${p.by}${days.length ? ` · Planned · ${days.join(', ')}` : ''}${mark ? ` · ${mark}` : ''}</span>
+        <span class="t13 muted">${t('places.addedBy', { name: p.by })}${days.length ? ` · ${t('plan.planned', { days: days.join(', ') })}` : ''}${mark ? ` · ${pick(MARK_TEXT[mark], lang())}` : ''}</span>
       </a></li>`;
     })}`;
   });

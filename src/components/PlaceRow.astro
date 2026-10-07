@@ -1,15 +1,19 @@
 ---
 import StationBadge from './StationBadge.astro';
-import type { Line, Place } from '../lib/data';
+import T from './T.astro';
+import U from './U.astro';
+import type { Line, Place, Zh } from '../lib/data';
 import { closedText, hoursText } from '../lib/time';
 
 interface Props {
   place: Place;
   line: Line;
+  /** Chinese for this place, if translated. */
+  zh?: Zh['places'][string];
 }
 
-const { place: p, line } = Astro.props;
-const schedule = [hoursText(p.hours), closedText(p.closed_days)].filter(Boolean).join(' · ');
+const { place: p, line, zh = {} } = Astro.props;
+const schedule = (lang: 'en' | 'zh') => [hoursText(p.hours, lang), closedText(p.closed_days, lang)].filter(Boolean).join(' · ');
 ---
 
 <li
@@ -28,14 +32,14 @@ const schedule = [hoursText(p.hours), closedText(p.closed_days)].filter(Boolean)
       </span>
       <span class="tag" data-tag hidden></span>
     </span>
-    <span class="rec">{p.recognition}</span>
-    <span class="why">{p.why}</span>
+    <span class="rec"><T en={p.recognition} zh={zh.recognition} /></span>
+    <span class="why"><T en={p.why} zh={zh.why} /></span>
     <span class="meta">
       <StationBadge line={line} station={p.station} />
-      <span class="mono">{p.price}</span>
-      {p.book_ahead && <span class="t13 w500">Book ahead</span>}
+      <span class="mono"><T en={p.price} zh={zh.price} /></span>
+      {p.book_ahead && <span class="t13 w500"><U k="row.bookAhead" /></span>}
     </span>
-    <span class="t13 muted"><span class="open w500" data-open></span>{schedule}</span>
+    <span class="t13 muted"><span class="open w500" data-open></span><T en={schedule('en')} zh={schedule('zh')} /></span>
     <span class="t13 w500" data-planned hidden></span>
   </a>
 </li>

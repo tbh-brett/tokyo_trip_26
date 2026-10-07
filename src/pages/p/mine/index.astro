@@ -2,12 +2,15 @@
 // One page for every place you add yourselves (/p/mine/?id=…), filled in
 // from the shared plan in the browser.
 import Base from '../../../layouts/Base.astro';
+import T from '../../../components/T.astro';
+import U from '../../../components/U.astro';
 import { KINDS } from '../../../lib/data';
-import { MARKS, MARK_LABEL } from '../../../lib/plan';
+import { MARKS } from '../../../lib/plan';
+import { KIND_LABEL, MARK_TEXT, ui } from '../../../i18n/ui';
 ---
 
-<Base title="Your place" tab="places">
-  <nav class="wrap back" aria-label="Back"><a href="/places/eat/" data-f-back>← Places</a></nav>
+<Base title={ui('mine.title', 'en')} titleZh={ui('mine.title', 'zh')} tab="places">
+  <nav class="wrap back" aria-label="Back"><a href="/places/eat/" data-f-back><U k="add.back" /></a></nav>
 
   <p class="wrap muted missing" data-missing hidden></p>
 
@@ -19,55 +22,74 @@ import { MARKS, MARK_LABEL } from '../../../lib/plan';
     <div class="wrap"><p class="t20" data-f="note"></p></div>
 
     <div class="wrap btns actions">
-      <a class="btn primary" data-l="staff" href="#">Show to staff <span class="hint">Full screen</span></a>
-      <a class="btn" data-l="maps" href="#">Open in Google Maps <span class="hint">↗</span></a>
-      <a class="btn" data-l="directions" href="#">Directions from here <span class="hint">Transit ↗</span></a>
-      <button class="btn" type="button" data-copy="">Copy address <span class="hint" data-copy-status aria-live="polite"></span></button>
-      <a class="btn" data-l="ask" href="#">Ask Claude about it <span class="hint">↗</span></a>
+      <a class="btn primary" data-link="staff" href="#"><U k="place.staff" /> <span class="hint"><U k="place.fullScreen" /></span></a>
+      <a class="btn" data-link="maps" href="#"><U k="place.maps" /> <span class="hint">↗</span></a>
+      <a class="btn" data-link="directions" href="#"><U k="place.directions" /> <span class="hint"><U k="place.transit" /></span></a>
+      <button class="btn" type="button" data-copy="">
+        <U k="place.copy" /> <span class="hint" data-copy-status aria-live="polite"></span>
+      </button>
+      <a class="btn" data-link="ask" href="#"><U k="place.ask" /> <span class="hint">↗</span></a>
     </div>
 
     <div class="wrap block">
-      <span class="label" id="mark-label">Mark for both of you</span>
+      <span class="label" id="mark-label"><U k="place.markFor" /></span>
       <div class="seg" role="group" aria-labelledby="mark-label" data-marks="">
-        {MARKS.map((m) => <button type="button" data-mark={m} aria-pressed="false">{MARK_LABEL[m]}</button>)}
+        {
+          MARKS.map((m) => (
+            <button type="button" data-mark={m} aria-pressed="false">
+              <T en={MARK_TEXT[m][0]} zh={MARK_TEXT[m][1]} />
+            </button>
+          ))
+        }
       </div>
       <p class="t13 muted by" data-mark-by></p>
     </div>
 
     <div class="wrap block">
-      <span class="label">In your plan</span>
+      <span class="label"><U k="place.inPlan" /></span>
       <div data-in-plan=""></div>
       <form class="addplan" data-add-to-plan="">
         <div class="row2">
-          <label class="field"><span>Day</span><select name="day"></select></label>
-          <label class="field"><span>Time (optional)</span><input type="time" name="time" /></label>
+          <label class="field"><span><U k="item.day" /></span><select name="day"></select></label>
+          <label class="field"><span><U k="place.timeOpt" /></span><input type="time" name="time" /></label>
         </div>
-        <button class="btn small primary" type="submit">Add to plan</button>
+        <button class="btn small primary" type="submit"><U k="place.addToPlan" /></button>
         <p class="t13 w500" data-status aria-live="polite"></p>
       </form>
     </div>
 
     <dl class="wrap facts">
-      <div><dt>Address</dt><dd lang="ja" data-f="address"></dd></div>
-      <div><dt>Kind</dt><dd data-f="kind"></dd></div>
-      <div><dt>Link</dt><dd class="t13" data-f="link"></dd></div>
+      <div><dt><U k="fact.address" /></dt><dd lang="ja" data-f="address"></dd></div>
+      <div><dt><U k="fact.kind" /></dt><dd data-f="kind"></dd></div>
+      <div><dt><U k="fact.link" /></dt><dd class="t13" data-f="link"></dd></div>
     </dl>
 
     <div class="wrap block">
       <details class="edit" data-edit>
-        <summary class="w500">Edit this place</summary>
+        <summary class="w500"><U k="mine.edit" /></summary>
         <form data-edit-form>
-          <label class="field"><span>Name</span><input type="text" name="name" required maxlength="120" /></label>
-          <label class="field"><span>Japanese name</span><input type="text" name="name_ja" maxlength="120" lang="ja" /></label>
-          <label class="field"><span>Address</span><input type="text" name="address" maxlength="200" /></label>
-          <label class="field"><span>Google Maps link</span><input type="url" name="maps" maxlength="600" inputmode="url" /></label>
-          <label class="field"><span>Kind</span><select name="kind">{KINDS.map((k) => <option value={k.id}>{k.label}</option>)}</select></label>
-          <label class="field"><span>Note</span><textarea name="note" rows="3" maxlength="500"></textarea></label>
-          <button class="btn small primary" type="submit">Save</button>
+          <label class="field"><span><U k="add.name" /></span><input type="text" name="name" required maxlength="120" /></label>
+          <label class="field"><span><U k="add.nameJa" /></span><input type="text" name="name_ja" maxlength="120" lang="ja" /></label>
+          <label class="field"><span><U k="add.address" /></span><input type="text" name="address" maxlength="200" /></label>
+          <label class="field"><span><U k="add.maps" /></span><input type="url" name="maps" maxlength="600" inputmode="url" /></label>
+          <label class="field">
+            <span><U k="add.kind" /></span>
+            <select name="kind">
+              {
+                KINDS.map((k) => (
+                  <option value={k.id} data-text-en={KIND_LABEL[k.id][0]} data-text-zh={KIND_LABEL[k.id][1]}>
+                    {KIND_LABEL[k.id][0]}
+                  </option>
+                ))
+              }
+            </select>
+          </label>
+          <label class="field"><span><U k="add.note" /></span><textarea name="note" rows="3" maxlength="500"></textarea></label>
+          <button class="btn small primary" type="submit"><U k="common.save" /></button>
           <p class="t13 w500" data-edit-status aria-live="polite"></p>
         </form>
       </details>
-      <button class="btn small delete" type="button" data-delete>Delete this place</button>
+      <button class="btn small delete" type="button" data-delete><U k="mine.delete" /></button>
     </div>
   </article>
 </Base>
@@ -135,13 +157,14 @@ import { MARKS, MARK_LABEL } from '../../../lib/plan';
   import { wireCopyButtons } from '../../../scripts/device';
   import { wireAddToPlan, wireMarks } from '../../../scripts/widgets';
   import { ago } from '../../../scripts/ui';
+  import { KIND_LABEL, pick } from '../../../i18n/ui';
+  import { lang, onLang, t } from '../../../scripts/lang';
 
-  const LABELS: Record<string, string> = { eat: 'Eat', coffee: 'Coffee', tea: 'Tea', bar: 'Bars', see: 'See', buy: 'Buy' };
   const id = new URLSearchParams(location.search).get('id') ?? '';
   const article = document.querySelector<HTMLElement>('[data-mine]')!;
   const missing = document.querySelector<HTMLElement>('[data-missing]')!;
   const field = (name: string) => article.querySelector<HTMLElement>(`[data-f="${name}"]`)!;
-  const link = (name: string) => article.querySelector<HTMLAnchorElement>(`[data-l="${name}"]`)!;
+  const link = (name: string) => article.querySelector<HTMLAnchorElement>(`[data-link="${name}"]`)!;
 
   // The widgets find their place by these attributes.
   article.querySelector<HTMLElement>('[data-marks]')!.dataset.marks = id;
@@ -156,30 +179,30 @@ import { MARKS, MARK_LABEL } from '../../../lib/plan';
     article.hidden = !place;
     missing.hidden = Boolean(place);
     if (!place) {
-      missing.textContent = hasServerCopy() ? 'This place was deleted, or the link is wrong.' : 'Loading…';
+      missing.textContent = t(hasServerCopy() ? 'mine.missing' : 'mine.loading');
       return;
     }
-    document.title = `${place.name} · Tokyo 2026`;
+    document.title = `${place.name} · ${t('appName')}`;
     field('name').textContent = place.name;
     field('name_ja').textContent = place.name_ja ?? '';
-    field('meta').textContent = `Added by ${place.by} · ${ago(place.at)}`;
+    field('meta').textContent = t('mine.addedBy', { name: place.by, ago: ago(place.at) });
     field('note').textContent = place.note ?? '';
-    field('address').textContent = place.address ?? 'No address yet. Edit the place to add one.';
-    field('kind').textContent = LABELS[place.kind] ?? place.kind;
+    field('address').textContent = place.address ?? t('mine.noAddress');
+    field('kind').textContent = KIND_LABEL[place.kind] ? pick(KIND_LABEL[place.kind], lang()) : place.kind;
     field('link').innerHTML = '';
     if (place.maps) {
       const a = document.createElement('a');
       a.href = place.maps;
       a.textContent = place.maps;
       field('link').append(a);
-    } else field('link').textContent = 'None';
+    } else field('link').textContent = t('mine.none');
     (document.querySelector('[data-f-back]') as HTMLAnchorElement).href = `/places/${place.kind}/`;
 
     const query = [place.name_ja ?? place.name, place.address].filter(Boolean).join(' ');
     link('staff').href = `/p/mine/staff/?id=${place.id}`;
     link('maps').href = place.maps ?? mapsSearchUrl(query);
     link('directions').href = mapsTransitUrl(query);
-    link('ask').href = askAboutPlace({ name: place.name, nameJa: place.name_ja, address: place.address, why: place.note });
+    link('ask').href = askAboutPlace({ name: place.name, nameJa: place.name_ja, address: place.address, why: place.note }, lang());
     const copy = article.querySelector<HTMLButtonElement>('[data-copy]')!;
     copy.hidden = !place.address;
     copy.dataset.copy = place.address ?? '';
@@ -191,6 +214,7 @@ import { MARKS, MARK_LABEL } from '../../../lib/plan';
   };
   paint();
   subscribe(paint);
+  onLang(paint);
 
   // Edit: fill the form when it opens, so it starts from what's saved now.
   const edit = article.querySelector<HTMLDetailsElement>('[data-edit]')!;
@@ -217,7 +241,7 @@ import { MARKS, MARK_LABEL } from '../../../lib/plan';
       kind: KIND_IDS.find((k) => k === kind) ?? 'eat',
       note: value('note'),
     });
-    form.querySelector('[data-edit-status]')!.textContent = error ?? '';
+    form.querySelector('[data-edit-status]')!.textContent = error ? t('sync.notSaved', { reason: error }) : '';
     if (!error) edit.open = false;
   });
 
@@ -226,10 +250,10 @@ import { MARKS, MARK_LABEL } from '../../../lib/plan';
   del.addEventListener('click', () => {
     if (del.dataset.armed !== 'true') {
       del.dataset.armed = 'true';
-      del.textContent = 'Tap again to delete it and remove it from the plan';
+      del.textContent = t('mine.deleteAgain');
       setTimeout(() => {
         del.dataset.armed = 'false';
-        del.textContent = 'Delete this place';
+        del.textContent = t('mine.delete');
       }, 4000);
       return;
     }

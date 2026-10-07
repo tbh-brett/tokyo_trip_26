@@ -1,115 +1,147 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { bookingDate, loadData, shortDate } from '../../lib/data';
+import T from '../../components/T.astro';
+import U from '../../components/U.astro';
+import { bookingDate, loadData } from '../../lib/data';
 import { claudeCodeUrl } from '../../lib/ask';
+import { dateIn, ui } from '../../i18n/ui';
 
 const data = await loadData();
-const { days } = data;
+const { days, zh } = data;
 const year = Number(days[0].date.slice(0, 4));
 const bookings = data.bookings.map((b) => ({ ...b, date: bookingDate(b.when, year) }));
-const dueLabel = (due: string) => (due === 'now' ? 'Now' : due === 'trip' ? 'On the trip' : shortDate(due));
-const names = data.travellers.map((t) => t.name).join(' and ');
+const due = (d: string, lang: 'en' | 'zh') => (d === 'now' ? ui('due.now', lang) : d === 'trip' ? ui('due.trip', lang) : dateIn(d, lang));
+const when = (b: (typeof bookings)[number], lang: 'en' | 'zh') =>
+  b.date ? dateIn(b.date, lang) : b.when === 'Now' ? ui('due.now', lang) : ui('when.anyTime', lang);
+const names = data.travellers.map((t) => t.name);
 ---
 
-<Base title="Plan" tab="plan">
+<Base title={ui('plan.title', 'en')} titleZh={ui('plan.title', 'zh')} tab="plan">
   <header class="page-head">
-    <h1 class="t40 w700">Plan</h1>
-    <p class="muted">Shared by {names}. A change on one phone shows on the other within seconds.</p>
+    <h1 class="t40 w700"><U k="plan.title" /></h1>
+    <p class="muted"><U k="plan.shared" v={{ names: names.join(ui('list.and', 'en')) }} vz={{ names: names.join(ui('list.and', 'zh')) }} /></p>
   </header>
 
   <section class="section" aria-labelledby="days-h">
-    <h2 class="label" id="days-h">The {days.length} days</h2>
+    <h2 class="label" id="days-h"><U k="today.theDays" v={{ n: days.length }} /></h2>
     <ol class="daylist">
       {
-        days.map((d, i) => (
-          <li>
-            <a href={`/day/${d.date}/`}>
-              <span class="when">
-                <span class="mono w500">{shortDate(d.date)}</span>
-                <span class="t13 muted">Day {i + 1}</span>
-              </span>
-              <span class="t20 w500" data-day-title={d.date}>
-                {d.title}
-              </span>
-              <span data-day-anchor={d.date}>{d.anchor}</span>
-              <span class="preview" data-day-preview={d.date} data-max="5" />
-              <span class="open-day w500">Open day →</span>
-            </a>
-          </li>
-        ))
+        days.map((d, i) => {
+          const z = zh.days[d.date];
+          return (
+            <li>
+              <a href={`/day/${d.date}/`}>
+                <span class="when">
+                  <span class="mono w500">
+                    <T en={dateIn(d.date, 'en')} zh={dateIn(d.date, 'zh')} />
+                  </span>
+                  <span class="t13 muted">
+                    <U k="plan.dayN" v={{ n: i + 1 }} />
+                  </span>
+                </span>
+                <span class="t20 w500" data-day-title={d.date}>
+                  <T en={d.title} zh={z?.title} />
+                </span>
+                <span data-day-anchor={d.date}>
+                  <T en={d.anchor} zh={z?.anchor} />
+                </span>
+                <span class="preview" data-day-preview={d.date} data-max="5" />
+                <span class="open-day w500">
+                  <U k="plan.openDay" />
+                </span>
+              </a>
+            </li>
+          );
+        })
       }
     </ol>
   </section>
 
   <section class="section" aria-labelledby="want-h">
-    <h2 class="label" id="want-h">Want list</h2>
-    <p class="t13 muted hint">Places either of you marked Want. Open one to add it to a day.</p>
+    <h2 class="label" id="want-h"><U k="plan.want" /></h2>
+    <p class="t13 muted hint"><U k="plan.wantHint" /></p>
     <ul class="rows-lite" data-wantlist></ul>
   </section>
 
   <section class="section" aria-labelledby="book-h">
-    <h2 class="label" id="book-h">Bookings</h2>
+    <h2 class="label" id="book-h"><U k="plan.bookings" /></h2>
     <ul class="checklist">
       {
-        bookings.map((b) => (
-          <li data-check-row>
-            <label class="check">
-              <input type="checkbox" data-check={`booking:${b.id}`} />
-              <span class="check-body">
-                <span class="mono w500">{b.date ? shortDate(b.date) : b.when}</span>
-                <span class="w500 item-text">{b.what}</span>
-                <span>{b.detail}</span>
-                <span class="t13 muted">{b.where}</span>
-                <span class="t13 w500" data-check-by />
-              </span>
-            </label>
-          </li>
-        ))
+        bookings.map((b) => {
+          const z = zh.bookings[b.id];
+          return (
+            <li data-check-row>
+              <label class="check">
+                <input type="checkbox" data-check={`booking:${b.id}`} />
+                <span class="check-body">
+                  <span class="mono w500">
+                    <T en={when(b, 'en')} zh={when(b, 'zh')} />
+                  </span>
+                  <span class="w500 item-text">
+                    <T en={b.what} zh={z?.what} />
+                  </span>
+                  <span>
+                    <T en={b.detail} zh={z?.detail} />
+                  </span>
+                  <span class="t13 muted">
+                    <T en={b.where} zh={z?.where} />
+                  </span>
+                  <span class="t13 w500" data-check-by />
+                </span>
+              </label>
+            </li>
+          );
+        })
       }
     </ul>
   </section>
 
   <section class="section" aria-labelledby="prep-h">
-    <h2 class="label" id="prep-h">Before you fly</h2>
+    <h2 class="label" id="prep-h"><U k="today.beforeFly" /></h2>
     <ul class="checklist">
       {
-        data.prep.map((p) => (
-          <li data-check-row>
-            <label class="check">
-              <input type="checkbox" data-check={`prep:${p.id}`} />
-              <span class="check-body">
-                <span class="mono w500">{dueLabel(p.due)}</span>
-                <span class="item-text">{p.item}</span>
-                <span class="t13 muted">{p.group}</span>
-                <span class="t13 w500" data-check-by />
-              </span>
-            </label>
-          </li>
-        ))
+        data.prep.map((p) => {
+          const z = zh.prep[p.id];
+          return (
+            <li data-check-row>
+              <label class="check">
+                <input type="checkbox" data-check={`prep:${p.id}`} />
+                <span class="check-body">
+                  <span class="mono w500">
+                    <T en={due(p.due, 'en')} zh={due(p.due, 'zh')} />
+                  </span>
+                  <span class="item-text">
+                    <T en={p.item} zh={z?.item} />
+                  </span>
+                  <span class="t13 muted">
+                    <T en={p.group} zh={z?.group} />
+                  </span>
+                  <span class="t13 w500" data-check-by />
+                </span>
+              </label>
+            </li>
+          );
+        })
       }
     </ul>
   </section>
 
   <section class="section" aria-labelledby="feed-h">
-    <h2 class="label" id="feed-h">Latest changes</h2>
+    <h2 class="label" id="feed-h"><U k="today.latest" /></h2>
     <ol class="feed" data-feed="20"></ol>
   </section>
 
   <section class="section" aria-labelledby="device-h">
-    <h2 class="label" id="device-h">On this phone</h2>
+    <h2 class="label" id="device-h"><U k="plan.device" /></h2>
     <div class="device" data-device></div>
   </section>
 
   <section class="section last" aria-labelledby="claude-h">
-    <h2 class="label" id="claude-h">Bigger changes</h2>
-    <p>
-      For research, like finding a place properly, checking opening hours or changing how the site works, ask Claude Code.
-      It opens on this site's code, follows the rules in CLAUDE.md, and the site updates about a minute after you accept
-      its change.
-    </p>
+    <h2 class="label" id="claude-h"><U k="plan.bigger" /></h2>
+    <p><U k="plan.biggerText" /></p>
     <p class="btns">
       <a class="btn" href={claudeCodeUrl('Read CLAUDE.md. I want to: ')}>
-        Ask Claude Code <span class="hint">Opens claude.ai ↗</span>
+        <U k="plan.askCode" /> <span class="hint"><U k="plan.opens" /></span>
       </a>
     </p>
   </section>
@@ -166,7 +198,7 @@ const names = data.travellers.map((t) => t.name).join(' and ');
 <script>
   import { PLACE_BY_ID } from '../../lib/catalog';
   import { itemsForPlace } from '../../lib/plan';
-  import { shortDate } from '../../lib/time';
+  import { date, t } from '../../scripts/lang';
   import { getPlan } from '../../scripts/store';
   import { html, mount, placeView } from '../../scripts/ui';
   import { wireChecklists, wireDayHeadlines, wireDayPreviews, wireDeviceStatus, wireFeeds } from '../../scripts/widgets';
@@ -184,13 +216,13 @@ const names = data.travellers.map((t) => t.name).join(' and ');
       .sort((a, b) => b[1].at - a[1].at)
       .map(([ref, m]) => ({ view: placeView(plan, ref), m, ref }))
       .filter((w) => w.view);
-    if (!wants.length) return html`<li class="muted">Nothing yet. Tap Want on any place and it appears here for both of you.</li>`;
+    if (!wants.length) return html`<li class="muted">${t('plan.wantEmpty')}</li>`;
     return html`${wants.map(({ view, m, ref }) => {
-      const days = [...new Set(itemsForPlace(plan, ref).map((i) => shortDate(i.day)))];
+      const days = [...new Set(itemsForPlace(plan, ref).map((i) => date(i.day)))];
       const station = PLACE_BY_ID.get(ref)?.station;
       return html`<li><a href="${view!.href}">
         <span class="w500">${view!.name}</span>${view!.nameJa ? html` <span lang="ja">${view!.nameJa}</span>` : ''}
-        <span class="t13 muted">${station ? `${station} · ` : ''}${days.length ? `Planned · ${days.join(', ')}` : 'Not planned yet'} · marked by ${m.by}</span>
+        <span class="t13 muted">${station ? `${station} · ` : ''}${days.length ? t('plan.planned', { days: days.join(', ') }) : t('plan.notPlanned')} · ${t('plan.markedBy', { name: m.by })}</span>
       </a></li>`;
     })}`;
   });

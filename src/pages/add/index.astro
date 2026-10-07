@@ -1,56 +1,74 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { KINDS, loadData, shortDate } from '../../lib/data';
+import U from '../../components/U.astro';
+import { KINDS, loadData } from '../../lib/data';
+import { dateIn, KIND_LABEL, ui, type UIKey } from '../../i18n/ui';
 
 const data = await loadData();
+const ph = (key: UIKey) => ({ 'data-ph-en': ui(key, 'en'), 'data-ph-zh': ui(key, 'zh'), placeholder: ui(key, 'en') });
+const both = (en: string, zh: string) => ({ 'data-text-en': en, 'data-text-zh': zh });
 ---
 
-<Base title="Add a place" tab="places">
-  <nav class="wrap back" aria-label="Back"><a href="/places/eat/" data-back>← Places</a></nav>
+<Base title={ui('add.title', 'en')} titleZh={ui('add.title', 'zh')} tab="places">
+  <nav class="wrap back" aria-label="Back">
+    <a href="/places/eat/" data-back><span data-back-label><U k="add.back" /></span></a>
+  </nav>
   <header class="page-head">
-    <h1 class="t40 w700">Add a place</h1>
-    <p class="muted">Somewhere you found that isn't in the list. You'll both see it straight away.</p>
+    <h1 class="t40 w700"><U k="add.title" /></h1>
+    <p class="muted"><U k="add.sub" /></p>
   </header>
 
   <form class="wrap addform" data-add-place>
     <label class="field">
-      <span>Name</span>
-      <input type="text" name="name" required maxlength="120" autocomplete="off" placeholder="Tsuta, the bar by the station…" />
+      <span><U k="add.name" /></span>
+      <input type="text" name="name" required maxlength="120" autocomplete="off" {...ph('add.namePh')} />
     </label>
     <label class="field">
-      <span>Japanese name (optional)</span>
+      <span><U k="add.nameJaOpt" /></span>
       <input type="text" name="name_ja" maxlength="120" lang="ja" autocomplete="off" />
-      <small class="t13 muted">Shown to staff, and the best thing to search Maps with.</small>
+      <small class="t13 muted"><U k="add.nameJaHint" /></small>
     </label>
     <label class="field">
-      <span>Address (optional)</span>
+      <span><U k="add.addressOpt" /></span>
       <input type="text" name="address" maxlength="200" autocomplete="off" />
-      <small class="t13 muted">Japanese is best. Copy it from Google Maps or Tabelog.</small>
+      <small class="t13 muted"><U k="add.addressHint" /></small>
     </label>
     <label class="field">
-      <span>Google Maps link (optional)</span>
+      <span><U k="add.mapsOpt" /></span>
       <input type="url" name="maps" maxlength="600" inputmode="url" autocomplete="off" placeholder="https://maps.app.goo.gl/…" />
-      <small class="t13 muted">In Google Maps: Share, then Copy link.</small>
+      <small class="t13 muted"><U k="add.mapsHint" /></small>
     </label>
     <label class="field">
-      <span>Kind</span>
-      <select name="kind">{KINDS.map((k) => <option value={k.id}>{k.label}</option>)}</select>
+      <span><U k="add.kind" /></span>
+      <select name="kind">
+        {KINDS.map((k) => <option value={k.id} {...both(KIND_LABEL[k.id][0], KIND_LABEL[k.id][1])}>{KIND_LABEL[k.id][0]}</option>)}
+      </select>
     </label>
     <label class="field">
-      <span>Note (optional)</span>
-      <textarea name="note" rows="3" maxlength="500" placeholder="Why it's worth it, what to order…"></textarea>
+      <span><U k="add.noteOpt" /></span>
+      <textarea name="note" rows="3" maxlength="500" {...ph('add.notePh')}></textarea>
     </label>
     <div class="row2">
       <label class="field">
-        <span>Add to a day</span>
+        <span><U k="add.day" /></span>
         <select name="day">
-          <option value="">Not yet</option>
-          {data.days.map((d) => <option value={d.date}>{shortDate(d.date)} · {d.title}</option>)}
+          <option value="" {...both(ui('add.notYet', 'en'), ui('add.notYet', 'zh'))}>{ui('add.notYet', 'en')}</option>
+          {
+            data.days.map((d) => {
+              const en = `${dateIn(d.date, 'en')} · ${d.title}`;
+              const zh = `${dateIn(d.date, 'zh')} · ${data.zh.days[d.date]?.title ?? d.title}`;
+              return (
+                <option value={d.date} {...both(en, zh)}>
+                  {en}
+                </option>
+              );
+            })
+          }
         </select>
       </label>
-      <label class="field"><span>Time</span><input type="time" name="time" /></label>
+      <label class="field"><span><U k="add.time" /></span><input type="time" name="time" /></label>
     </div>
-    <button class="btn primary" type="submit">Add place</button>
+    <button class="btn primary" type="submit"><U k="add.submit" /></button>
     <p class="t13 w500" data-status aria-live="polite"></p>
   </form>
 </Base>
@@ -80,7 +98,10 @@ const data = await loadData();
 
 <script>
   import { KIND_IDS } from '../../lib/catalog';
+  import { ui } from '../../i18n/ui';
+  import { t } from '../../scripts/lang';
   import { dispatch, newId } from '../../scripts/store';
+  import { html } from '../../scripts/ui';
 
   const form = document.querySelector<HTMLFormElement>('[data-add-place]')!;
   const status = form.querySelector<HTMLElement>('[data-status]')!;
@@ -91,7 +112,7 @@ const data = await loadData();
   if (day) {
     (form.elements.namedItem('day') as HTMLSelectElement).value = day;
     document.querySelector<HTMLAnchorElement>('[data-back]')!.href = `/day/${day}/`;
-    document.querySelector<HTMLAnchorElement>('[data-back]')!.textContent = '← Back to the day';
+    document.querySelector<HTMLElement>('[data-back-label]')!.innerHTML = html`<span data-l="en">${ui('add.backDay', 'en')}</span><span data-l="zh" lang="zh-Hant">${ui('add.backDay', 'zh')}</span>`.value;
   }
 
   form.addEventListener('submit', (e) => {
@@ -110,13 +131,13 @@ const data = await loadData();
       note: value('note'),
     });
     if (error) {
-      status.textContent = error;
+      status.textContent = t('sync.notSaved', { reason: error });
       return;
     }
     const chosenDay = value('day');
     if (chosenDay) {
       const planError = dispatch({ type: 'item.add', id: newId(), day: chosenDay, time: value('time'), place: id });
-      if (planError) status.textContent = planError;
+      if (planError) status.textContent = t('sync.notSaved', { reason: planError });
     }
     location.href = `/p/mine/?id=${id}`;
   });

@@ -1,10 +1,13 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import StationBadge from '../../../components/StationBadge.astro';
-import { kindLabel, loadData, mapsPlaceUrl, mapsTransitUrlFor } from '../../../lib/data';
+import T from '../../../components/T.astro';
+import U from '../../../components/U.astro';
+import { loadData, mapsPlaceUrl, mapsTransitUrlFor } from '../../../lib/data';
 import { askAboutPlace } from '../../../lib/ask';
-import { MARKS, MARK_LABEL } from '../../../lib/plan';
+import { MARKS } from '../../../lib/plan';
 import { closedText, hoursText } from '../../../lib/time';
+import { KIND_LABEL, MARK_TEXT, SLOT_TEXT, ui } from '../../../i18n/ui';
 
 export async function getStaticPaths() {
   const data = await loadData();
@@ -13,21 +16,21 @@ export async function getStaticPaths() {
 
 const data = await loadData();
 const p = data.place(Astro.params.id!);
+const zh = data.zh.places[p.id] ?? {};
 const line = data.line(p.line);
 const zone = data.zone(p.zone);
+const zoneZh = data.zh.zones[p.zone];
 const sourceIsUrl = /^https?:\/\//.test(p.source);
-
-const addressNote =
-  p.address_precision === 'district'
-    ? 'Neighbourhood only. The street address is not known yet, so Maps may land on the area, not the door.'
-    : p.address_verified
-      ? null
-      : 'Street address, not yet checked.';
+const [kindEn, kindZh] = KIND_LABEL[p.kind];
+const slots = (lang: 0 | 1) => p.slots.map((s) => SLOT_TEXT[s][lang]).join(ui('list.sep', lang ? 'zh' : 'en'));
+const addressNote = p.address_precision === 'district' ? 'addr.district' : p.address_verified ? null : 'addr.unchecked';
+const ask = (lang: 'en' | 'zh') =>
+  askAboutPlace({ name: p.name_en, nameJa: p.name_ja, address: p.address_ja, why: lang === 'zh' ? (zh.why ?? p.why) : p.why }, lang);
 ---
 
 <Base title={p.name_en} tab="places">
   <nav class="wrap back" aria-label="Back">
-    <a href={`/places/${p.kind}/`}>← All {kindLabel(p.kind)}</a>
+    <a href={`/places/${p.kind}/`}><U k="place.all" v={{ kind: kindEn }} vz={{ kind: kindZh }} /></a>
   </nav>
 
   <header class="page-head head">
@@ -35,16 +38,18 @@ const addressNote =
       <span>{p.name_en}</span>
       {p.name_ja !== p.name_en && <span lang="ja">{p.name_ja}</span>}
     </h1>
-    <p class="t20 w500">{p.recognition}</p>
+    <p class="t20 w500"><T en={p.recognition} zh={zh.recognition} /></p>
   </header>
 
   <div class="wrap stack">
-    <p class="t20">{p.why}</p>
+    <p class="t20"><T en={p.why} zh={zh.why} /></p>
     {
       p.note && (
         <p class="note">
-          <span class="label">Note</span>
-          {p.note}
+          <span class="label">
+            <U k="place.note" />
+          </span>
+          <T en={p.note} zh={zh.note} />
         </p>
       )
     }
@@ -52,29 +57,28 @@ const addressNote =
 
   <div class="wrap btns actions">
     <a class="btn primary" href={`/p/${p.id}/staff/`}>
-      Show to staff <span class="hint">Full screen</span>
+      <U k="place.staff" /> <span class="hint"><U k="place.fullScreen" /></span>
     </a>
     <a class="btn" href={mapsPlaceUrl(p)}>
-      Open in Google Maps <span class="hint" aria-hidden="true">↗</span>
+      <U k="place.maps" /> <span class="hint" aria-hidden="true">↗</span>
     </a>
     <a class="btn" href={mapsTransitUrlFor(p)}>
-      Directions from here <span class="hint">Transit ↗</span>
+      <U k="place.directions" /> <span class="hint"><U k="place.transit" /></span>
     </a>
     <button class="btn" type="button" data-copy={p.address_ja}>
-      Copy address <span class="hint" data-copy-status aria-live="polite"></span>
+      <U k="place.copy" /> <span class="hint" data-copy-status aria-live="polite"></span>
     </button>
-    <a class="btn" href={askAboutPlace({ name: p.name_en, nameJa: p.name_ja, address: p.address_ja, why: p.why })}>
-      Ask Claude about it <span class="hint">↗</span>
-    </a>
+    <a class="btn" data-l="en" href={ask('en')}>{ui('place.ask', 'en')} <span class="hint">↗</span></a>
+    <a class="btn" data-l="zh" lang="zh-Hant" href={ask('zh')}>{ui('place.ask', 'zh')} <span class="hint">↗</span></a>
   </div>
 
   <div class="wrap marks">
-    <span class="label" id="mark-label">Mark for both of you</span>
+    <span class="label" id="mark-label"><U k="place.markFor" /></span>
     <div class="seg" role="group" aria-labelledby="mark-label" data-marks={p.id}>
       {
         MARKS.map((m) => (
           <button type="button" data-mark={m} aria-pressed="false">
-            {MARK_LABEL[m]}
+            <T en={MARK_TEXT[m][0]} zh={MARK_TEXT[m][1]} />
           </button>
         ))
       }
@@ -83,14 +87,14 @@ const addressNote =
   </div>
 
   <div class="wrap plan">
-    <span class="label">In your plan</span>
+    <span class="label"><U k="place.inPlan" /></span>
     <div data-in-plan={p.id}></div>
     <form class="addplan" data-add-to-plan={p.id}>
       <div class="row2">
-        <label class="field"><span>Day</span><select name="day"></select></label>
-        <label class="field"><span>Time (optional)</span><input type="time" name="time" /></label>
+        <label class="field"><span><U k="item.day" /></span><select name="day"></select></label>
+        <label class="field"><span><U k="place.timeOpt" /></span><input type="time" name="time" /></label>
       </div>
-      <button class="btn small primary" type="submit">Add to plan</button>
+      <button class="btn small primary" type="submit"><U k="place.addToPlan" /></button>
       <p class="t13 w500" data-status aria-live="polite"></p>
     </form>
   </div>
@@ -103,52 +107,54 @@ const addressNote =
       data-closed={p.closed_days.join(',')}
       data-verified={String(p.hours_verified)}
     >
-      <dt>Now</dt>
-      <dd class="w500" data-open>{p.hours_verified ? 'Open hours below' : 'See estimated hours below'}</dd>
+      <dt><U k="fact.now" /></dt>
+      <dd class="w500" data-open><U k={p.hours_verified ? 'fact.nowHintVerified' : 'fact.nowHint'} /></dd>
     </div>
     <div>
-      <dt>Hours</dt>
-      <dd class={p.hours.length ? 'mono' : undefined}>{p.hours.length ? hoursText(p.hours) : 'Not listed yet'}</dd>
-      {closedText(p.closed_days) && <dd>{closedText(p.closed_days)}</dd>}
+      <dt><U k="fact.hours" /></dt>
+      <dd class={p.hours.length ? 'mono' : undefined}>{p.hours.length ? hoursText(p.hours) : <U k="hours.notListed" />}</dd>
+      {closedText(p.closed_days) && <dd><T en={closedText(p.closed_days, 'en')} zh={closedText(p.closed_days, 'zh')} /></dd>}
       {p.hours.length === 0 ? (
-        <dd class="t13 muted">Check Google Maps or the venue's site before going.</dd>
+        <dd class="t13 muted"><U k="hours.checkMaps" /></dd>
       ) : (
-        !p.hours_verified && <dd class="t13 muted">Estimated. Not yet checked with the shop.</dd>
+        !p.hours_verified && <dd class="t13 muted"><U k="hours.estimated" /></dd>
       )}
     </div>
     <div>
-      <dt>Price</dt>
-      <dd class="mono">{p.price}</dd>
+      <dt><U k="fact.price" /></dt>
+      <dd class="mono"><T en={p.price} zh={zh.price} /></dd>
     </div>
     {
       p.book_ahead && (
         <div>
-          <dt>Booking</dt>
-          <dd class="w500">Book ahead</dd>
+          <dt><U k="fact.booking" /></dt>
+          <dd class="w500"><U k="row.bookAhead" /></dd>
         </div>
       )
     }
     <div>
-      <dt>Station</dt>
+      <dt><U k="fact.station" /></dt>
       <dd><StationBadge line={line} station={p.station} /></dd>
     </div>
     <div>
-      <dt>Area</dt>
-      <dd>{zone.name_en}</dd>
-      <dd lang="ja">{zone.name_ja}</dd>
+      <dt><U k="fact.area" /></dt>
+      <dd><T en={zone.name_en} zh={zoneZh?.full} /></dd>
+      <dd lang="ja" data-l={zoneZh ? 'en' : undefined}>{zone.name_ja}</dd>
     </div>
     <div>
-      <dt>Address</dt>
+      <dt><U k="fact.address" /></dt>
       <dd lang="ja">{p.address_ja}</dd>
-      {addressNote && <dd class="t13 muted">{addressNote}</dd>}
+      {addressNote && <dd class="t13 muted"><U k={addressNote} /></dd>}
     </div>
     <div>
-      <dt>Good for</dt>
-      <dd>{p.slots.join(', ')}</dd>
+      <dt><U k="fact.goodFor" /></dt>
+      <dd><T en={slots(0)} zh={slots(1)} /></dd>
     </div>
     <div>
-      <dt>Source</dt>
-      <dd class="t13">{sourceIsUrl ? <a href={p.source}>{p.source}</a> : p.source}</dd>
+      <dt><U k="fact.source" /></dt>
+      <dd class="t13">
+        {sourceIsUrl ? <a href={p.source}>{p.source}</a> : p.source === 'general-knowledge' ? <U k="fact.generalKnowledge" /> : p.source}
+      </dd>
     </div>
   </dl>
 </Base>

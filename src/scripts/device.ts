@@ -1,4 +1,5 @@
 // Phone features, each wrapped so a refusal or an old browser just does nothing.
+import { t } from './lang';
 
 /** Keep the screen on while this page is visible (Show to staff). */
 export function holdScreenOn() {
@@ -49,7 +50,7 @@ export function wireCopyButtons() {
     button.addEventListener('click', async () => {
       const ok = await copyText(button.dataset.copy ?? '');
       const status = button.querySelector('[data-copy-status]');
-      if (status) status.textContent = ok ? 'Copied' : 'Press and hold the address instead';
+      if (status) status.textContent = ok ? t('place.copied') : t('place.copyFail');
     });
   }
 }

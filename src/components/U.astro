@@ -1,0 +1,15 @@
+---
+// Interface text by key (src/i18n/ui.ts), in both languages.
+// v: values for {placeholders}; vz: Chinese values when they differ (dates).
+import { ui, type UIKey } from '../i18n/ui';
+import T from './T.astro';
+
+interface Props {
+  k: UIKey;
+  v?: Record<string, string | number>;
+  vz?: Record<string, string | number>;
+}
+const { k, v, vz } = Astro.props;
+---
+
+<T en={ui(k, 'en', v)} zh={ui(k, 'zh', vz ?? v)} />

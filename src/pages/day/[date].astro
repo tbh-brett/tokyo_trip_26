@@ -1,7 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
 import StationBadge from '../../components/StationBadge.astro';
-import { loadData, shortDate } from '../../lib/data';
+import T from '../../components/T.astro';
+import U from '../../components/U.astro';
+import { loadData } from '../../lib/data';
+import { dateIn, ui, weekdayIn } from '../../i18n/ui';
 
 export async function getStaticPaths() {
   const data = await loadData();
@@ -12,63 +15,85 @@ const data = await loadData();
 const date = Astro.params.date!;
 const index = data.days.findIndex((d) => d.date === date);
 const day = data.days[index];
+const zh = data.zh.days[date];
 const prev = data.days[index - 1];
 const next = data.days[index + 1];
 const ideas = day.places.map((id) => data.place(id));
+const ph = (key: Parameters<typeof ui>[0]) => ({ 'data-ph-en': ui(key, 'en'), 'data-ph-zh': ui(key, 'zh'), placeholder: ui(key, 'en') });
 ---
 
-<Base title={`${shortDate(date)} · ${day.title}`} tab="plan">
+<Base
+  title={`${dateIn(date, 'en')} · ${day.title}`}
+  titleZh={`${dateIn(date, 'zh')} · ${zh?.title ?? day.title}`}
+  tab="plan"
+>
   <nav class="wrap daynav" aria-label="Days">
-    <a href="/plan/">← Plan</a>
+    <a href="/plan/"><U k="day.back" /></a>
     <span>
-      {prev && <a href={`/day/${prev.date}/`}>‹ {shortDate(prev.date).slice(0, 3)}</a>}
-      {next && <a href={`/day/${next.date}/`}>{shortDate(next.date).slice(0, 3)} ›</a>}
+      {prev && <a href={`/day/${prev.date}/`}>‹ <T en={prev.weekday} zh={weekdayIn(prev.weekday, 'zh')} /></a>}
+      {next && <a href={`/day/${next.date}/`}><T en={next.weekday} zh={weekdayIn(next.weekday, 'zh')} /> ›</a>}
     </span>
   </nav>
 
   <header class="page-head">
-    <p class="label">Day {index + 1} of {data.days.length} · {shortDate(date)}</p>
-    <h1 class="t40 w700" data-day-title={date}>{day.title}</h1>
+    <p class="label">
+      <U
+        k="today.dayOf"
+        v={{ n: index + 1, m: data.days.length, date: dateIn(date, 'en') }}
+        vz={{ n: index + 1, m: data.days.length, date: dateIn(date, 'zh') }}
+      />
+    </p>
+    <h1 class="t40 w700" data-day-title={date}><T en={day.title} zh={zh?.title} /></h1>
   </header>
-  <p class="anchor t20 w500" data-day-anchor={date}>{day.anchor}</p>
+  <p class="anchor t20 w500" data-day-anchor={date}><T en={day.anchor} zh={zh?.anchor} /></p>
 
   <div class="wrap">
     <details class="headline-edit" data-headline={date}>
-      <summary class="w500">Edit the headline</summary>
+      <summary class="w500"><U k="day.editHeadline" /></summary>
       <form data-form="headline">
-        <label class="field"><span>Title</span><input type="text" name="title" maxlength="80" /></label>
-        <label class="field"><span>Main plan</span><textarea name="anchor" maxlength="240" rows="3"></textarea></label>
+        <label class="field"><span><U k="day.title" /></span><input type="text" name="title" maxlength="80" /></label>
+        <label class="field"><span><U k="day.mainPlan" /></span><textarea name="anchor" maxlength="240" rows="3"></textarea></label>
         <div class="btn-row">
-          <button class="btn small primary" type="submit">Save</button>
-          <button class="btn small" type="button" data-reset>Back to original</button>
+          <button class="btn small primary" type="submit"><U k="common.save" /></button>
+          <button class="btn small" type="button" data-reset><U k="day.reset" /></button>
         </div>
       </form>
     </details>
   </div>
 
   <section class="section" aria-labelledby="plan-h">
-    <h2 class="label" id="plan-h">Your plan</h2>
+    <h2 class="label" id="plan-h"><U k="day.yourPlan" /></h2>
     <div data-day-items={date}></div>
-    <p class="btns ask"><a class="btn" data-ask-day href="https://claude.ai/new">Ask Claude about this day <span class="hint">↗</span></a></p>
+    <p class="btns ask">
+      <a class="btn" data-ask-day href="https://claude.ai/new"><U k="day.ask" /> <span class="hint">↗</span></a>
+    </p>
   </section>
 
   <section class="section" aria-labelledby="add-h" data-adder={date}>
-    <h2 class="label" id="add-h">Add to this day</h2>
-    <label class="field first"><span>Time (optional, for the next thing you add)</span><input type="time" name="time" data-add-time /></label>
-    <label class="field"><span>Find a place</span><input type="search" name="q" placeholder="Name, station or area" autocomplete="off" data-search /></label>
+    <h2 class="label" id="add-h"><U k="day.add" /></h2>
+    <label class="field first"><span><U k="day.timeNext" /></span><input type="time" name="time" data-add-time /></label>
+    <label class="field">
+      <span><U k="day.find" /></span>
+      <input type="search" name="q" autocomplete="off" data-search {...ph('day.findPh')} />
+    </label>
     <ul class="picks" data-results></ul>
 
     <form data-form="custom-item" class="custom">
-      <label class="field"><span>Or something that isn't a place</span><input type="text" name="title" maxlength="120" placeholder="Check in, rest at the hotel, meet Clara…" /></label>
-      <button class="btn small" type="submit">Add it</button>
+      <label class="field">
+        <span><U k="day.custom" /></span>
+        <input type="text" name="title" maxlength="120" {...ph('day.customPh')} />
+      </label>
+      <button class="btn small" type="submit"><U k="day.addIt" /></button>
     </form>
-    <p class="btns"><a class="btn" href={`/add/?day=${date}`}>Add a place that isn't listed <span class="hint">→</span></a></p>
+    <p class="btns">
+      <a class="btn" href={`/add/?day=${date}`}><U k="day.addUnlisted" /> <span class="hint">→</span></a>
+    </p>
     <p class="t13 w500" data-add-status aria-live="polite"></p>
 
-    <h3 class="label sub">From your Want list</h3>
+    <h3 class="label sub"><U k="day.fromWant" /></h3>
     <ul class="picks" data-wants></ul>
 
-    <h3 class="label sub">Ideas for this day</h3>
+    <h3 class="label sub"><U k="day.ideas" /></h3>
     <ul class="picks">
       {
         ideas.map((p) => (
@@ -76,18 +101,28 @@ const ideas = day.places.map((id) => data.place(id));
             <a href={`/p/${p.id}/`} class="pick-name">
               <span class="w500">{p.name_en}</span>
               {p.name_ja !== p.name_en && <span lang="ja">{p.name_ja}</span>}
-              <span class="t13">{p.recognition}</span>
+              <span class="t13">
+                <T en={p.recognition} zh={data.zh.places[p.id]?.recognition} />
+              </span>
               <StationBadge line={data.line(p.line)} station={p.station} />
             </a>
             <button type="button" class="chip" data-action="add" data-ref={p.id}>
-              Add
+              <U k="common.add" />
             </button>
           </li>
         ))
       }
     </ul>
-    <h3 class="label sub">Notes from the research</h3>
-    <ul class="notes">{day.notes.map((n) => <li>{n}</li>)}</ul>
+    <h3 class="label sub"><U k="day.notes" /></h3>
+    <ul class="notes">
+      {
+        day.notes.map((n, j) => (
+          <li>
+            <T en={n} zh={zh?.notes[j]} />
+          </li>
+        ))
+      }
+    </ul>
   </section>
 </Base>
 
@@ -163,13 +198,13 @@ const ideas = day.places.map((id) => data.place(id));
   import { askAboutDay } from '../../lib/ask';
   import { DAYS, PLACES } from '../../lib/catalog';
   import { dayItems, itemLabel, type PlanItem, type PlanState } from '../../lib/plan';
-  import { shortDate } from '../../lib/time';
+  import { date as dateLabel, lang, t } from '../../scripts/lang';
   import { dispatch, getPlan, newId, subscribe } from '../../scripts/store';
   import { dayHeadline, dayOptions, html, mount, onAction, onForm, placeView } from '../../scripts/ui';
   import { dayLines, wireDayHeadlines } from '../../scripts/widgets';
 
-  const date = document.querySelector<HTMLElement>('[data-day-items]')!.dataset.dayItems!;
   const list = document.querySelector<HTMLElement>('[data-day-items]')!;
+  const date = list.dataset.dayItems!;
   const adder = document.querySelector<HTMLElement>('[data-adder]')!;
   const status = adder.querySelector<HTMLElement>('[data-add-status]')!;
   const timeInput = adder.querySelector<HTMLInputElement>('[data-add-time]')!;
@@ -178,6 +213,7 @@ const ideas = day.places.map((id) => data.place(id));
   wireDayHeadlines();
 
   const say = (text: string) => (status.textContent = text);
+  const failed = (error: string) => say(t('sync.notSaved', { reason: error }));
   const onThisDay = (plan: PlanState, ref: string) => plan.items.some((i) => i.day === date && i.place === ref);
 
   // ── Your plan ──────────────────────────────────────────────────────────
@@ -185,29 +221,29 @@ const ideas = day.places.map((id) => data.place(id));
     const place = placeView(plan, item.place);
     return html`<li><details data-key="${item.id}">
       <summary>
-        <span class="t mono w500">${item.time ?? 'Any time'}</span>
+        <span class="t mono w500">${item.time ?? t('day.anyTime')}</span>
         <span class="what">
           <span class="w500">${itemLabel(plan, item)}</span>
           ${place?.nameJa ? html`<span lang="ja">${place.nameJa}</span>` : ''}
           ${item.note ? html`<span class="note">${item.note}</span>` : ''}
-          <span class="t13 muted">added by ${item.by}</span>
+          <span class="t13 muted">${t('item.addedBy', { name: item.by })}</span>
         </span>
-        <span class="edit t13 w500">Edit</span>
+        <span class="edit t13 w500">${t('item.edit')}</span>
       </summary>
       <div class="controls">
         <form data-form="item" data-id="${item.id}">
           <div class="row2">
-            <label class="field"><span>Time</span><input type="time" name="time" value="${item.time ?? ''}" /></label>
-            <label class="field"><span>Day</span><select name="day">${dayOptions(item.day)}</select></label>
+            <label class="field"><span>${t('item.time')}</span><input type="time" name="time" value="${item.time ?? ''}" /></label>
+            <label class="field"><span>${t('item.day')}</span><select name="day">${dayOptions(item.day)}</select></label>
           </div>
-          <label class="field"><span>Note</span><textarea name="note" rows="2" maxlength="500" placeholder="Booked for 2, ask for the counter…">${item.note ?? ''}</textarea></label>
-          <button class="btn small primary" type="submit">Save changes</button>
+          <label class="field"><span>${t('item.note')}</span><textarea name="note" rows="2" maxlength="500" placeholder="${t('item.notePh')}">${item.note ?? ''}</textarea></label>
+          <button class="btn small primary" type="submit">${t('item.save')}</button>
         </form>
         <div class="btn-row">
-          ${movable ? html`<button class="btn small" type="button" data-action="up" data-id="${item.id}" ${movable.up ? '' : html`disabled`}>Move up</button>
-            <button class="btn small" type="button" data-action="down" data-id="${item.id}" ${movable.down ? '' : html`disabled`}>Move down</button>` : ''}
-          ${place ? html`<a class="btn small" href="${place.href}">Open place</a>` : ''}
-          <button class="btn small" type="button" data-action="remove" data-id="${item.id}">Remove</button>
+          ${movable ? html`<button class="btn small" type="button" data-action="up" data-id="${item.id}" ${movable.up ? '' : html`disabled`}>${t('item.up')}</button>
+            <button class="btn small" type="button" data-action="down" data-id="${item.id}" ${movable.down ? '' : html`disabled`}>${t('item.down')}</button>` : ''}
+          ${place ? html`<a class="btn small" href="${place.href}">${t('item.open')}</a>` : ''}
+          <button class="btn small" type="button" data-action="remove" data-id="${item.id}">${t('item.remove')}</button>
         </div>
       </div>
     </details></li>`;
@@ -216,15 +252,13 @@ const ideas = day.places.map((id) => data.place(id));
   mount(list, () => {
     const plan = getPlan();
     const { timed, anytime } = dayItems(plan, date);
-    if (!timed.length && !anytime.length) {
-      return html`<p class="empty muted">Nothing planned yet. Add something below: search, your Want list, or the ideas from the research.</p>`;
-    }
+    if (!timed.length && !anytime.length) return html`<p class="empty muted">${t('day.empty')}</p>`;
     return html`
       ${timed.length ? html`<ol class="plan-list">${timed.map((i) => row(plan, i, null))}</ol>` : ''}
-      ${anytime.length ? html`${timed.length ? html`<h3 class="label anytime">Any time</h3>` : ''}<ol class="plan-list">${anytime.map((i, n) =>
+      ${anytime.length ? html`${timed.length ? html`<h3 class="label anytime">${t('day.anyTime')}</h3>` : ''}<ol class="plan-list">${anytime.map((i, n) =>
         row(plan, i, { up: n > 0, down: n < anytime.length - 1 }),
       )}</ol>` : ''}
-      <p class="t13 muted legend">Timed things follow the clock. Use Move up and Move down to order the rest.</p>`;
+      <p class="t13 muted legend">${t('day.legend')}</p>`;
   });
 
   onForm(list, {
@@ -236,7 +270,7 @@ const ideas = day.places.map((id) => data.place(id));
         day: String(data.get('day')),
         note: String(data.get('note') ?? ''),
       });
-      if (error) say(error);
+      if (error) failed(error);
       else (form.closest('details') as HTMLDetailsElement).open = false;
     },
   });
@@ -248,10 +282,10 @@ const ideas = day.places.map((id) => data.place(id));
       // Ask twice instead of a dialog.
       if (el.dataset.armed !== 'true') {
         el.dataset.armed = 'true';
-        el.textContent = 'Tap again to remove';
+        el.textContent = t('item.removeAgain');
         setTimeout(() => {
           el.dataset.armed = 'false';
-          el.textContent = 'Remove';
+          el.textContent = t('item.remove');
         }, 3000);
         return;
       }
@@ -259,12 +293,12 @@ const ideas = day.places.map((id) => data.place(id));
     },
   });
 
-  // "Ask Claude about this day" carries the current plan.
+  // "Ask Claude about this day" carries the current plan, in this phone's language.
   const ask = document.querySelector<HTMLAnchorElement>('[data-ask-day]')!;
   const paintAsk = () => {
     const plan = getPlan();
-    const lines = dayLines(plan, date).map((l) => `${l.time ?? 'Any time'}: ${l.label}`);
-    ask.href = askAboutDay(shortDate(date), dayHeadline(plan, date).anchor, lines);
+    const lines = dayLines(plan, date).map((l) => `${l.time ?? t('day.anyTime')}: ${l.label}`);
+    ask.href = askAboutDay(dateLabel(date), dayHeadline(plan, date).anchor, lines, lang());
   };
   paintAsk();
   subscribe(paintAsk);
@@ -282,11 +316,14 @@ const ideas = day.places.map((id) => data.place(id));
     headline: (_form, data) => {
       const title = String(data.get('title') ?? '').trim();
       const anchor = String(data.get('anchor') ?? '').trim();
+      // Unchanged from the research (in either language) means no override.
+      const shown = dayHeadline(null, date);
+      const keep = (value: string, en: string, current: string) => (value && value !== en && value !== current ? value : null);
       const error = dispatch({
         type: 'day.edit',
         day: date,
-        title: title && title !== original.title ? title : null,
-        anchor: anchor && anchor !== original.anchor ? anchor : null,
+        title: keep(title, original.title, shown.title),
+        anchor: keep(anchor, original.anchor, shown.anchor),
       });
       if (!error) headline.open = false;
     },
@@ -300,17 +337,17 @@ const ideas = day.places.map((id) => data.place(id));
   const add = (item: { place?: string; title?: string }) => {
     const time = timeInput.value || null;
     const error = dispatch({ type: 'item.add', id: newId(), day: date, time, ...item });
-    if (error) return say(error);
+    if (error) return failed(error);
     timeInput.value = '';
-    const label = item.title ?? placeView(getPlan(), item.place ?? null)?.name ?? 'It';
-    say(`${label} added${time ? ` at ${time}` : ''}.`);
+    const label = item.title ?? placeView(getPlan(), item.place ?? null)?.name ?? '';
+    say(time ? t('day.addedAt', { label, time }) : t('day.added', { label }));
   };
 
   onAction(adder, { add: (el) => add({ place: el.dataset.ref! }) });
   onForm(adder, {
     'custom-item': (form, data) => {
       const title = String(data.get('title') ?? '').trim();
-      if (!title) return say('Type what it is first.');
+      if (!title) return say(t('day.typeFirst'));
       add({ title });
       form.reset();
     },
@@ -319,8 +356,8 @@ const ideas = day.places.map((id) => data.place(id));
   const pick = (plan: PlanState, ref: string, name: string, extra: ReturnType<typeof html> | string, href: string) =>
     html`<li><a href="${href}" class="pick-name"><span class="w500">${name}</span>${extra}</a>${
       onThisDay(plan, ref)
-        ? html`<span class="t13 w500 added">On this day</span>`
-        : html`<button type="button" class="chip" data-action="add" data-ref="${ref}">Add</button>`
+        ? html`<span class="t13 w500 added">${t('day.onDay')}</span>`
+        : html`<button type="button" class="chip" data-action="add" data-ref="${ref}">${t('common.add')}</button>`
     }</li>`;
 
   // Search the researched places and your own.
@@ -341,7 +378,7 @@ const ideas = day.places.map((id) => data.place(id));
       .filter((x) => x.score < 2)
       .sort((a, b) => a.score - b.score)
       .slice(0, 8);
-    if (!found.length) return html`<li class="muted">No match. Try the station name, or add it as a new place.</li>`;
+    if (!found.length) return html`<li class="muted">${t('day.noMatch')}</li>`;
     return html`${found.map(({ p }) =>
       pick(plan, p.ref, p.name, html`${p.ja ? html`<span lang="ja">${p.ja}</span>` : ''}<span class="t13 muted">${p.where}</span>`, p.href),
     )}`;
@@ -355,22 +392,22 @@ const ideas = day.places.map((id) => data.place(id));
       .filter(([ref, m]) => m.mark === 'want' && !onThisDay(plan, ref))
       .map(([ref]) => placeView(plan, ref))
       .filter((v) => v !== null);
-    if (!wants.length) return html`<li class="muted">Nothing on the Want list that isn't already here.</li>`;
+    if (!wants.length) return html`<li class="muted">${t('day.wantsEmpty')}</li>`;
     return html`${wants.map((v) => pick(plan, v.ref, v.name, v.nameJa ? html`<span lang="ja">${v.nameJa}</span>` : '', v.href))}`;
   });
 
-  // Ideas: swap Add for "On this day" once added.
+  // Ideas: swap Add for "On this day" once added (and follow the language).
   const paintIdeas = () => {
     const plan = getPlan();
     for (const li of adder.querySelectorAll<HTMLElement>('[data-idea]')) {
       const ref = li.dataset.idea!;
-      const has = onThisDay(plan, ref);
-      const btn = li.querySelector<HTMLElement>('[data-action=add], .added');
-      if (has && btn?.tagName === 'BUTTON') btn.outerHTML = '<span class="t13 w500 added">On this day</span>';
-      if (!has && btn?.tagName !== 'BUTTON') {
-        btn?.remove();
-        li.insertAdjacentHTML('beforeend', `<button type="button" class="chip" data-action="add" data-ref="${ref}">Add</button>`);
-      }
+      li.querySelector('[data-action=add], .added')?.remove();
+      li.insertAdjacentHTML(
+        'beforeend',
+        onThisDay(plan, ref)
+          ? html`<span class="t13 w500 added">${t('day.onDay')}</span>`.value
+          : html`<button type="button" class="chip" data-action="add" data-ref="${ref}">${t('common.add')}</button>`.value,
+      );
     }
   };
   paintIdeas();

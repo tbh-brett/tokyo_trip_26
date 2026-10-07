@@ -1,10 +1,12 @@
 ---
 // Show to staff for your own places (/p/mine/staff/?id=…).
 import Base from '../../../layouts/Base.astro';
+import U from '../../../components/U.astro';
+import { ui } from '../../../i18n/ui';
 ---
 
-<Base title="Show to staff" showTabs={false} bodyClass="staff">
-  <a class="close" href="/plan/" data-close>← Close</a>
+<Base title={ui('place.staff', 'en')} titleZh={ui('place.staff', 'zh')} showTabs={false} bodyClass="staff">
+  <a class="close" href="/plan/" data-close><U k="staff.close" /></a>
   <div class="card">
     <p class="ja" lang="ja" data-f="ja"></p>
     <p class="addr" lang="ja" data-f="address"></p>
@@ -68,6 +70,7 @@ import Base from '../../../layouts/Base.astro';
 
 <script>
   import { holdScreenOn } from '../../../scripts/device';
+  import { t } from '../../../scripts/lang';
   import { getPlan } from '../../../scripts/store';
 
   // No live sync on this screen: the plan as this phone has it, unsent changes included.
@@ -80,6 +83,6 @@ import Base from '../../../layouts/Base.astro';
     set('address', place.address ?? '');
     set('en', place.name_ja ? place.name : '');
     document.querySelector<HTMLAnchorElement>('[data-close]')!.href = `/p/mine/?id=${place.id}`;
-  } else set('en', 'Place not found on this phone.');
+  } else set('en', t('mine.notOnPhone'));
   holdScreenOn();
 </script>

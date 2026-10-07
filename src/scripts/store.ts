@@ -2,7 +2,7 @@
 // - A change shows immediately (the same reducer the server uses).
 // - It is kept on the phone until the server confirms it, so no signal is fine.
 // - Every few seconds, while the page is open, it picks up the other phone's changes.
-import { applyAll, applyOp, emptyPlan, PlanError, type Envelope, type Op, type PlanState } from '../lib/plan';
+import { applyAll, applyOp, emptyPlan, PlanError, type Activity, type Envelope, type Op, type PlanState } from '../lib/plan';
 
 const KEYS = {
   state: 'tokyo2026:plan',
@@ -41,7 +41,7 @@ let syncedAt: number | null = read<number>(KEYS.synced);
 let outbox: Envelope[] = read<Envelope[]>(KEYS.outbox) ?? [];
 let view: PlanState = rebase();
 let sync: Sync = { kind: 'live' };
-let news: { text: string; at: number } | null = null;
+let news: { act: Activity; at: number } | null = null;
 /** Changes made on this phone, so they're never announced back as news. */
 const mine = new Set(outbox.map((e) => e.opId));
 const listeners = new Set<() => void>();
@@ -111,7 +111,7 @@ function accept(state: PlanState) {
   if (state.version < confirmed.version) return;
   const known = new Set(confirmed.activity.map((a) => a.id));
   const theirs = state.activity.filter((a) => !known.has(a.id) && !mine.has(a.id));
-  if (theirs.length && syncedAt !== null) news = { text: `${theirs[0].by} ${theirs[0].text}`, at: Date.now() };
+  if (theirs.length && syncedAt !== null) news = { act: theirs[0], at: Date.now() };
   confirmed = state;
   syncedAt = Date.now();
   write(KEYS.state, confirmed);
@@ -222,6 +222,11 @@ export function start() {
       notify();
     }
   });
+}
+
+/** Repaint everything that follows the plan (after a language change, for instance). */
+export function refresh() {
+  notify();
 }
 
 /** Clear a shown error or news line. */

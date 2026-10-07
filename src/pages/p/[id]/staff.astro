@@ -1,6 +1,8 @@
 ---
 // Show to staff: the one centred screen. White on black, Japanese name large.
 import Base from '../../../layouts/Base.astro';
+import U from '../../../components/U.astro';
+import { ui } from '../../../i18n/ui';
 import { loadData } from '../../../lib/data';
 
 export async function getStaticPaths() {
@@ -12,8 +14,8 @@ const data = await loadData();
 const p = data.place(Astro.params.id!);
 ---
 
-<Base title={`Show to staff: ${p.name_en}`} showTabs={false} bodyClass="staff">
-  <a class="close" href={`/p/${p.id}/`}>← Close</a>
+<Base title={ui('staff.title', 'en', { name: p.name_en })} titleZh={ui('staff.title', 'zh', { name: p.name_en })} showTabs={false} bodyClass="staff">
+  <a class="close" href={`/p/${p.id}/`}><U k="staff.close" /></a>
   <div class="card">
     <p class="ja" lang="ja">{p.name_ja}</p>
     <p class="addr" lang="ja">{p.address_ja}</p>

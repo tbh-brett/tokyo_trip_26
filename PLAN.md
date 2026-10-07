@@ -62,6 +62,10 @@ Brett asked for a site you edit rather than read: add and remove places, set tim
 
 Still open from it: the Japan Cup lottery (22–24 Nov, result 25 Nov) decides Sunday afternoon and Wednesday evening; Mori Art Museum's hours on 27 Nov; Hasedera's illumination dates; teamLab's closed days. 10 of the new places have neighbourhood-only addresses and 19 have no hours on file; Phase 2's address pass should cover them.
 
+## Traditional Chinese version ✓ (7 Oct 2026)
+
+Every page in English and Traditional Chinese, switched per phone with the 中文 / EN button in the tab bar. Translated: all interface text, every place's description and notes, each day's title, main plan and notes, bookings, prep and area names; dates, opening hours and the feed of changes; "Ask Claude" asks in Chinese. Works offline in either language.
+
 ## Phase 2 — coordinates, map, near me
 
 - For the `address_precision: "district"` places (79 after the itinerary), find the full street address from the Tabelog listing or the shop's own site. Update the JSON.
