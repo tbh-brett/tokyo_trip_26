@@ -97,6 +97,7 @@ const addressNote =
 
   <dl class="wrap facts">
     <div
+      hidden={p.hours.length === 0}
       data-place={p.id}
       data-hours={JSON.stringify(p.hours)}
       data-closed={p.closed_days.join(',')}
@@ -107,9 +108,13 @@ const addressNote =
     </div>
     <div>
       <dt>Hours</dt>
-      <dd class="mono">{hoursText(p.hours)}</dd>
+      <dd class={p.hours.length ? 'mono' : undefined}>{p.hours.length ? hoursText(p.hours) : 'Not listed yet'}</dd>
       {closedText(p.closed_days) && <dd>{closedText(p.closed_days)}</dd>}
-      {!p.hours_verified && <dd class="t13 muted">Estimated. Not yet checked with the shop.</dd>}
+      {p.hours.length === 0 ? (
+        <dd class="t13 muted">Check Google Maps or the venue's site before going.</dd>
+      ) : (
+        !p.hours_verified && <dd class="t13 muted">Estimated. Not yet checked with the shop.</dd>
+      )}
     </div>
     <div>
       <dt>Price</dt>

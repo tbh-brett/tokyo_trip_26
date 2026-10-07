@@ -1,7 +1,12 @@
 // "Ask Claude" links. They open a new Claude chat with the question typed in,
 // ready to review and send. No API key, nothing to run: it's your own Claude.
 
-const TRIP = 'We are two people in Tokyo from 27 Nov to 4 Dec 2026, staying in Soto-Kanda near Suehirocho station (Ginza line, G14).';
+import { BASE, DAYS } from './catalog';
+import { shortDate } from './time';
+
+const first = DAYS[0].date;
+const last = DAYS[DAYS.length - 1].date;
+const TRIP = `We are two people in Tokyo from ${shortDate(first).slice(4)} to ${shortDate(last).slice(4)} ${last.slice(0, 4)}, staying in Soto-Kanda near ${BASE.name_en} station (${BASE.code}).`;
 
 /** The GitHub repo the site is built from, for "change the site" requests. */
 export const REPO = 'tbh-brett/tokyo_trip_26';

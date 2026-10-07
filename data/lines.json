@@ -19,5 +19,10 @@
   { "id": "mita", "name": "Toei Mita line", "code": "I", "colour": "#006AB8" },
   { "id": "yurakucho", "name": "Yurakucho line", "code": "Y", "colour": "#C1A470" },
   { "id": "tsukuba", "name": "Tsukuba Express", "code": "TX", "colour": "#0F6CBD" },
-  { "id": "toden", "name": "Tokyo Sakura Tram", "code": "SA", "colour": "#E8739A" }
+  { "id": "toden", "name": "Tokyo Sakura Tram", "code": "SA", "colour": "#E8739A" },
+  { "id": "denentoshi", "name": "Tokyu Den-en-toshi line", "code": "DT", "colour": "#20A288" },
+  { "id": "setagaya", "name": "Tokyu Setagaya line", "code": "SG", "colour": "#F4C400" },
+  { "id": "minatomirai", "name": "Minatomirai line", "code": "MM", "colour": "#09357F" },
+  { "id": "enoden", "name": "Enoden (Enoshima Electric Railway)", "code": "EN", "colour": "#2A9B4B" },
+  { "id": "monorail", "name": "Tokyo Monorail", "code": "MO", "colour": "#1F5FA8" }
 ]

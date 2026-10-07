@@ -1,79 +1,107 @@
 [
   {
+    "id": "jra-register",
+    "when": "Now",
+    "what": "Register on JRA's ticket site",
+    "detail": "Weeks before the Japan Cup lottery, check it accepts a Hong Kong card and phone number. The site is in Japanese and needs a credit card and email.",
+    "where": "JRA ticket site"
+  },
+  {
+    "id": "louvre",
+    "when": "Now",
+    "what": "Louvre show at the National Art Center, Fri 27 Nov",
+    "detail": "Advance ticket, ¥2,200. No time slot needed for 27 Nov.",
+    "where": "National Art Center site"
+  },
+  {
     "id": "rikugien-tickets",
     "when": "Now",
-    "what": "Rikugien night illumination",
-    "detail": "¥1,000 online vs ¥1,200 cash at the gate. Runs 25 Nov–6 Dec, so any night works — Mon 30 Nov is the least crowded of yours.",
+    "what": "Rikugien night illumination, Sun 29 Nov",
+    "detail": "¥1,000 online once sales open, ¥1,200 cash at the gate. Runs 25 Nov – 6 Dec, 18:00–20:30.",
     "where": "Tokyo Parks official site"
+  },
+  {
+    "id": "teamlab",
+    "when": "Now",
+    "what": "teamLab Borderless, Mon 30 Nov, first slot",
+    "detail": "The opening slot is the least crowded. Prices move with demand, ¥3,600–4,800. Check the calendar for closed days.",
+    "where": "teamLab's site"
   },
   {
     "id": "sakurai",
     "when": "Now",
-    "what": "櫻井焙煎研究所 (Sakurai tea)",
-    "detail": "Eight seats, English-speaking, a tea course rather than a café. One of the few genuinely unmissable bookings in this guide.",
+    "what": "櫻井焙煎研究所 tea counter, Wed 2 Dec",
+    "detail": "Eight seats, a tea course run like an omakase. Only if you take that option for Wednesday afternoon.",
     "where": "Shop's own booking page"
   },
   {
-    "id": "gen-yamamoto",
-    "when": "Now",
-    "what": "Gen Yamamoto",
-    "detail": "Eight seats, seasonal cocktail flight. Asks for seven or more days' notice; in practice book further out.",
-    "where": "Shop's own booking page"
-  },
-  {
-    "id": "december-early",
-    "when": "1 Oct",
-    "what": "December dates, 1st-of-month rule",
-    "detail": "Some counters open the whole of December two months ahead, on 1 Oct at 10:00 JST. Worth a look for 2–3 Dec.",
-    "where": "Restaurant's own site / TableCheck"
-  },
-  {
-    "id": "sat-dinner",
-    "when": "28 Oct",
-    "what": "Sat 28 Nov dinner",
-    "detail": "Exactly one month out. Saturdays fill first — if you want a booked Saturday, this is the day.",
-    "where": "TableCheck · Tabelog · OMAKASE"
+    "id": "butagumi",
+    "when": "27 Oct",
+    "what": "Dinner at 西麻布 豚組, Fri 27 Nov",
+    "detail": "Many restaurants open one month ahead, and it is a Friday.",
+    "where": "Restaurant's booking page"
   },
   {
     "id": "december-opens",
     "when": "1 Nov",
     "what": "★ The key date — December opens",
-    "detail": "Many Tokyo restaurants release the following month on the 1st at 10:00 JST. That is 09:00 Hong Kong. Alarm set, account already made, site already open.",
+    "detail": "Many Tokyo restaurants release December on the 1st at 10:00 JST, 09:00 Hong Kong. Alarm set, account made, site open.",
     "where": "TableCheck · Tabelog · OMAKASE"
+  },
+  {
+    "id": "benfiddich",
+    "when": "1 Nov",
+    "what": "Bar Benfiddich, Wed 2 Dec",
+    "detail": "For evening B. No menu: you describe a mood and he builds it.",
+    "where": "TableCheck"
   },
   {
     "id": "dinner-wed",
     "when": "2 Nov",
-    "what": "Anchor dinner #1 — Wed 2 Dec",
-    "detail": "Target 鮨 つぼみ or 鮨 尚充 in Nakameguro, both 寿司 TOKYO 百名店 at ¥15–25k. Book both, keep whichever answers.",
+    "what": "Sushi counter in Nakameguro, Wed 2 Dec",
+    "detail": "鮨 つぼみ or 鮨 尚充, ¥15–28k, one month ahead. Book both, keep whichever answers. For evening B.",
     "where": "OMAKASE (prepaid) or TableCheck"
   },
   {
-    "id": "narikura",
-    "when": "2 Nov",
-    "what": "とんかつ成蔵 — if you want a trophy",
-    "detail": "The hardest tonkatsu reservation in Tokyo. Low odds, near-zero cost to try.",
-    "where": "Its own reservation system"
+    "id": "shibuya-sky",
+    "when": "14 Nov",
+    "what": "Shibuya Sky sunset slot, Sat 28 Nov",
+    "detail": "On sale 14 days ahead. Aim for a 15:30–16:00 entry. Sunset slots can sell out within hours.",
+    "where": "Shibuya Sky's site"
   },
   {
-    "id": "dinner-thu",
-    "when": "3 Nov",
-    "what": "Anchor dinner #2 — Thu 3 Dec",
-    "detail": "にし邑 in Ginza (とんかつ百名店, kappo-style) or a yakiniku. Leave one dinner unbooked to follow your nose.",
-    "where": "TableCheck · Tabelog"
+    "id": "jc-reserved",
+    "when": "17 Nov",
+    "what": "Japan Cup reserved-seat lottery",
+    "detail": "Only if you want a seat. General round 17–19 Nov, result 20 Nov.",
+    "where": "JRA ticket site"
   },
   {
-    "id": "benfiddich",
+    "id": "teien",
+    "when": "20 Nov",
+    "what": "Teien Marimekko time slot, Wed 2 Dec",
+    "detail": "Only if you take the Teien option for Wednesday afternoon. ¥1,400.",
+    "where": "Teien Art Museum's site"
+  },
+  {
+    "id": "jc-general",
+    "when": "22 Nov",
+    "what": "Japan Cup general admission lottery",
+    "detail": "22–24 Nov, about 80,000 places, result 25 Nov. Leftovers and cancellations first come from 23 Nov.",
+    "where": "JRA ticket site"
+  },
+  {
+    "id": "mori-art",
     "when": "Any time",
-    "what": "Bar Benfiddich",
-    "detail": "Reservations via TableCheck. No menu — you describe a mood and he builds it.",
-    "where": "TableCheck"
+    "what": "Mori Art Museum time slot",
+    "detail": "Only if you add it to Fri 27 Nov, and only after checking it is open late that night.",
+    "where": "Mori Art Museum's site"
   },
   {
-    "id": "fuglen",
+    "id": "gen-yamamoto",
     "when": "Any time",
-    "what": "Fuglen Sangubashi",
-    "detail": "Eight seats, cashless only.",
+    "what": "Gen Yamamoto",
+    "detail": "Only if Wednesday evening goes that way. Eight seats; asks for a week's notice, book further out.",
     "where": "Shop's own booking page"
   }
 ]

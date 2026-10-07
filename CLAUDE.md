@@ -1,8 +1,10 @@
 # Tokyo 2026 — trip site
 
-A private, phone-first site for two people (Brett and Clara) on a Tokyo trip, **27 Nov – 4 Dec 2026**, based at 外神田6丁目 (Suehirocho, Ginza line G14). It replaces spreadsheets that never got opened. Its one job: answer *"what now, from here"* in under five seconds.
+A private, phone-first site for two people (Brett and Clara) on a Tokyo trip, **27 Nov – 3 Dec 2026**, based at 外神田6丁目 (Suehirocho, Ginza line G14). It replaces spreadsheets that never got opened. Its one job: answer *"what now, from here"* in under five seconds.
 
 Read `PLAN.md` for phases and acceptance criteria. This file is the standing rules.
+
+The itinerary comes from "Tokyo Itinerary · 27 Nov – 3 Dec 2026" (7 Oct 2026, built on Clara's preliminary plan): `days.json` holds its days, notes and ideas, and its timed schedule was put into the shared plan as "added by Claude". Brett flies home Thu 3 Dec, 22:00 from Narita (leave the hotel by 18:45). Clara and a friend continue to Izu 4–6 Dec; the site doesn't cover those days, but their checks are in `prep.json`.
 
 ## Hard constraints
 
@@ -49,7 +51,8 @@ When changing the plan's shape, keep old stored plans loading: the store spreads
 - Geocode street-level Japanese addresses with the GSI (国土地理院) address search API. Store `lat`/`lng`, set `coords_verified: true` only after a spot-check against Google Maps.
 - `closed_days` use `Sun`…`Sat`. `hours` are `["HH:MM","HH:MM"]` pairs in JST; a close after midnight is written as e.g. `["18:00","01:00"]`.
 - Recognition strings are literal (`喫茶店百名店 2026`, `Asia's 50 Best Bars 2026 · No. 23`). Keep the year; lists change annually.
-- `trip.json` holds the home station (`base`). `lines.json` holds each line's name, letter code (`G`, `JY`, or `null` when there isn't a single one) and colour. The `toden` colour is an approximation of the Tokyo Sakura Tram pink.
+- `trip.json` holds the home station (`base`). `lines.json` holds each line's name, letter code (`G`, `JY`, or `null` when there isn't a single one) and colour. The colours of `toden`, `denentoshi`, `setagaya`, `minatomirai`, `enoden` and `monorail` are approximations.
+- A place with `hours: []` has no known hours: the UI shows "Not listed yet" and no open/closed status.
 
 ## Design — modernist, words first
 
@@ -68,8 +71,8 @@ Swiss / International Typographic Style meets Tokyo Metro wayfinding. Restraint 
 
 Tabs: Today · Plan · Places. Day pages at `/day/<date>/`; your own places at `/p/mine/?id=…`; add one at `/add/`.
 
-1. **Today** — date-aware header (countdown before the trip; "Day 3 of 8" during). Today's anchor. Next timed item. **Near me now**: three places max, sorted by open-now then distance (Geolocation API; fall back to a zone picker if denied). Walking time = distance × 1.3 ÷ 80 m/min, labelled "about".
-2. **Plan** — eight days with what you've planned, the shared Want list, bookings and prep as shared checklists, the feed of changes. Each day page: your plan (timed items by the clock, the rest in your order), edit time / day / note, move up / down, remove (tap twice), edit the headline, add by search / Want list / the day's ideas (`days.json` `places`) / free text, and Ask Claude about the day.
+1. **Today** — date-aware header (countdown before the trip; "Day 3 of 7" during). Today's anchor. Next timed item. **Near me now**: three places max, sorted by open-now then distance (Geolocation API; fall back to a zone picker if denied). Walking time = distance × 1.3 ÷ 80 m/min, labelled "about".
+2. **Plan** — the seven days with what you've planned, the shared Want list, bookings and prep as shared checklists, the feed of changes. Each day page: your plan (timed items by the clock, the rest in your order), edit time / day / note, move up / down, remove (tap twice), edit the headline, add by search / Want list / the day's ideas (`days.json` `places`) / free text, and Ask Claude about the day.
 3. **Map** — every place as a black dot, selected in orange; filter by kind with text chips; overlay one route at a time; "Near me" recentres.
 4. **Places** — by kind (Eat, Coffee, Tea, Bars, See, Buy), filter by zone, recognition shown on every row. Static detail page per place (`/p/[id]`).
 5. **Routes** — curated walks from `/data/routes.json`. Stops numbered on the map, joined by straight lines (label them "not street routing"). "Walk this in Google Maps" splits into legs of **≤ 3 waypoints** (Google's mobile limit).

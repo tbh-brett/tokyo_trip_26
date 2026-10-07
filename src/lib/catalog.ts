@@ -6,6 +6,7 @@ import daysJson from '../../data/days.json';
 import bookingsJson from '../../data/bookings.json';
 import prepJson from '../../data/prep.json';
 import travellersJson from '../../data/travellers.json';
+import tripJson from '../../data/trip.json';
 
 export type Kind = 'eat' | 'coffee' | 'tea' | 'bar' | 'see' | 'buy';
 export const KIND_IDS: readonly Kind[] = ['eat', 'coffee', 'tea', 'bar', 'see', 'buy'];
@@ -39,6 +40,7 @@ export const PLACE_BY_ID = new Map(PLACES.map((p) => [p.id, p]));
 export const DAYS = daysJson as unknown as CatalogDay[];
 export const DAY_DATES = DAYS.map((d) => d.date);
 export const TRAVELLERS = travellersJson.map((t) => t.name);
+export const BASE = tripJson.base;
 
 /** Things that can be ticked off, keyed "booking:<id>" and "prep:<id>". */
 export const CHECKS = new Map<string, string>([

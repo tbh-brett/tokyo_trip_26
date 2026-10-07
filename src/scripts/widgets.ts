@@ -90,7 +90,8 @@ export function wirePlaceRows() {
       if (open && row.dataset.hours) {
         const hours = JSON.parse(row.dataset.hours) as Hours;
         const closed = (row.dataset.closed ?? '').split(',').filter(Boolean);
-        open.textContent = openLabel(openState(hours, closed, now), row.dataset.verified === 'true');
+        // No hours on file: say nothing rather than guess.
+        open.textContent = hours.length ? openLabel(openState(hours, closed, now), row.dataset.verified === 'true') : '';
       }
       const mark = plan.marks[ref]?.mark;
       if (mark) row.dataset.mark = mark;

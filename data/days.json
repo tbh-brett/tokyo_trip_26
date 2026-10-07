@@ -2,143 +2,165 @@
   {
     "date": "2026-11-27",
     "weekday": "Fri",
-    "title": "Arrive",
-    "anchor": "Nothing booked. Walk to Ameyoko and eat standing up.",
+    "title": "Arrive, Roppongi at night",
+    "anchor": "The Louvre show at the National Art Center, open until 20:00 on Fridays.",
     "notes": [
-      "Drop bags, then Ueno on foot — Ameyoko is 12 minutes from the door.",
-      "大統領 for motsu-nikomi, or Kanda for soba if you land early.",
-      "Do not schedule anything. The trip is long enough."
+      "Land 14:45. The Skyliner reaches Keisei-Ueno in about 41 minutes; the hotel is a 10-minute walk.",
+      "17:00 Hibiya line from Naka-Okachimachi to Roppongi, no change, about 20 minutes.",
+      "Leonardo's La Belle Ferronnière is in Japan for the first time and the show closes 13 Dec. ¥2,200 in advance.",
+      "Book 西麻布 豚組 for dinner: it is a Friday.",
+      "Mori Art Museum fits after dinner only if it is open late that night. One listing says it shuts at 17:00 on 27 Nov."
     ],
     "places": [
-      "ameyoko",
-      "daitoryo",
-      "yabusoba",
-      "matsuya"
+      "nact-louvre",
+      "butagumi",
+      "keyakizaka",
+      "mori-art"
     ]
   },
   {
     "date": "2026-11-28",
     "weekday": "Sat",
-    "title": "Ginkgo, then Aoyama",
-    "anchor": "神宮外苑いちょう並木 at first light — Ginza line direct, no changes.",
+    "title": "Ginkgo, cats, sunset",
+    "anchor": "神宮外苑いちょう並木 at 07:30, before the Saturday crush.",
     "notes": [
-      "Forecast peak was 26 Nov, so you're catching the tail of gold. Ginkgo holds a week or more.",
-      "Be there by 08:00. Saturday in peak season is shoulder-to-shoulder by 11:00.",
-      "カフェ香咲 is four minutes away and on the national top-100 kissaten list.",
-      "Then Philocoffea, and 櫻井焙煎研究所 for tea if you booked it.",
-      "Evening: Marunouchi and Midtown Hibiya illuminations in one loop, then a Ginza bar."
+      "07:05 Ginza line from Suehirocho (G14) to Gaienmae (G03), no change, about 20 minutes.",
+      "Ginkgo first, Gotokuji second: the avenue is shoulder to shoulder by 11:00, the cats will still be there at 09:30.",
+      "To Gotokuji: Ginza line to Shibuya, Den-en-toshi line to Sangenjaya, then the Setagaya tram to Miyanosaka. About 40 minutes.",
+      "Shibuya Sky tickets go on sale 14 days ahead, on 14 Nov. A 15:30–16:00 slot gets daylight, sunset around 16:30, and the lights.",
+      "Home: Ginza line from Shibuya (G01) to Suehirocho (G14), no change."
     ],
     "places": [
       "gaien",
-      "kasa",
-      "philocoffea",
-      "sakurai",
-      "marunouchi-il",
-      "hibiya-il"
+      "gotokuji",
+      "gensuiton",
+      "three",
+      "shibuya-sky",
+      "hatou",
+      "bellwood",
+      "nonbei"
     ]
   },
   {
     "date": "2026-11-29",
     "weekday": "Sun",
-    "title": "Yanesen on foot",
-    "anchor": "谷根千 — Nezu Shrine, Yanaka Ginza, and the cats.",
+    "title": "Todai ginkgo, then races or Kiyosumi",
+    "anchor": "Japan Cup at 15:40 if the lottery comes through; MOT and Kiyosumi if not. Rikugien lit at night either way.",
     "notes": [
-      "Maple peak is today, but every famous garden is full on a Sunday. This is the quiet alternative.",
-      "カヤバ珈琲 opens at 08:00 — get there before the queue.",
-      "Ignis in Sendagi for Panama coffee. All of it walkable from your side of town.",
-      "Dinner: Nakameguro if the sushi booking landed, otherwise Kanda."
+      "Morning either way: Todai's ginkgo avenue to Yasuda Auditorium, quiet on a Sunday, then Kayaba Coffee 10 minutes' walk away.",
+      "Japan Cup: Shinjuku, then the Keio line to Fuchukeiba-seimonmae, about 35 minutes. In by 13:00 to see the paddock.",
+      "There is no gate sale on Japan Cup day. General admission lottery 22–24 Nov, result 25 Nov.",
+      "Clara's original afternoon: MOT's two shows, fukagawa-meshi (clams on rice) for lunch, Mameya Kakeru's coffee course, Kiyosumi Teien's stepping stones.",
+      "If the Japan Cup takes Sunday, MOT and Kiyosumi move to Thursday morning.",
+      "Rikugien: 18:00–20:30, last entry 19:30, ¥1,000 online or ¥1,200 cash. Then Tokiwa Shokudo, one stop away."
     ],
     "places": [
+      "todai-hongo",
       "kayaba",
-      "nezu",
-      "ignis",
-      "tsubomi",
-      "naomitsu"
+      "tokyo-racecourse",
+      "mot",
+      "kakeru",
+      "kiyosumiteien",
+      "rikugien",
+      "tokiwa"
     ]
   },
   {
     "date": "2026-11-30",
     "weekday": "Mon",
-    "title": "Rikugien after dark",
-    "anchor": "六義園 night illumination, 18:00–20:30. Booked in advance.",
+    "title": "teamLab, then Yokohama",
+    "anchor": "teamLab's first slot, then Yokohama's Christmas market at dusk.",
     "notes": [
-      "Mondays close Shinjuku Gyoen and most museums. Gardens and streets are the play.",
-      "Daytime: Kiyosumi-Shirakawa for Mameya Kakeru's coffee course and the garden.",
-      "巣鴨ときわ食堂 near Komagome for a top-100 shokudo dinner after the lights.",
-      "Komagome is 12 minutes on the Yamanote from Okachimachi."
+      "08:00 Hibiya line from Naka-Okachimachi straight to Kamiyacho, about 20 minutes. teamLab is two minutes from exit 5.",
+      "Allow 1.5–2.5 hours. Check teamLab's calendar when booking: it closes some days without a fixed pattern.",
+      "13:00 Hibiya line to Naka-Meguro, then the Toyoko line straight through to Bashamichi, about 45 minutes.",
+      "Monday is the market's calmest day, and the cable car catches sunset around 16:30.",
+      "Home: JR from Sakuragicho to Okachimachi or Akihabara, about 50 minutes."
     ],
     "places": [
-      "rikugien",
-      "kakeru",
-      "kiyosumiteien",
-      "tokiwa"
+      "teamlab",
+      "saboe",
+      "kuromame",
+      "air-cabin",
+      "akarenga-xmas",
+      "noge"
     ]
   },
   {
     "date": "2026-12-01",
     "weekday": "Tue",
-    "title": "Out of town",
-    "anchor": "Kamakura — temple maples and Hasedera lit after sunset.",
+    "title": "Kamakura and Enoshima",
+    "anchor": "Hasedera's maples and Enoshima at sunset, on a weekday rather than a Sunday.",
     "notes": [
-      "Tuesday is the heaviest closing day for Tokyo restaurants. Being elsewhere is efficient.",
-      "Kamakura peaks late — one of the last in Japan, holding into December.",
-      "Alternative: Mt Takao, 55 min and ¥580, if you'd rather walk than look.",
-      "Take 神田志乃多寿司 inarizushi on the train."
+      "07:30 leave. JR to Tokyo, then the Yokosuka line to Kita-Kamakura, about an hour.",
+      "Kamakura's maples are among the last in Japan to turn, holding into early December.",
+      "Lunch: shirasu-don, whitebait on rice.",
+      "Enoden from Kamakura to Hase is five minutes; the Great Buddha is five minutes' walk from Hasedera.",
+      "If Hasedera announces its night illumination, flip the afternoon: Enoshima first, the lit maples at dusk.",
+      "Home: Odakyu from Katase-Enoshima to Shinjuku, about 70 minutes, or JR from Fujisawa to Tokyo."
     ],
     "places": [
-      "kamakura",
-      "takao",
-      "shinodazushi"
+      "engakuji",
+      "meigetsuin",
+      "tsurugaoka",
+      "hasedera",
+      "daibutsu",
+      "kokomae",
+      "enoshima",
+      "kamakura"
     ]
   },
   {
     "date": "2026-12-02",
     "weekday": "Wed",
-    "title": "Knives, then the good dinner",
-    "anchor": "Booked dinner #1. Kappabashi in the morning.",
+    "title": "Gyoen, Aoyama, and a night out",
+    "anchor": "Shinjuku Gyoen in the morning, a tea counter or the Teien in the afternoon, racing or a hidden bar at night.",
     "notes": [
-      "Kappabashi 10:30–12:00 is the quiet window. Start at 釜浅商店.",
-      "Buy today if you want engraving — 1 to 3 days.",
-      "Lunch: すぎ田 in Kuramae, top-100 tonkatsu, if you booked. Otherwise 麺 みつヰ.",
-      "Afternoon: Kiyosumi or back through Asakusa for its four top-100 kissaten."
+      "Nezu Museum is closed between exhibitions from 24 Nov to 5 Dec, garden included. This day replaces it.",
+      "09:00 Marunouchi line from Awajicho straight to Shinjuku-gyoemmae. ¥500.",
+      "14:00, pick one: Sakurai's eight-seat tea counter (book), or Marimekko in the Teien's 1933 Art Deco house (timed, ¥1,400).",
+      "Evening A: Ōi night racing, ¥100, an SII race on the card, last race around 20:50, then Bar Trench. Pick this if the Japan Cup lottery fails.",
+      "Evening B: a top-100 sushi counter in Nakameguro, then Bar Benfiddich (TableCheck). Or Janai Coffee in Ebisu, or Gen Yamamoto."
     ],
     "places": [
-      "kappabashi",
-      "kamaasa",
-      "sugita",
-      "mitsui"
+      "gyoen",
+      "tonkatsu-jp",
+      "nanaido",
+      "philocoffea",
+      "sakurai",
+      "teien",
+      "ohi",
+      "trench",
+      "tsubomi",
+      "naomitsu",
+      "benfiddich",
+      "janai",
+      "genyamamoto"
     ]
   },
   {
     "date": "2026-12-03",
     "weekday": "Thu",
-    "title": "Ginza and the bars",
-    "anchor": "Booked dinner #2, then a proper bar.",
+    "title": "Palace, Hibiya, Marunouchi, fly",
+    "anchor": "Daitoku-ji at the National Museum, Marunouchi's lights at dusk, then Narita for the 22:00 flight.",
     "notes": [
-      "カフェ・ド・ランブル in the afternoon — aged coffee, nothing else like it in the world.",
-      "Depachika crawl at Mitsukoshi Ginza before closing.",
-      "Punch Room or Mori Bar Gran after dinner. Punch bowls suit two people.",
-      "Last chance for anything you saw and didn't buy."
+      "The Daitoku-ji show is in its last week: Muqi's Dragon and Tiger and a National Treasure Ido tea bowl. 15 minutes' walk from the hotel.",
+      "If the Japan Cup took Sunday, do MOT and Kiyosumi this morning instead.",
+      "11:00 check out and leave the bags at the hotel.",
+      "Imperial Palace East Gardens are free; walk the outer garden toward Hibiya.",
+      "Naka-dōri's 1.2 km of lit trees come on at 16:00. Tokyo to Akihabara is four minutes.",
+      "Leave the hotel by 18:45 for Narita: Skyliner from Keisei-Ueno, about 41 minutes, two hours before the flight."
     ],
     "places": [
+      "tnm-daitokuji",
+      "higashi-gyoen",
+      "you",
       "lambre",
-      "mitsukoshi",
-      "punchroom",
-      "moribar"
-    ]
-  },
-  {
-    "date": "2026-12-04",
-    "weekday": "Fri",
-    "title": "Leave",
-    "anchor": "Ameyoko for food to take home, then out.",
-    "notes": [
-      "Dried fish, sesame, knives already boxed. Matsuzakaya depachika does the rest.",
-      "Knives in checked luggage. Every time."
-    ],
-    "places": [
-      "ameyoko",
-      "matsuzakaya"
+      "oldimperial",
+      "marunouchi-il",
+      "nmwa-turner",
+      "mot",
+      "kiyosumiteien"
     ]
   }
 ]

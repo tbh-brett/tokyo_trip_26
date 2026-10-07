@@ -56,9 +56,15 @@ Brett asked for a site you edit rather than read: add and remove places, set tim
 
 **Done when:** a change on one phone appears on the other without reloading; a change made with no signal syncs when signal returns.
 
+## Itinerary applied (7 Oct 2026)
+
+"Tokyo Itinerary · 27 Nov – 3 Dec 2026" replaced the original day plan. The trip on the site is now 7 days (Brett flies 3 Dec, 22:00, Narita). 28 places added from it (sources on each), bookings and prep rebuilt from its lists, and its timed schedule put into the shared plan with "Pick one" notes where it offers a choice.
+
+Still open from it: the Japan Cup lottery (22–24 Nov, result 25 Nov) decides Sunday afternoon and Wednesday evening; Mori Art Museum's hours on 27 Nov; Hasedera's illumination dates; teamLab's closed days. 10 of the new places have neighbourhood-only addresses and 19 have no hours on file; Phase 2's address pass should cover them.
+
 ## Phase 2 — coordinates, map, near me
 
-- For the 69 `address_precision: "district"` places, find the full street address from the Tabelog listing or the shop's own site. Update the JSON.
+- For the `address_precision: "district"` places (79 after the itinerary), find the full street address from the Tabelog listing or the shop's own site. Update the JSON.
 - Geocode every street-level address with the GSI address search API. Spot-check ten pins against Google Maps before marking `coords_verified`.
 - Map page with MapLibre + OpenFreeMap. Filter chips. Route overlay.
 - Near me on Today: geolocation, open-now, distance, three results max.
