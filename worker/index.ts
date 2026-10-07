@@ -46,6 +46,15 @@ export default {
         return json(await store.apply(ops as Envelope[]));
       }
 
+      if (url.pathname === '/api/signin' && request.method === 'GET') {
+        // Pages come from the phone's saved copy, so a reload never meets the
+        // login. This address always goes to the network: if the login has
+        // expired, Access shows its sign-in page first, then lands back here.
+        const to = url.searchParams.get('to') ?? '/';
+        const location = to.startsWith('/') && !to.startsWith('//') ? to : '/';
+        return new Response(null, { status: 302, headers: { ...HEADERS, Location: location } });
+      }
+
       return json({ error: 'not found' }, 404);
     } catch (error) {
       console.error('api error', error);

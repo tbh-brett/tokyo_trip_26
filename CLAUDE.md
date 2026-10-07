@@ -22,7 +22,7 @@ The itinerary comes from "Tokyo Itinerary · 27 Nov – 3 Dec 2026" (7 Oct 2026,
 | Data | JSON in `/data`, loaded as content collections | Editable by Claude Code from a phone; diffable; one source of truth |
 | Map | MapLibre GL JS + OpenFreeMap `positron` (light) / `dark` style | No API key, no billing, no quota. Load only on Map and Route pages |
 | Navigation | Deep links into the Google Maps app | Transit, live hours and turn-by-turn are Google's job, not ours |
-| Offline | `@vite-pwa/astro` (Workbox), precache app shell + data + fonts | Opens instantly, survives no signal |
+| Offline | Workbox via `workbox-build` (`scripts/build-sw.mjs`, run after `astro build`): `dist/sw.js` precaches every page, script, style, font and icon. Pages are served from the phone first; a new deploy installs in the background and takes over (skipWaiting + clientsClaim). `/api/*` is never cached. `@vite-pwa/astro` was the plan but only supports Astro ≤ 5 | Opens instantly, survives no signal |
 | Fonts | IBM Plex Sans JP + IBM Plex Mono via Fontsource, self-hosted. Japanese glyphs are subset at build time to the characters in `/data` and `/src` (`scripts/subset-fonts.mjs`) | One family covering Latin and Japanese; ~37 KB per weight instead of ~900 KB; cacheable offline |
 | Alerts | Subscribed calendar feed (`.ics`) generated at build | Native phone alerts with no push server. Web push on iOS needs Home Screen install + a VAPID server — not worth it |
 | Hosting | Cloudflare Workers: static assets for every page, plus a small Worker (`worker/`) that only handles `/api/*` (`run_worker_first`). Deployed by Workers Builds from the private GitHub repo `tbh-brett/tokyo_trip_26` to the Worker `tokyo-trip-26` | Cloudflare's recommended path for new sites (chosen over Pages on 25 Sep 2026). Free static requests, no deploy cap, a failed build never deploys |
@@ -40,7 +40,11 @@ When changing the plan's shape, keep old stored plans loading: the store spreads
 
 ### Build pipeline
 
-`npm run build` = `check-json` (malformed JSON fails fast; Astro's loader would otherwise keep stale data) → `subset-fonts` → `astro check` → `tsc -p worker` → `astro build`. Workers Builds then runs `npx wrangler deploy`, which bundles the Worker. Rerun `npx wrangler types worker/worker-configuration.d.ts` after changing `wrangler.jsonc`. Run everything locally with `npx wrangler dev`. Schemas live in `src/content.config.ts`; cross-file checks (zones, lines, route stops, consecutive days, empty files) in `src/lib/data.ts`. The loader adds a `position` field to every array item so pages keep file order; never write `position` in the JSON.
+`npm run build` = `check-json` (malformed JSON fails fast; Astro's loader would otherwise keep stale data) → `subset-fonts` → `astro check` → `tsc -p worker` → `astro build` → `build-sw` (postbuild). Workers Builds then runs `npx wrangler deploy`, which bundles the Worker. Rerun `npx wrangler types worker/worker-configuration.d.ts` after changing `wrangler.jsonc`. Run everything locally with `npx wrangler dev`. Schemas live in `src/content.config.ts`; cross-file checks (zones, lines, route stops, consecutive days, empty files) in `src/lib/data.ts`. The loader adds a `position` field to every array item so pages keep file order; never write `position` in the JSON.
+
+### Offline and the login
+
+Because pages come from the phone, a reload never meets Cloudflare Access. When the plan API reports the login has expired, the "Sign in again" button goes to `/api/signin?to=<page>`, which always hits the network: Access shows its login if needed, then the Worker sends you back. The manifest link uses `crossorigin="use-credentials"` so it's fetched with the login cookie. Home Screen icons are in `public/icons/`. A Home Screen install on iPhone has its own storage: sign in and pick your name once more inside it. The Plan page's "On this phone" section says whether the site is saved for offline use.
 
 ## Data rules
 

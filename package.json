@@ -8,6 +8,7 @@
     "dev": "astro dev",
     "prebuild": "node scripts/check-json.mjs && npm run fonts",
     "build": "astro check && tsc -p worker && astro build",
+    "postbuild": "node scripts/build-sw.mjs",
     "preview": "wrangler dev",
     "deploy": "wrangler deploy"
   },
@@ -20,6 +21,7 @@
     "@astrojs/check": "^0.9.10",
     "subset-font": "^2.9.0",
     "typescript": "^6.0.3",
+    "workbox-build": "^7.4.1",
     "wrangler": "^4.140.0"
   },
   "engines": {

@@ -95,6 +95,11 @@ const names = data.travellers.map((t) => t.name).join(' and ');
     <ol class="feed" data-feed="20"></ol>
   </section>
 
+  <section class="section" aria-labelledby="device-h">
+    <h2 class="label" id="device-h">On this phone</h2>
+    <div class="device" data-device></div>
+  </section>
+
   <section class="section last" aria-labelledby="claude-h">
     <h2 class="label" id="claude-h">Bigger changes</h2>
     <p>
@@ -138,6 +143,15 @@ const names = data.travellers.map((t) => t.name).join(' and ');
   .hint {
     margin: var(--u) 0 0;
   }
+  .device {
+    padding-top: calc(var(--u) * 2);
+  }
+  .device > * + * {
+    margin-top: var(--u);
+  }
+  .device :global(.install) {
+    margin-top: calc(var(--u) * 3);
+  }
   .last {
     padding-bottom: calc(var(--u) * 5);
   }
@@ -155,12 +169,13 @@ const names = data.travellers.map((t) => t.name).join(' and ');
   import { shortDate } from '../../lib/time';
   import { getPlan } from '../../scripts/store';
   import { html, mount, placeView } from '../../scripts/ui';
-  import { wireChecklists, wireDayHeadlines, wireDayPreviews, wireFeeds } from '../../scripts/widgets';
+  import { wireChecklists, wireDayHeadlines, wireDayPreviews, wireDeviceStatus, wireFeeds } from '../../scripts/widgets';
 
   wireDayHeadlines();
   wireDayPreviews();
   wireChecklists();
   wireFeeds();
+  wireDeviceStatus();
 
   mount(document.querySelector<HTMLElement>('[data-wantlist]')!, () => {
     const plan = getPlan();

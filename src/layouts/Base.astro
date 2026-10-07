@@ -36,6 +36,12 @@ const tabs = [
     <meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)" />
     <meta name="format-detection" content="telephone=no" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- The site is behind Cloudflare Access, so the manifest must be fetched with the login cookie. -->
+    <link rel="manifest" href="/manifest.webmanifest" crossorigin="use-credentials" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Tokyo" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <title>{title === 'Tokyo 2026' ? title : `${title} · Tokyo 2026`}</title>
   </head>
   <body class={bodyClass} data-live={showTabs ? 'on' : 'off'}>
@@ -65,6 +71,9 @@ const tabs = [
   import { TRAVELLERS } from '../lib/catalog';
   import { dismiss, getNews, getSync, me, setMe, start, subscribe } from '../scripts/store';
   import { html } from '../scripts/ui';
+
+  // Save the whole site on the phone for no-signal use (scripts/build-sw.mjs).
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
 
   if (document.body.dataset.live === 'on') {
     start();
@@ -117,7 +126,8 @@ const tabs = [
     };
     bar.addEventListener('click', (e) => {
       const b = (e.target as HTMLElement).closest<HTMLElement>('[data-bar]');
-      if (b?.dataset.bar === 'reload') location.reload();
+      // Pages come from the phone's saved copy, so go via the network to meet the login.
+      if (b?.dataset.bar === 'reload') location.href = `/api/signin?to=${encodeURIComponent(location.pathname + location.search)}`;
       if (b?.dataset.bar === 'dismiss') dismiss();
     });
     paintBar();

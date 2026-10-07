@@ -183,3 +183,44 @@ export function wireAddToPlan() {
   }
 }
 
+
+/** [data-device]: is the site saved for no-signal use, and is it on the Home Screen? */
+export function wireDeviceStatus() {
+  const el = document.querySelector<HTMLElement>('[data-device]');
+  if (!el) return;
+  const paint = async () => {
+    const standalone =
+      matchMedia('(display-mode: standalone)').matches || (navigator as Navigator & { standalone?: boolean }).standalone === true;
+    let saved = 0;
+    try {
+      for (const name of await caches.keys()) {
+        if (name.includes('precache')) saved += (await (await caches.open(name)).keys()).length;
+      }
+    } catch {
+      saved = 0;
+    }
+    const supported = 'serviceWorker' in navigator && 'caches' in window;
+    const ready = supported && Boolean(navigator.serviceWorker.controller) && saved > 0;
+    el.innerHTML = html`
+      <p class="w500">${ready ? 'Ready for no signal' : supported ? 'Saving the site to this phone…' : "This browser can't save the site for offline use"}</p>
+      <p class="muted">${
+        ready
+          ? `${saved} pages and files are saved here. Every page opens on the subway; changes you make wait and sync later.`
+          : supported
+            ? 'Keep this page open for a minute, then check again.'
+            : 'Pages need signal to open. Changes still wait on the phone until they can sync.'
+      }</p>
+      ${ready ? '' : supported ? html`<button type="button" class="btn small" data-device-check>Check again</button>` : ''}
+      <p class="w500 install">${standalone ? 'Opened from the Home Screen' : 'Add it to your Home Screen'}</p>
+      <p class="muted">${
+        standalone
+          ? 'It opens full screen, like an app.'
+          : "iPhone: in Safari, tap Share, then Add to Home Screen. Android: in Chrome, open the menu, then Install app. You'll sign in once more inside it, and choose your name again."
+      }</p>`.value;
+  };
+  el.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).closest('[data-device-check]')) void paint();
+  });
+  void paint();
+  navigator.serviceWorker?.addEventListener('controllerchange', () => void paint());
+}

@@ -78,6 +78,8 @@ Still open from it: the Japan Cup lottery (22–24 Nov, result 25 Nov) decides S
 
 **Done when:** airplane mode, every page still opens; the site installs to the Home Screen with a proper icon and opens full-screen.
 
+✓ 7 Oct 2026: 337 files precached (2.5 MB before compression). Tested in headless Edge with the server stopped: all page types open from the phone with fonts, a change made offline waits and syncs when the server returns. Still to try on the real phones: Home Screen install and sign-in inside it.
+
 ## Phase 4 — routes and calendar
 
 - Route pages from `routes.json`: numbered stops, straight-line map, "Walk this in Google Maps" split into ≤ 3-waypoint legs. Optimise stop order once coordinates exist (`order_verified`).
