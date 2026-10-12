@@ -20,10 +20,10 @@ The itinerary comes from "Tokyo Itinerary · 27 Nov – 3 Dec 2026" (7 Oct 2026,
 |---|---|---|
 | Framework | Astro, static output, TypeScript | Content is the product; content collections + Zod schemas catch bad data at build time |
 | Data | JSON in `/data`, loaded as content collections | Editable by Claude Code from a phone; diffable; one source of truth |
-| Map | MapLibre GL JS + OpenFreeMap `positron` (light) / `dark` style | No API key, no billing, no quota. Load only on Map and Route pages |
+| Map | MapLibre GL JS + OpenFreeMap `positron` style (the site is light only) | No API key, no billing, no quota. Load only on Map and Route pages |
 | Navigation | Deep links into the Google Maps app | Transit, live hours and turn-by-turn are Google's job, not ours |
 | Offline | Workbox via `workbox-build` (`scripts/build-sw.mjs`, run after `astro build`): `dist/sw.js` precaches every page, script, style, font and icon. Pages are served from the phone first; a new deploy installs in the background and takes over (skipWaiting + clientsClaim). `/api/*` is never cached. `@vite-pwa/astro` was the plan but only supports Astro ≤ 5 | Opens instantly, survives no signal |
-| Fonts | IBM Plex Sans JP + IBM Plex Mono via Fontsource, self-hosted. Japanese glyphs are subset at build time to the characters in `/data` and `/src` (`scripts/subset-fonts.mjs`) | One family covering Latin and Japanese; ~37 KB per weight instead of ~900 KB; cacheable offline |
+| Fonts | Huninn (justfont 粉圓, OFL) for English and Chinese, one weight; Zen Maru Gothic (`@fontsource/zen-maru-gothic`) for Japanese names, addresses and Show to staff. Self-hosted and subset at build time (`scripts/subset-fonts.mjs`): Huninn's Chinese to the text in `src/i18n`, `data/i18n` and the `*_zh` fields; Zen Maru to the other Japanese in `/data` and `/src`. Huninn is read from the Google Fonts TTF in `@expo-google-fonts/huninn` (the only npm copy with every character in one file; none of its code runs). Chosen 12 Oct 2026 for the picture-book redesign | Rounded, friendly, covers both languages; Huninn draws kanji the Taiwanese way, so staff see Japanese forms from Zen Maru. ~26 KB Latin, ~220 KB Chinese (only loaded in Chinese), ~68 KB per Zen Maru weight |
 | Alerts | Subscribed calendar feed (`.ics`) generated at build | Native phone alerts with no push server. Web push on iOS needs Home Screen install + a VAPID server — not worth it |
 | Hosting | Cloudflare Workers: static assets for every page, plus a small Worker (`worker/`) that only handles `/api/*` (`run_worker_first`). Deployed by Workers Builds from the private GitHub repo `tbh-brett/tokyo_trip_26` to the Worker `tokyo-trip-26` | Cloudflare's recommended path for new sites (chosen over Pages on 25 Sep 2026). Free static requests, no deploy cap, a failed build never deploys |
 | Shared plan | One SQLite-backed Durable Object (`TripStore`, `worker/trip-store.ts`) holding the plan as one JSON document, plus a log of every change (`ops` table). Added 25 Sep 2026 at Brett's request so both phones can edit the itinerary live | Strict ordering of edits from two phones, no database to provision, free tier (100k requests/day) |
@@ -48,13 +48,13 @@ Because pages come from the phone, a reload never meets Cloudflare Access. When 
 
 ### Two languages: English and Traditional Chinese
 
-Every page carries both; a phone shows one. The 中文 / EN button in the tab bar sets `tokyo2026:lang` in `localStorage`; an inline script in `Base.astro` applies it before paint (`html[data-lang="zh"]`, `lang="zh-Hant"`), and CSS hides the other language's `[data-l]` spans. Each phone keeps its own choice; URLs are the same in both.
+Every page carries both; a phone shows one. The 中文 / EN button in the top bar sets `tokyo2026:lang` in `localStorage`; an inline script in `Base.astro` applies it before paint (`html[data-lang="zh"]`, `lang="zh-Hant"`), and CSS hides the other language's `[data-l]` spans. Each phone keeps its own choice; URLs are the same in both.
 
 - **Interface text** lives only in `src/i18n/ui.ts` as `[English, Chinese]` pairs (Hong Kong written Chinese). Pages use `<U k="key" />`; pairs of content use `<T en zh />`; browser code uses `t("key")` from `src/scripts/lang.ts`. Add both languages whenever you add text. `<option>` text, placeholders and the page title switch through `data-text-*`, `data-ph-*` and `meta[name=title-*]`.
-- **Research translations** live in `data/i18n/zh-Hant.json` (places: why / note / recognition / price; days: title / anchor / notes; bookings; prep; zone names). Every field is optional and falls back to English. The build fails if a key doesn't match an English entry, a translated note has no English note, or a day's translated notes don't line up one-to-one. When you change English research, change the Chinese with it, or delete the stale translation so the English shows.
+- **Research translations** live in `data/i18n/zh-Hant.json` (places: why / note / recognition / price; days: title / anchor / notes; bookings; prep; zone names). Every field is optional and falls back to English. The structures added with the redesign carry their Chinese inline instead, in fields named `*_zh`: day `legs` (`text_zh`), `flights` (`note_zh`, airport `name_zh`), `stay` (`area_zh`) and `lines.json` (`name_zh`). The build fails if a key doesn't match an English entry, a translated note has no English note, or a day's translated notes don't line up one-to-one. When you change English research, change the Chinese with it, or delete the stale translation so the English shows.
 - Award and list names stay literal in both languages (`喫茶店百名店 2026`, `Asia's 50 Best Bars`). Place names stay English + Japanese. Text typed into the plan is shown as typed.
 - The feed stores each change as a kind plus details (`src/lib/activity.ts`), so each phone renders it in its own language; entries from before 7 Oct 2026 are English text only.
-- Chinese renders in the phone's Traditional Chinese font (`--sans-zh`: Plex Latin, then PingFang TC / Noto Sans TC); Japanese names keep Plex Sans JP. Keep Chinese characters out of `/src` outside `src/i18n`, or the Japanese font subset grows for nothing.
+- Chinese renders in Huninn (`--font-zh`); Japanese names (`lang="ja"`) and Japanese words inside English text use Zen Maru Gothic. Chinese typed into the plan that isn't in the subset falls back to the phone's Traditional Chinese font. Keep Chinese and Japanese characters out of `/src` outside `src/i18n` (comments included), or the Zen Maru subset grows for nothing.
 
 ## Data rules
 
@@ -65,34 +65,53 @@ Every page carries both; a phone shows one. The 中文 / EN button in the tab ba
 - Geocode street-level Japanese addresses with the GSI (国土地理院) address search API. Store `lat`/`lng`, set `coords_verified: true` only after a spot-check against Google Maps.
 - `closed_days` use `Sun`…`Sat`. `hours` are `["HH:MM","HH:MM"]` pairs in JST; a close after midnight is written as e.g. `["18:00","01:00"]`.
 - Recognition strings are literal (`喫茶店百名店 2026`, `Asia's 50 Best Bars 2026 · No. 23`). Keep the year; lists change annually.
-- `trip.json` holds the home station (`base`). `lines.json` holds each line's name, letter code (`G`, `JY`, or `null` when there isn't a single one) and colour. The colours of `toden`, `denentoshi`, `setagaya`, `minatomirai`, `enoden` and `monorail` are approximations.
+- `trip.json` holds the home station (`base`), where you stay (`stay`) and the `flights`. Anything not known yet is `null` and shows as "to add"; never fill a flight number, terminal, hotel name, phone or time from memory. Known on 12 Oct 2026: land at Narita 27 Nov 14:45; Brett leaves Narita 3 Dec 22:00.
+- Each day in `days.json` has `must` (one or two of its `places` that make the day: tagged Must-go on the timeline) and `legs` (how to get to a stop). Fill legs **only from what that day's notes already say**: the line, station codes and minutes the notes give, nothing more. A leg shows above its `to` stop when that stop is in the plan; `"hotel"` legs show right after an arriving flight, after the last place on the day you fly out, and otherwise at the end of the day; `"airport"` legs just before a departing flight.
+- `lines.json` holds each line's name, letter code (`G`, `JY`, or `null` when there isn't a single one) and colour. The colours of `toden`, `denentoshi`, `setagaya`, `minatomirai`, `enoden` and `monorail` are approximations.
 - A place with `hours: []` has no known hours: the UI shows "Not listed yet" and no open/closed status.
 
-## Design — modernist, words first
+## Design — picture book (繪本風)
 
-Swiss / International Typographic Style meets Tokyo Metro wayfinding. Restraint is the brief.
+Since 12 Oct 2026 the site looks like a picture book, at Clara's request, after a Claude-made Busan trip site (screenshots of it in `design/reference/`: match its style, never copy its code or drawings). The usability rules from the earlier modernist design all stay.
 
-- **Grid**: 4 columns on mobile, 16px gutters, 8px baseline. Flush left, ragged right. Nothing centred except the show-to-staff screen.
-- **Type** (IBM Plex Sans JP; Plex Mono for times, prices, station codes, distances): 13 / 16 / 20 / 28 / 40px. Body never below 16px. Weights 400, 500, 700 only.
-- **Colour**: black `#111`, white `#FFF`, greys `#F2F2F2 #BDBDBD #6B6B6B`, one signal colour: Ginza-line orange `#FF9500`. Orange is a **fill with black text on it** (≈9:1), never orange text on white (fails contrast). Dark mode inverts paper/ink; orange stays.
-- **Line colours** appear only in station badges styled like Tokyo Metro codes (ring + `G14`). Nowhere else.
-- **Separation by hairlines and space**: 1px rules, no shadows, no gradients, corner radius 0–2px. No card stacks with drop shadows.
-- **Visible words**: every control carries a text label. Icons only beside text, never alone. Tap targets ≥ 44px. No hover-only affordances, no truncated place names, no carousels, no modals for primary content.
-- **Bilingual order**: English name for scanning, Japanese name beneath at equal visual weight — it is what gets shown to staff and typed into Maps.
+- **Paper**: washi `#FFFCF6`. **Light only, no dark mode**, as in the reference. `color-scheme: light`.
+- **Lines**: 3px ink `#3E3A39` on cards, buttons, tabs, the day track and illustrations; a 3px ink rule under the top bar. Dotted ink lines for timelines, flight durations and list separators.
+- **Shapes**: radius 20–24px on cards, full pills on chips and buttons. Flat colour only: no gradients, no blur shadows.
+- **Palette** (fills; text on them is always ink, never white): coral `#F2A497` (selected tab, selected day, today, Must-go, plane; light tint `#FBE1DA` for day header cards), yamabuki `#F6D27A` (countdown, recognition pills, taxi), mizu `#A8D3E6` (flight card header, trains, link underlines), wakatake `#B9DAA5` (walking, ticked, likely open). Warning text `#B5483A` (5.2:1) for small notes, only on washi or white. Ginza orange `#FF9500` is the mascot's body and nothing else.
+- **Text**: ink on washi ≈ 11:1. Secondary text `#6B6461` (5.7:1), never on a pastel fill; on pastels use ink. Check every new pair for AA.
+- **Links**: ink text with a 3px mizu underline.
+- **Type**: Huninn, one weight (400), `font-synthesis: none`: build hierarchy with size, fills and outlined boxes, never bold. Titles letter-spaced (`.spaced`). Zen Maru Gothic 500 for Japanese, 700 on Show to staff. Scale 13 / 16 / 20 / 28 / 40px; body never below 16px. Times use `tabular-nums` (Huninn's digits are already equal-width).
+- **Mascot**: a little Ginza-line car (orange body, ink outline, two dot eyes; `src/components/Mascot.astro`). Top-left in the top bar linking to Today, and it rides the day track.
+- **Line colours** appear only in station badges (Metro-style ring + `G14`) and as the small dot in a train leg's pill (`● G03 銀座線`).
+- **Illustrations**: inline SVG in `src/components/illustrations/`, same 3px ink line and flat palette, original and about Tokyo (no anime or manga characters, no logos, nothing traced). One hero plus one per day (`DayArt.astro` maps dates to drawings). `role="img"` with a label in both languages, or `aria-hidden` when decorative. Keep each under ~6 KB.
+- **Motion**: CSS only, transform and opacity. Illustrations drift (4–6 s loops, 2–4px or a few degrees: classes `a-bob`, `a-sway`, `a-drift`, `a-fall`, `a-twinkle`); the mascot slides to the chosen day with a slight overshoot (~440 ms); day content bounces in once (`.enter`, staggered by `--i`), never on live updates; ticking a box pops. `prefers-reduced-motion: reduce` turns all of it off.
+- **Visible words**: every control carries a text label. Icons (`src/lib/icons.ts`) only beside text, never alone. Tap targets ≥ 44px. No hover-only affordances, no truncated place names, no carousels, no modals for primary content.
+- **Bilingual order**: English name for scanning, Japanese name beneath — it is what gets shown to staff and typed into Maps.
 - **Sunlight-legible**: WCAG AA minimum everywhere, aim AAA for body text.
+
+### Components
+
+- **Top bar** (fixed, safe-area aware): mascot left; Today · Plan · Places and 中文 / EN right, the current one in a coral pill with a 3px outline.
+- **Section headings** (`SectionHead.astro`): a round badge (pastel circle, 3px outline, pictogram) beside the words: plane for Flights, train for the itinerary, check box for prep, house for Stay.
+- **Hero** (Today): the illustration in a rounded 3px frame, the title letter-spaced (「東京 7 天 6 夜」), the dates, and a yamabuki pill: countdown before, "Day 3 of 7" (coral) during.
+- **Flight cards** (`FlightCard.astro`), **stay card** (`StayCard.astro`, with Copy address and Show to staff at `/stay/staff/`).
+- **Day track** (`DayTrack.astro`): a metro strip map, one station per day, date under each dot and the weekday below; the chosen day in a coral pill; the mascot rides the line. Day pages keep their URLs (`/day/<date>/`).
+- **Day header card** (`DayCard.astro`): coral tint, the day's drawing small in a frame, "Day 2", the title, and where you sleep (or when you fly home).
+- **Timeline** (`src/scripts/timeline.ts`, used by day pages and by Today during the trip): times left, dotted line with hollow nodes; places as white cards with the name linked and the plan note small and grey; legs as pills between stops; flights as stops; Must-go as a coral tag; untimed items under "Any time".
+- **Checklists**: rounded square boxes, 3px outline; ticked is a drawn tick on wakatake.
 
 ## Modules
 
 Tabs: Today · Plan · Places. Day pages at `/day/<date>/`; your own places at `/p/mine/?id=…`; add one at `/add/`.
 
-1. **Today** — date-aware header (countdown before the trip; "Day 3 of 7" during). Today's anchor. Next timed item. **Near me now**: three places max, sorted by open-now then distance (Geolocation API; fall back to a zone picker if denied). Walking time = distance × 1.3 ÷ 80 m/min, labelled "about".
-2. **Plan** — the seven days with what you've planned, the shared Want list, bookings and prep as shared checklists, the feed of changes. Each day page: your plan (timed items by the clock, the rest in your order), edit time / day / note, move up / down, remove (tap twice), edit the headline, add by search / Want list / the day's ideas (`days.json` `places`) / free text, and Ask Claude about the day.
-3. **Map** — every place as a black dot, selected in orange; filter by kind with text chips; overlay one route at a time; "Near me" recentres.
+1. **Today** — the hero (countdown before the trip; "Day 3 of 7" during), flights, the days, bookings and prep before the trip, the stay card, the latest changes. During the trip: today's card, anchor, next timed item and today's timeline. **Near me now**: three places max, sorted by open-now then distance (Geolocation API; fall back to a zone picker if denied). Walking time = distance × 1.3 ÷ 80 m/min, labelled "about".
+2. **Plan** — the seven days with what you've planned, the shared Want list, bookings and prep as shared checklists, the feed of changes. Each day page: the day track, the day header card, your plan as a timeline (timed items by the clock, the rest in your order, legs and flights between), edit time / day / note, move up / down, remove (tap twice), edit the headline, add by search / Want list / the day's ideas (`days.json` `places`) / free text, and Ask Claude about the day.
+3. **Map** — every place as an ink dot, selected in coral; filter by kind with text chips; overlay one route at a time; "Near me" recentres.
 4. **Places** — by kind (Eat, Coffee, Tea, Bars, See, Buy), filter by zone, recognition shown on every row. Static detail page per place (`/p/[id]`).
 5. **Routes** — curated walks from `/data/routes.json`. Stops numbered on the map, joined by straight lines (label them "not street routing"). "Walk this in Google Maps" splits into legs of **≤ 3 waypoints** (Google's mobile limit).
 6. **Areas** — zone guides from `/data/zones.json`.
 
-Place detail must include: **Show to staff** (full-screen, white on black, `name_ja` at 48px+, address below, request a screen wake lock and tolerate refusal), **Open in Google Maps**, **Directions from here** (transit), **Copy address**, Want / Booked / Skip marks shared through the plan, **In your plan** with **Add to plan** (day + optional time), and **Ask Claude about it** (`src/lib/ask.ts`: a `claude.ai/new?q=` link with the question filled in; no API key).
+Place detail must include: **Show to staff** (full-screen, washi on ink, `name_ja` at 48px+ in Zen Maru Gothic, address below, request a screen wake lock and tolerate refusal), **Open in Google Maps**, **Directions from here** (transit), **Copy address**, Want / Booked / Skip marks shared through the plan, **In your plan** with **Add to plan** (day + optional time), and **Ask Claude about it** (`src/lib/ask.ts`: a `claude.ai/new?q=` link with the question filled in; no API key).
 
 ### Google Maps link formats
 
