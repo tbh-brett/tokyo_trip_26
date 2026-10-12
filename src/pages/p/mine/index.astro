@@ -2,6 +2,7 @@
 // One page for every place you add yourselves (/p/mine/?id=…), filled in
 // from the shared plan in the browser.
 import Base from '../../../layouts/Base.astro';
+import SectionHead from '../../../components/SectionHead.astro';
 import T from '../../../components/T.astro';
 import U from '../../../components/U.astro';
 import { KINDS } from '../../../lib/data';
@@ -16,7 +17,7 @@ import { KIND_LABEL, MARK_TEXT, ui } from '../../../i18n/ui';
 
   <article data-mine hidden>
     <header class="page-head head">
-      <h1 class="t28 w700"><span data-f="name"></span><span lang="ja" data-f="name_ja"></span></h1>
+      <h1><span class="t28" data-f="name"></span><span class="t20" lang="ja" data-f="name_ja"></span></h1>
       <p class="t13 muted" data-f="meta"></p>
     </header>
     <div class="wrap"><p class="t20" data-f="note"></p></div>
@@ -31,8 +32,9 @@ import { KIND_LABEL, MARK_TEXT, ui } from '../../../i18n/ui';
       <a class="btn" data-link="ask" href="#"><U k="place.ask" /> <span class="hint">↗</span></a>
     </div>
 
-    <div class="wrap block">
-      <span class="label" id="mark-label"><U k="place.markFor" /></span>
+    <section class="section" aria-labelledby="mark-label">
+      <SectionHead icon="star" tone="coral" id="mark-label" small><U k="place.markFor" /></SectionHead>
+      <div>
       <div class="seg" role="group" aria-labelledby="mark-label" data-marks="">
         {
           MARKS.map((m) => (
@@ -43,10 +45,12 @@ import { KIND_LABEL, MARK_TEXT, ui } from '../../../i18n/ui';
         }
       </div>
       <p class="t13 muted by" data-mark-by></p>
-    </div>
+      </div>
+    </section>
 
-    <div class="wrap block">
-      <span class="label"><U k="place.inPlan" /></span>
+    <section class="section" aria-labelledby="inplan-h">
+      <SectionHead icon="calendar" tone="mizu" id="inplan-h" small><U k="place.inPlan" /></SectionHead>
+      <div class="card">
       <div data-in-plan=""></div>
       <form class="addplan" data-add-to-plan="">
         <div class="row2">
@@ -54,19 +58,22 @@ import { KIND_LABEL, MARK_TEXT, ui } from '../../../i18n/ui';
           <label class="field"><span><U k="place.timeOpt" /></span><input type="time" name="time" /></label>
         </div>
         <button class="btn small primary" type="submit"><U k="place.addToPlan" /></button>
-        <p class="t13 w500" data-status aria-live="polite"></p>
+        <p class="t13" data-status aria-live="polite"></p>
       </form>
-    </div>
+      </div>
+    </section>
 
-    <dl class="wrap facts">
+    <div class="section">
+    <dl class="facts">
       <div><dt><U k="fact.address" /></dt><dd lang="ja" data-f="address"></dd></div>
       <div><dt><U k="fact.kind" /></dt><dd data-f="kind"></dd></div>
       <div><dt><U k="fact.link" /></dt><dd class="t13" data-f="link"></dd></div>
     </dl>
+    </div>
 
     <div class="wrap block">
       <details class="edit" data-edit>
-        <summary class="w500"><U k="mine.edit" /></summary>
+        <summary class="linkish"><U k="mine.edit" /></summary>
         <form data-edit-form>
           <label class="field"><span><U k="add.name" /></span><input type="text" name="name" required maxlength="120" /></label>
           <label class="field"><span><U k="add.nameJa" /></span><input type="text" name="name_ja" maxlength="120" lang="ja" /></label>
@@ -86,7 +93,7 @@ import { KIND_LABEL, MARK_TEXT, ui } from '../../../i18n/ui';
           </label>
           <label class="field"><span><U k="add.note" /></span><textarea name="note" rows="3" maxlength="500"></textarea></label>
           <button class="btn small primary" type="submit"><U k="common.save" /></button>
-          <p class="t13 w500" data-edit-status aria-live="polite"></p>
+          <p class="t13" data-edit-status aria-live="polite"></p>
         </form>
       </details>
       <button class="btn small delete" type="button" data-delete><U k="mine.delete" /></button>
@@ -99,8 +106,7 @@ import { KIND_LABEL, MARK_TEXT, ui } from '../../../i18n/ui';
     display: inline-flex;
     align-items: center;
     min-height: var(--tap);
-    padding-top: var(--u);
-    font-weight: 500;
+    margin-top: var(--u);
   }
   .missing {
     padding-top: calc(var(--u) * 3);
@@ -118,29 +124,13 @@ import { KIND_LABEL, MARK_TEXT, ui } from '../../../i18n/ui';
   .block {
     margin-top: calc(var(--u) * 3);
   }
-  .block > .label {
-    margin-bottom: var(--u);
-  }
   .by {
     margin-top: 4px;
   }
   .addplan {
     margin-top: var(--u);
   }
-  .facts {
-    margin-top: calc(var(--u) * 3);
-  }
-  .facts > div:first-child {
-    border-top: 1px solid var(--ink);
-  }
-  .edit summary {
-    display: flex;
-    align-items: center;
-    min-height: var(--tap);
-    cursor: pointer;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
+
   .edit form .btn {
     margin-top: calc(var(--u) * 2);
   }

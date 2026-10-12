@@ -1,0 +1,162 @@
+---
+// The day switcher: a metro strip map. One station per day on a 3px ink line,
+// the date under each, the chosen day in a coral pill. The mascot rides the
+// line and slides to the chosen day (it remembers where it was for this visit).
+import Mascot from './Mascot.astro';
+import { slashDate, ui, weekdayIn } from '../i18n/ui';
+
+interface Props {
+  days: ReadonlyArray<{ date: string; weekday: string }>;
+  /** The day this page is about: shown in a coral pill. */
+  current?: string | null;
+  /** Where the mascot sits. Defaults to the current day, else the first. */
+  at?: string | null;
+}
+
+const { days, current = null, at = null } = Astro.props;
+const index = (date: string | null) => days.findIndex((d) => d.date === date);
+const atIndex = Math.max(0, index(at ?? current));
+---
+
+<nav
+  class="track"
+  data-track
+  data-at={atIndex}
+  data-today-at={at === null && current === null ? '' : undefined}
+  style={`--n: ${days.length}; --at: ${atIndex}`}
+  aria-label={ui('track.label', 'en')}
+  data-aria-en={ui('track.label', 'en')}
+  data-aria-zh={ui('track.label', 'zh')}
+>
+  <span class="rail" aria-hidden="true"></span>
+  <span class="car" aria-hidden="true"><Mascot /></span>
+  <ol>
+    {
+      days.map((d) => (
+        <li>
+          <a href={`/day/${d.date}/`} aria-current={d.date === current ? 'page' : undefined} data-track-day={d.date}>
+            <span class="dot" />
+            <span class="date">{slashDate(d.date)}</span>
+            <span class="wd t13">
+              <span data-l="en">{d.weekday}</span>
+              <span data-l="zh" lang="zh-Hant">
+                {weekdayIn(d.weekday, 'zh')}
+              </span>
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+
+<style>
+  /* Seven days need the gutters too. */
+  .track {
+    position: relative;
+    container-type: inline-size;
+    margin-inline: -10px;
+    padding-top: 34px;
+  }
+  /* The line runs between the first and last stations. */
+  .rail {
+    position: absolute;
+    top: 41.5px;
+    left: calc(50% / var(--n));
+    right: calc(50% / var(--n));
+    height: 3px;
+    background: var(--ink);
+  }
+  /* Wheels on the rail, covering the dot of the day it's at. */
+  .car {
+    position: absolute;
+    z-index: 2;
+    top: 3px;
+    left: 0;
+    width: 44px;
+    transform: translateX(calc((var(--at) + 0.5) * 100cqw / var(--n) - 22px));
+  }
+  .track.go .car {
+    transition: transform 440ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .car :global(svg) {
+    width: 44px;
+    height: 40px;
+    animation: bob 2.6s ease-in-out infinite;
+  }
+  ol {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  }
+  a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-height: 88px;
+    padding-bottom: 4px;
+    text-decoration: none;
+  }
+  .dot {
+    width: 18px;
+    height: 18px;
+    margin-top: 0;
+    border: 3px solid var(--ink);
+    border-radius: 50%;
+    background: var(--card);
+  }
+  .date {
+    padding: 0 5px;
+    border-radius: var(--r-pill);
+    font-size: var(--t16);
+    line-height: 1.6;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .wd {
+    color: var(--ink-2);
+  }
+  a[aria-current='page'] .date,
+  a[data-today] .date {
+    background: var(--coral);
+  }
+  a[aria-current='page'] .dot {
+    background: var(--coral);
+  }
+</style>
+
+<script>
+  // Slide the mascot from where it was on the last page to this page's day.
+  const KEY = 'tokyo2026:track';
+  for (const track of document.querySelectorAll<HTMLElement>('[data-track]')) {
+    let to = Number(track.dataset.at);
+    // Today and Plan: the mascot waits at today during the trip.
+    if (track.dataset.todayAt !== undefined) {
+      const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Tokyo' }).format(new Date());
+      const links = [...track.querySelectorAll<HTMLElement>('[data-track-day]')];
+      const i = links.findIndex((a) => a.dataset.trackDay === parts);
+      if (i >= 0) {
+        to = i;
+        links[i].dataset.today = '';
+      } else if (links.length && parts > links[links.length - 1].dataset.trackDay!) to = links.length - 1;
+    }
+    let from = to;
+    try {
+      const saved = sessionStorage.getItem(KEY);
+      if (saved !== null) from = Number(saved);
+      sessionStorage.setItem(KEY, String(to));
+    } catch {
+      // no memory: no slide
+    }
+    track.style.setProperty('--at', String(from));
+    if (from !== to) {
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          track.classList.add('go');
+          track.style.setProperty('--at', String(to));
+        }),
+      );
+    }
+  }
+</script>

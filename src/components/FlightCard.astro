@@ -1,0 +1,138 @@
+---
+// A flight from data/trip.json: a mizu header strip (date, direction, flight
+// number), then departure and arrival in large type with a dotted line and the
+// time in the air between them, and a note in the warning colour. Anything not
+// known yet says so instead of guessing.
+import T from './T.astro';
+import U from './U.astro';
+import type { Flight } from '../lib/data';
+import { dateIn, ui } from '../i18n/ui';
+
+interface Props {
+  flight: Flight;
+}
+
+const { flight: f } = Astro.props;
+const duration = f.minutes ? ui('flight.duration', 'en', { h: Math.floor(f.minutes / 60), m: f.minutes % 60 }) : null;
+const ends = [
+  { time: f.depart, at: f.from },
+  { time: f.arrive, at: f.to },
+];
+const where = (a: Flight['from'], lang: 'en' | 'zh') => {
+  const name = lang === 'zh' ? (a.name_zh ?? a.name_en) : a.name_en;
+  return [name ?? ui('flight.toAdd', lang), a.terminal].filter(Boolean).join(' ');
+};
+---
+
+<article class="flight">
+  <header>
+    <span>
+      <T en={dateIn(f.date, 'en')} zh={dateIn(f.date, 'zh')} />
+      <U k={f.direction === 'outbound' ? 'flight.outbound' : 'flight.return'} />
+      {f.who.length > 0 && <span class="who"> · <U k="flight.only" v={{ names: f.who.join(', ') }} vz={{ names: f.who.join('、') }} /></span>}
+    </span>
+    <span class="no">{f.number ? [f.airline, f.number].filter(Boolean).join(' ') : <U k="flight.noNumber" />}</span>
+  </header>
+  <div class="body">
+    <div class="ends">
+      {
+        ends.map((e, i) => (
+          <>
+            {i === 1 && (
+              <span class="between" aria-hidden="true">
+                <span class="dots" />
+                {duration && <span class="t13">{duration}</span>}
+              </span>
+            )}
+            <span class:list={['end', { arrive: i === 1 }]}>
+              <span class:list={['time', { unknown: !e.time }]}>{e.time ?? '--:--'}</span>
+              <span class="where">
+                <T en={where(e.at, 'en')} zh={where(e.at, 'zh')} />
+              </span>
+            </span>
+          </>
+        ))
+      }
+    </div>
+    {
+      f.note_en && (
+        <p class="note warn t13">
+          <T en={f.note_en} zh={f.note_zh} />
+        </p>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .flight {
+    overflow: hidden;
+    background: var(--card);
+    border: var(--line) solid var(--ink);
+    border-radius: var(--r-card);
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    background: var(--mizu);
+    border-bottom: var(--line) solid var(--ink);
+  }
+  header > span:first-child {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 8px;
+  }
+  .no {
+    flex: none;
+    font-size: var(--t13);
+    text-align: right;
+  }
+  .body {
+    padding: 14px 20px 16px;
+  }
+  .ends {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .end {
+    display: flex;
+    flex-direction: column;
+  }
+  .end.arrive {
+    align-items: flex-end;
+    text-align: right;
+  }
+  .time {
+    font-size: var(--t40);
+    line-height: 1.15;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .time.unknown {
+    color: var(--ink-2);
+  }
+  .where {
+    font-size: var(--t16);
+  }
+  .between {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding-top: 22px;
+    color: var(--ink-2);
+  }
+  .dots {
+    width: 100%;
+    height: 4px;
+    background: radial-gradient(circle, var(--ink) 1.5px, transparent 1.9px) 0 50% / 8px 4px repeat-x;
+  }
+  .note {
+    margin-top: 12px;
+  }
+</style>

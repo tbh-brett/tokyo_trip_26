@@ -16,7 +16,7 @@ const number = code ? code.slice(letters?.length ?? 0) : '';
 ---
 
 <span class:list={['badge', { large }]}>
-  <span class="ring mono" style={`--line: ${line.colour}`} aria-hidden="true">
+  <span class="ring num" style={`--lc: ${line.colour}`} aria-hidden="true">
     {letters && <span>{letters}</span>}
     {number && <span>{number}</span>}
   </span>
@@ -37,12 +37,11 @@ const number = code ? code.slice(letters?.length ?? 0) : '';
     justify-content: center;
     width: 32px;
     height: 32px;
-    border: 4px solid var(--line);
+    border: 4px solid var(--lc);
     border-radius: 50%;
-    background: var(--paper);
+    background: var(--card);
     color: var(--ink);
     font-size: var(--t13);
-    font-weight: 700;
     line-height: 1;
   }
   .large .ring {
@@ -53,6 +52,5 @@ const number = code ? code.slice(letters?.length ?? 0) : '';
   }
   .large .name {
     font-size: var(--t20);
-    font-weight: 500;
   }
 </style>

@@ -1,10 +1,13 @@
 ---
 import Base from '../../layouts/Base.astro';
+import DayCard from '../../components/DayCard.astro';
+import DayTrack from '../../components/DayTrack.astro';
+import SectionHead from '../../components/SectionHead.astro';
 import StationBadge from '../../components/StationBadge.astro';
 import T from '../../components/T.astro';
 import U from '../../components/U.astro';
 import { loadData } from '../../lib/data';
-import { dateIn, ui, weekdayIn } from '../../i18n/ui';
+import { dateIn, ui } from '../../i18n/ui';
 
 export async function getStaticPaths() {
   const data = await loadData();
@@ -16,8 +19,6 @@ const date = Astro.params.date!;
 const index = data.days.findIndex((d) => d.date === date);
 const day = data.days[index];
 const zh = data.zh.days[date];
-const prev = data.days[index - 1];
-const next = data.days[index + 1];
 const ideas = day.places.map((id) => data.place(id));
 const ph = (key: Parameters<typeof ui>[0]) => ({ 'data-ph-en': ui(key, 'en'), 'data-ph-zh': ui(key, 'zh'), placeholder: ui(key, 'en') });
 ---
@@ -27,29 +28,18 @@ const ph = (key: Parameters<typeof ui>[0]) => ({ 'data-ph-en': ui(key, 'en'), 'd
   titleZh={`${dateIn(date, 'zh')} · ${zh?.title ?? day.title}`}
   tab="plan"
 >
-  <nav class="wrap daynav" aria-label="Days">
-    <a href="/plan/"><U k="day.back" /></a>
-    <span>
-      {prev && <a href={`/day/${prev.date}/`}>‹ <T en={prev.weekday} zh={weekdayIn(prev.weekday, 'zh')} /></a>}
-      {next && <a href={`/day/${next.date}/`}><T en={next.weekday} zh={weekdayIn(next.weekday, 'zh')} /> ›</a>}
-    </span>
-  </nav>
-
-  <header class="page-head">
-    <p class="label">
-      <U
-        k="today.dayOf"
-        v={{ n: index + 1, m: data.days.length, date: dateIn(date, 'en') }}
-        vz={{ n: index + 1, m: data.days.length, date: dateIn(date, 'zh') }}
-      />
+  <div class="section top">
+    <SectionHead icon="train" tone="coral"><U k="itin.title" /></SectionHead>
+    <DayTrack days={data.days} current={date} />
+    <div class="enter" style="--i: 0">
+      <DayCard day={day} n={index + 1} zh={zh} stay={data.stay} flights={data.flights} level={1} />
+    </div>
+    <p class="anchor enter" style="--i: 1">
+      <span class="label"><U k="day.mainPlan" /></span>
+      <span data-day-anchor={date}><T en={day.anchor} zh={zh?.anchor} /></span>
     </p>
-    <h1 class="t40 w700" data-day-title={date}><T en={day.title} zh={zh?.title} /></h1>
-  </header>
-  <p class="anchor t20 w500" data-day-anchor={date}><T en={day.anchor} zh={zh?.anchor} /></p>
-
-  <div class="wrap">
     <details class="headline-edit" data-headline={date}>
-      <summary class="w500"><U k="day.editHeadline" /></summary>
+      <summary class="linkish"><U k="day.editHeadline" /></summary>
       <form data-form="headline">
         <label class="field"><span><U k="day.title" /></span><input type="text" name="title" maxlength="80" /></label>
         <label class="field"><span><U k="day.mainPlan" /></span><textarea name="anchor" maxlength="240" rows="3"></textarea></label>
@@ -61,8 +51,8 @@ const ph = (key: Parameters<typeof ui>[0]) => ({ 'data-ph-en': ui(key, 'en'), 'd
     </details>
   </div>
 
-  <section class="section" aria-labelledby="plan-h">
-    <h2 class="label" id="plan-h"><U k="day.yourPlan" /></h2>
+  <section class="section plan" aria-labelledby="plan-h">
+    <h2 class="sr-only" id="plan-h"><U k="day.yourPlan" /></h2>
     <div data-day-items={date}></div>
     <p class="btns ask">
       <a class="btn" data-ask-day href="https://claude.ai/new"><U k="day.ask" /> <span class="hint">↗</span></a>
@@ -70,38 +60,40 @@ const ph = (key: Parameters<typeof ui>[0]) => ({ 'data-ph-en': ui(key, 'en'), 'd
   </section>
 
   <section class="section" aria-labelledby="add-h" data-adder={date}>
-    <h2 class="label" id="add-h"><U k="day.add" /></h2>
-    <label class="field first"><span><U k="day.timeNext" /></span><input type="time" name="time" data-add-time /></label>
-    <label class="field">
-      <span><U k="day.find" /></span>
-      <input type="search" name="q" autocomplete="off" data-search {...ph('day.findPh')} />
-    </label>
-    <ul class="picks" data-results></ul>
-
-    <form data-form="custom-item" class="custom">
+    <SectionHead icon="plus" tone="wakatake" id="add-h"><U k="day.add" /></SectionHead>
+    <div class="card">
+      <label class="field first"><span><U k="day.timeNext" /></span><input type="time" name="time" data-add-time /></label>
       <label class="field">
-        <span><U k="day.custom" /></span>
-        <input type="text" name="title" maxlength="120" {...ph('day.customPh')} />
+        <span><U k="day.find" /></span>
+        <input type="search" name="q" autocomplete="off" data-search {...ph('day.findPh')} />
       </label>
-      <button class="btn small" type="submit"><U k="day.addIt" /></button>
-    </form>
+      <ul class="picks" data-results></ul>
+
+      <form data-form="custom-item" class="custom">
+        <label class="field">
+          <span><U k="day.custom" /></span>
+          <input type="text" name="title" maxlength="120" {...ph('day.customPh')} />
+        </label>
+        <button class="btn small" type="submit"><U k="day.addIt" /></button>
+      </form>
+      <p class="t13 status" data-add-status aria-live="polite"></p>
+    </div>
     <p class="btns">
       <a class="btn" href={`/add/?day=${date}`}><U k="day.addUnlisted" /> <span class="hint">→</span></a>
     </p>
-    <p class="t13 w500" data-add-status aria-live="polite"></p>
 
-    <h3 class="label sub"><U k="day.fromWant" /></h3>
+    <SectionHead icon="star" tone="coral" level={3} small><U k="day.fromWant" /></SectionHead>
     <ul class="picks" data-wants></ul>
 
-    <h3 class="label sub"><U k="day.ideas" /></h3>
+    <SectionHead icon="sparkle" tone="yamabuki" level={3} small><U k="day.ideas" /></SectionHead>
     <ul class="picks">
       {
         ideas.map((p) => (
           <li data-idea={p.id}>
             <a href={`/p/${p.id}/`} class="pick-name">
-              <span class="w500">{p.name_en}</span>
+              <span class="name">{p.name_en}</span>
               {p.name_ja !== p.name_en && <span lang="ja">{p.name_ja}</span>}
-              <span class="t13">
+              <span class="t13 muted">
                 <T en={p.recognition} zh={data.zh.places[p.id]?.recognition} />
               </span>
               <StationBadge line={data.line(p.line)} station={p.station} />
@@ -113,8 +105,9 @@ const ph = (key: Parameters<typeof ui>[0]) => ({ 'data-ph-en': ui(key, 'en'), 'd
         ))
       }
     </ul>
-    <h3 class="label sub"><U k="day.notes" /></h3>
-    <ul class="notes">
+
+    <SectionHead icon="book" tone="mizu" level={3} small><U k="day.notes" /></SectionHead>
+    <ul class="notes card">
       {
         day.notes.map((n, j) => (
           <li>
@@ -127,67 +120,48 @@ const ph = (key: Parameters<typeof ui>[0]) => ({ 'data-ph-en': ui(key, 'en'), 'd
 </Base>
 
 <style>
-  .daynav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .daynav a {
-    display: inline-flex;
-    align-items: center;
-    min-height: var(--tap);
-    padding-top: var(--u);
-    font-weight: 500;
-  }
-  .daynav span a + a {
-    margin-left: var(--g);
-  }
-  .page-head {
-    padding-top: var(--u);
-  }
-  .page-head .label {
-    margin-bottom: var(--u);
+  .top > :global(.track) {
+    margin-top: var(--u);
   }
   .anchor {
-    max-width: 44rem;
-    padding: var(--u) var(--g);
-    background: var(--signal);
-    color: var(--on-signal);
+    padding: 0 4px;
   }
-  .headline-edit summary {
-    display: flex;
-    align-items: center;
-    min-height: var(--tap);
-    cursor: pointer;
-    text-decoration: underline;
-    text-underline-offset: 3px;
+  .headline-edit {
+    margin-top: 0 !important;
+    padding-inline: 4px;
   }
   .headline-edit form {
     padding-bottom: calc(var(--u) * 2);
   }
+  .plan {
+    padding-top: calc(var(--u) * 2);
+  }
+  .plan > [data-day-items] {
+    margin-top: 0;
+  }
   .ask {
-    margin-top: calc(var(--u) * 2);
+    margin-top: calc(var(--u) * 3) !important;
   }
   .first {
-    margin-top: calc(var(--u) * 2);
+    margin-top: 0;
   }
   .custom {
-    margin-top: calc(var(--u) * 3);
-  }
-  .custom .btn {
-    margin-top: var(--u);
-  }
-  [data-adder] > .btns {
     margin-top: calc(var(--u) * 2);
   }
-  .sub {
+  .status:empty {
+    display: none;
+  }
+  [data-adder] :global(.sec-head.small) {
     margin-top: calc(var(--u) * 4);
-    padding-bottom: var(--u);
-    border-bottom: 1px solid var(--ink);
+  }
+  .notes {
+    padding-block: 4px;
   }
   .notes li {
-    padding: var(--u) 0;
-    border-bottom: 1px solid var(--grey-2);
+    padding: 12px 0;
+  }
+  .notes li + li {
+    background: radial-gradient(circle, var(--ink) 1.5px, transparent 1.9px) 0 0 / 8px 4px repeat-x;
   }
   section:last-of-type {
     padding-bottom: calc(var(--u) * 5);
@@ -197,10 +171,11 @@ const ph = (key: Parameters<typeof ui>[0]) => ({ 'data-ph-en': ui(key, 'en'), 'd
 <script>
   import { askAboutDay } from '../../lib/ask';
   import { DAYS, PLACES } from '../../lib/catalog';
-  import { dayItems, itemLabel, type PlanItem, type PlanState } from '../../lib/plan';
+  import { type PlanState } from '../../lib/plan';
   import { date as dateLabel, lang, t } from '../../scripts/lang';
   import { dispatch, getPlan, newId, subscribe } from '../../scripts/store';
-  import { dayHeadline, dayOptions, html, mount, onAction, onForm, placeView } from '../../scripts/ui';
+  import { renderTimeline } from '../../scripts/timeline';
+  import { dayHeadline, html, mount, onAction, onForm, placeView } from '../../scripts/ui';
   import { dayLines, wireDayHeadlines } from '../../scripts/widgets';
 
   const list = document.querySelector<HTMLElement>('[data-day-items]')!;
@@ -217,48 +192,11 @@ const ph = (key: Parameters<typeof ui>[0]) => ({ 'data-ph-en': ui(key, 'en'), 'd
   const onThisDay = (plan: PlanState, ref: string) => plan.items.some((i) => i.day === date && i.place === ref);
 
   // ── Your plan ──────────────────────────────────────────────────────────
-  const row = (plan: PlanState, item: PlanItem, movable: { up: boolean; down: boolean } | null) => {
-    const place = placeView(plan, item.place);
-    return html`<li><details data-key="${item.id}">
-      <summary>
-        <span class="t mono w500">${item.time ?? t('day.anyTime')}</span>
-        <span class="what">
-          <span class="w500">${itemLabel(plan, item)}</span>
-          ${place?.nameJa ? html`<span lang="ja">${place.nameJa}</span>` : ''}
-          ${item.note ? html`<span class="note">${item.note}</span>` : ''}
-          <span class="t13 muted">${t('item.addedBy', { name: item.by })}</span>
-        </span>
-        <span class="edit t13 w500">${t('item.edit')}</span>
-      </summary>
-      <div class="controls">
-        <form data-form="item" data-id="${item.id}">
-          <div class="row2">
-            <label class="field"><span>${t('item.time')}</span><input type="time" name="time" value="${item.time ?? ''}" /></label>
-            <label class="field"><span>${t('item.day')}</span><select name="day">${dayOptions(item.day)}</select></label>
-          </div>
-          <label class="field"><span>${t('item.note')}</span><textarea name="note" rows="2" maxlength="500" placeholder="${t('item.notePh')}">${item.note ?? ''}</textarea></label>
-          <button class="btn small primary" type="submit">${t('item.save')}</button>
-        </form>
-        <div class="btn-row">
-          ${movable ? html`<button class="btn small" type="button" data-action="up" data-id="${item.id}" ${movable.up ? '' : html`disabled`}>${t('item.up')}</button>
-            <button class="btn small" type="button" data-action="down" data-id="${item.id}" ${movable.down ? '' : html`disabled`}>${t('item.down')}</button>` : ''}
-          ${place ? html`<a class="btn small" href="${place.href}">${t('item.open')}</a>` : ''}
-          <button class="btn small" type="button" data-action="remove" data-id="${item.id}">${t('item.remove')}</button>
-        </div>
-      </div>
-    </details></li>`;
-  };
-
+  let first = true;
   mount(list, () => {
-    const plan = getPlan();
-    const { timed, anytime } = dayItems(plan, date);
-    if (!timed.length && !anytime.length) return html`<p class="empty muted">${t('day.empty')}</p>`;
-    return html`
-      ${timed.length ? html`<ol class="plan-list">${timed.map((i) => row(plan, i, null))}</ol>` : ''}
-      ${anytime.length ? html`${timed.length ? html`<h3 class="label anytime">${t('day.anyTime')}</h3>` : ''}<ol class="plan-list">${anytime.map((i, n) =>
-        row(plan, i, { up: n > 0, down: n < anytime.length - 1 }),
-      )}</ol>` : ''}
-      <p class="t13 muted legend">${t('day.legend')}</p>`;
+    const out = html`${renderTimeline(getPlan(), date, { editable: true, enter: first })}<p class="t13 muted legend">${t('day.legend')}</p>`;
+    first = false;
+    return out;
   });
 
   onForm(list, {
@@ -354,9 +292,9 @@ const ph = (key: Parameters<typeof ui>[0]) => ({ 'data-ph-en': ui(key, 'en'), 'd
   });
 
   const pick = (plan: PlanState, ref: string, name: string, extra: ReturnType<typeof html> | string, href: string) =>
-    html`<li><a href="${href}" class="pick-name"><span class="w500">${name}</span>${extra}</a>${
+    html`<li><a href="${href}" class="pick-name"><span class="name">${name}</span>${extra}</a>${
       onThisDay(plan, ref)
-        ? html`<span class="t13 w500 added">${t('day.onDay')}</span>`
+        ? html`<span class="tag wakatake added">${t('day.onDay')}</span>`
         : html`<button type="button" class="chip" data-action="add" data-ref="${ref}">${t('common.add')}</button>`
     }</li>`;
 
@@ -405,7 +343,7 @@ const ph = (key: Parameters<typeof ui>[0]) => ({ 'data-ph-en': ui(key, 'en'), 'd
       li.insertAdjacentHTML(
         'beforeend',
         onThisDay(plan, ref)
-          ? html`<span class="t13 w500 added">${t('day.onDay')}</span>`.value
+          ? html`<span class="tag wakatake added">${t('day.onDay')}</span>`.value
           : html`<button type="button" class="chip" data-action="add" data-ref="${ref}">${t('common.add')}</button>`.value,
       );
     }

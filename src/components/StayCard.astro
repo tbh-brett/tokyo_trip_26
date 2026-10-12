@@ -1,0 +1,81 @@
+---
+// Where you stay (data/trip.json "stay"): rows split by a dotted line, dates
+// right-aligned in grey, then Copy address and Show to staff.
+import T from './T.astro';
+import U from './U.astro';
+import type { Stay } from '../lib/data';
+import { slashDate } from '../i18n/ui';
+
+interface Props {
+  stay: Stay;
+}
+
+const { stay: s } = Astro.props;
+const dates = `${slashDate(s.from)}–${slashDate(s.to)}`;
+---
+
+<div class="stay">
+  <div class="row">
+    <span class="name">
+      {s.name_en ? <span class="t20">{s.name_en}</span> : <span class="t20 muted"><U k="stay.noName" /></span>}
+      {s.name_ja && s.name_ja !== s.name_en && <span lang="ja">{s.name_ja}</span>}
+      <span class="t13 muted"><T en={s.area_en} zh={s.area_zh} /></span>
+    </span>
+    <span class="muted num">{dates}</span>
+  </div>
+  <hr class="dotted" />
+  <div class="row">
+    <span class="t13 muted key"><U k="fact.address" /></span>
+    <span lang="ja">{s.address_ja}</span>
+  </div>
+  {s.address_precision === 'district' && <p class="t13 muted aside"><U k="addr.district" /></p>}
+  <hr class="dotted" />
+  <div class="row">
+    <span class="t13 muted key"><U k="stay.checkIn" /> · <U k="stay.checkOut" /></span>
+    <span class:list={['num', { muted: !s.check_in && !s.check_out }]}>
+      {s.check_in || s.check_out ? `${s.check_in ?? '--:--'} · ${s.check_out ?? '--:--'}` : <U k="stay.toAdd" />}
+    </span>
+  </div>
+  <hr class="dotted" />
+  <div class="row">
+    <span class="t13 muted key"><U k="stay.phone" /></span>
+    {s.phone ? <a class="num" href={`tel:${s.phone.replace(/[^\d+]/g, '')}`}>{s.phone}</a> : <span class="muted"><U k="stay.toAdd" /></span>}
+  </div>
+  <div class="btn-row">
+    <a class="btn small primary" href="/stay/staff/"><U k="place.staff" /></a>
+    <button class="btn small" type="button" data-copy={[s.name_ja, s.address_ja].filter(Boolean).join(' ')}>
+      <U k="place.copy" /> <span class="hint" data-copy-status aria-live="polite"></span>
+    </button>
+  </div>
+</div>
+
+<style>
+  .stay {
+    background: var(--card);
+    border: var(--line) solid var(--ink);
+    border-radius: var(--r-card);
+    padding: 8px 20px 18px;
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding: 12px 0;
+  }
+  .name {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .key,
+  .num {
+    flex: none;
+  }
+  .row > :last-child {
+    text-align: right;
+  }
+  .aside {
+    margin: -6px 0 12px;
+  }
+</style>

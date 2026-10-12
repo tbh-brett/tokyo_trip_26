@@ -1,12 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
+import Mascot from '../components/Mascot.astro';
 import U from '../components/U.astro';
 import { ui } from '../i18n/ui';
 ---
 
 <Base title={ui('nf.short', 'en')} titleZh={ui('nf.short', 'zh')}>
   <header class="page-head">
-    <h1 class="t40 w700"><U k="nf.title" /></h1>
+    <span class="lost"><Mascot /></span>
+    <h1 class="t40 spaced"><U k="nf.title" /></h1>
   </header>
   <div class="wrap stack">
     <p class="t20"><U k="nf.text" /></p>
@@ -14,3 +16,11 @@ import { ui } from '../i18n/ui';
     <p><a class="btn" href="/places/eat/"><U k="nf.places" /></a></p>
   </div>
 </Base>
+
+<style>
+  .lost :global(svg) {
+    width: 88px;
+    height: 80px;
+    transform: rotate(-8deg);
+  }
+</style>

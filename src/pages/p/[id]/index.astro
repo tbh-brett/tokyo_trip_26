@@ -1,5 +1,6 @@
 ---
 import Base from '../../../layouts/Base.astro';
+import SectionHead from '../../../components/SectionHead.astro';
 import StationBadge from '../../../components/StationBadge.astro';
 import T from '../../../components/T.astro';
 import U from '../../../components/U.astro';
@@ -34,23 +35,28 @@ const ask = (lang: 'en' | 'zh') =>
   </nav>
 
   <header class="page-head head">
-    <h1 class="t28 w700">
-      <span>{p.name_en}</span>
-      {p.name_ja !== p.name_en && <span lang="ja">{p.name_ja}</span>}
+    <h1>
+      <span class="t28">{p.name_en}</span>
+      {p.name_ja !== p.name_en && <span class="t20" lang="ja">{p.name_ja}</span>}
     </h1>
-    <p class="t20 w500"><T en={p.recognition} zh={zh.recognition} /></p>
+    <p class="tags">
+      <span class="tag yamabuki"><T en={p.recognition} zh={zh.recognition} /></span>
+      {p.book_ahead && <span class="tag coral"><U k="row.bookAhead" /></span>}
+    </p>
   </header>
 
   <div class="wrap stack">
     <p class="t20"><T en={p.why} zh={zh.why} /></p>
     {
       p.note && (
-        <p class="note">
+        <div class="card tint">
           <span class="label">
             <U k="place.note" />
           </span>
-          <T en={p.note} zh={zh.note} />
-        </p>
+          <p>
+            <T en={p.note} zh={zh.note} />
+          </p>
+        </div>
       )
     }
   </div>
@@ -72,91 +78,89 @@ const ask = (lang: 'en' | 'zh') =>
     <a class="btn" data-l="zh" lang="zh-Hant" href={ask('zh')}>{ui('place.ask', 'zh')} <span class="hint">↗</span></a>
   </div>
 
-  <div class="wrap marks">
-    <span class="label" id="mark-label"><U k="place.markFor" /></span>
-    <div class="seg" role="group" aria-labelledby="mark-label" data-marks={p.id}>
-      {
-        MARKS.map((m) => (
-          <button type="button" data-mark={m} aria-pressed="false">
-            <T en={MARK_TEXT[m][0]} zh={MARK_TEXT[m][1]} />
-          </button>
-        ))
-      }
-    </div>
-    <p class="t13 muted by" data-mark-by></p>
-  </div>
-
-  <div class="wrap plan">
-    <span class="label"><U k="place.inPlan" /></span>
-    <div data-in-plan={p.id}></div>
-    <form class="addplan" data-add-to-plan={p.id}>
-      <div class="row2">
-        <label class="field"><span><U k="item.day" /></span><select name="day"></select></label>
-        <label class="field"><span><U k="place.timeOpt" /></span><input type="time" name="time" /></label>
+  <section class="section" aria-labelledby="mark-h">
+    <SectionHead icon="star" tone="coral" id="mark-h" small><U k="place.markFor" /></SectionHead>
+    <div>
+      <div class="seg" role="group" aria-labelledby="mark-h" data-marks={p.id}>
+        {
+          MARKS.map((m) => (
+            <button type="button" data-mark={m} aria-pressed="false">
+              <T en={MARK_TEXT[m][0]} zh={MARK_TEXT[m][1]} />
+            </button>
+          ))
+        }
       </div>
-      <button class="btn small primary" type="submit"><U k="place.addToPlan" /></button>
-      <p class="t13 w500" data-status aria-live="polite"></p>
-    </form>
-  </div>
+      <p class="t13 muted by" data-mark-by></p>
+    </div>
+  </section>
 
-  <dl class="wrap facts">
-    <div
-      hidden={p.hours.length === 0}
-      data-place={p.id}
-      data-hours={JSON.stringify(p.hours)}
-      data-closed={p.closed_days.join(',')}
-      data-verified={String(p.hours_verified)}
-    >
-      <dt><U k="fact.now" /></dt>
-      <dd class="w500" data-open><U k={p.hours_verified ? 'fact.nowHintVerified' : 'fact.nowHint'} /></dd>
-    </div>
-    <div>
-      <dt><U k="fact.hours" /></dt>
-      <dd class={p.hours.length ? 'mono' : undefined}>{p.hours.length ? hoursText(p.hours) : <U k="hours.notListed" />}</dd>
-      {closedText(p.closed_days) && <dd><T en={closedText(p.closed_days, 'en')} zh={closedText(p.closed_days, 'zh')} /></dd>}
-      {p.hours.length === 0 ? (
-        <dd class="t13 muted"><U k="hours.checkMaps" /></dd>
-      ) : (
-        !p.hours_verified && <dd class="t13 muted"><U k="hours.estimated" /></dd>
-      )}
-    </div>
-    <div>
-      <dt><U k="fact.price" /></dt>
-      <dd class="mono"><T en={p.price} zh={zh.price} /></dd>
-    </div>
-    {
-      p.book_ahead && (
-        <div>
-          <dt><U k="fact.booking" /></dt>
-          <dd class="w500"><U k="row.bookAhead" /></dd>
+  <section class="section" aria-labelledby="inplan-h">
+    <SectionHead icon="calendar" tone="mizu" id="inplan-h" small><U k="place.inPlan" /></SectionHead>
+    <div class="card">
+      <div data-in-plan={p.id}></div>
+      <form class="addplan" data-add-to-plan={p.id}>
+        <div class="row2">
+          <label class="field"><span><U k="item.day" /></span><select name="day"></select></label>
+          <label class="field"><span><U k="place.timeOpt" /></span><input type="time" name="time" /></label>
         </div>
-      )
-    }
-    <div>
-      <dt><U k="fact.station" /></dt>
-      <dd><StationBadge line={line} station={p.station} /></dd>
+        <button class="btn small primary" type="submit"><U k="place.addToPlan" /></button>
+        <p class="t13" data-status aria-live="polite"></p>
+      </form>
     </div>
-    <div>
-      <dt><U k="fact.area" /></dt>
-      <dd><T en={zone.name_en} zh={zoneZh?.full} /></dd>
-      <dd lang="ja" data-l={zoneZh ? 'en' : undefined}>{zone.name_ja}</dd>
-    </div>
-    <div>
-      <dt><U k="fact.address" /></dt>
-      <dd lang="ja">{p.address_ja}</dd>
-      {addressNote && <dd class="t13 muted"><U k={addressNote} /></dd>}
-    </div>
-    <div>
-      <dt><U k="fact.goodFor" /></dt>
-      <dd><T en={slots(0)} zh={slots(1)} /></dd>
-    </div>
-    <div>
-      <dt><U k="fact.source" /></dt>
-      <dd class="t13">
-        {sourceIsUrl ? <a href={p.source}>{p.source}</a> : p.source === 'general-knowledge' ? <U k="fact.generalKnowledge" /> : p.source}
-      </dd>
-    </div>
-  </dl>
+  </section>
+
+  <section class="section last">
+    <dl class="facts">
+      <div
+        hidden={p.hours.length === 0}
+        data-place={p.id}
+        data-hours={JSON.stringify(p.hours)}
+        data-closed={p.closed_days.join(',')}
+        data-verified={String(p.hours_verified)}
+      >
+        <dt><U k="fact.now" /></dt>
+        <dd><span class="tag" data-open><U k={p.hours_verified ? 'fact.nowHintVerified' : 'fact.nowHint'} /></span></dd>
+      </div>
+      <div>
+        <dt><U k="fact.hours" /></dt>
+        <dd class="num">{p.hours.length ? hoursText(p.hours) : <U k="hours.notListed" />}</dd>
+        {closedText(p.closed_days) && <dd><T en={closedText(p.closed_days, 'en')} zh={closedText(p.closed_days, 'zh')} /></dd>}
+        {p.hours.length === 0 ? (
+          <dd class="t13 warn"><U k="hours.checkMaps" /></dd>
+        ) : (
+          !p.hours_verified && <dd class="t13 muted"><U k="hours.estimated" /></dd>
+        )}
+      </div>
+      <div>
+        <dt><U k="fact.price" /></dt>
+        <dd class="num"><T en={p.price} zh={zh.price} /></dd>
+      </div>
+      <div>
+        <dt><U k="fact.station" /></dt>
+        <dd><StationBadge line={line} station={p.station} /></dd>
+      </div>
+      <div>
+        <dt><U k="fact.area" /></dt>
+        <dd><T en={zone.name_en} zh={zoneZh?.full} /></dd>
+        <dd lang="ja" data-l={zoneZh ? 'en' : undefined}>{zone.name_ja}</dd>
+      </div>
+      <div>
+        <dt><U k="fact.address" /></dt>
+        <dd lang="ja">{p.address_ja}</dd>
+        {addressNote && <dd class="t13 muted"><U k={addressNote} /></dd>}
+      </div>
+      <div>
+        <dt><U k="fact.goodFor" /></dt>
+        <dd><T en={slots(0)} zh={slots(1)} /></dd>
+      </div>
+      <div>
+        <dt><U k="fact.source" /></dt>
+        <dd class="t13">
+          {sourceIsUrl ? <a href={p.source}>{p.source}</a> : p.source === 'general-knowledge' ? <U k="fact.generalKnowledge" /> : p.source}
+        </dd>
+      </div>
+    </dl>
+  </section>
 </Base>
 
 <style>
@@ -164,44 +168,27 @@ const ask = (lang: 'en' | 'zh') =>
     display: inline-flex;
     align-items: center;
     min-height: var(--tap);
-    padding-top: var(--u);
-    font-weight: 500;
-  }
-  .head {
-    padding-top: var(--u);
-  }
-  .head h1 span {
-    display: block;
-  }
-  .head p {
     margin-top: var(--u);
   }
-  .note .label {
-    margin-bottom: 4px;
+  .head h1 > span {
+    display: block;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
   }
   .actions {
     margin-top: calc(var(--u) * 3);
   }
-  .marks,
-  .plan {
-    margin-top: calc(var(--u) * 3);
-  }
-  .marks .label,
-  .plan .label {
-    margin-bottom: var(--u);
-  }
   .by {
-    margin-top: 4px;
+    margin-top: 6px;
   }
   .addplan {
     margin-top: var(--u);
   }
-  .facts {
-    margin-top: calc(var(--u) * 3);
-    padding-bottom: calc(var(--u) * 4);
-  }
-  .facts > div:first-child {
-    border-top: 1px solid var(--ink);
+  .last {
+    padding-bottom: calc(var(--u) * 3);
   }
 </style>
 

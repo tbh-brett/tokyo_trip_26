@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import SectionHead from '../../components/SectionHead.astro';
 import U from '../../components/U.astro';
 import { KINDS, loadData } from '../../lib/data';
 import { dateIn, KIND_LABEL, ui, type UIKey } from '../../i18n/ui';
@@ -14,11 +15,11 @@ const both = (en: string, zh: string) => ({ 'data-text-en': en, 'data-text-zh': 
     <a href="/places/eat/" data-back><span data-back-label><U k="add.back" /></span></a>
   </nav>
   <header class="page-head">
-    <h1 class="t40 w700"><U k="add.title" /></h1>
+    <SectionHead icon="plus" tone="wakatake" level={1}><U k="add.title" /></SectionHead>
     <p class="muted"><U k="add.sub" /></p>
   </header>
 
-  <form class="wrap addform" data-add-place>
+  <div class="wrap"><form class="card addform" data-add-place>
     <label class="field">
       <span><U k="add.name" /></span>
       <input type="text" name="name" required maxlength="120" autocomplete="off" {...ph('add.namePh')} />
@@ -69,8 +70,8 @@ const both = (en: string, zh: string) => ({ 'data-text-en': en, 'data-text-zh': 
       <label class="field"><span><U k="add.time" /></span><input type="time" name="time" /></label>
     </div>
     <button class="btn primary" type="submit"><U k="add.submit" /></button>
-    <p class="t13 w500" data-status aria-live="polite"></p>
-  </form>
+    <p class="t13" data-status aria-live="polite"></p>
+  </form></div>
 </Base>
 
 <style>
@@ -78,14 +79,13 @@ const both = (en: string, zh: string) => ({ 'data-text-en': en, 'data-text-zh': 
     display: inline-flex;
     align-items: center;
     min-height: var(--tap);
-    padding-top: var(--u);
-    font-weight: 500;
+    margin-top: var(--u);
   }
   .page-head p {
     margin-top: var(--u);
   }
   .addform {
-    padding-bottom: calc(var(--u) * 5);
+    margin-bottom: calc(var(--u) * 3);
   }
   .addform .btn {
     margin-top: calc(var(--u) * 3);

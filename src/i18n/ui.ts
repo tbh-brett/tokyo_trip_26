@@ -29,6 +29,47 @@ const S = {
   'sync.ok': ['OK', '好'],
   'sync.notSaved': ['Not saved: {reason}', '未能儲存：{reason}'],
 
+  // Today: the hero
+  'hero.city': ['Tokyo', '東京'],
+  'hero.length': ['{n} days, {m} nights', '{n} 天 {m} 夜'],
+  'hero.countdown': ['{n} days to go', '出發倒數 {n} 天'],
+  'hero.countdown1': ['1 day to go', '出發倒數 1 天'],
+  'hero.dayOf': ['Day {n} of {m}', '第 {n} 天（共 {m} 天）'],
+  'hero.home': ['Home again', '回家了'],
+  'hero.art': ['Tokyo skyline with a lattice tower, ginkgo leaves and the little Ginza-line train', '東京天際線、格子鐵塔、銀杏葉和銀座線小列車'],
+
+  // Flights and stay (data/trip.json)
+  'flights.title': ['Flights', '航班'],
+  'flight.outbound': ['Outbound', '去程'],
+  'flight.return': ['Return', '回程'],
+  'flight.only': ['{names} only', '只有 {names}'],
+  'flight.noNumber': ['Flight no. to add', '航班編號待填'],
+  'flight.toAdd': ['to add', '待填'],
+  'flight.duration': ['{h}h {m}m', '{h}h {m}m'],
+  'stay.title': ['Stay', '住宿'],
+  'stay.line': ['Staying in {area}', '住 {area}'],
+  'stay.noName': ['Hotel name to add', '酒店名稱待填'],
+  'stay.checkIn': ['Check-in', '入住'],
+  'stay.checkOut': ['Check-out', '退房'],
+  'stay.phone': ['Phone', '電話'],
+  'stay.toAdd': ['Not added yet', '未填'],
+  'stay.flyHome': ['Fly home {time}, {airport}', '{time} {airport}起飛回程'],
+  'stay.staffTitle': ['Show to staff: the hotel', '給店員看：酒店'],
+
+  // Itinerary: the day track, timeline and legs
+  'itin.title': ['Itinerary', '每日行程'],
+  'track.label': ['Days of the trip', '旅程日子'],
+  'tl.mustGo': ['Must-go', '必去'],
+  'tl.land': ['Land at {airport}', '抵達{airport}'],
+  'tl.fly': ['Fly home from {airport}', '由{airport}起飛回程'],
+  'leg.train': ['Train', '電車'],
+  'leg.walk': ['Walk', '步行'],
+  'leg.taxi': ['Taxi', '的士'],
+  'leg.plane': ['Flight', '航班'],
+  'leg.min': ['about {n} min', '約 {n} 分鐘'],
+  'leg.hour': ['about {h} h', '約 {h} 小時'],
+  'leg.hourMin': ['about {h} h {n} min', '約 {h} 小時 {n} 分鐘'],
+
   // Today
   'today.toGo': ['days to go', '天後出發'],
   'today.toGo1': ['day to go', '天後出發'],
@@ -345,3 +386,24 @@ export function rangeIn(first: string, last: string, lang: Lang): string {
 
 /** "Sun" → "Sun" / "週日" */
 export const weekdayIn = (day: string, lang: Lang) => (lang === 'zh' ? `週${WEEKDAY_ZH[WEEKDAY_EN.indexOf(day)]}` : day);
+
+/** "2026-11-27" → "11/27", in either language (the day track) */
+export function slashDate(iso: string): string {
+  const d = new Date(`${iso}T12:00:00Z`);
+  return `${d.getUTCMonth() + 1}/${d.getUTCDate()}`;
+}
+
+/** "Fri 27 Nov – Thu 3 Dec 2026" / "2026・11/27（五）– 12/3（四）" */
+export function heroRange(first: string, last: string, lang: Lang): string {
+  if (lang !== 'zh') return `${dateIn(first, 'en')} – ${dateIn(last, 'en')} ${first.slice(0, 4)}`;
+  const day = (iso: string) => `${slashDate(iso)}（${WEEKDAY_ZH[new Date(`${iso}T12:00:00Z`).getUTCDay()]}）`;
+  return `${first.slice(0, 4)}・${day(first)} – ${day(last)}`;
+}
+
+/** 20 → "about 20 min", 60 → "about 1 h", 70 → "about 1 h 10 min" */
+export function aboutMinutes(n: number, lang: Lang): string {
+  const h = Math.floor(n / 60);
+  const m = n % 60;
+  if (!h) return ui('leg.min', lang, { n });
+  return m ? ui('leg.hourMin', lang, { h, n: m }) : ui('leg.hour', lang, { h });
+}

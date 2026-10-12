@@ -1,0 +1,22 @@
+---
+// A heading with a round badge: coloured circle, ink outline, a pictogram.
+import Icon from './Icon.astro';
+import type { IconName } from '../lib/icons';
+
+interface Props {
+  icon: IconName;
+  tone?: 'coral' | 'yamabuki' | 'mizu' | 'wakatake';
+  id?: string;
+  /** h1 for a page's own title, h2 for sections (the default), h3 inside one. */
+  level?: 1 | 2 | 3;
+  small?: boolean;
+}
+
+const { icon, tone = 'mizu', id, level = 2, small = false } = Astro.props;
+const H = `h${level}` as 'h1' | 'h2' | 'h3';
+---
+
+<H class:list={['sec-head', { small }]} id={id}>
+  <span class:list={['badge-icon', tone]}><Icon name={icon} /></span>
+  <span><slot /></span>
+</H>

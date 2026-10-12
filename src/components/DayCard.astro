@@ -1,0 +1,84 @@
+---
+// A day's header card: light coral, the day's picture in a small frame, then
+// "Day 2", the title (follows headline edits in the plan) and where you sleep.
+import DayArt from './illustrations/DayArt.astro';
+import T from './T.astro';
+import U from './U.astro';
+import type { Day, Flight, Stay, Zh } from '../lib/data';
+import { ui } from '../i18n/ui';
+
+interface Props {
+  day: Day;
+  n: number;
+  zh?: Zh['days'][string];
+  stay: Stay;
+  flights: Flight[];
+  /** h1 on the day's own page, h2 elsewhere. */
+  level?: 1 | 2;
+  href?: string;
+}
+
+const { day, n, zh, stay, flights, level = 2, href } = Astro.props;
+const H = `h${level}` as 'h1' | 'h2';
+// The last night is the night before a return flight: that day says when you fly instead.
+const leaving = flights.find((f) => f.direction === 'return' && f.date === day.date);
+const fly = (lang: 'en' | 'zh') =>
+  leaving ? ui('stay.flyHome', lang, { time: leaving.depart ?? '', airport: (lang === 'zh' ? leaving.from.name_zh : leaving.from.name_en) ?? '' }) : null;
+const Wrap = href ? 'a' : 'div';
+---
+
+<Wrap class="daycard" href={href}>
+  <span class="frame"><DayArt date={day.date} /></span>
+  <span class="text">
+    <span class="t13 dn"><U k="plan.dayN" v={{ n }} /></span>
+    <H class="t20 title" data-day-title={day.date}><T en={day.title} zh={zh?.title} /></H>
+    <span class="t13 sleep">
+      {fly('en') ? <T en={fly('en')!} zh={fly('zh')} /> : <U k="stay.line" v={{ area: stay.area_en }} vz={{ area: stay.area_zh }} />}
+    </span>
+  </span>
+</Wrap>
+
+<style>
+  .daycard {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px;
+    background: var(--coral-tint);
+    border: var(--line) solid var(--ink);
+    border-radius: var(--r-card);
+    text-decoration: none;
+  }
+  .frame {
+    flex: none;
+    width: 104px;
+    height: 78px;
+    overflow: hidden;
+    border: var(--line) solid var(--ink);
+    border-radius: 14px;
+    background: var(--washi);
+  }
+  .frame :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .title {
+    letter-spacing: 0.03em;
+  }
+  .dn,
+  .sleep {
+    color: var(--ink-2);
+  }
+  a.daycard .title {
+    text-decoration: underline;
+    text-decoration-color: var(--mizu);
+    text-decoration-thickness: var(--line);
+    text-underline-offset: 5px;
+  }
+</style>

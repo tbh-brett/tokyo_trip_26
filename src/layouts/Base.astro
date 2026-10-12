@@ -1,8 +1,7 @@
 ---
 import '../styles/fonts.css';
-import '@fontsource/ibm-plex-mono/latin-400.css';
-import '@fontsource/ibm-plex-mono/latin-500.css';
 import '../styles/global.css';
+import Mascot from '../components/Mascot.astro';
 import U from '../components/U.astro';
 import { ui } from '../i18n/ui';
 
@@ -12,7 +11,7 @@ interface Props {
   titleZh?: string;
   /** Which tab is current, if any. */
   tab?: 'today' | 'plan' | 'places';
-  /** false hides the tab bar and live sync (Show to staff). */
+  /** false hides the top bar and live sync (Show to staff). */
   showTabs?: boolean;
   bodyClass?: string;
 }
@@ -35,9 +34,8 @@ const tabs = [
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="robots" content="noindex, nofollow" />
     <meta name="referrer" content="no-referrer" />
-    <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#fffcf6" />
     <meta name="format-detection" content="telephone=no" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <!-- The site is behind Cloudflare Access, so the manifest must be fetched with the login cookie. -->
@@ -62,35 +60,40 @@ const tabs = [
   </head>
   <body class={bodyClass} data-live={showTabs ? 'on' : 'off'}>
     <a class="skip" href="#main"><U k="skip" /></a>
+    {
+      showTabs && (
+        <header class="topbar">
+          <div class="topbar-in">
+            <a class="brand" href="/" aria-label={ui('tab.today', 'en')} data-aria-en={ui('tab.today', 'en')} data-aria-zh={ui('tab.today', 'zh')}>
+              <Mascot />
+            </a>
+            <nav class="tabs" aria-label="Sections">
+              {tabs.map((t) => (
+                <a class="tab" href={t.href} aria-current={t.id === tab ? 'page' : undefined}>
+                  <U k={t.key} />
+                </a>
+              ))}
+              <button
+                type="button"
+                class="tab langbtn"
+                data-lang-toggle
+                aria-label={ui('lang.switch', 'en')}
+                data-aria-en={ui('lang.switch', 'en')}
+                data-aria-zh={ui('lang.switch', 'zh')}
+              >
+                <span data-l="en" lang="zh-Hant">{ui('lang.other', 'en')}</span>
+                <span data-l="zh" lang="en">{ui('lang.other', 'zh')}</span>
+              </button>
+            </nav>
+          </div>
+        </header>
+      )
+    }
     {showTabs && <div class="whoami" data-whoami hidden />}
     <main id="main">
       <slot />
     </main>
-    {
-      showTabs && (
-        <>
-          <div class="syncbar" data-syncbar role="status" hidden />
-          <nav class="tabbar" aria-label="Sections">
-            {tabs.map((t) => (
-              <a href={t.href} aria-current={t.id === tab ? 'page' : undefined}>
-                <U k={t.key} />
-              </a>
-            ))}
-            <button
-              type="button"
-              class="langbtn"
-              data-lang-toggle
-              aria-label={ui('lang.switch', 'en')}
-              data-aria-en={ui('lang.switch', 'en')}
-              data-aria-zh={ui('lang.switch', 'zh')}
-            >
-              <span data-l="en" lang="zh-Hant">{ui('lang.other', 'en')}</span>
-              <span data-l="zh" lang="en">{ui('lang.other', 'zh')}</span>
-            </button>
-          </nav>
-        </>
-      )
-    }
+    {showTabs && <div class="syncbar" data-syncbar role="status" hidden />}
   </body>
 </html>
 
@@ -113,7 +116,7 @@ const tabs = [
   if (document.body.dataset.live === 'on') {
     start();
 
-    // Status line above the tabs: saving, no signal, errors, and the other phone's news.
+    // Status line at the bottom: saving, no signal, errors, and the other phone's news.
     const bar = document.querySelector<HTMLElement>('[data-syncbar]')!;
     let savingSince = 0;
     const paintBar = () => {
@@ -175,9 +178,9 @@ const tabs = [
     const paintWho = () => {
       who.hidden = Boolean(me());
       if (who.hidden) return;
-      who.innerHTML = html`<p class="w500">${t('who.q')}</p>
+      who.innerHTML = html`<div><p class="t20">${t('who.q')}</p>
         <p class="t13 muted">${t('who.why')}</p>
-        <div class="chips">${TRAVELLERS.map((name) => html`<button type="button" class="chip" data-me="${name}">${t('who.me', { name })}</button>`)}</div>`.value;
+        <div class="chips">${TRAVELLERS.map((name) => html`<button type="button" class="chip" data-me="${name}">${t('who.me', { name })}</button>`)}</div></div>`.value;
     };
     who.addEventListener('click', (e) => {
       const b = (e.target as HTMLElement).closest<HTMLElement>('[data-me]');

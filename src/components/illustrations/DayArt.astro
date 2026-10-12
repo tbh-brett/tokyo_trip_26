@@ -1,0 +1,27 @@
+---
+// The illustration for a day, by date. Decorative: the day's title sits beside it.
+import Enoshima from './Enoshima.astro';
+import Ginkgo from './Ginkgo.astro';
+import Lights from './Lights.astro';
+import Maples from './Maples.astro';
+import Races from './Races.astro';
+import Roppongi from './Roppongi.astro';
+import Yokohama from './Yokohama.astro';
+
+interface Props {
+  date: string;
+}
+
+const ART: Record<string, typeof Ginkgo> = {
+  '2026-11-27': Roppongi,
+  '2026-11-28': Ginkgo,
+  '2026-11-29': Races,
+  '2026-11-30': Yokohama,
+  '2026-12-01': Enoshima,
+  '2026-12-02': Maples,
+  '2026-12-03': Lights,
+};
+const Art = ART[Astro.props.date] ?? Ginkgo;
+---
+
+<Art />

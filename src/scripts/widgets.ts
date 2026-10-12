@@ -40,7 +40,7 @@ export function wireDayPreviews() {
       if (!lines.length) return html`<span class="t13 muted">${t('preview.nothing')}</span>`;
       const shown = lines.slice(0, max);
       return html`<span class="preview-list">${shown.map(
-        (l) => html`<span><span class="mono">${l.time ?? t('preview.any')}</span> ${l.label}</span>`,
+        (l) => html`<span><span class="num">${l.time ?? t('preview.any')}</span> ${l.label}</span>`,
       )}${lines.length > max ? html`<span class="t13 muted">${t('preview.more', { n: lines.length - max })}</span>` : ''}</span>`;
     });
   }
@@ -77,7 +77,7 @@ export function wireFeeds() {
       const items = getPlan().activity.slice(0, n);
       if (!items.length) return html`<li class="muted">${t('feed.empty')}</li>`;
       return html`${items.map(
-        (a) => html`<li><span class="w500">${a.by}</span> ${activityText(a, lang())} <span class="t13 muted">· ${ago(a.at)}</span></li>`,
+        (a) => html`<li><span class="tag washi">${a.by}</span> ${activityText(a, lang())} <span class="t13 muted">· ${ago(a.at)}</span></li>`,
       )}`;
     });
   }
@@ -96,7 +96,9 @@ export function wirePlaceRows() {
         const hours = JSON.parse(row.dataset.hours) as Hours;
         const closed = (row.dataset.closed ?? '').split(',').filter(Boolean);
         // No hours on file: say nothing rather than guess.
-        open.textContent = hours.length ? openLabel(openState(hours, closed, now), row.dataset.verified === 'true', lang()) : '';
+        const state = hours.length ? openState(hours, closed, now) : null;
+        open.textContent = state ? openLabel(state, row.dataset.verified === 'true', lang()) : '';
+        open.dataset.state = state?.open ? 'open' : 'closed';
       }
       const mark = plan.marks[ref]?.mark;
       if (mark) row.dataset.mark = mark;
@@ -184,7 +186,7 @@ export function wireAddToPlan() {
       const items = itemsForPlace(getPlan(), el.dataset.inPlan!);
       if (!items.length) return html`<p class="muted">${t('place.notInPlan')}</p>`;
       return html`<ul class="inplan">${items.map(
-        (i) => html`<li><a href="/day/${i.day}/"><span class="mono w500">${date(i.day)}${i.time ? ` · ${i.time}` : ''}</span>${
+        (i) => html`<li><a href="/day/${i.day}/"><span class="num">${date(i.day)}${i.time ? ` · ${i.time}` : ''}</span>${
           i.note ? html` <span class="muted">· ${i.note}</span>` : ''
         } <span class="t13 muted">${t('item.addedBy', { name: i.by })}</span></a></li>`,
       )}</ul>`;
@@ -210,10 +212,10 @@ export function wireDeviceStatus() {
     const supported = 'serviceWorker' in navigator && 'caches' in window;
     const ready = supported && Boolean(navigator.serviceWorker.controller) && saved > 0;
     el.innerHTML = html`
-      <p class="w500">${t(ready ? 'device.ready' : supported ? 'device.saving' : 'device.unsupported')}</p>
+      <p class="t20">${t(ready ? 'device.ready' : supported ? 'device.saving' : 'device.unsupported')}</p>
       <p class="muted">${ready ? t('device.readyText', { n: saved }) : t(supported ? 'device.savingText' : 'device.unsupportedText')}</p>
       ${ready ? '' : supported ? html`<button type="button" class="btn small" data-device-check>${t('device.check')}</button>` : ''}
-      <p class="w500 install">${t(standalone ? 'device.installed' : 'device.install')}</p>
+      <p class="t20 install">${t(standalone ? 'device.installed' : 'device.install')}</p>
       <p class="muted">${t(standalone ? 'device.installedText' : 'device.installText')}</p>`.value;
   };
   el.addEventListener('click', (e) => {

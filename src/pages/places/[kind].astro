@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PlaceRow from '../../components/PlaceRow.astro';
+import SectionHead from '../../components/SectionHead.astro';
 import T from '../../components/T.astro';
 import U from '../../components/U.astro';
 import { KINDS, loadData, zoneShort, type Kind } from '../../lib/data';
@@ -22,7 +23,7 @@ const zones = data.zones
 
 <Base title={label} titleZh={labelZh} tab="places">
   <header class="page-head">
-    <h1 class="t40 w700"><T en={label} zh={labelZh} /></h1>
+    <SectionHead icon="pin" tone="mizu" level={1}><T en={label} zh={labelZh} /></SectionHead>
   </header>
 
   <nav class="wrap" aria-label="Kind of place">
@@ -53,9 +54,9 @@ const zones = data.zones
     </div>
   </div>
 
-  <section class="wrap mine" aria-labelledby="mine-h">
-    <h2 class="label" id="mine-h"><U k="places.mine" /></h2>
-    <ul class="rows-lite" data-mine-list={kind}></ul>
+  <section class="section mine" aria-labelledby="mine-h">
+    <SectionHead icon="star" tone="coral" id="mine-h" small><U k="places.mine" /></SectionHead>
+    <ul class="rows-lite card" data-mine-list={kind}></ul>
     <p class="btns"><a class="btn" href={`/add/?kind=${kind}`}><U k="day.addUnlisted" /> <span class="hint">→</span></a></p>
   </section>
 
@@ -73,19 +74,14 @@ const zones = data.zones
     margin-bottom: var(--u);
   }
   .mine {
-    margin-top: calc(var(--u) * 3);
-  }
-  .mine .label {
-    padding-bottom: var(--u);
-    border-bottom: 1px solid var(--ink);
-  }
-  .mine .btns {
-    margin-top: var(--u);
+    padding-top: calc(var(--u) * 4);
   }
   .count {
-    margin-top: calc(var(--u) * 3);
-    padding-bottom: var(--u);
-    border-bottom: 1px solid var(--ink);
+    margin-top: calc(var(--u) * 4);
+    margin-bottom: 12px;
+  }
+  .rows {
+    padding-bottom: calc(var(--u) * 3);
   }
 </style>
 
@@ -131,7 +127,7 @@ const zones = data.zones
       const days = [...new Set(itemsForPlace(plan, p.id).map((i) => date(i.day)))];
       const mark = plan.marks[p.id]?.mark;
       return html`<li><a href="/p/mine/?id=${p.id}">
-        <span class="w500">${p.name}</span>${p.name_ja ? html` <span lang="ja">${p.name_ja}</span>` : ''}
+        <span class="name">${p.name}</span>${p.name_ja ? html` <span lang="ja">${p.name_ja}</span>` : ''}
         <span class="t13 muted">${t('places.addedBy', { name: p.by })}${days.length ? ` · ${t('plan.planned', { days: days.join(', ') })}` : ''}${mark ? ` · ${pick(MARK_TEXT[mark], lang())}` : ''}</span>
       </a></li>`;
     })}`;

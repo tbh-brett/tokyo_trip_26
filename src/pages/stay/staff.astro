@@ -1,0 +1,33 @@
+---
+// Show to staff for where you're staying (taxi drivers, mostly). Until the
+// hotel's name is in data/trip.json, the address is the big line.
+import Base from '../../layouts/Base.astro';
+import U from '../../components/U.astro';
+import { ui } from '../../i18n/ui';
+import { loadData } from '../../lib/data';
+
+const { stay } = await loadData();
+---
+
+<Base title={ui('stay.staffTitle', 'en')} titleZh={ui('stay.staffTitle', 'zh')} showTabs={false} bodyClass="staff">
+  <a class="staff-close" href="/"><U k="staff.close" /></a>
+  <div class="staff-card">
+    {
+      stay.name_ja ? (
+        <>
+          <p class="staff-ja" lang="ja">{stay.name_ja}</p>
+          <p class="staff-addr" lang="ja">{stay.address_ja}</p>
+        </>
+      ) : (
+        <p class="staff-ja" lang="ja">{stay.address_ja}</p>
+      )
+    }
+    {stay.name_en && stay.name_en !== stay.name_ja && <p class="staff-en">{stay.name_en}</p>}
+  </div>
+</Base>
+
+<script>
+  import { holdScreenOn } from '../../scripts/device';
+
+  holdScreenOn();
+</script>

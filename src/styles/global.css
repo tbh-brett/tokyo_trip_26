@@ -1,18 +1,30 @@
-/* Modernist, words first. Tokens from CLAUDE.md. */
+/* Picture book. Tokens and rules from CLAUDE.md: washi paper, 3px
+   ink lines, big round corners, flat pastel fills with ink text, one rounded
+   font. Light only: there is no dark mode. Usability rules stay: words on
+   every control, tap targets ≥ 44px, body ≥ 16px, WCAG AA everywhere. */
 
 :root {
-  --paper: #fff;
-  --ink: #111;
-  --grey-1: #f2f2f2; /* quiet surfaces */
-  --grey-2: #bdbdbd; /* hairlines */
-  --grey-3: #6b6b6b; /* secondary text, 5.3:1 on white */
-  --signal: #ff9500; /* Ginza line. A fill, always with black text on it. */
-  --on-signal: #111;
+  --washi: #fffcf6; /* paper */
+  --card: #ffffff;
+  --ink: #3e3a39; /* lines and text, 11:1 on washi */
+  --ink-2: #6b6461; /* secondary text, 5.7:1 on washi. Never on a pastel fill. */
+  --coral: #f2a497; /* selected, today, must-go, plane */
+  --coral-tint: #fbe1da; /* day header card */
+  --yamabuki: #f6d27a; /* countdown, recognition, taxi */
+  --mizu: #a8d3e6; /* flights, trains, link underlines */
+  --wakatake: #b9daa5; /* walking, ticked, likely open */
+  --warn: #b5483a; /* small warnings, 5.2:1 on washi. Only on washi or white. */
+  --ginza: #ff9500; /* the mascot's body, nothing else */
 
-  --sans: 'IBM Plex Sans JP', system-ui, -apple-system, 'Hiragino Sans', 'Yu Gothic', sans-serif;
-  --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-  /* Chinese: Plex for Latin, then the phone's Traditional Chinese font. */
-  --sans-zh: 'Plex Latin', 'PingFang TC', 'PingFang HK', 'Noto Sans TC', 'Noto Sans CJK TC', 'Microsoft JhengHei', 'Heiti TC', system-ui, sans-serif;
+  --line: 3px;
+  --r-card: 22px;
+  --r-box: 14px;
+  --r-pill: 999px;
+
+  /* Huninn for Latin first, then each language's CJK font (fonts.css). */
+  --font: 'Huninn Latin', 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', 'Hiragino Sans', system-ui, sans-serif;
+  --font-zh: 'Huninn Latin', 'Huninn TC', 'PingFang TC', 'PingFang HK', 'Noto Sans TC', 'Microsoft JhengHei', system-ui, sans-serif;
+  --font-ja: 'Huninn Latin', 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', 'Hiragino Sans', 'Yu Gothic', sans-serif;
 
   --t13: 0.8125rem;
   --t16: 1rem;
@@ -20,22 +32,12 @@
   --t28: 1.75rem;
   --t40: 2.5rem;
 
-  --u: 8px; /* baseline */
-  --g: 16px; /* gutter */
+  --u: 8px;
+  --g: 16px;
   --tap: 44px;
-  --nav-h: 56px;
+  --bar-h: 64px;
 
-  color-scheme: light dark;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #111;
-    --ink: #fff;
-    --grey-1: #1f1f1f;
-    --grey-2: #4a4a4a;
-    --grey-3: #ababab;
-  }
+  color-scheme: light;
 }
 
 *,
@@ -47,21 +49,25 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  background: var(--paper);
+  background: var(--washi);
+  scroll-padding-top: calc(var(--bar-h) + env(safe-area-inset-top) + 16px);
 }
 
 body {
   margin: 0;
   min-height: 100dvh;
-  background: var(--paper);
+  background: var(--washi);
   color: var(--ink);
-  font-family: var(--sans);
+  font-family: var(--font);
   font-size: var(--t16);
-  line-height: 1.5;
+  line-height: 1.6;
   font-weight: 400;
+  font-synthesis: none;
+  font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: antialiased;
   overflow-wrap: anywhere;
-  padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom));
+  padding-top: calc(var(--bar-h) + var(--line) + env(safe-area-inset-top));
+  padding-bottom: calc(40px + env(safe-area-inset-bottom));
 }
 
 h1,
@@ -76,6 +82,12 @@ figure {
   margin: 0;
 }
 
+h1,
+h2,
+h3 {
+  font-weight: 400;
+}
+
 ul,
 ol {
   padding: 0;
@@ -84,8 +96,11 @@ ol {
 
 a {
   color: inherit;
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
+  text-decoration-line: underline;
+  text-decoration-color: var(--mizu);
+  text-decoration-thickness: var(--line);
+  text-underline-offset: 5px;
+  text-decoration-skip-ink: none;
 }
 
 button {
@@ -93,9 +108,14 @@ button {
   color: inherit;
 }
 
+svg {
+  display: block;
+}
+
 :focus-visible {
-  outline: 3px solid var(--ink);
-  outline-offset: 2px;
+  outline: var(--line) solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 6px;
 }
 
 [hidden] {
@@ -109,11 +129,12 @@ html:not([data-lang='zh']) [data-l='zh'] {
 }
 html[data-lang='zh'] body,
 [data-l='zh'] {
-  font-family: var(--sans-zh);
+  font-family: var(--font-zh);
 }
 /* Japanese names keep Japanese glyphs in either language. */
 :lang(ja) {
-  font-family: var(--sans);
+  font-family: var(--font-ja);
+  font-weight: 500;
 }
 
 .sr-only {
@@ -129,130 +150,215 @@ html[data-lang='zh'] body,
   position: absolute;
   left: var(--g);
   top: -100px;
-  background: var(--signal);
-  color: var(--on-signal);
+  z-index: 30;
   padding: var(--u) var(--g);
-  z-index: 20;
+  background: var(--coral);
+  border: var(--line) solid var(--ink);
+  border-radius: var(--r-pill);
+  text-decoration: none;
 }
 .skip:focus {
-  top: var(--u);
+  top: calc(env(safe-area-inset-top) + 8px);
 }
 
-/* Type */
+/* ── Type ──────────────────────────────────────────────────────────────── */
 
 .t13 {
   font-size: var(--t13);
-  line-height: 16px;
+  line-height: 1.45;
 }
 .t20 {
   font-size: var(--t20);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 .t28 {
   font-size: var(--t28);
-  line-height: 1.25;
+  line-height: 1.3;
 }
 .t40 {
   font-size: var(--t40);
   line-height: 1.2;
 }
-.w500 {
-  font-weight: 500;
+.spaced {
+  letter-spacing: 0.12em;
 }
-.w700 {
-  font-weight: 700;
-}
-.mono {
-  font-family: var(--mono);
+.num {
   font-variant-numeric: tabular-nums;
 }
 .muted {
-  color: var(--grey-3);
+  color: var(--ink-2);
+}
+.warn {
+  color: var(--warn);
 }
 .label {
   display: block;
   font-size: var(--t13);
-  line-height: 16px;
-  font-weight: 500;
+  line-height: 1.45;
   letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--grey-3);
+  color: var(--ink-2);
 }
 
-/* Layout: flush left, one column of reading width */
+/* ── Layout: one centred reading column ────────────────────────────────── */
 
-.wrap {
-  max-width: 44rem;
+.wrap,
+.page-head,
+.section {
+  max-width: 40rem;
+  margin-inline: auto;
   padding-inline: var(--g);
 }
-
 .page-head {
-  max-width: 44rem;
-  padding: calc(var(--u) * 3) var(--g) calc(var(--u) * 2);
-}
-
-.section {
-  max-width: 44rem;
-  padding: calc(var(--u) * 3) var(--g) 0;
-}
-.section > .label {
+  padding-top: calc(var(--u) * 3);
   padding-bottom: var(--u);
-  border-bottom: 1px solid var(--ink);
-  margin-bottom: 0;
 }
-
-.rule {
-  border: 0;
-  border-top: 1px solid var(--grey-2);
-  margin: 0;
+.page-head > * + * {
+  margin-top: var(--u);
 }
-
+.section {
+  padding-top: calc(var(--u) * 5);
+}
+.section > * + * {
+  margin-top: calc(var(--u) * 2);
+}
 .stack > * + * {
   margin-top: calc(var(--u) * 2);
 }
 
-/* Bottom tab bar: text labels, one-handed */
-
-.tabbar {
-  position: fixed;
-  inset: auto 0 0 0;
-  display: flex;
-  background: var(--paper);
-  border-top: 1px solid var(--ink);
-  padding-bottom: env(safe-area-inset-bottom);
-  z-index: 10;
-}
-.tabbar a {
-  flex: 1;
+/* Section heading: a round badge with a pictogram, then the words. */
+.sec-head {
   display: flex;
   align-items: center;
-  min-height: var(--nav-h);
-  padding-inline: var(--g);
-  font-weight: 500;
-  text-decoration: none;
+  gap: 12px;
+  font-size: var(--t28);
+  line-height: 1.3;
+  letter-spacing: 0.06em;
 }
-.tabbar a + a {
-  border-left: 1px solid var(--grey-2);
+.sec-head.small {
+  font-size: var(--t20);
 }
-.tabbar .langbtn {
+.sec-head .sub {
+  display: block;
+  font-size: var(--t13);
+  letter-spacing: 0.02em;
+  color: var(--ink-2);
+}
+.badge-icon {
   flex: none;
-  min-width: 72px;
-  min-height: var(--nav-h);
-  padding: 0 var(--g);
-  border: 0;
-  border-left: 1px solid var(--grey-2);
-  background: transparent;
-  color: var(--ink);
-  font-weight: 500;
-  text-align: left;
-  cursor: pointer;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: var(--line) solid var(--ink);
+  border-radius: 50%;
+  background: var(--tone, var(--mizu));
 }
-.tabbar a[aria-current='page'] {
-  background: var(--signal);
-  color: var(--on-signal);
+.sec-head.small .badge-icon {
+  width: 40px;
+  height: 40px;
+}
+.badge-icon svg {
+  width: 26px;
+  height: 26px;
+}
+.sec-head.small .badge-icon svg {
+  width: 22px;
+  height: 22px;
 }
 
-/* Chips: text filters and kind tabs */
+/* Dotted ink rule, as in the reference's separators. */
+.dotted {
+  height: 4px;
+  border: 0;
+  margin: 0;
+  background: radial-gradient(circle, var(--ink) 1.5px, transparent 1.9px) 0 50% / 8px 4px repeat-x;
+}
+
+/* ── Surfaces ──────────────────────────────────────────────────────────── */
+
+.card {
+  background: var(--card);
+  border: var(--line) solid var(--ink);
+  border-radius: var(--r-card);
+  padding: calc(var(--u) * 2) 20px;
+}
+.card.tint {
+  background: var(--coral-tint);
+}
+.card > * + * {
+  margin-top: var(--u);
+}
+
+/* Pills and tags: flat fill, ink text, ink outline. */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 2px 12px;
+  border: var(--line) solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--tone, var(--card));
+  color: var(--ink);
+  font-size: var(--t13);
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.pill svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+.pill.big {
+  min-height: 52px;
+  padding: 4px 24px;
+  font-size: var(--t20);
+  gap: 10px;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 10px;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: var(--tone, var(--card));
+  font-size: var(--t13);
+  line-height: 1.45;
+}
+.coral {
+  --tone: var(--coral);
+}
+.yamabuki {
+  --tone: var(--yamabuki);
+}
+.mizu {
+  --tone: var(--mizu);
+}
+.wakatake {
+  --tone: var(--wakatake);
+}
+.washi {
+  --tone: var(--washi);
+}
+/* Opening hours: green when (likely) open. */
+.tag[data-state='open'] {
+  --tone: var(--wakatake);
+}
+.tag[data-state='closed'] {
+  --tone: var(--washi);
+}
+.tag[data-mark='want'] {
+  --tone: var(--coral);
+}
+.tag[data-mark='booked'] {
+  --tone: var(--wakatake);
+}
+.tag[data-mark='skip'] {
+  --tone: var(--washi);
+}
+
+/* ── Controls ──────────────────────────────────────────────────────────── */
 
 .chips {
   display: flex;
@@ -262,29 +368,29 @@ html[data-lang='zh'] body,
 .chip {
   display: inline-flex;
   align-items: center;
-  gap: var(--u);
+  gap: 6px;
   min-height: var(--tap);
-  padding: 0 12px;
-  border: 1px solid var(--ink);
-  border-radius: 2px;
-  background: transparent;
+  padding: 0 16px;
+  border: var(--line) solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--card);
   color: var(--ink);
-  font-weight: 500;
   text-decoration: none;
   cursor: pointer;
+  white-space: nowrap;
 }
 .chip .n {
-  font-family: var(--mono);
   font-size: var(--t13);
+  color: var(--ink-2);
 }
 .chip[aria-current='page'],
 .chip[aria-pressed='true'] {
-  background: var(--signal);
-  border-color: var(--signal);
-  color: var(--on-signal);
+  background: var(--coral);
 }
-
-/* Buttons: full-width, words not icons */
+.chip[aria-current='page'] .n,
+.chip[aria-pressed='true'] .n {
+  color: var(--ink);
+}
 
 .btn {
   display: flex;
@@ -293,150 +399,129 @@ html[data-lang='zh'] body,
   gap: var(--g);
   width: 100%;
   min-height: 56px;
-  padding: 0 var(--g);
-  border: 1px solid var(--ink);
-  border-radius: 2px;
-  background: var(--paper);
+  padding: 6px 24px;
+  border: var(--line) solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--card);
   color: var(--ink);
   font-size: var(--t20);
-  font-weight: 500;
+  line-height: 1.3;
   text-align: left;
   text-decoration: none;
   cursor: pointer;
 }
 .btn.primary {
-  background: var(--signal);
-  border-color: var(--signal);
-  color: var(--on-signal);
+  background: var(--coral);
 }
 .btn .hint {
+  flex: none;
   font-size: var(--t13);
-  font-weight: 400;
+}
+.btn.small {
+  min-height: var(--tap);
+  padding: 4px 18px;
+  font-size: var(--t16);
+}
+.btn[disabled] {
+  border-color: var(--ink-2);
+  color: var(--ink-2);
+  border-style: dashed;
+  cursor: default;
 }
 .btns > * + * {
-  margin-top: var(--u);
+  margin-top: 12px;
+}
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--u);
+  margin-top: 12px;
+}
+.btn-row .btn {
+  width: auto;
+  flex: 1 1 auto;
+}
+form .btn.small {
+  margin-top: 12px;
 }
 
-/* Segmented control for Want / Booked / Skip */
+/* A text button that looks like a link (Edit, Edit the headline). */
+.linkish {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: var(--mizu);
+  text-decoration-thickness: var(--line);
+  text-underline-offset: 5px;
+}
+summary.linkish {
+  list-style: none;
+}
+summary.linkish::-webkit-details-marker {
+  display: none;
+}
 
+/* Want / Booked / Skip */
 .seg {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  border: 1px solid var(--ink);
-  border-radius: 2px;
+  gap: var(--u);
 }
 .seg button {
   min-height: 48px;
-  border: 0;
-  background: transparent;
-  font-weight: 500;
+  border: var(--line) solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--card);
   cursor: pointer;
 }
-.seg button + button {
-  border-left: 1px solid var(--ink);
-}
 .seg button[aria-pressed='true'] {
-  background: var(--signal);
-  color: var(--on-signal);
+  background: var(--coral);
+}
+.seg button[data-mark='booked'][aria-pressed='true'] {
+  background: var(--wakatake);
+}
+.seg button[data-mark='skip'][aria-pressed='true'] {
+  background: var(--washi);
+  border-style: dashed;
 }
 
-/* Mark tags on list rows */
-
-.tag {
-  display: inline-block;
-  padding: 0 6px;
-  font-size: var(--t13);
-  line-height: 20px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  border: 1px solid var(--ink);
+/* Facts card: rows split by dotted lines. */
+.facts {
+  background: var(--card);
+  border: var(--line) solid var(--ink);
+  border-radius: var(--r-card);
+  padding: 4px 20px;
 }
-.tag[data-mark='want'] {
-  background: var(--signal);
-  border-color: var(--signal);
-  color: var(--on-signal);
-}
-.tag[data-mark='booked'] {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-/* Definition rows: label left, value right on wide, stacked on narrow */
-
 .facts > div {
-  padding: 12px 0;
-  border-bottom: 1px solid var(--grey-2);
+  padding: 14px 0;
+}
+.facts > div + div {
+  background: radial-gradient(circle, var(--ink) 1.5px, transparent 1.9px) 0 0 / 8px 4px repeat-x;
 }
 .facts dt {
   font-size: var(--t13);
-  line-height: 16px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--grey-3);
-  margin-bottom: 4px;
+  color: var(--ink-2);
+  margin-bottom: 2px;
 }
-
-/* ── Live plan ─────────────────────────────────────────────────────────── */
-
-/* One-time "who's using this phone" question */
-.whoami {
-  padding: calc(var(--u) * 2) var(--g);
-  background: var(--grey-1);
-  border-bottom: 1px solid var(--ink);
-}
-.whoami > * + * {
-  margin-top: var(--u);
-}
-
-/* Status line above the tabs: saving, no signal, the other phone's news */
-.syncbar {
-  position: fixed;
-  inset: auto 0 calc(var(--nav-h) + env(safe-area-inset-bottom)) 0;
-  z-index: 11;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--g);
-  min-height: 52px;
-  padding: 4px var(--g);
-  background: var(--ink);
-  color: var(--paper);
-  font-weight: 500;
-}
-.syncbar[data-tone='alert'] {
-  background: var(--signal);
-  color: var(--on-signal);
-}
-.syncbar button {
-  flex: none;
-  min-height: var(--tap);
-  padding: 0 var(--g);
-  border: 1px solid currentColor;
-  border-radius: 2px;
-  background: transparent;
-  font-weight: 500;
-  cursor: pointer;
-}
-body.has-syncbar {
-  padding-bottom: calc(var(--nav-h) + 60px + env(safe-area-inset-bottom));
+.facts dd + dd {
+  margin-top: 4px;
 }
 
 /* Forms */
 .field {
   display: block;
-  margin-top: calc(var(--u) * 1.5);
+  margin-top: 12px;
 }
 .field > span {
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   font-size: var(--t13);
-  line-height: 16px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--grey-3);
+  color: var(--ink-2);
 }
 input[type='text'],
 input[type='search'],
@@ -447,10 +532,10 @@ textarea {
   display: block;
   width: 100%;
   min-height: 48px;
-  padding: 10px 12px;
-  border: 1px solid var(--ink);
-  border-radius: 2px;
-  background: var(--paper);
+  padding: 10px 14px;
+  border: var(--line) solid var(--ink);
+  border-radius: var(--r-box);
+  background: var(--card);
   color: var(--ink);
   font: inherit;
   font-size: var(--t16); /* 16px keeps iOS from zooming in */
@@ -461,73 +546,155 @@ textarea {
 .row2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--u);
-}
-.btn.small {
-  min-height: var(--tap);
-  font-size: var(--t16);
-}
-.btn[disabled] {
-  border-color: var(--grey-2);
-  color: var(--grey-3);
-  cursor: default;
-}
-.btn-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--u);
-  margin-top: calc(var(--u) * 1.5);
-}
-.btn-row .btn {
-  width: auto;
-  flex: 1 1 auto;
-}
-form .btn.small {
-  margin-top: calc(var(--u) * 1.5);
+  gap: 12px;
 }
 
-/* A day's plan */
-.plan-list > li {
-  border-bottom: 1px solid var(--grey-2);
-}
-.plan-list summary {
+/* Checkboxes: rounded squares; ticked is a drawn tick on wakatake. */
+input[type='checkbox'] {
+  appearance: none;
+  flex: none;
   display: grid;
-  grid-template-columns: 5.5rem 1fr auto;
-  gap: var(--u);
-  align-items: start;
-  min-height: 56px;
-  padding: 12px 0;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  border: var(--line) solid var(--ink);
+  border-radius: 9px;
+  background: var(--card);
   cursor: pointer;
-  list-style: none;
 }
-.plan-list summary::-webkit-details-marker {
-  display: none;
+input[type='checkbox']:checked {
+  background: var(--wakatake)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='%233e3a39' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+    center / 22px no-repeat;
+  animation: pop 260ms cubic-bezier(0.3, 1.6, 0.5, 1);
 }
-.plan-list .what > * {
-  display: block;
+
+/* ── Top bar ───────────────────────────────────────────────────────────── */
+
+.topbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 20;
+  padding-top: env(safe-area-inset-top);
+  background: var(--washi);
+  border-bottom: var(--line) solid var(--ink);
 }
-.plan-list .note {
-  margin-top: 2px;
+.topbar-in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--u);
+  max-width: 40rem;
+  height: var(--bar-h);
+  margin-inline: auto;
+  padding-inline: 12px;
 }
-.plan-list .edit {
-  padding-top: 2px;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.plan-list details[open] .edit {
+.brand {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--tap);
+  height: var(--tap);
   text-decoration: none;
 }
-.plan-list .controls {
-  padding: 0 0 calc(var(--u) * 2);
+.brand svg {
+  width: 44px;
+  height: 40px;
 }
-.anytime {
-  margin-top: calc(var(--u) * 2);
-  padding-bottom: var(--u);
-  border-bottom: 1px solid var(--grey-2);
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }
-.legend,
-.empty {
+.tab {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  padding: 0 11px;
+  border: var(--line) solid transparent;
+  border-radius: var(--r-pill);
+  background: none;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.tab[aria-current='page'] {
+  background: var(--coral);
+  border-color: var(--ink);
+}
+.langbtn {
+  margin-left: 2px;
+  border-color: var(--ink);
+  border-style: dashed;
+}
+
+/* ── Live plan ─────────────────────────────────────────────────────────── */
+
+/* One-time "who's using this phone" question */
+.whoami {
+  max-width: 40rem;
+  margin: var(--g) auto 0;
+  padding-inline: var(--g);
+}
+.whoami > div {
+  background: var(--coral-tint);
+  border: var(--line) solid var(--ink);
+  border-radius: var(--r-card);
+  padding: var(--g) 20px;
+}
+.whoami > div > * + * {
   margin-top: var(--u);
+}
+
+/* Status line, floating at the bottom: saving, no signal, the other phone's news */
+.syncbar {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom));
+  z-index: 21;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 38rem;
+  min-height: 56px;
+  margin-inline: auto;
+  padding: 6px 8px 6px 20px;
+  border: var(--line) solid var(--ink);
+  border-radius: var(--r-card);
+  background: var(--card);
+  animation: rise 300ms cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+.syncbar[data-tone='alert'] {
+  background: var(--coral);
+}
+.syncbar[data-tone='news'] {
+  background: var(--mizu);
+}
+.syncbar button {
+  flex: none;
+  min-height: var(--tap);
+  padding: 0 18px;
+  border: var(--line) solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--card);
+  cursor: pointer;
+}
+body.has-syncbar {
+  padding-bottom: calc(110px + env(safe-area-inset-bottom));
+}
+
+/* Place cards, one under another */
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 40rem;
+  margin-inline: auto;
+  padding-inline: var(--g);
 }
 
 /* Lists of places to pick from, with an Add button */
@@ -537,21 +704,27 @@ form .btn.small {
   justify-content: space-between;
   gap: var(--g);
   padding: 12px 0;
-  border-bottom: 1px solid var(--grey-2);
+}
+.picks > li + li {
+  background: radial-gradient(circle, var(--ink) 1.5px, transparent 1.9px) 0 0 / 8px 4px repeat-x;
 }
 .pick-name {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  align-items: flex-start;
+  gap: 4px;
   text-decoration: none;
   min-width: 0;
+}
+.pick-name > .name {
+  text-decoration: underline;
+  text-decoration-color: var(--mizu);
+  text-decoration-thickness: var(--line);
+  text-underline-offset: 5px;
 }
 .picks .chip,
 .picks .added {
   flex: none;
-}
-.picks .muted {
-  display: block;
 }
 
 /* Simple link lists: Want list, your own places */
@@ -560,8 +733,17 @@ form .btn.small {
   flex-direction: column;
   gap: 2px;
   padding: 12px 0;
-  border-bottom: 1px solid var(--grey-2);
   text-decoration: none;
+}
+.rows-lite > li + li {
+  background: radial-gradient(circle, var(--ink) 1.5px, transparent 1.9px) 0 0 / 8px 4px repeat-x;
+}
+.rows-lite .name {
+  align-self: flex-start;
+  text-decoration: underline;
+  text-decoration-color: var(--mizu);
+  text-decoration-thickness: var(--line);
+  text-underline-offset: 5px;
 }
 .rows-lite > li.muted {
   padding: 12px 0;
@@ -575,7 +757,6 @@ form .btn.small {
   align-items: baseline;
   min-height: var(--tap);
   padding: 10px 0;
-  border-bottom: 1px solid var(--grey-2);
 }
 
 /* Compact day summary */
@@ -584,50 +765,358 @@ form .btn.small {
   flex-direction: column;
   gap: 2px;
 }
-.preview-list .mono {
+.preview-list .num {
   display: inline-block;
   min-width: 3.5rem;
-}
-
-/* Next timed thing on Today */
-.nextup {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 12px var(--g);
-  margin-inline: calc(var(--g) * -1);
-  border-bottom: 1px solid var(--ink);
-  text-decoration: none;
+  color: var(--ink-2);
 }
 
 /* Shared checklists: bookings and prep */
+.checklist > li:not([hidden]) ~ li {
+  background: radial-gradient(circle, var(--ink) 1.5px, transparent 1.9px) 0 0 / 8px 4px repeat-x;
+}
 .check {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   align-items: flex-start;
-  padding: calc(var(--u) * 2) 0;
-  border-bottom: 1px solid var(--grey-2);
+  padding: 14px 0;
   cursor: pointer;
 }
 .check input {
-  flex: none;
-  width: 28px;
-  height: 28px;
-  margin: 0;
-  accent-color: var(--ink);
+  margin-top: 1px;
 }
 .check-body {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
 }
 .done .item-text {
   text-decoration: line-through;
-  color: var(--grey-3);
+  text-decoration-color: var(--ink-2);
+  color: var(--ink-2);
 }
 
 /* Who changed what */
 .feed > li {
   padding: 10px 0;
-  border-bottom: 1px solid var(--grey-2);
+}
+.feed > li + li {
+  background: radial-gradient(circle, var(--ink) 1.5px, transparent 1.9px) 0 0 / 8px 4px repeat-x;
+}
+
+/* ── Timeline (day pages and Today) ────────────────────────────────────── */
+
+/* Times on the left, a dotted line with hollow nodes, stops on the right. */
+.tl {
+  position: relative;
+  --time-w: 3.4rem;
+  --rail: calc(var(--time-w) + 14px);
+}
+.tl::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: calc(var(--rail) - 2px);
+  width: 4px;
+  background: radial-gradient(circle, var(--ink) 1.6px, transparent 2px) 50% 0 / 4px 8px repeat-y;
+}
+.tl > li {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--time-w) 28px 1fr;
+  align-items: start;
+  padding: 8px 0;
+}
+.tl-time {
+  padding-top: 14px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.tl-node {
+  justify-self: center;
+  width: 18px;
+  height: 18px;
+  margin-top: 17px;
+  margin-left: -1px;
+  border: var(--line) solid var(--ink);
+  border-radius: 50%;
+  background: var(--washi);
+  z-index: 1;
+}
+.tl-leg .tl-node {
+  width: 12px;
+  height: 12px;
+  margin-top: 13px;
+  border-width: 2px;
+}
+.tl-leg .tl-time {
+  padding-top: 8px;
+  color: var(--ink-2);
+}
+.tl-body {
+  min-width: 0;
+  padding-left: 6px;
+}
+
+/* A stop: a white card */
+.tl-card {
+  background: var(--card);
+  border: var(--line) solid var(--ink);
+  border-radius: 20px;
+  padding: 12px 16px 8px;
+}
+.tl-card .name {
+  font-size: var(--t20);
+  line-height: 1.4;
+}
+.tl-card .name a {
+  text-decoration-color: var(--mizu);
+}
+.tl-card .ja {
+  display: block;
+  margin-top: 2px;
+}
+.tl-card .note {
+  margin-top: 6px;
+  font-size: var(--t13);
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+.tl-card .meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 12px;
+  margin-top: 2px;
+}
+.tl-card .controls {
+  padding: 4px 0 12px;
+}
+.tl-card summary {
+  min-height: var(--tap);
+  cursor: pointer;
+  list-style: none;
+}
+.tl-card summary::-webkit-details-marker {
+  display: none;
+}
+.tl-card details[open] .linkish {
+  text-decoration: none;
+}
+.mustgo {
+  float: right;
+  margin: 2px 0 6px 10px;
+}
+.tl-plain .tl-card {
+  background: var(--washi);
+  border-style: dashed;
+}
+
+/* A journey between stops */
+.leg-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.line-dot {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 0 2px var(--card);
+}
+.leg-text {
+  margin-top: 6px;
+}
+.leg-mins {
+  font-size: var(--t13);
+  color: var(--ink-2);
+}
+
+.tl-sub {
+  margin: calc(var(--u) * 3) 0 var(--u);
+  font-size: var(--t20);
+  letter-spacing: 0.06em;
+}
+.legend,
+.empty {
+  margin-top: 12px;
+}
+
+/* ── Motion: gentle, CSS only, off for reduced motion ──────────────────── */
+
+@keyframes pop {
+  0% {
+    transform: scale(0.7);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes rise {
+  from {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+}
+@keyframes bounce-in {
+  0% {
+    transform: translateY(14px) scale(0.98);
+    opacity: 0;
+  }
+  70% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+  100% {
+    transform: none;
+  }
+}
+@keyframes bob {
+  50% {
+    transform: translateY(-3px);
+  }
+}
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+@keyframes drift {
+  50% {
+    transform: translateX(4px);
+  }
+}
+@keyframes fall {
+  0% {
+    transform: translate(0, -6px) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(10px, 26px) rotate(40deg);
+    opacity: 0;
+  }
+}
+@keyframes twinkle {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* Classes the illustrations use; transform-box keeps rotation on each shape. */
+.a-bob,
+.a-sway,
+.a-drift,
+.a-fall,
+.a-twinkle {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+.a-bob {
+  animation: bob 4s ease-in-out infinite;
+}
+.a-sway {
+  transform-origin: 50% 0;
+  animation: sway 5s ease-in-out infinite;
+}
+.a-drift {
+  animation: drift 6s ease-in-out infinite;
+}
+.a-fall {
+  animation: fall 5s ease-in-out infinite;
+}
+.a-twinkle {
+  animation: twinkle 4s ease-in-out infinite;
+}
+.a-d1 {
+  animation-delay: -1.2s;
+}
+.a-d2 {
+  animation-delay: -2.5s;
+}
+.a-d3 {
+  animation-delay: -3.7s;
+}
+
+/* Entering content bounces in, staggered by --i. */
+.enter {
+  animation: bounce-in 320ms cubic-bezier(0.3, 1.3, 0.5, 1) both;
+  animation-delay: calc(min(var(--i, 0), 10) * 45ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── Show to staff: the one centred screen ─────────────────────────────── */
+
+/* Washi on ink, Japanese name large in Zen Maru Gothic. */
+html:has(body.staff) {
+  background: var(--ink);
+}
+body.staff {
+  padding: 0;
+  background: var(--ink);
+  color: var(--washi);
+}
+.staff-close {
+  position: absolute;
+  top: calc(env(safe-area-inset-top) + 12px);
+  left: 12px;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  padding: 0 20px;
+  border: var(--line) solid var(--washi);
+  border-radius: var(--r-pill);
+  color: var(--washi);
+  font-size: var(--t20);
+  text-decoration: none;
+}
+.staff-close:focus-visible {
+  outline-color: var(--washi);
+}
+.staff-card {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--u) * 3);
+  padding: 88px var(--g) calc(var(--u) * 5);
+  text-align: center;
+}
+.staff-ja {
+  font-size: clamp(48px, 13vw, 96px);
+  line-height: 1.25;
+  font-weight: 700;
+  word-break: auto-phrase;
+}
+.staff-addr {
+  font-size: var(--t28);
+  line-height: 1.45;
+}
+.staff-en {
+  font-size: var(--t20);
+  color: #d9d3cc;
 }

@@ -1,5 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
+import DayCard from '../../components/DayCard.astro';
+import DayTrack from '../../components/DayTrack.astro';
+import SectionHead from '../../components/SectionHead.astro';
 import T from '../../components/T.astro';
 import U from '../../components/U.astro';
 import { bookingDate, loadData } from '../../lib/data';
@@ -7,7 +10,7 @@ import { claudeCodeUrl } from '../../lib/ask';
 import { dateIn, ui } from '../../i18n/ui';
 
 const data = await loadData();
-const { days, zh } = data;
+const { days, zh, stay, flights } = data;
 const year = Number(days[0].date.slice(0, 4));
 const bookings = data.bookings.map((b) => ({ ...b, date: bookingDate(b.when, year) }));
 const due = (d: string, lang: 'en' | 'zh') => (d === 'now' ? ui('due.now', lang) : d === 'trip' ? ui('due.trip', lang) : dateIn(d, lang));
@@ -18,54 +21,34 @@ const names = data.travellers.map((t) => t.name);
 
 <Base title={ui('plan.title', 'en')} titleZh={ui('plan.title', 'zh')} tab="plan">
   <header class="page-head">
-    <h1 class="t40 w700"><U k="plan.title" /></h1>
+    <SectionHead icon="list" tone="coral" level={1}><U k="plan.title" /></SectionHead>
     <p class="muted"><U k="plan.shared" v={{ names: names.join(ui('list.and', 'en')) }} vz={{ names: names.join(ui('list.and', 'zh')) }} /></p>
   </header>
 
   <section class="section" aria-labelledby="days-h">
-    <h2 class="label" id="days-h"><U k="today.theDays" v={{ n: days.length }} /></h2>
+    <SectionHead icon="train" tone="coral" id="days-h"><U k="today.theDays" v={{ n: days.length }} /></SectionHead>
+    <DayTrack days={days} />
     <ol class="daylist">
       {
-        days.map((d, i) => {
-          const z = zh.days[d.date];
-          return (
-            <li>
-              <a href={`/day/${d.date}/`}>
-                <span class="when">
-                  <span class="mono w500">
-                    <T en={dateIn(d.date, 'en')} zh={dateIn(d.date, 'zh')} />
-                  </span>
-                  <span class="t13 muted">
-                    <U k="plan.dayN" v={{ n: i + 1 }} />
-                  </span>
-                </span>
-                <span class="t20 w500" data-day-title={d.date}>
-                  <T en={d.title} zh={z?.title} />
-                </span>
-                <span data-day-anchor={d.date}>
-                  <T en={d.anchor} zh={z?.anchor} />
-                </span>
-                <span class="preview" data-day-preview={d.date} data-max="5" />
-                <span class="open-day w500">
-                  <U k="plan.openDay" />
-                </span>
-              </a>
-            </li>
-          );
-        })
+        days.map((d, i) => (
+          <li>
+            <DayCard day={d} n={i + 1} zh={zh.days[d.date]} stay={stay} flights={flights} href={`/day/${d.date}/`} />
+            <div class="preview" data-day-preview={d.date} data-max="6" />
+          </li>
+        ))
       }
     </ol>
   </section>
 
   <section class="section" aria-labelledby="want-h">
-    <h2 class="label" id="want-h"><U k="plan.want" /></h2>
-    <p class="t13 muted hint"><U k="plan.wantHint" /></p>
-    <ul class="rows-lite" data-wantlist></ul>
+    <SectionHead icon="star" tone="coral" id="want-h"><U k="plan.want" /></SectionHead>
+    <p class="t13 muted"><U k="plan.wantHint" /></p>
+    <ul class="rows-lite card" data-wantlist></ul>
   </section>
 
   <section class="section" aria-labelledby="book-h">
-    <h2 class="label" id="book-h"><U k="plan.bookings" /></h2>
-    <ul class="checklist">
+    <SectionHead icon="calendar" tone="yamabuki" id="book-h"><U k="plan.bookings" /></SectionHead>
+    <ul class="checklist card">
       {
         bookings.map((b) => {
           const z = zh.bookings[b.id];
@@ -74,10 +57,10 @@ const names = data.travellers.map((t) => t.name);
               <label class="check">
                 <input type="checkbox" data-check={`booking:${b.id}`} />
                 <span class="check-body">
-                  <span class="mono w500">
+                  <span class="tag yamabuki">
                     <T en={when(b, 'en')} zh={when(b, 'zh')} />
                   </span>
-                  <span class="w500 item-text">
+                  <span class="t20 item-text">
                     <T en={b.what} zh={z?.what} />
                   </span>
                   <span>
@@ -86,7 +69,7 @@ const names = data.travellers.map((t) => t.name);
                   <span class="t13 muted">
                     <T en={b.where} zh={z?.where} />
                   </span>
-                  <span class="t13 w500" data-check-by />
+                  <span class="t13" data-check-by />
                 </span>
               </label>
             </li>
@@ -97,8 +80,8 @@ const names = data.travellers.map((t) => t.name);
   </section>
 
   <section class="section" aria-labelledby="prep-h">
-    <h2 class="label" id="prep-h"><U k="today.beforeFly" /></h2>
-    <ul class="checklist">
+    <SectionHead icon="check" tone="wakatake" id="prep-h"><U k="today.beforeFly" /></SectionHead>
+    <ul class="checklist card">
       {
         data.prep.map((p) => {
           const z = zh.prep[p.id];
@@ -107,7 +90,7 @@ const names = data.travellers.map((t) => t.name);
               <label class="check">
                 <input type="checkbox" data-check={`prep:${p.id}`} />
                 <span class="check-body">
-                  <span class="mono w500">
+                  <span class="tag washi">
                     <T en={due(p.due, 'en')} zh={due(p.due, 'zh')} />
                   </span>
                   <span class="item-text">
@@ -116,7 +99,7 @@ const names = data.travellers.map((t) => t.name);
                   <span class="t13 muted">
                     <T en={p.group} zh={z?.group} />
                   </span>
-                  <span class="t13 w500" data-check-by />
+                  <span class="t13" data-check-by />
                 </span>
               </label>
             </li>
@@ -127,17 +110,17 @@ const names = data.travellers.map((t) => t.name);
   </section>
 
   <section class="section" aria-labelledby="feed-h">
-    <h2 class="label" id="feed-h"><U k="today.latest" /></h2>
-    <ol class="feed" data-feed="20"></ol>
+    <SectionHead icon="chat" tone="mizu" id="feed-h"><U k="today.latest" /></SectionHead>
+    <ol class="feed card" data-feed="20"></ol>
   </section>
 
   <section class="section" aria-labelledby="device-h">
-    <h2 class="label" id="device-h"><U k="plan.device" /></h2>
-    <div class="device" data-device></div>
+    <SectionHead icon="phone" tone="wakatake" id="device-h"><U k="plan.device" /></SectionHead>
+    <div class="device card" data-device></div>
   </section>
 
   <section class="section last" aria-labelledby="claude-h">
-    <h2 class="label" id="claude-h"><U k="plan.bigger" /></h2>
+    <SectionHead icon="sparkle" tone="yamabuki" id="claude-h"><U k="plan.bigger" /></SectionHead>
     <p><U k="plan.biggerText" /></p>
     <p class="btns">
       <a class="btn" href={claudeCodeUrl('Read CLAUDE.md. I want to: ')}>
@@ -148,50 +131,28 @@ const names = data.travellers.map((t) => t.name);
 </Base>
 
 <style>
-  .page-head p {
-    margin-top: var(--u);
-  }
-  .daylist > li > a {
+  .daylist {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    padding: calc(var(--u) * 2) 0;
-    border-bottom: 1px solid var(--grey-2);
-    text-decoration: none;
-  }
-  .when {
-    display: flex;
-    gap: var(--u);
-    align-items: baseline;
+    gap: 18px;
   }
   .preview {
-    margin-top: 4px;
+    padding: 10px 6px 0 18px;
   }
-  .open-day {
-    margin-top: 4px;
-    text-decoration: underline;
-    text-underline-offset: 3px;
+  .check-body > .tag {
+    align-self: flex-start;
   }
-  .hint {
-    margin: var(--u) 0 0;
+  .checklist {
+    padding-block: 2px;
   }
-  .device {
-    padding-top: calc(var(--u) * 2);
-  }
-  .device > * + * {
+  .device > :global(* + *) {
     margin-top: var(--u);
   }
   .device :global(.install) {
     margin-top: calc(var(--u) * 3);
   }
   .last {
-    padding-bottom: calc(var(--u) * 5);
-  }
-  .last p + p {
-    margin-top: calc(var(--u) * 2);
-  }
-  .last > p:first-of-type {
-    margin-top: calc(var(--u) * 2);
+    padding-bottom: calc(var(--u) * 3);
   }
 </style>
 
@@ -221,7 +182,7 @@ const names = data.travellers.map((t) => t.name);
       const days = [...new Set(itemsForPlace(plan, ref).map((i) => date(i.day)))];
       const station = PLACE_BY_ID.get(ref)?.station;
       return html`<li><a href="${view!.href}">
-        <span class="w500">${view!.name}</span>${view!.nameJa ? html` <span lang="ja">${view!.nameJa}</span>` : ''}
+        <span class="name">${view!.name}</span>${view!.nameJa ? html` <span lang="ja">${view!.nameJa}</span>` : ''}
         <span class="t13 muted">${station ? `${station} · ` : ''}${days.length ? t('plan.planned', { days: days.join(', ') }) : t('plan.notPlanned')} · ${t('plan.markedBy', { name: m.by })}</span>
       </a></li>`;
     })}`;

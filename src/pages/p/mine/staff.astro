@@ -6,67 +6,13 @@ import { ui } from '../../../i18n/ui';
 ---
 
 <Base title={ui('place.staff', 'en')} titleZh={ui('place.staff', 'zh')} showTabs={false} bodyClass="staff">
-  <a class="close" href="/plan/" data-close><U k="staff.close" /></a>
-  <div class="card">
-    <p class="ja" lang="ja" data-f="ja"></p>
-    <p class="addr" lang="ja" data-f="address"></p>
-    <p class="en" data-f="en"></p>
+  <a class="staff-close" href="/plan/" data-close><U k="staff.close" /></a>
+  <div class="staff-card">
+    <p class="staff-ja" lang="ja" data-f="ja"></p>
+    <p class="staff-addr" lang="ja" data-f="address"></p>
+    <p class="staff-en" data-f="en"></p>
   </div>
 </Base>
-
-<style is:global>
-  body.staff {
-    background: #000;
-    color: #fff;
-    padding-bottom: 0;
-    color-scheme: dark;
-  }
-</style>
-
-<style>
-  .close {
-    position: absolute;
-    top: env(safe-area-inset-top);
-    left: 0;
-    display: inline-flex;
-    align-items: center;
-    min-height: 56px;
-    padding-inline: var(--g);
-    color: #fff;
-    font-weight: 500;
-    font-size: var(--t20);
-    text-decoration: none;
-  }
-  .close:focus-visible {
-    outline-color: #fff;
-  }
-  .card {
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: calc(var(--u) * 3);
-    padding: 72px var(--g) calc(var(--u) * 5);
-    text-align: center;
-  }
-  .ja {
-    font-size: clamp(48px, 13vw, 96px);
-    line-height: 1.2;
-    font-weight: 700;
-    overflow-wrap: anywhere;
-    word-break: auto-phrase;
-  }
-  .addr {
-    font-size: var(--t28);
-    line-height: 1.4;
-    font-weight: 500;
-  }
-  .en {
-    font-size: var(--t20);
-    color: #bdbdbd;
-  }
-</style>
 
 <script>
   import { holdScreenOn } from '../../../scripts/device';

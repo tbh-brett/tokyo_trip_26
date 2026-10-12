@@ -1,0 +1,11 @@
+---
+// A pictogram from src/lib/icons.ts. Always next to words.
+import { iconSvg, type IconName } from '../lib/icons';
+
+interface Props {
+  name: IconName;
+}
+const { name } = Astro.props;
+---
+
+<Fragment set:html={iconSvg(name)} />
