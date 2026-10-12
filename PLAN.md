@@ -75,7 +75,7 @@ Clara asked for the look of a Claude-made Busan trip site (brief and screenshots
 - Day pages: a metro strip-map day track the mascot rides, a coral day header card with the day's drawing, and the plan as a timeline with Must-go tags, transport legs (from each day's notes only) and the flights. Today shows today's timeline during the trip.
 - Eight original illustrations (hero + one per day), gentle CSS motion, all off with reduced motion.
 
-Still open: flight numbers, airline and terminals, the departure time from home, the hotel's name, phone and check-in/out times (Brett to supply; the cards say "to add"). The plan's typed transit entries (e.g. "07:05 Ginza line, Suehirocho (G14) to Gaienmae (G03)") now repeat the legs; remove them once the new pages are live. Done when Clara looks at it on her phone and says yes.
+Flights and hotel filled in 12 Oct 2026 (HK Express UO848 / UO693, Okachimachi Urban Hotel). Still open: UO693's Narita terminal and Hong Kong arrival time; past schedules listed UO693 at 20:55, not 22:00, so check the booking; the hotel may change (free cancellation). The plan's typed transit entries (e.g. "07:05 Ginza line, Suehirocho (G14) to Gaienmae (G03)") now repeat the legs; remove them once the new pages are live. Done when Clara looks at it on her phone and says yes.
 
 Later, only if Brett misses the old look: a per-phone theme switch (picture book / modern) set before paint like the language. It doubles design QA.
 

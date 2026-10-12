@@ -225,6 +225,7 @@ const trip = defineCollection({
     stay: z.strictObject({
       name_en: z.string().min(1).nullable(),
       name_ja: z.string().min(1).nullable(),
+      name_zh: z.string().min(1).nullable(),
       area_en: z.string().min(1),
       area_zh: z.string().min(1),
       address_ja: z.string().min(1),
@@ -234,6 +235,8 @@ const trip = defineCollection({
       check_in: hhmm.nullable(),
       check_out: hhmm.nullable(),
       phone: z.string().min(1).nullable(),
+      /** Where the hotel's details came from. */
+      source: z.string().min(1).nullable(),
     }),
     flights: z.array(flight),
   }),

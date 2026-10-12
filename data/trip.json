@@ -7,41 +7,61 @@
     "area_ja": "外神田6丁目"
   },
   "stay": {
-    "name_en": null,
-    "name_ja": null,
+    "name_en": "Okachimachi Urban Hotel",
+    "name_ja": "御徒町アーバンホテル",
+    "name_zh": "御徒町都市酒店",
     "area_en": "Soto-Kanda",
     "area_zh": "外神田",
-    "address_ja": "外神田6丁目",
-    "address_precision": "district",
+    "address_ja": "〒101-0021 東京都千代田区外神田6-16-8",
+    "address_precision": "street",
     "from": "2026-11-27",
     "to": "2026-12-03",
-    "check_in": null,
-    "check_out": null,
-    "phone": null
+    "check_in": "14:00",
+    "check_out": "11:00",
+    "phone": "03-3837-1131",
+    "source": "https://newt.net/hotel/jpn/e297980"
   },
   "flights": [
     {
       "date": "2026-11-27",
       "direction": "outbound",
       "who": [],
-      "airline": null,
-      "number": null,
-      "from": { "name_en": null, "name_zh": null, "terminal": null },
-      "to": { "name_en": "Narita", "name_zh": "成田", "terminal": null },
-      "depart": null,
+      "airline": "HK Express",
+      "number": "UO848",
+      "from": {
+        "name_en": "Hong Kong",
+        "name_zh": "香港",
+        "terminal": "T2"
+      },
+      "to": {
+        "name_en": "Narita",
+        "name_zh": "成田",
+        "terminal": "T2"
+      },
+      "depart": "09:15",
       "arrive": "14:45",
-      "minutes": null,
-      "note_en": "Skyliner to Keisei-Ueno, about 41 minutes; the hotel is a 10-minute walk.",
-      "note_zh": "Skyliner 約 41 分鐘到京成上野；酒店步行 10 分鐘。"
+      "minutes": 270,
+      "note_en": "Hong Kong: self check-in and bag drop in T2, Aisle U; the gates are in T1. Narita: Skyliner to Keisei-Ueno, about 41 minutes; the hotel is a 10-minute walk.",
+      "note_zh": "香港：在 T2 U 行自助登記及寄艙；登機閘口在 T1。成田：Skyliner 約 41 分鐘到京成上野；酒店步行 10 分鐘。"
     },
     {
       "date": "2026-12-03",
       "direction": "return",
-      "who": ["Brett"],
-      "airline": null,
-      "number": null,
-      "from": { "name_en": "Narita", "name_zh": "成田", "terminal": null },
-      "to": { "name_en": null, "name_zh": null, "terminal": null },
+      "who": [
+        "Brett"
+      ],
+      "airline": "HK Express",
+      "number": "UO693",
+      "from": {
+        "name_en": "Narita",
+        "name_zh": "成田",
+        "terminal": null
+      },
+      "to": {
+        "name_en": "Hong Kong",
+        "name_zh": "香港",
+        "terminal": null
+      },
       "depart": "22:00",
       "arrive": null,
       "minutes": null,

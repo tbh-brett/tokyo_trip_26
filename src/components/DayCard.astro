@@ -33,7 +33,15 @@ const Wrap = href ? 'a' : 'div';
     <span class="t13 dn"><U k="plan.dayN" v={{ n }} /></span>
     <H class="t20 title" data-day-title={day.date}><T en={day.title} zh={zh?.title} /></H>
     <span class="t13 sleep">
-      {fly('en') ? <T en={fly('en')!} zh={fly('zh')} /> : <U k="stay.line" v={{ area: stay.area_en }} vz={{ area: stay.area_zh }} />}
+      {
+        fly('en') ? (
+          <T en={fly('en')!} zh={fly('zh')} />
+        ) : stay.name_en ? (
+          <U k="stay.at" v={{ name: stay.name_en }} vz={{ name: stay.name_zh ?? stay.name_en }} />
+        ) : (
+          <U k="stay.line" v={{ area: stay.area_en }} vz={{ area: stay.area_zh }} />
+        )
+      }
     </span>
   </span>
 </Wrap>

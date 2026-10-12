@@ -91,9 +91,8 @@ function flightRow(f: CatalogFlight): Safe {
   const zh = lang() === 'zh';
   const out = f.direction === 'outbound';
   const airport = (out ? (zh ? f.to.name_zh : f.to.name_en) : zh ? f.from.name_zh : f.from.name_en) ?? '';
-  const number = [f.airline, f.number].filter(Boolean).join(' ');
   return html`<span class="tl-time">${out ? f.arrive : f.depart}</span><span class="tl-node"></span><div class="tl-body">
-    <div class="leg-pills"><span class="pill coral">${new Safe(iconSvg('plane'))}${t('leg.plane')}${number ? ` ${number}` : ''}</span></div>
+    <div class="leg-pills"><span class="pill coral">${new Safe(iconSvg('plane'))}${t('leg.plane')}${f.number ? ` ${f.number}` : ''}</span></div>
     <p class="leg-text">${t(out ? 'tl.land' : 'tl.fly', { airport })}${f.who.length ? html` <span class="leg-mins">· ${t('flight.only', { names: f.who.join(t('list.sep')) })}</span>` : ''}</p>
   </div>`;
 }
