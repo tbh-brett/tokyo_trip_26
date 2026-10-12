@@ -68,6 +68,21 @@ const places = defineCollection({
     ),
 });
 
+/**
+ * A journey between stops. "hotel" legs show right after an arriving flight,
+ * otherwise at the end of the day; "airport" legs just before a departing flight.
+ */
+const leg = z.strictObject({
+  to: z.union([slug, z.literal('hotel'), z.literal('airport')]),
+  mode: z.enum(['train', 'walk', 'taxi', 'plane']),
+  lines: z.array(slug).optional(),
+  from_code: z.string().regex(/^[A-Z]{1,2}\d{2}$/).optional(),
+  to_code: z.string().regex(/^[A-Z]{1,2}\d{2}$/).optional(),
+  minutes: z.number().int().positive().optional(),
+  text_en: z.string().min(1),
+  text_zh: z.string().min(1).optional(),
+});
+
 const days = defineCollection({
   loader: file('data/days.json', { parser: jsonArray({ idFrom: (d) => String(d.date) }) }),
   schema: z
@@ -81,6 +96,10 @@ const days = defineCollection({
       notes: z.array(z.string().min(1)),
       /** Places the notes mention, offered as ideas on the day's page. */
       places: z.array(slug),
+      /** The stops that make the day (its anchor): tagged Must-go on the timeline. */
+      must: z.array(slug).max(2),
+      /** How to get between stops, only as the notes say. Each shows above its stop when that stop is in the plan. */
+      legs: z.array(leg),
     })
     .refine(
       (d) => WEEKDAYS[new Date(`${d.date}T12:00:00Z`).getUTCDay()] === d.weekday,
@@ -149,6 +168,7 @@ const lines = defineCollection({
     position: z.number().int(),
     id: slug,
     name: z.string().min(1),
+    name_zh: z.string().min(1).optional(),
     code: z.string().regex(/^[A-Z]{1,2}$/).nullable(),
     colour: z.string().regex(/^#[0-9A-Fa-f]{6}$/, 'colour must be "#RRGGBB"'),
   }),
@@ -163,14 +183,59 @@ const travellers = defineCollection({
   }),
 });
 
+// trip.json is one object: the home station, where you stay, and the flights.
+const airport = z.strictObject({
+  name_en: z.string().min(1).nullable(),
+  name_zh: z.string().min(1).nullable(),
+  terminal: z.string().min(1).nullable(),
+});
+
+const flight = z
+  .strictObject({
+    date: isoDate,
+    /** outbound = arriving in Tokyo, return = leaving it. */
+    direction: z.enum(['outbound', 'return']),
+    /** Who is on it, when not both of you. */
+    who: z.array(z.string().min(1)),
+    airline: z.string().min(1).nullable(),
+    number: z.string().min(1).nullable(),
+    from: airport,
+    to: airport,
+    /** Local times at each end. */
+    depart: hhmm.nullable(),
+    arrive: hhmm.nullable(),
+    /** Time in the air. */
+    minutes: z.number().int().positive().nullable(),
+    note_en: z.string().min(1).nullable(),
+    note_zh: z.string().min(1).nullable(),
+  })
+  .refine((f) => (f.direction === 'outbound' ? f.arrive : f.depart) !== null, 'a flight needs its time in Tokyo: arrive for outbound, depart for return');
+
 const trip = defineCollection({
-  loader: file('data/trip.json'),
+  loader: file('data/trip.json', { parser: (text) => [{ id: 'trip', ...JSON.parse(text) }] }),
   schema: z.strictObject({
-    name_en: z.string().min(1),
-    name_ja: z.string().min(1),
-    line: slug,
-    code: z.string().regex(/^[A-Z]{1,2}\d{2}$/),
-    area_ja: z.string().min(1),
+    id: z.literal('trip'),
+    base: z.strictObject({
+      name_en: z.string().min(1),
+      name_ja: z.string().min(1),
+      line: slug,
+      code: z.string().regex(/^[A-Z]{1,2}\d{2}$/),
+      area_ja: z.string().min(1),
+    }),
+    stay: z.strictObject({
+      name_en: z.string().min(1).nullable(),
+      name_ja: z.string().min(1).nullable(),
+      area_en: z.string().min(1),
+      area_zh: z.string().min(1),
+      address_ja: z.string().min(1),
+      address_precision: z.enum(['street', 'district']),
+      from: isoDate,
+      to: isoDate,
+      check_in: hhmm.nullable(),
+      check_out: hhmm.nullable(),
+      phone: z.string().min(1).nullable(),
+    }),
+    flights: z.array(flight),
   }),
 });
 

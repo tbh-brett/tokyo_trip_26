@@ -16,6 +16,35 @@
       "butagumi",
       "keyakizaka",
       "mori-art"
+    ],
+    "must": [
+      "nact-louvre"
+    ],
+    "legs": [
+      {
+        "to": "hotel",
+        "mode": "train",
+        "minutes": 41,
+        "text_en": "Skyliner from Narita to Keisei-Ueno",
+        "text_zh": "由成田坐 Skyliner 到京成上野"
+      },
+      {
+        "to": "hotel",
+        "mode": "walk",
+        "minutes": 10,
+        "text_en": "Keisei-Ueno to the hotel",
+        "text_zh": "京成上野到酒店"
+      },
+      {
+        "to": "nact-louvre",
+        "mode": "train",
+        "lines": [
+          "hibiya"
+        ],
+        "minutes": 20,
+        "text_en": "Naka-Okachimachi to Roppongi, no change",
+        "text_zh": "仲御徒町到六本木，不用轉車"
+      }
     ]
   },
   {
@@ -39,6 +68,46 @@
       "hatou",
       "bellwood",
       "nonbei"
+    ],
+    "must": [
+      "gaien"
+    ],
+    "legs": [
+      {
+        "to": "gaien",
+        "mode": "train",
+        "lines": [
+          "ginza"
+        ],
+        "from_code": "G14",
+        "to_code": "G03",
+        "minutes": 20,
+        "text_en": "Suehirocho to Gaienmae, no change",
+        "text_zh": "末廣町到外苑前，不用轉車"
+      },
+      {
+        "to": "gotokuji",
+        "mode": "train",
+        "lines": [
+          "ginza",
+          "denentoshi",
+          "setagaya"
+        ],
+        "minutes": 40,
+        "text_en": "Ginza line to Shibuya, Den-en-toshi line to Sangenjaya, then the Setagaya tram to Miyanosaka",
+        "text_zh": "銀座線到澀谷，轉田園都市線到三軒茶屋，再坐世田谷線到宮之坂"
+      },
+      {
+        "to": "hotel",
+        "mode": "train",
+        "lines": [
+          "ginza"
+        ],
+        "from_code": "G01",
+        "to_code": "G14",
+        "text_en": "Home: Shibuya to Suehirocho, no change",
+        "text_zh": "回程：澀谷到末廣町，不用轉車"
+      }
     ]
   },
   {
@@ -63,6 +132,34 @@
       "kiyosumiteien",
       "rikugien",
       "tokiwa"
+    ],
+    "must": [
+      "rikugien"
+    ],
+    "legs": [
+      {
+        "to": "kayaba",
+        "mode": "walk",
+        "minutes": 10,
+        "text_en": "From Todai's ginkgo avenue",
+        "text_zh": "由東大的銀杏大道"
+      },
+      {
+        "to": "tokyo-racecourse",
+        "mode": "train",
+        "lines": [
+          "keio"
+        ],
+        "minutes": 35,
+        "text_en": "Shinjuku, then the Keio line to Fuchukeiba-seimonmae",
+        "text_zh": "到新宿，轉京王線到府中競馬正門前"
+      },
+      {
+        "to": "tokiwa",
+        "mode": "train",
+        "text_en": "One stop from Rikugien",
+        "text_zh": "離六義園一站"
+      }
     ]
   },
   {
@@ -84,6 +181,43 @@
       "air-cabin",
       "akarenga-xmas",
       "noge"
+    ],
+    "must": [
+      "teamlab",
+      "akarenga-xmas"
+    ],
+    "legs": [
+      {
+        "to": "teamlab",
+        "mode": "train",
+        "lines": [
+          "hibiya"
+        ],
+        "minutes": 20,
+        "text_en": "Naka-Okachimachi straight to Kamiyacho; teamLab is two minutes from exit 5",
+        "text_zh": "由仲御徒町直達神谷町；teamLab 離 5 號出口兩分鐘"
+      },
+      {
+        "to": "air-cabin",
+        "mode": "train",
+        "lines": [
+          "hibiya",
+          "toyoko"
+        ],
+        "minutes": 45,
+        "text_en": "Hibiya line to Naka-Meguro, then the Toyoko line straight through to Bashamichi",
+        "text_zh": "日比谷線到中目黑，再坐東橫線直通馬車道"
+      },
+      {
+        "to": "hotel",
+        "mode": "train",
+        "lines": [
+          "jr"
+        ],
+        "minutes": 50,
+        "text_en": "Home: Sakuragicho to Okachimachi or Akihabara",
+        "text_zh": "回程：櫻木町到御徒町或秋葉原"
+      }
     ]
   },
   {
@@ -108,6 +242,49 @@
       "kokomae",
       "enoshima",
       "kamakura"
+    ],
+    "must": [
+      "hasedera",
+      "enoshima"
+    ],
+    "legs": [
+      {
+        "to": "engakuji",
+        "mode": "train",
+        "lines": [
+          "jr"
+        ],
+        "minutes": 60,
+        "text_en": "JR to Tokyo, then the Yokosuka line to Kita-Kamakura",
+        "text_zh": "坐 JR 到東京，再轉橫須賀線到北鎌倉"
+      },
+      {
+        "to": "hasedera",
+        "mode": "train",
+        "lines": [
+          "enoden"
+        ],
+        "minutes": 5,
+        "text_en": "Kamakura to Hase",
+        "text_zh": "鎌倉到長谷"
+      },
+      {
+        "to": "daibutsu",
+        "mode": "walk",
+        "minutes": 5,
+        "text_en": "From Hasedera",
+        "text_zh": "由長谷寺出發"
+      },
+      {
+        "to": "hotel",
+        "mode": "train",
+        "lines": [
+          "odakyu"
+        ],
+        "minutes": 70,
+        "text_en": "Home: Odakyu from Katase-Enoshima to Shinjuku, or JR from Fujisawa to Tokyo",
+        "text_zh": "回程：由片瀨江之島坐小田急到新宿，或由藤澤坐 JR 到東京"
+      }
     ]
   },
   {
@@ -136,6 +313,20 @@
       "benfiddich",
       "janai",
       "genyamamoto"
+    ],
+    "must": [
+      "gyoen"
+    ],
+    "legs": [
+      {
+        "to": "gyoen",
+        "mode": "train",
+        "lines": [
+          "marunouchi"
+        ],
+        "text_en": "Awajicho straight to Shinjuku-gyoemmae",
+        "text_zh": "由淡路町直達新宿御苑前"
+      }
     ]
   },
   {
@@ -161,6 +352,33 @@
       "nmwa-turner",
       "mot",
       "kiyosumiteien"
+    ],
+    "must": [
+      "tnm-daitokuji",
+      "marunouchi-il"
+    ],
+    "legs": [
+      {
+        "to": "tnm-daitokuji",
+        "mode": "walk",
+        "minutes": 15,
+        "text_en": "From the hotel",
+        "text_zh": "由酒店出發"
+      },
+      {
+        "to": "hotel",
+        "mode": "train",
+        "minutes": 4,
+        "text_en": "Tokyo to Akihabara",
+        "text_zh": "東京到秋葉原"
+      },
+      {
+        "to": "airport",
+        "mode": "train",
+        "minutes": 41,
+        "text_en": "Skyliner from Keisei-Ueno to Narita; leave the hotel by 18:45",
+        "text_zh": "由京成上野坐 Skyliner 到成田；18:45 前離開酒店"
+      }
     ]
   }
 ]

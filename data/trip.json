@@ -5,5 +5,48 @@
     "line": "ginza",
     "code": "G14",
     "area_ja": "外神田6丁目"
-  }
+  },
+  "stay": {
+    "name_en": null,
+    "name_ja": null,
+    "area_en": "Soto-Kanda",
+    "area_zh": "外神田",
+    "address_ja": "外神田6丁目",
+    "address_precision": "district",
+    "from": "2026-11-27",
+    "to": "2026-12-03",
+    "check_in": null,
+    "check_out": null,
+    "phone": null
+  },
+  "flights": [
+    {
+      "date": "2026-11-27",
+      "direction": "outbound",
+      "who": [],
+      "airline": null,
+      "number": null,
+      "from": { "name_en": null, "name_zh": null, "terminal": null },
+      "to": { "name_en": "Narita", "name_zh": "成田", "terminal": null },
+      "depart": null,
+      "arrive": "14:45",
+      "minutes": null,
+      "note_en": "Skyliner to Keisei-Ueno, about 41 minutes; the hotel is a 10-minute walk.",
+      "note_zh": "Skyliner 約 41 分鐘到京成上野；酒店步行 10 分鐘。"
+    },
+    {
+      "date": "2026-12-03",
+      "direction": "return",
+      "who": ["Brett"],
+      "airline": null,
+      "number": null,
+      "from": { "name_en": "Narita", "name_zh": "成田", "terminal": null },
+      "to": { "name_en": null, "name_zh": null, "terminal": null },
+      "depart": "22:00",
+      "arrive": null,
+      "minutes": null,
+      "note_en": "Leave the hotel by 18:45: Skyliner from Keisei-Ueno, about 41 minutes, two hours before the flight.",
+      "note_zh": "18:45 前離開酒店：由京成上野坐 Skyliner 約 41 分鐘，航班前兩小時到。"
+    }
+  ]
 }

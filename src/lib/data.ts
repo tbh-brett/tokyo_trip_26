@@ -16,7 +16,11 @@ export type PrepItem = CollectionEntry<'prep'>['data'];
 export type Route = CollectionEntry<'routes'>['data'];
 export type Zone = CollectionEntry<'zones'>['data'];
 export type Line = CollectionEntry<'lines'>['data'];
-export type Base = CollectionEntry<'trip'>['data'];
+export type Trip = CollectionEntry<'trip'>['data'];
+export type Base = Trip['base'];
+export type Stay = Trip['stay'];
+export type Flight = Trip['flights'][number];
+export type Leg = Day['legs'][number];
 export type Traveller = CollectionEntry<'travellers'>['data'];
 export type Kind = Place['kind'];
 
@@ -56,6 +60,8 @@ export interface TripData {
   lines: Line[];
   travellers: Traveller[];
   base: Base;
+  stay: Stay;
+  flights: Flight[];
   zh: Zh;
   place: (id: string) => Place;
   zone: (id: string) => Zone;
@@ -91,9 +97,17 @@ async function load(): Promise<TripData> {
   for (const [name, entries] of Object.entries(counts)) {
     if (entries.length === 0) problems.push(`${name}.json: no entries (unreadable file?)`);
   }
-  const base = trip.find((e) => e.id === 'base')?.data;
-  if (!base) problems.push('trip.json: missing "base"');
-  else if (!lineMap.has(base.line)) problems.push(`trip.json: base line "${base.line}" is not in lines.json`);
+  const tripData = trip[0]?.data;
+  if (!tripData) problems.push('trip.json: unreadable');
+  else {
+    const { base, stay, flights } = tripData;
+    if (!lineMap.has(base.line)) problems.push(`trip.json: base line "${base.line}" is not in lines.json`);
+    if (stay.to < stay.from) problems.push('trip.json stay: "to" is before "from"');
+    const dates = new Set(days.map((e) => e.data.date));
+    for (const f of flights) {
+      if (!dates.has(f.date)) problems.push(`trip.json flight on ${f.date}: not one of the days in days.json`);
+    }
+  }
 
   for (const p of placeMap.values()) {
     if (p.id === 'mine') problems.push('places.json: the id "mine" is reserved for your own places (/p/mine/)');
@@ -109,6 +123,15 @@ async function load(): Promise<TripData> {
   for (const { data: d } of days) {
     for (const id of d.places) {
       if (!placeMap.has(id)) problems.push(`days.json ${d.date}: place "${id}" is not in places.json`);
+    }
+    for (const id of d.must) {
+      if (!d.places.includes(id)) problems.push(`days.json ${d.date}: must "${id}" is not in that day's places`);
+    }
+    for (const leg of d.legs) {
+      if (leg.to !== 'hotel' && leg.to !== 'airport' && !placeMap.has(leg.to)) problems.push(`days.json ${d.date}: leg to "${leg.to}" is not in places.json`);
+      for (const line of leg.lines ?? []) {
+        if (!lineMap.has(line)) problems.push(`days.json ${d.date}: leg line "${line}" is not in lines.json`);
+      }
     }
   }
   for (let i = 1; i < days.length; i++) {
@@ -138,7 +161,7 @@ async function load(): Promise<TripData> {
       if (en && t.notes.length !== en.notes.length) problems.push(`i18n/zh-Hant.json days.${date}.notes: ${t.notes.length} notes, English has ${en.notes.length}`);
     }
   }
-  if (problems.length || !base || !zhParsed.success) throw new Error(`Data check failed:\n  ${problems.join('\n  ')}`);
+  if (problems.length || !tripData || !zhParsed.success) throw new Error(`Data check failed:\n  ${problems.join('\n  ')}`);
 
   const need = <T>(map: Map<string, T>, what: string) => (id: string) => {
     const item = map.get(id);
@@ -155,7 +178,9 @@ async function load(): Promise<TripData> {
     zones: zones.map((e) => e.data),
     lines: lines.map((e) => e.data),
     travellers: travellers.map((e) => e.data),
-    base,
+    base: tripData.base,
+    stay: tripData.stay,
+    flights: tripData.flights,
     zh: zhParsed.data,
     place: need(placeMap, 'place'),
     zone: need(zoneMap, 'zone'),
