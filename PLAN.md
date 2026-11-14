@@ -79,6 +79,10 @@ Flights and hotel filled in 12 Oct 2026 (HK Express UO848 / UO693, Okachimachi U
 
 Later, only if Brett misses the old look: a per-phone theme switch (picture book / modern) set before paint like the language. It doubles design QA.
 
+## Food additions (14 Nov 2026)
+
+Brett found the earlier list too heavy on tonkatsu. Eleven restaurants from "Tokyo eating, beyond tonkatsu" (13 Nov) added with sources, plus Ginza Ichibun (sushi, booked by Brett on Tabelog for Tue 1 Dec; one seating at 18:00). Each went into the ideas of the day whose route and opening days it fits, with a note per day saying why; where the list's own day suggestions clashed (1 Dec now has the sushi booking), they were moved. 1 Dec's notes, legs and Must-go follow the booking: leave Enoshima by about 16:15, so the sunset no longer fits. The katsu entries already in the shared plan (Butagumi Fri dinner, Gensuiton as a Sat lunch option, tonkatsu.jp / Nanaido Wed lunch) are untouched; the day notes name the alternatives. Takataro and Sakai Shokai still need street addresses and hours; Rojyu's hours aren't confirmed.
+
 ## Phase 2 — coordinates, map, near me
 
 - For the `address_precision: "district"` places (79 after the itinerary), find the full street address from the Tabelog listing or the shop's own site. Update the JSON.

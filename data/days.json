@@ -9,13 +9,15 @@
       "17:00 Hibiya line from Naka-Okachimachi to Roppongi, no change, about 20 minutes.",
       "Leonardo's La Belle Ferronnière is in Japan for the first time and the show closes 13 Dec. ¥2,200 in advance.",
       "Book 西麻布 豚組 for dinner: it is a Friday.",
-      "Mori Art Museum fits after dinner only if it is open late that night. One listing says it shuts at 17:00 on 27 Nov."
+      "Mori Art Museum fits after dinner only if it is open late that night. One listing says it shuts at 17:00 on 27 Nov.",
+      "Not tonkatsu: Rojyu, a yakiniku top-100 that serves wagyu on large antique plates at Roppongi-itchome, can replace Butagumi. ¥15,000 course; its hours aren't confirmed yet."
     ],
     "places": [
       "nact-louvre",
       "butagumi",
       "keyakizaka",
-      "mori-art"
+      "mori-art",
+      "rojyu"
     ],
     "must": [
       "nact-louvre"
@@ -57,7 +59,8 @@
       "Ginkgo first, Gotokuji second: the avenue is shoulder to shoulder by 11:00, the cats will still be there at 09:30.",
       "To Gotokuji: Ginza line to Shibuya, Den-en-toshi line to Sangenjaya, then the Setagaya tram to Miyanosaka. About 40 minutes.",
       "Shibuya Sky tickets go on sale 14 days ahead, on 14 Nov. A 15:30–16:00 slot gets daylight, sunset around 16:30, and the lights.",
-      "Home: Ginza line from Shibuya (G01) to Suehirocho (G14), no change."
+      "Home: Ginza line from Shibuya (G01) to Suehirocho (G14), no change.",
+      "After Shibuya Sky: Takataro and Sakai Shokai are Shibuya's two izakaya on Tabelog's 2026 top 100. Their hours and booking aren't checked yet."
     ],
     "places": [
       "gaien",
@@ -67,7 +70,9 @@
       "shibuya-sky",
       "hatou",
       "bellwood",
-      "nonbei"
+      "nonbei",
+      "takataro",
+      "sakai-shokai"
     ],
     "must": [
       "gaien"
@@ -121,7 +126,8 @@
       "There is no gate sale on Japan Cup day. General admission lottery 22–24 Nov, result 25 Nov.",
       "Clara's original afternoon: MOT's two shows, fukagawa-meshi (clams on rice) for lunch, Mameya Kakeru's coffee course, Kiyosumi Teien's stepping stones.",
       "If the Japan Cup takes Sunday, MOT and Kiyosumi move to Thursday morning.",
-      "Rikugien: 18:00–20:30, last entry 19:30, ¥1,000 online or ¥1,200 cash. Then Tokiwa Shokudo, one stop away."
+      "Rikugien: 18:00–20:30, last entry 19:30, ¥1,000 online or ¥1,200 cash. Then Tokiwa Shokudo, one stop away.",
+      "After Rikugien, instead of Tokiwa: Takokyu, a 14-seat oden counter in Yushima since 1904, open on Sundays. In winter arrive after 20:15; cash only; call 03-3831-5088 from 12:00 that day."
     ],
     "places": [
       "todai-hongo",
@@ -131,7 +137,8 @@
       "kakeru",
       "kiyosumiteien",
       "rikugien",
-      "tokiwa"
+      "tokiwa",
+      "takokyu"
     ],
     "must": [
       "rikugien"
@@ -172,7 +179,8 @@
       "Allow 1.5–2.5 hours. Check teamLab's calendar when booking: it closes some days without a fixed pattern.",
       "13:00 Hibiya line to Naka-Meguro, then the Toyoko line straight through to Bashamichi, about 45 minutes.",
       "Monday is the market's calmest day, and the cable car catches sunset around 16:30.",
-      "Home: JR from Sakuragicho to Okachimachi or Akihabara, about 50 minutes."
+      "Home: JR from Sakuragicho to Okachimachi or Akihabara, about 50 minutes.",
+      "Or dinner back near the hotel instead of Noge: Namaiki, a yakiniku top-100 two blocks away, open until 23:30."
     ],
     "places": [
       "teamlab",
@@ -180,7 +188,8 @@
       "kuromame",
       "air-cabin",
       "akarenga-xmas",
-      "noge"
+      "noge",
+      "namaiki"
     ],
     "must": [
       "teamlab",
@@ -224,14 +233,15 @@
     "date": "2026-12-01",
     "weekday": "Tue",
     "title": "Kamakura and Enoshima",
-    "anchor": "Hasedera's maples and Enoshima at sunset, on a weekday rather than a Sunday.",
+    "anchor": "Hasedera's maples and Enoshima on a weekday, then omakase at Ginza Ichibun at 18:00.",
     "notes": [
       "07:30 leave. JR to Tokyo, then the Yokosuka line to Kita-Kamakura, about an hour.",
       "Kamakura's maples are among the last in Japan to turn, holding into early December.",
       "Lunch: shirasu-don, whitebait on rice.",
       "Enoden from Kamakura to Hase is five minutes; the Great Buddha is five minutes' walk from Hasedera.",
-      "If Hasedera announces its night illumination, flip the afternoon: Enoshima first, the lit maples at dusk.",
-      "Home: Odakyu from Katase-Enoshima to Shinjuku, about 70 minutes, or JR from Fujisawa to Tokyo."
+      "Hasedera's night illumination, if it's announced, now clashes with the 18:00 dinner: keep the daytime order.",
+      "To dinner: Odakyu from Katase-Enoshima to Shinjuku, about 70 minutes, then the Marunouchi line to Ginza; or JR from Fujisawa to Tokyo. Leave Enoshima by about 16:15, before the sunset.",
+      "Dinner booked on Tabelog: Ginza Ichibun's omakase. Everyone starts together at 18:00, for about two hours; ¥28,600; no overly casual clothes. Afterwards walk 12 minutes to Ginza station, then the Ginza line from Ginza (G09) to Suehirocho (G14), no change."
     ],
     "places": [
       "engakuji",
@@ -241,11 +251,12 @@
       "daibutsu",
       "kokomae",
       "enoshima",
-      "kamakura"
+      "kamakura",
+      "ginza-ichibun"
     ],
     "must": [
       "hasedera",
-      "enoshima"
+      "ginza-ichibun"
     ],
     "legs": [
       {
@@ -276,14 +287,32 @@
         "text_zh": "由長谷寺出發"
       },
       {
+        "to": "ginza-ichibun",
+        "mode": "train",
+        "lines": [
+          "odakyu",
+          "marunouchi"
+        ],
+        "text_en": "Odakyu from Katase-Enoshima to Shinjuku, about 70 minutes, then the Marunouchi line to Ginza; or JR from Fujisawa to Tokyo",
+        "text_zh": "由片瀨江之島坐小田急到新宿，約 70 分鐘，再轉丸之內線到銀座；或由藤澤坐 JR 到東京"
+      },
+      {
+        "to": "hotel",
+        "mode": "walk",
+        "minutes": 12,
+        "text_en": "To Ginza station",
+        "text_zh": "步行到銀座站"
+      },
+      {
         "to": "hotel",
         "mode": "train",
         "lines": [
-          "odakyu"
+          "ginza"
         ],
-        "minutes": 70,
-        "text_en": "Home: Odakyu from Katase-Enoshima to Shinjuku, or JR from Fujisawa to Tokyo",
-        "text_zh": "回程：由片瀨江之島坐小田急到新宿，或由藤澤坐 JR 到東京"
+        "from_code": "G09",
+        "to_code": "G14",
+        "text_en": "Home: Ginza to Suehirocho, no change",
+        "text_zh": "回程：銀座到末廣町，不用轉車"
       }
     ]
   },
@@ -297,7 +326,9 @@
       "09:00 Marunouchi line from Awajicho straight to Shinjuku-gyoemmae. ¥500.",
       "14:00, pick one: Sakurai's eight-seat tea counter (book), or Marimekko in the Teien's 1933 Art Deco house (timed, ¥1,400).",
       "Evening A: Ōi night racing, ¥100, an SII race on the card, last race around 20:50, then Bar Trench. Pick this if the Japan Cup lottery fails.",
-      "Evening B: a top-100 sushi counter in Nakameguro, then Bar Benfiddich (TableCheck). Or Janai Coffee in Ebisu, or Gen Yamamoto."
+      "Evening B: a top-100 sushi counter in Nakameguro, then Bar Benfiddich (TableCheck). Or Janai Coffee in Ebisu, or Gen Yamamoto.",
+      "Not tonkatsu at lunch: Fuunji's tsukemen in Shinjuku, near the Gyoen.",
+      "More evenings: Kinju, a yakiniku top-100 in Nakameguro open until 03:30, fits Evening B; Nishio-san's Shizuoka oden in Shinjuku-sanchome goes before Benfiddich (same-day phone booking, cash). For a quiet night, Ishibashi's sukiyaki is a minute from Suehirocho (last order 20:00, cash only)."
     ],
     "places": [
       "gyoen",
@@ -312,7 +343,11 @@
       "naomitsu",
       "benfiddich",
       "janai",
-      "genyamamoto"
+      "genyamamoto",
+      "fuunji",
+      "kinju",
+      "nishio",
+      "ishibashi"
     ],
     "must": [
       "gyoen"
@@ -340,7 +375,8 @@
       "11:00 check out and leave the bags at the hotel.",
       "Imperial Palace East Gardens are free; walk the outer garden toward Hibiya.",
       "Naka-dōri's 1.2 km of lit trees come on at 16:00. Tokyo to Akihabara is four minutes.",
-      "Leave the hotel by 18:45 for Narita: Skyliner from Keisei-Ueno, about 41 minutes, two hours before the flight."
+      "Leave the hotel by 18:45 for Narita: Skyliner from Keisei-Ueno, about 41 minutes, two hours before the flight.",
+      "Lunch on the way: Isegen's monkfish hotpot at Awajicho, Otako's oden and to-meshi at Nihombashi (weekday set ¥1,700), or Imahan's sukiyaki lunch at Ueno-Hirokoji (¥6,270), one stop from Suehirocho."
     ],
     "places": [
       "tnm-daitokuji",
@@ -351,7 +387,10 @@
       "marunouchi-il",
       "nmwa-turner",
       "mot",
-      "kiyosumiteien"
+      "kiyosumiteien",
+      "isegen",
+      "otako",
+      "imahan-ueno"
     ],
     "must": [
       "tnm-daitokuji",

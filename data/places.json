@@ -4776,5 +4776,406 @@
     "lng": null,
     "coords_verified": false,
     "source": "https://kaibutsu-blog.com/tate-turner-nmwa-2026-guide/"
+  },
+  {
+    "id": "namaiki",
+    "name_ja": "生粋",
+    "name_en": "Namaiki",
+    "kind": "eat",
+    "zone": "base",
+    "station": "Suehirocho",
+    "line": "ginza",
+    "recognition": "焼肉 TOKYO 百名店 2026",
+    "why": "Top-100 yakiniku two blocks from the hotel. Staff grill for you; the signature cut is the \"silk loin\". Private rooms for two.",
+    "note": "Cards only, 10% service. Book on Tabelog or call 03-5817-8929.",
+    "price": "¥10,000–14,999",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "17:00",
+        "23:30"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": true,
+    "book_ahead": true,
+    "address_ja": "〒101-0021 東京都千代田区外神田6-14-7 VORT末広町 2F",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "https://tabelog.com/tokyo/A1311/A131101/13165294/"
+  },
+  {
+    "id": "ishibashi",
+    "name_ja": "いし橋",
+    "name_en": "Ishibashi",
+    "kind": "eat",
+    "zone": "base",
+    "station": "Suehirocho",
+    "line": "ginza",
+    "recognition": "すき焼き・しゃぶしゃぶ 百名店 2026",
+    "why": "Sukiyaki since 1872, a minute from Suehirocho station. Every table is a private tatami room.",
+    "note": "Weekday evenings only, last order 20:00; closed Sat, Sun and holidays. No cards. Marbled course ¥11,000 + tax + ¥1,300 service. Phone 03-3251-3580.",
+    "price": "About ¥13,500 with tax and service",
+    "slots": [
+      "dinner"
+    ],
+    "hours": [
+      [
+        "17:00",
+        "21:30"
+      ]
+    ],
+    "closed_days": [
+      "Sat",
+      "Sun"
+    ],
+    "hours_verified": true,
+    "book_ahead": true,
+    "address_ja": "〒101-0021 東京都千代田区外神田3-6-8",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "https://tabelog.com/tokyo/A1311/A131101/13021036/"
+  },
+  {
+    "id": "takokyu",
+    "name_ja": "多古久",
+    "name_en": "Takokyu",
+    "kind": "eat",
+    "zone": "base",
+    "station": "Yushima",
+    "line": "chiyoda",
+    "recognition": "Oden since 1904",
+    "why": "A 14-seat counter around a copper oden pot, running since 1904. Slightly sweet broth; pieces from ¥110.",
+    "note": "Cash only. Call 03-3831-5088 from 12:00 on the day. In winter, arrive 18:00–19:00 or after 20:15. Walk in if seats are free.",
+    "price": "¥4,000–6,000",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "18:00",
+        "23:00"
+      ]
+    ],
+    "closed_days": [
+      "Mon",
+      "Tue"
+    ],
+    "hours_verified": true,
+    "book_ahead": false,
+    "address_ja": "〒110-0005 東京都台東区上野2-11-8 長谷川ビル 1F",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "https://tabelog.com/tokyo/A1311/A131101/13008517/"
+  },
+  {
+    "id": "imahan-ueno",
+    "name_ja": "人形町今半 上野広小路店",
+    "name_en": "Ningyocho Imahan, Ueno-Hirokoji",
+    "kind": "eat",
+    "zone": "base",
+    "station": "Ueno-hirokoji",
+    "line": "ginza",
+    "recognition": "すき焼き・しゃぶしゃぶ 百名店 2026",
+    "why": "Imahan's famous sukiyaki and shabu-shabu, at about a third of the dinner price if you go at lunch. Opposite Matsuzakaya.",
+    "note": "Lunch set ¥6,270; dinner from ¥9,900, courses ¥14,520–23,100. 12% service. Weekends open at 11:00. Book on TableCheck.",
+    "price": "¥6,270 lunch · ¥9,900+ dinner",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:30",
+        "15:00"
+      ],
+      [
+        "17:00",
+        "22:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": true,
+    "book_ahead": true,
+    "address_ja": "〒110-0005 東京都台東区上野1-20-11 ヒューリック上野広小路ビル6階",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "https://restaurant.imahan.com/ueno"
+  },
+  {
+    "id": "isegen",
+    "name_ja": "いせ源",
+    "name_en": "Isegen",
+    "kind": "eat",
+    "zone": "base",
+    "station": "Awajicho",
+    "line": "marunouchi",
+    "recognition": "Monkfish hotpot since 1830",
+    "why": "Tokyo's best-known monkfish (ankō) hotpot house, in an old wooden building about ten minutes from the hotel.",
+    "note": "Courses ¥9,000, ¥11,000 and ¥14,000; 10% service after 16:00. From December, monkfish sashimi when the catch allows. Weekends 11:30–15:00 and 16:00–22:00; Sunday until 21:00. Book on Tabelog.",
+    "price": "¥9,000–14,000",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:30",
+        "14:00"
+      ],
+      [
+        "17:00",
+        "22:00"
+      ]
+    ],
+    "closed_days": [
+      "Mon"
+    ],
+    "hours_verified": true,
+    "book_ahead": true,
+    "address_ja": "〒101-0041 東京都千代田区神田須田町1-11-1",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "https://isegen.com/info/"
+  },
+  {
+    "id": "otako",
+    "name_ja": "お多幸本店",
+    "name_en": "Otako Honten",
+    "kind": "eat",
+    "zone": "ginza",
+    "station": "Nihombashi",
+    "line": "ginza",
+    "recognition": "Oden since 1923",
+    "why": "Tokyo-style oden since 1923. Order the to-meshi: tofu simmered in the oden broth, served over rice.",
+    "note": "Lunch on weekdays only; the oden and to-meshi set is ¥1,700. Saturday dinner 16:00–22:00. Closed Sundays. Book on Gurunavi or call 050-5492-2962.",
+    "price": "¥1,700 lunch · ¥3,500–5,000 dinner",
+    "slots": [
+      "lunch",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "11:30",
+        "14:00"
+      ],
+      [
+        "16:30",
+        "22:30"
+      ]
+    ],
+    "closed_days": [
+      "Sun"
+    ],
+    "hours_verified": true,
+    "book_ahead": false,
+    "address_ja": "〒103-0027 東京都中央区日本橋2-2-3 お多幸ビル",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "https://a439400.gorp.jp/"
+  },
+  {
+    "id": "nishio",
+    "name_ja": "西尾さん",
+    "name_en": "Nishio-san",
+    "kind": "eat",
+    "zone": "shinjuku",
+    "station": "Shinjuku-sanchome",
+    "line": "marunouchi",
+    "recognition": "居酒屋 百名店 2026",
+    "why": "Shizuoka-style oden, served without broth under fish powder, in a one-man Showa basement. You take your own sticks and declare the count at the end.",
+    "note": "Same-day phone booking only, and usually full. Cash. Closes on whichever of Sunday or Monday has no bookings.",
+    "price": "¥3,000–4,000",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "17:00",
+        "00:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒160-0022 東京都新宿区新宿3-1-32 新宿ビル3号 B1F",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "https://www.hotpepper.jp/strJ000238283/"
+  },
+  {
+    "id": "kinju",
+    "name_ja": "焼肉ホルモン金樹 中目黒",
+    "name_en": "Yakiniku Horumon Kinju, Nakameguro",
+    "kind": "eat",
+    "zone": "shibuya",
+    "station": "Nakameguro",
+    "line": "toyoko",
+    "recognition": "焼肉 TOKYO 百名店 2026",
+    "why": "New to the yakiniku top 100 this year. Fresh offal and rare cuts at fair prices, and it's open until 03:30.",
+    "note": "Sunday 17:00–23:00. Cards, 10% service. Book on Tabelog or call 050-5456-0251; tables are released 15 minutes after a no-show.",
+    "price": "¥8,000–9,999",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "18:00",
+        "03:30"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": true,
+    "book_ahead": true,
+    "address_ja": "〒153-0042 東京都目黒区青葉台1-28-9 タイガーマンション 1F",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "https://tabelog.com/tokyo/A1317/A131701/13307231/"
+  },
+  {
+    "id": "rojyu",
+    "name_ja": "六本木 大皿焼肉 老中",
+    "name_en": "Roppongi Rojyu",
+    "kind": "eat",
+    "zone": "azabu",
+    "station": "Roppongi-itchome",
+    "line": "namboku",
+    "recognition": "焼肉 TOKYO 百名店 2026",
+    "why": "Tokyo branch of a Nagoya yakiniku favourite, opened November 2025 and straight onto the top 100. Wagyu served on large antique plates.",
+    "note": "Course ¥15,000 for 12 dishes. 14-seat counter plus two tables. Hours not confirmed; book on Tabelog.",
+    "price": "¥15,000 course",
+    "slots": [
+      "dinner"
+    ],
+    "hours": [],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒106-0032 東京都港区六本木1-4-5 アークヒルズサウスタワー 1F",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "https://magazine.tabelog.com/articles/486078"
+  },
+  {
+    "id": "takataro",
+    "name_ja": "高太郎",
+    "name_en": "Takataro",
+    "kind": "eat",
+    "zone": "shibuya",
+    "station": "Shibuya",
+    "line": "yamanote",
+    "recognition": "居酒屋 百名店 2026",
+    "why": "One of two Shibuya izakaya on Tabelog's 2026 top 100, for the evening after Shibuya Sky.",
+    "note": "Hours and booking not checked yet.",
+    "price": "Not checked",
+    "slots": [
+      "dinner"
+    ],
+    "hours": [],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "東京都渋谷区",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "https://award.tabelog.com/hyakumeiten/izakaya_east"
+  },
+  {
+    "id": "sakai-shokai",
+    "name_ja": "酒井商会",
+    "name_en": "Sakai Shokai",
+    "kind": "eat",
+    "zone": "shibuya",
+    "station": "Shibuya",
+    "line": "yamanote",
+    "recognition": "居酒屋 百名店 2026",
+    "why": "The other Shibuya izakaya on Tabelog's 2026 top 100.",
+    "note": "Hours and booking not checked yet.",
+    "price": "Not checked",
+    "slots": [
+      "dinner"
+    ],
+    "hours": [],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "東京都渋谷区",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "https://award.tabelog.com/hyakumeiten/izakaya_east"
+  },
+  {
+    "id": "ginza-ichibun",
+    "name_ja": "銀座いち分",
+    "name_en": "Ginza Ichibun",
+    "kind": "eat",
+    "zone": "ginza",
+    "station": "Shintomicho",
+    "line": "yurakucho",
+    "recognition": "寿司 TOKYO 百名店 2025",
+    "why": "A nine-seat sushi counter in Ginza 2-chome. The omakase is five to seven small dishes, twelve pieces of nigiri, tamagoyaki and soup.",
+    "note": "One seating: everyone starts together at 18:00, for about two hours. Omakase ¥28,600 with tax. Cards accepted. Booking online only (Tabelog). No overly casual clothes. Closed Sun and Wed.",
+    "price": "¥28,600 omakase",
+    "slots": [
+      "dinner"
+    ],
+    "hours": [
+      [
+        "18:00",
+        "20:30"
+      ]
+    ],
+    "closed_days": [
+      "Sun",
+      "Wed"
+    ],
+    "hours_verified": true,
+    "book_ahead": true,
+    "address_ja": "〒104-0061 東京都中央区銀座2-13-19 銀座アルカビル 1F",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "https://tabelog.com/en/tokyo/A1313/A131301/13209942/"
   }
 ]

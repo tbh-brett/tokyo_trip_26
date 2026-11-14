@@ -922,6 +922,12 @@ body.has-syncbar {
   flex-wrap: wrap;
   gap: 6px;
 }
+/* Long line names ("Enoden (Enoshima Electric Railway)") wrap inside the pill. */
+.leg-pills .pill {
+  max-width: 100%;
+  white-space: normal;
+  border-radius: 16px;
+}
 .line-dot {
   flex: none;
   width: 12px;
