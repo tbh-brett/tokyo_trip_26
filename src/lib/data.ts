@@ -33,6 +33,16 @@ const ZhSchema = z.strictObject({
   bookings: z.record(z.string(), z.strictObject({ what: zhText, detail: zhText, where: zhText })),
   prep: z.record(z.string(), z.strictObject({ group: zhText, item: zhText })),
   zones: z.record(z.string(), z.strictObject({ name: zhText, full: zhText })),
+  // Shared-plan entries Claude wrote, by item id, each with the English it
+  // translates: the Chinese shows only while the entry still says that.
+  plan: z
+    .record(
+      z.string().regex(/^[\w-]+$/),
+      z
+        .strictObject({ title_en: zhText.optional(), title: zhText.optional(), note_en: zhText.optional(), note: zhText.optional() })
+        .refine((t) => !t.title_en === !t.title && !t.note_en === !t.note, 'title and note each need both the English and the Chinese'),
+    )
+    .optional(),
 });
 export type Zh = z.infer<typeof ZhSchema>;
 

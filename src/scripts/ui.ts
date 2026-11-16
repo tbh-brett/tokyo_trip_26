@@ -1,6 +1,6 @@
 // Small helpers for rendering the live parts of pages without a framework.
-import { DAYS, PLACE_BY_ID, ZH_DAYS, type Kind } from '../lib/catalog';
-import { isMine, type PlanState } from '../lib/plan';
+import { DAYS, PLACE_BY_ID, ZH_DAYS, ZH_PLAN, type Kind } from '../lib/catalog';
+import { isMine, itemLabel, type PlanItem, type PlanState } from '../lib/plan';
 import { date, lang, t } from './lang';
 import { subscribe } from './store';
 
@@ -111,6 +111,21 @@ export function dayHeadline(plan: PlanState | null, day: string) {
     title: edit?.title ?? zh?.title ?? base.title,
     anchor: edit?.anchor ?? zh?.anchor ?? base.anchor,
     edited: Boolean(edit),
+  };
+}
+
+/**
+ * A plan entry's title and note in this phone's language. Entries Claude wrote
+ * have Chinese in data/i18n/zh-Hant.json ("plan"), used only while the entry
+ * still says the English it was translated from; anything typed shows as typed.
+ */
+export function itemText(plan: PlanState, item: PlanItem): { label: string; note: string | null } {
+  const label = itemLabel(plan, item);
+  const zh = lang() === 'zh' ? ZH_PLAN[item.id] : undefined;
+  if (!zh) return { label, note: item.note };
+  return {
+    label: !item.place && zh.title && item.title === zh.title_en ? zh.title : label,
+    note: zh.note && item.note === zh.note_en ? zh.note : item.note,
   };
 }
 

@@ -280,12 +280,12 @@ const length = { n: days.length, m: days.length - 1 };
 </style>
 
 <script>
-  import { dayItems, itemLabel } from '../lib/plan';
+  import { dayItems } from '../lib/plan';
   import { daysBetween, jstNow } from '../lib/time';
   import { onLang, t } from '../scripts/lang';
   import { getPlan, subscribe } from '../scripts/store';
   import { renderTimeline } from '../scripts/timeline';
-  import { html, mount, placeView } from '../scripts/ui';
+  import { html, itemText, mount, placeView } from '../scripts/ui';
   import { wireChecklists, wireDayHeadlines, wireFeeds } from '../scripts/widgets';
   import { wireCopyButtons } from '../scripts/device';
 
@@ -307,11 +307,12 @@ const length = { n: days.length, m: days.length - 1 };
       const next = dayItems(plan, day).timed.find((i) => i.time! >= hhmm);
       if (!next) return html``;
       const place = placeView(plan, next.place);
+      const { label, note } = itemText(plan, next);
       return html`<a class="nextup" href="${place?.href ?? `/day/${day}/`}">
         <span class="t13">${t('today.nextUp')}</span>
-        <span class="t28"><span class="num">${next.time}</span> ${itemLabel(plan, next)}</span>
+        <span class="t28"><span class="num">${next.time}</span> ${label}</span>
         ${place?.nameJa ? html`<span class="t20" lang="ja">${place.nameJa}</span>` : ''}
-        ${next.note ? html`<span>${next.note}</span>` : ''}
+        ${note ? html`<span>${note}</span>` : ''}
       </a>`;
     });
   }

@@ -91,6 +91,23 @@ export const LINE_BY_ID = new Map((linesJson as CatalogLine[]).map((l) => [l.id,
 
 /** Traditional Chinese for what the browser renders itself: day headlines and checklist labels. */
 export const ZH_DAYS = zhJson.days as Record<string, { title: string; anchor: string; notes: string[] } | undefined>;
+
+/** Chinese for the plan entries Claude wrote, by item id, with the English each translates. */
+export interface ZhPlanEntry {
+  title_en?: string;
+  title?: string;
+  note_en?: string;
+  note?: string;
+}
+export const ZH_PLAN = ((zhJson as { plan?: Record<string, ZhPlanEntry> }).plan ?? {}) as Record<string, ZhPlanEntry | undefined>;
+/** The same, by English text: the feed only kept the words, not the item. */
+export const ZH_PLAN_TEXT = new Map<string, string>(
+  Object.values(ZH_PLAN).flatMap((t): [string, string][] => [
+    ...(t?.title_en && t.title ? [[t.title_en, t.title] as [string, string]] : []),
+    ...(t?.note_en && t.note ? [[t.note_en, t.note] as [string, string]] : []),
+  ]),
+);
+
 const zhBookings = zhJson.bookings as Record<string, { what: string } | undefined>;
 const zhPrep = zhJson.prep as Record<string, { item: string } | undefined>;
 

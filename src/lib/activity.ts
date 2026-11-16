@@ -2,7 +2,7 @@
 // its details, so every phone can show it in its own language. Older entries
 // only have English text; they show as they are.
 import { dateIn, MARK_TEXT, pick, ui, type Lang, type UIKey } from '../i18n/ui';
-import { CHECKS, CHECKS_ZH } from './catalog';
+import { CHECKS, CHECKS_ZH, ZH_PLAN_TEXT } from './catalog';
 
 export type ActKind =
   | 'item.add'
@@ -37,9 +37,11 @@ export interface ActArgs {
 export function activityText(act: { k?: string; a?: ActArgs; text?: string }, lang: Lang): string {
   if (!act.k || !act.a) return act.text ?? '';
   const a = act.a;
+  // Claude's plan entries have Chinese (data/i18n/zh-Hant.json "plan").
+  const words = (s: string | undefined) => (s && lang === 'zh' ? (ZH_PLAN_TEXT.get(s) ?? s) : (s ?? ''));
   let text = ui(`act.${act.k}` as UIKey, lang, {
-    label: a.label ?? '',
-    note: a.note ?? '',
+    label: words(a.label),
+    note: words(a.note),
     t: a.t ?? '',
     day: a.day ? dateIn(a.day, lang) : '',
     to: a.to ? dateIn(a.to, lang) : '',

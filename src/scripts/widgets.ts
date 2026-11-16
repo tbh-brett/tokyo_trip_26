@@ -3,12 +3,12 @@
 // from t() so it follows the phone's language.
 import { activityText } from '../lib/activity';
 import { DAYS } from '../lib/catalog';
-import { dayItems, itemLabel, itemsForPlace, type Mark, type PlanState } from '../lib/plan';
+import { dayItems, itemsForPlace, type Mark, type PlanState } from '../lib/plan';
 import { jstNow, openLabel, openState, type Hours } from '../lib/time';
 import { MARK_TEXT, pick } from '../i18n/ui';
 import { date, lang, onLang, t } from './lang';
 import { dispatch, getPlan, newId, subscribe } from './store';
-import { ago, dayHeadline, dayOptions, html, mount, placeView } from './ui';
+import { ago, dayHeadline, dayOptions, html, itemText, mount, placeView } from './ui';
 
 const all = <T extends Element = HTMLElement>(sel: string, root: ParentNode = document) => [...root.querySelectorAll<T>(sel)];
 const markText = (mark: Mark) => pick(MARK_TEXT[mark], lang());
@@ -27,7 +27,7 @@ export function wireDayHeadlines() {
 /** A one-line-per-item summary of a day. */
 export function dayLines(plan: PlanState, day: string): { time: string | null; label: string; href: string | null }[] {
   const { timed, anytime } = dayItems(plan, day);
-  return [...timed, ...anytime].map((i) => ({ time: i.time, label: itemLabel(plan, i), href: placeView(plan, i.place)?.href ?? null }));
+  return [...timed, ...anytime].map((i) => ({ time: i.time, label: itemText(plan, i).label, href: placeView(plan, i.place)?.href ?? null }));
 }
 
 /** [data-day-preview=date]: what's planned, compactly. */
@@ -183,11 +183,12 @@ export function wireAddToPlan() {
   }
   for (const el of all('[data-in-plan]')) {
     mount(el, () => {
-      const items = itemsForPlace(getPlan(), el.dataset.inPlan!);
+      const plan = getPlan();
+      const items = itemsForPlace(plan, el.dataset.inPlan!);
       if (!items.length) return html`<p class="muted">${t('place.notInPlan')}</p>`;
       return html`<ul class="inplan">${items.map(
         (i) => html`<li><a href="/day/${i.day}/"><span class="num">${date(i.day)}${i.time ? ` · ${i.time}` : ''}</span>${
-          i.note ? html` <span class="muted">· ${i.note}</span>` : ''
+          i.note ? html` <span class="muted">· ${itemText(plan, i).note}</span>` : ''
         } <span class="t13 muted">${t('item.addedBy', { name: i.by })}</span></a></li>`,
       )}</ul>`;
     });

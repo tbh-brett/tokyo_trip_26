@@ -3,11 +3,11 @@
 // they lead to, and flights from trip.json are stops of their own. Used by the
 // day pages (with edit controls) and by Today during the trip (read-only).
 import { DAYS, FLIGHTS, LINE_BY_ID, type CatalogFlight, type CatalogLeg } from '../lib/catalog';
-import { dayItems, itemLabel, type PlanItem, type PlanState } from '../lib/plan';
+import { dayItems, type PlanItem, type PlanState } from '../lib/plan';
 import { iconSvg } from '../lib/icons';
 import { aboutMinutes } from '../i18n/ui';
 import { lang, t } from './lang';
-import { dayOptions, html, placeView, Safe } from './ui';
+import { dayOptions, html, itemText, placeView, Safe } from './ui';
 
 type Row =
   | { kind: 'stop'; item: PlanItem; movable: { up: boolean; down: boolean } | null }
@@ -119,13 +119,13 @@ function controls(item: PlanItem, movable: { up: boolean; down: boolean } | null
 function stopRow(plan: PlanState, row: Extract<Row, { kind: 'stop' }>, must: string[], editable: boolean): Safe {
   const { item } = row;
   const place = placeView(plan, item.place);
-  const label = itemLabel(plan, item);
+  const { label, note } = itemText(plan, item);
   const isMust = Boolean(item.place && must.includes(item.place));
   return html`<span class="tl-time">${item.time ?? ''}</span><span class="tl-node"></span><div class="tl-body"><div class="tl-card">
     ${isMust ? html`<span class="tag coral mustgo">${t('tl.mustGo')}</span>` : ''}
     <p class="name">${place ? html`<a href="${place.href}">${label}</a>` : label}</p>
     ${place?.nameJa ? html`<span class="ja" lang="ja">${place.nameJa}</span>` : ''}
-    ${item.note ? html`<p class="note">${item.note}</p>` : ''}
+    ${note ? html`<p class="note">${note}</p>` : ''}
     ${
       editable
         ? html`<details data-key="${item.id}"><summary class="meta"><span class="t13 muted">${t('item.addedBy', { name: item.by })}</span><span class="linkish t13">${t('item.edit')}</span></summary>${controls(item, row.movable, place?.href ?? null)}</details>`
