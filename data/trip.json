@@ -65,8 +65,8 @@
       "depart": "22:00",
       "arrive": null,
       "minutes": null,
-      "note_en": "Leave the hotel by 18:45: Skyliner from Keisei-Ueno, about 41 minutes, two hours before the flight.",
-      "note_zh": "18:45 前離開酒店：由京成上野坐 Skyliner 約 41 分鐘，航班前兩小時到。"
+      "note_en": "Leave the hotel by 18:15, 30 minutes earlier than before, for the tax-refund kiosk: Skyliner from Keisei-Ueno, about 41 minutes.",
+      "note_zh": "18:15 前離開酒店，比之前早 30 分鐘，留時間到退稅機：由京成上野坐 Skyliner 約 41 分鐘。"
     }
   ]
 }

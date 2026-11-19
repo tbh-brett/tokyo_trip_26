@@ -30,9 +30,30 @@
   {
     "id": "sakurai",
     "when": "Now",
-    "what": "櫻井焙煎研究所 tea counter, Wed 2 Dec",
-    "detail": "Eight seats, a tea course run like an omakase. Only if you take that option for Wednesday afternoon.",
-    "where": "Shop's own booking page"
+    "what": "櫻井焙茶研究所 tea counter, Wed 2 Dec, 16:15",
+    "detail": "Eight seats, a tea course run like an omakase, up to four people.",
+    "where": "TableCheck"
+  },
+  {
+    "id": "tsumugi",
+    "when": "Now",
+    "what": "Tsumugi breakfast, Thu 3 Dec, 08:00",
+    "detail": "110 a day, half the seats bookable online. ¥2,200 with tea.",
+    "where": "Tsumugi's online booking"
+  },
+  {
+    "id": "bazooka-f",
+    "when": "Now",
+    "what": "Bazooka F, Sat 28 Nov, 19:45",
+    "detail": "Booked: the Nishi-Shinjuku main branch, 7-15-5.",
+    "where": "Gurunavi"
+  },
+  {
+    "id": "cafe-dior",
+    "when": "Now",
+    "what": "Café Dior, Mon 30 Nov (optional)",
+    "detail": "Online booking only, by 23:00 the day before. Desserts from about ¥3,000.",
+    "where": "TableCheck"
   },
   {
     "id": "butagumi",
@@ -64,9 +85,9 @@
   },
   {
     "id": "shibuya-sky",
-    "when": "14 Nov",
+    "when": "Now",
     "what": "Shibuya Sky sunset slot, Sat 28 Nov",
-    "detail": "On sale 14 days ahead. Aim for a 15:30–16:00 entry. Sunset slots can sell out within hours.",
+    "detail": "On sale since 14 Nov. Aim for a 15:30–16:00 entry. Sunset slots can sell out within hours.",
     "where": "Shibuya Sky's site"
   },
   {
@@ -75,13 +96,6 @@
     "what": "Japan Cup reserved-seat lottery",
     "detail": "Only if you want a seat. General round 17–19 Nov, result 20 Nov.",
     "where": "JRA ticket site"
-  },
-  {
-    "id": "teien",
-    "when": "20 Nov",
-    "what": "Teien Marimekko time slot, Wed 2 Dec",
-    "detail": "Only if you take the Teien option for Wednesday afternoon. ¥1,400.",
-    "where": "Teien Art Museum's site"
   },
   {
     "id": "jc-general",
@@ -103,5 +117,12 @@
     "what": "Gen Yamamoto",
     "detail": "Only if Wednesday evening goes that way. Eight seats; asks for a week's notice, book further out.",
     "where": "Shop's own booking page"
+  },
+  {
+    "id": "ippodo-aoyama",
+    "when": "Any time",
+    "what": "Ippodo Aoyama tearoom, Wed 2 Dec (optional)",
+    "detail": "A second sit-down tea, instead of Koffee Mameya at 15:45.",
+    "where": "TableCheck"
   }
 ]

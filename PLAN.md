@@ -83,6 +83,19 @@ Later, only if Brett misses the old look: a per-phone theme switch (picture book
 
 Brett found the earlier list too heavy on tonkatsu. Eleven restaurants from "Tokyo eating, beyond tonkatsu" (13 Nov) added with sources, plus Ginza Ichibun (sushi, booked by Brett on Tabelog for Tue 1 Dec; one seating at 18:00). Each went into the ideas of the day whose route and opening days it fits, with a note per day saying why; where the list's own day suggestions clashed (1 Dec now has the sushi booking), they were moved. 1 Dec's notes, legs and Must-go follow the booking: leave Enoshima by about 16:15, so the sunset no longer fits. The katsu entries already in the shared plan (Butagumi Fri dinner, Gensuiton as a Sat lunch option, tonkatsu.jp / Nanaido Wed lunch) are untouched; the day notes name the alternatives. Takataro and Sakai Shokai still need street addresses and hours; Rojyu's hours aren't confirmed.
 
+## Shopping, Tsukiji, sushi and tea (20 Nov 2026)
+
+Folded in "Tokyo shopping, with coffee on the way" (18 Nov) and "Tokyo sushi, Tsukiji, Christmas markets and tea" (19 Nov; it wins where they differ). 46 places added with their sources (shops, cafés, tea, sushi, markets, brand spaces), each day's notes, ideas and legs rewritten in both languages, and the shared plan updated in one batch of 59 changes.
+
+- Fri: Roppongi Hills Christmas Market 17:20, the Louvre from 18:15.
+- Sat: SOUEN, Shimokitazawa curry and vintage, MATCHA PASSPORT, Shibuya Sky, Shibuya shops, Bazooka F at 19:45 (booked, Nishi-Shinjuku main branch), home on the Oedo line.
+- Mon: Onibus, Have More Curry, the Dior Bamboo Pavilion, Hedy and Eva in Daikanyama, then Yokohama.
+- Wed: BEAMS JAPAN, Onodera kaiten lunch, Harajuku to Aoyama resale, Koffee Mameya, Sakurai at 16:15, AURALEE, the Fendi lights.
+- Thu: check out 07:30, Tsumugi breakfast, Tsukiji, the museum at 10:15, kaiten lunch, Ginza brand spaces, Higashiya, G.Itoya, the lights, leave the hotel 18:15.
+- Tax-free since 1 Nov: pay full price, claim 10% at the airport, under the passport of whoever carries it home. In prep.
+
+Booked: Bazooka F only. Not booked yet: Shibuya Sky (on sale since 14 Nov), Tsumugi (Thu 08:00), Sakurai (Wed 16:15); optional: Café Dior, Ippodo Aoyama, the Dior tour. Hours for the new places are as the docs give them, never marked verified; several are "not checked".
+
 ## Phase 2 — coordinates, map, near me
 
 - For the `address_precision: "district"` places (79 after the itinerary), find the full street address from the Tabelog listing or the shop's own site. Update the JSON.

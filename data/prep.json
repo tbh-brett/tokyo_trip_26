@@ -56,7 +56,13 @@
   {
     "id": "passport",
     "group": "Money",
-    "item": "Physical passport on you for tax-free purchases over ¥5,500 (photos not accepted)",
+    "item": "Physical passport on you for tax-free shopping. Since 1 Nov you pay full price and claim the 10% back at the airport: at least ¥5,000 before tax in one store on one day; keep every receipt",
+    "due": "trip"
+  },
+  {
+    "id": "tax-free-claim",
+    "group": "Money",
+    "item": "Tax-free claims: buy under the passport of whoever carries it home. Brett claims at Narita on 3 Dec at the kiosk before checking bags, with every item on hand (one missing item cancels that receipt); Clara when she leaves. 90 days from purchase; opened food, drink or cosmetics aren't refunded",
     "due": "trip"
   },
   {
