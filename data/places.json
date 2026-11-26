@@ -677,6 +677,61 @@
     "source": "researched-2026-09-24"
   },
   {
+    "id": "sensoji",
+    "name_ja": "浅草寺",
+    "name_en": "Senso-ji",
+    "kind": "see",
+    "zone": "asakusa",
+    "station": "Asakusa",
+    "line": "ginza",
+    "recognition": "Tokyo's oldest temple",
+    "why": "After dark the main hall and the five-storey pagoda are lit until 23:00, without the daytime crowds.",
+    "note": "The main hall is open 06:30–17:00 from October to March; the lights are outside it.",
+    "price": "free",
+    "slots": [
+      "late"
+    ],
+    "hours": [],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒111-0032 東京都台東区浅草2-3-1",
+    "address_precision": "street",
+    "address_verified": true,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "https://www.senso-ji.jp/about/"
+  },
+  {
+    "id": "hoppy-dori",
+    "name_ja": "ホッピー通り（煮込み通り）",
+    "name_en": "Hoppy Street",
+    "kind": "eat",
+    "zone": "asakusa",
+    "station": "Asakusa",
+    "line": "ginza",
+    "recognition": "Asakusa's stew street",
+    "why": "Beef-tendon and offal stews at outdoor tables, walk-in: an easy first-night dinner by Senso-ji.",
+    "note": null,
+    "price": "Not checked",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "東京都台東区浅草2丁目",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "general-knowledge"
+  },
+  {
     "id": "tengoku",
     "name_ja": "珈琲 天国",
     "name_en": "Coffee Tengoku",
@@ -3500,6 +3555,34 @@
     "source": "researched-2026-09-24"
   },
   {
+    "id": "marunouchi-xmas",
+    "name_ja": "丸の内 行幸通り クリスマスマーケット",
+    "name_en": "Marunouchi Christmas market, Gyoko-dori",
+    "kind": "see",
+    "zone": "ginza",
+    "station": "Tokyo",
+    "line": "marunouchi",
+    "recognition": "Marunouchi Bright Holiday 2026 · Harry Potter",
+    "why": "Harry Potter decorations on the avenue between Tokyo station and the Imperial Palace, with 15 Christmas huts from 27 Nov, the most yet.",
+    "note": "Free. Marunouchi Bright Holiday runs 12 Nov – 25 Dec. The Hogwarts Snow Tree is in Marucube, Marunouchi Building 1F. The huts' hours aren't checked.",
+    "price": "Free entry",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "東京都千代田区丸の内 行幸通り",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "https://prtimes.jp/main/html/rd/p/000000004.000163832.html"
+  },
+  {
     "id": "hibiya-il",
     "name_ja": "東京ミッドタウン日比谷",
     "name_en": "Midtown Hibiya illumination",
@@ -4000,15 +4083,15 @@
   },
   {
     "id": "mori-art",
-    "name_ja": "森美術館 マリコ・モリ「燦燦」",
+    "name_ja": "森美術館「森万里子：燦燦」",
     "name_en": "Mori Art Museum: Mariko Mori",
     "kind": "see",
     "zone": "azabu",
     "station": "Roppongi",
     "line": "hibiya",
     "recognition": "Mariko Mori retrospective · 31 Oct 2026 – 28 Mar 2027",
-    "why": "A strong 30-year retrospective. Competes with the Louvre for Friday evening, so it only fits after dinner.",
-    "note": "Normally open until 22:00, but one listing says it closes at 17:00 on 27 Nov. Check the museum's site first. Timed tickets online.",
+    "why": "A strong 30-year retrospective. It shuts at 17:00 on Fri 27 Nov, so it moved to Wednesday evening.",
+    "note": "10:00–22:00; until 17:00 on Tuesdays and on Fri 27 Nov. Last entry 30 minutes before closing. Timed tickets online.",
     "price": "¥2,800, timed",
     "slots": [
       "dinner",
@@ -4029,7 +4112,7 @@
     "lat": null,
     "lng": null,
     "coords_verified": false,
-    "source": "https://www.tokyoartbeat.com/events/-/Mariko-Mori/61183-FDF/2026-10-31"
+    "source": "https://www.mori.art.museum/jp/"
   },
   {
     "id": "gotokuji",
@@ -4187,8 +4270,8 @@
     "line": "keio",
     "recognition": "46th Japan Cup · Sun 29 Nov 2026 · 15:40 post, 2,400 m turf",
     "why": "The big autumn race. Be in by 13:00 to see the paddock; trains back are packed for an hour after.",
-    "note": "No gate sale on Japan Cup day: every ticket is bought online in advance, mostly by lottery, on JRA's Japanese-language ticket site (credit card and email). Reserved seats: apply 17–19 Nov, result 20 Nov. General admission (about 80,000): apply 22–24 Nov, result 25 Nov. Leftovers first come from 23 Nov. Dates from a fan site: confirm on JRA.",
-    "price": "Advance tickets by lottery",
+    "note": "Tickets won: general admission, ¥1,000 each, sold online only. Go in any time after the time on your ticket; JRA staggers entry from 8:00 to 10:00. Use the main, west or east gate and show the QR ticket from the JRA site (from midnight; a screenshot works). After the race: Ichiro's talk show, a special horse show, and a happy hour at the infield gourmet festival with ramen and beer half price.",
+    "price": "¥1,000 general admission (won)",
     "slots": [
       "lunch",
       "dinner"
@@ -4203,7 +4286,7 @@
     "lat": null,
     "lng": null,
     "coords_verified": false,
-    "source": "https://www.jra.go.jp/keiba/g1/jc.html"
+    "source": "https://jra.jp/facilities/race/tokyo/news/nyujou.html"
   },
   {
     "id": "mot",
@@ -4249,7 +4332,7 @@
     "station": "Kamiyacho",
     "line": "hibiya",
     "recognition": "Azabudai Hills · timed entry",
-    "why": "Immersive light rooms. Fun rather than art history; Clara's pick. The opening slot is the least crowded.",
+    "why": "Immersive light rooms. Fun rather than art history; Clara's pick. Booked for 11:00 on Mon 30 Nov.",
     "note": "Allow 1.5–2.5 hours. Two minutes from Kamiyacho exit 5, in the basement of Garden Plaza B. Closes some days without a fixed pattern, usually Tuesdays: check the calendar when booking.",
     "price": "¥3,600–4,800, moves with demand",
     "slots": [
@@ -5593,6 +5676,61 @@
     "source": "general-knowledge"
   },
   {
+    "id": "tmg-observatory",
+    "name_ja": "東京都庁 展望室",
+    "name_en": "Tokyo Metropolitan Government observatories",
+    "kind": "see",
+    "zone": "shinjuku",
+    "station": "Tochomae",
+    "line": "oedo",
+    "recognition": "Free · 45th floor",
+    "why": "A free view from the 45th floor for the sunset, then a projection-mapping show on the building after dark.",
+    "note": "Free, no booking. Last entry 21:30, out by 22:00; on some days one of the two towers closes at 17:30 (2025 times). The projection mapping plays several times a night after sunset, until about 21:30, free.",
+    "price": "free",
+    "slots": [
+      "dinner",
+      "late"
+    ],
+    "hours": [],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "〒163-8001 東京都新宿区西新宿2-8-1",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "https://www.gotokyo.org/jp/spot/74/index.html"
+  },
+  {
+    "id": "golden-gai",
+    "name_ja": "新宿ゴールデン街",
+    "name_en": "Golden Gai",
+    "kind": "bar",
+    "zone": "shinjuku",
+    "station": "Shinjuku-sanchome",
+    "line": "marunouchi",
+    "recognition": "Old Shinjuku alleys",
+    "why": "Narrow alleys of tiny bars with a few seats each: a nightcap after Bazooka F, instead of Omoide Yokochō.",
+    "note": "Many bars charge a cover; some are for regulars only.",
+    "price": "Not checked",
+    "slots": [
+      "late"
+    ],
+    "hours": [],
+    "closed_days": [],
+    "hours_verified": false,
+    "book_ahead": false,
+    "address_ja": "東京都新宿区歌舞伎町1丁目",
+    "address_precision": "district",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "general-knowledge"
+  },
+  {
     "id": "have-more-curry",
     "name_ja": "ハブモアカレー",
     "name_en": "Have More Curry",
@@ -5984,6 +6122,42 @@
     "lng": null,
     "coords_verified": false,
     "source": "https://www.wwdjapan.com/articles/463430"
+  },
+  {
+    "id": "tornado",
+    "name_ja": "トルネード（TORNADO）",
+    "name_en": "TORNADO hair salon",
+    "kind": "buy",
+    "zone": "omote",
+    "station": "Omotesando",
+    "line": "ginza",
+    "recognition": "English OK · same-day booking",
+    "why": "An English-speaking salon for both of you, three minutes from Omotesando exit A2, that takes bookings up to the same day.",
+    "note": "First-visit coupons on Hot Pepper Beauty: a cut, about an hour, ¥5,850; cut, colour and treatment, about 2.5 hours, ¥18,450 (hair below the collarbone +¥1,500–3,000). No same-day cancellation, and more than 10 minutes late can cancel the booking. Mon, Thu and Fri 10:00–20:00; Sat and Sun 10:00–19:30; closed Tue and Wed. TEL 03-6804-2517. Cards, transit IC cards and PayPay.",
+    "price": "Cut ¥5,850 · cut, colour and treatment ¥18,450 (first visit)",
+    "slots": [
+      "coffee",
+      "dinner"
+    ],
+    "hours": [
+      [
+        "10:00",
+        "20:00"
+      ]
+    ],
+    "closed_days": [
+      "Tue",
+      "Wed"
+    ],
+    "hours_verified": false,
+    "book_ahead": true,
+    "address_ja": "〒150-0001 東京都渋谷区神宮前4-5-10 野口ビル2F",
+    "address_precision": "street",
+    "address_verified": true,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "https://beauty.hotpepper.jp/slnH000297847/"
   },
   {
     "id": "fendi-illumination",

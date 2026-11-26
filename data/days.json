@@ -2,27 +2,27 @@
   {
     "date": "2026-11-27",
     "weekday": "Fri",
-    "title": "Arrive, Roppongi at night",
-    "anchor": "The Louvre show at the National Art Center, open until 20:00 on Fridays.",
+    "title": "Arrive, a haircut, Asakusa at night",
+    "anchor": "TORNADO in Omotesando from 17:30, then Senso-ji lit up after dark and dinner on Hoppy Street.",
     "notes": [
       "Land 14:45. The Skyliner reaches Keisei-Ueno in about 41 minutes; the hotel is a 10-minute walk.",
-      "17:00 Hibiya line from Naka-Okachimachi to Roppongi, no change, about 20 minutes.",
-      "17:20–18:00 Roppongi Hills Christmas Market, free, in its 20th year: Käthe Wohlfahrt ornaments, glühwein, sausages and stollen on the Ōyane Plaza. The Keyakizaka lights are on from 17:00.",
-      "Then the Louvre show from 18:15 (last entry 19:30). Leonardo's La Belle Ferronnière is in Japan for the first time and the show closes 13 Dec. ¥2,200 in advance.",
-      "Book 西麻布 豚組 for dinner: it is a Friday.",
-      "Mori Art Museum fits after dinner only if it is open late that night. One listing says it shuts at 17:00 on 27 Nov.",
-      "Not tonkatsu: Rojyu, a yakiniku top-100 that serves wagyu on large antique plates at Roppongi-itchome, can replace Butagumi. ¥15,000 course; its hours aren't confirmed yet."
+      "Hair at TORNADO in Omotesando, not booked yet: book today on Hot Pepper Beauty, or call 03-6804-2517 (English OK). Clara at 17:30 for the cut, colour and treatment (¥18,450, about 2.5 hours): the latest start that menu allows on a Friday, as the salon closes at 20:00. Brett at 18:30 for a cut (¥5,850, about an hour).",
+      "Clara goes straight from Keisei-Ueno: the Ginza line from Ueno (G16) to Omotesando (G02), no change, about 25 minutes, then 3 minutes from exit A2. Brett takes both bags to the hotel, then the Ginza line from Suehirocho (G14). If the flight is late, ring the salon: the coupons allow no same-day cancellation, and more than 10 minutes late can cancel the booking.",
+      "After the salon: the Ginza line from Omotesando (G02) straight to Asakusa (G19), about 30 minutes. Senso-ji's main hall and five-storey pagoda are lit from sunset until 23:00, without the daytime crowds.",
+      "Dinner on Hoppy Street (煮込み通り) by Senso-ji: beef-tendon and offal stews at outdoor tables, walk-in. Home: the Ginza line from Asakusa (G19) to Suehirocho (G14), no change.",
+      "Clara's Roppongi evening moves to Wednesday: the Mori Art Museum closes at 17:00 today (the museum's own site), and the salon takes the Louvre's slot. The Louvre show (not booked) drops; it runs until 13 Dec.",
+      "Or Roppongi tonight instead of Asakusa, as Clara first planned: the Hills Christmas Market is open until 21:00 and the Keyakizaka lights until 23:00."
     ],
     "places": [
-      "nact-louvre",
-      "butagumi",
-      "keyakizaka",
-      "mori-art",
-      "rojyu",
-      "roppongi-xmas"
+      "tornado",
+      "sensoji",
+      "hoppy-dori",
+      "roppongi-xmas",
+      "keyakizaka"
     ],
     "must": [
-      "nact-louvre"
+      "tornado",
+      "sensoji"
     ],
     "legs": [
       {
@@ -40,14 +40,34 @@
         "text_zh": "京成上野到酒店"
       },
       {
-        "to": "roppongi-xmas",
+        "to": "tornado",
         "mode": "train",
         "lines": [
-          "hibiya"
+          "ginza"
         ],
-        "minutes": 20,
-        "text_en": "Naka-Okachimachi to Roppongi, no change",
-        "text_zh": "仲御徒町到六本木，不用轉車"
+        "to_code": "G02",
+        "minutes": 25,
+        "text_en": "Clara: Ueno straight to Omotesando. Brett: from Suehirocho after the bags",
+        "text_zh": "Clara：由上野直達表參道。Brett：放下行李後由末廣町出發"
+      },
+      {
+        "to": "tornado",
+        "mode": "walk",
+        "minutes": 3,
+        "text_en": "Exit A2 to the salon",
+        "text_zh": "由 A2 出口步行到沙龍"
+      },
+      {
+        "to": "sensoji",
+        "mode": "train",
+        "lines": [
+          "ginza"
+        ],
+        "from_code": "G02",
+        "to_code": "G19",
+        "minutes": 30,
+        "text_en": "Omotesando to Asakusa, no change",
+        "text_zh": "表參道到淺草，不用轉車"
       }
     ]
   },
@@ -58,20 +78,19 @@
     "anchor": "神宮外苑いちょう並木 at 07:30, before the Saturday crush.",
     "notes": [
       "07:05 Ginza line from Suehirocho (G14) to Gaienmae (G03), no change, about 20 minutes.",
+      "The avenue was in full colour on 18 Nov, and the leaves start to fall around 2 Dec. This year the picture gallery at the end is under scaffolding, and there is no Christmas market at Gaien.",
       "Ginkgo first, Gotokuji second: the avenue is shoulder to shoulder by 11:00, the cats will still be there at 09:30.",
       "To Gotokuji: Ginza line to Shibuya, Den-en-toshi line to Sangenjaya, then the Setagaya tram to Miyanosaka. About 40 minutes.",
       "After Gotokuji: the Setagaya tram from Miyanosaka to Shoin-jinja-mae, a few stops back toward Sangenjaya, for SOUEN at 11:00, Sakurai's casual tea bar (walk-in, closed Wednesdays). Then the tram to Sangenjaya and a 20-minute walk up Chazawa-dōri to Shimokitazawa.",
-      "Shimokitazawa from 12:30: a curry top-100 lunch (Kyu Yamu-tei Shimokita-so, KALPASI or PANNYA; expect a queue), then vintage, then MATCHA PASSPORT at 14:15. Most shops open around noon and many take cash only. Keio Inokashira line to Shibuya at 15:10.",
-      "Shibuya Sky: a 15:30–16:00 slot gets daylight, sunset around 16:30, and the lights. Not booked yet: tickets have been on sale since 14 Nov and sunset slots sell out fast.",
-      "17:00 in Shibuya before dinner: Louis Vuitton Shibuya Men's holiday trains (free, to 31 Dec), Shibuya Loft, or coffee at Chatei Hatō or Kissa Satera.",
-      "Dinner booked: Bazooka F, Nishi-Shinjuku 7-15-5, at 19:45. Charcoal yakiniku; the signature is the Bazooka harami. JR Yamanote line from Shibuya to Shinjuku, about 7 minutes, then a 5–6 minute walk from the west exit.",
-      "Home: a nightcap at Omoide Yokochō first if you like, then the Oedo line from Shinjuku-nishiguchi straight to Ueno-okachimachi, near the hotel."
+      "Shimokitazawa from 12:30: a curry top-100 lunch (Kyu Yamu-tei Shimokita-so, KALPASI or PANNYA; expect a queue), then vintage, then MATCHA PASSPORT at 14:15. Most shops open around noon and many take cash only.",
+      "Sunset from the Tokyo Metropolitan Government's free 45th-floor observatory: at about 15:30 take the Odakyu line from Shimokitazawa straight to Shinjuku (about 10 minutes), then walk about 10 minutes from the west exit, in time for the 16:30 sunset. Last entry 21:30. After dark the projection mapping plays on the building until about 21:30, free. Shibuya Sky instead only if a slot is left (not booked).",
+      "17:45 BEAMS JAPAN, five floors of made in Japan, open until 20:00 (moved here from Wednesday). If you got Shibuya Sky instead: Louis Vuitton Shibuya Men's holiday trains, Shibuya Loft or Chatei Hatō, then the JR Yamanote line to Shinjuku, about 7 minutes.",
+      "Dinner booked: Bazooka F, Nishi-Shinjuku 7-15-5, at 19:45. Charcoal yakiniku; the signature is the Bazooka harami. A 5–6 minute walk from Shinjuku's west exit.",
+      "Home: a nightcap at Omoide Yokochō by the west exit, or in Golden Gai's tiny bars across the station in Kabukicho, then the Oedo line from Shinjuku-nishiguchi straight to Ueno-okachimachi, near the hotel."
     ],
     "places": [
       "gaien",
       "gotokuji",
-      "shibuya-sky",
-      "hatou",
       "souen",
       "kyu-yamutei",
       "kalpasi",
@@ -84,10 +103,15 @@
       "circulable",
       "matcha-passport",
       "troischambres",
+      "tmg-observatory",
+      "beams-japan",
+      "shibuya-sky",
       "lv-shibuya-mens",
+      "hatou",
       "satera",
       "bazooka-f",
-      "omoide-yokocho"
+      "omoide-yokocho",
+      "golden-gai"
     ],
     "must": [
       "gaien",
@@ -128,6 +152,23 @@
         "text_zh": "世田谷線，宮之坂到松陰神社前"
       },
       {
+        "to": "tmg-observatory",
+        "mode": "train",
+        "lines": [
+          "odakyu"
+        ],
+        "minutes": 10,
+        "text_en": "Shimokitazawa straight to Shinjuku",
+        "text_zh": "由下北澤直達新宿"
+      },
+      {
+        "to": "tmg-observatory",
+        "mode": "walk",
+        "minutes": 10,
+        "text_en": "From Shinjuku's west exit",
+        "text_zh": "由新宿西口步行"
+      },
+      {
         "to": "shibuya-sky",
         "mode": "train",
         "text_en": "Keio Inokashira line from Shimokitazawa to Shibuya",
@@ -135,13 +176,9 @@
       },
       {
         "to": "bazooka-f",
-        "mode": "train",
-        "lines": [
-          "yamanote"
-        ],
-        "minutes": 7,
-        "text_en": "Shibuya to Shinjuku, then 5–6 minutes from the west exit",
-        "text_zh": "澀谷到新宿，再由西口步行 5–6 分鐘"
+        "mode": "walk",
+        "text_en": "5–6 minutes from Shinjuku's west exit",
+        "text_zh": "由新宿西口步行 5–6 分鐘"
       },
       {
         "to": "hotel",
@@ -157,46 +194,44 @@
   {
     "date": "2026-11-29",
     "weekday": "Sun",
-    "title": "Todai ginkgo, then races or Kiyosumi",
-    "anchor": "Japan Cup at 15:40 if the lottery comes through; MOT and Kiyosumi if not. Rikugien lit at night either way.",
+    "title": "Todai ginkgo, the Japan Cup, Rikugien",
+    "anchor": "The Japan Cup at 15:40, tickets won. Rikugien lit up after the races.",
     "notes": [
-      "Morning either way: Todai's ginkgo avenue to Yasuda Auditorium, quiet on a Sunday, then Kayaba Coffee 10 minutes' walk away.",
-      "Japan Cup: Shinjuku, then the Keio line to Fuchukeiba-seimonmae, about 35 minutes. In by 13:00 to see the paddock.",
-      "There is no gate sale on Japan Cup day. General admission lottery 22–24 Nov, result 25 Nov.",
-      "Clara's original afternoon: MOT's two shows, fukagawa-meshi (clams on rice) for lunch, Mameya Kakeru's coffee course, Kiyosumi Teien's stepping stones.",
-      "If the Japan Cup takes Sunday, MOT and Kiyosumi no longer move to Thursday: Thursday morning is now Tsukiji.",
-      "Rikugien: 18:00–20:30, last entry 19:30, ¥1,000 online or ¥1,200 cash. Then Tokiwa Shokudo, one stop away.",
+      "Morning: Todai's ginkgo avenue to Yasuda Auditorium, quiet on a Sunday, then Nezu Shrine's tunnel of torii and Kayaba Coffee, each about 15 minutes' walk on.",
+      "Japan Cup tickets won: general admission, ¥1,000 each. The time on the ticket is the earliest you can go in (JRA staggers entry from 8:00 to 10:00); after it, come whenever you like. Show the QR ticket from the JRA booking site (from midnight; a screenshot works) at the main, west or east gate. Whoever won should send the second ticket on with チケット分配 before the day, as JRA asks.",
+      "Getting there: Shinjuku, then the Keio line to Fuchukeiba-seimonmae, about 35 minutes. Leave Kayaba by about 10:00. In by 13:00 to see the paddock; the race goes at 15:40.",
+      "Eat and drink at the infield gourmet festival. After the race: Ichiro's talk show, a special horse show, and a happy hour at the gourmet festival with ramen and beer half price. JRA expects the cash betting windows to jam in the afternoon, passages to be closed off when crowded, and phone signal to be patchy.",
+      "Rikugien: 18:00–20:30, last entry 19:30, ¥1,000 online or ¥1,200 cash. From the races: the Keio line back to Shinjuku, then the JR Yamanote line to Komagome. Then Tokiwa Shokudo, one stop away.",
       "After Rikugien, instead of Tokiwa: Takokyu, a 14-seat oden counter in Yushima since 1904, open on Sundays. In winter arrive after 20:15; cash only; call 03-3831-5088 from 12:00 that day.",
-      "Plan B extras, all walk-in: Matcha& by Kiyosumi (amazake matcha, miso matcha latte). Kuramae is two stops away on the Oedo line: Kakimori's build-your-own notebooks (weekends 11:00–18:00), Pelican Café, Leaves Coffee Apartment. 2k540's makers, by the hotel, are open today too.",
-      "If the Japan Cup lottery fails: Chanel Nexus Hall in Ginza shows about 60 National Portrait Gallery photographs until today, free, 11:00–19:00. Tsukiji is shut today."
+      "Clara's original afternoon (MOT, fukagawa-meshi, Mameya Kakeru, Kiyosumi Teien) gives way to the races."
     ],
     "places": [
       "todai-hongo",
+      "nezu",
       "kayaba",
       "tokyo-racecourse",
-      "mot",
-      "kakeru",
-      "kiyosumiteien",
       "rikugien",
       "tokiwa",
-      "takokyu",
-      "matcha-and",
-      "kakimori",
-      "pelican-cafe",
-      "leaves-apartment",
-      "2k540",
-      "chanel-nexus"
+      "takokyu"
     ],
     "must": [
+      "tokyo-racecourse",
       "rikugien"
     ],
     "legs": [
       {
-        "to": "kayaba",
+        "to": "nezu",
         "mode": "walk",
-        "minutes": 10,
+        "minutes": 15,
         "text_en": "From Todai's ginkgo avenue",
         "text_zh": "由東大的銀杏大道"
+      },
+      {
+        "to": "kayaba",
+        "mode": "walk",
+        "minutes": 15,
+        "text_en": "From Nezu Shrine",
+        "text_zh": "由根津神社"
       },
       {
         "to": "tokyo-racecourse",
@@ -207,6 +242,16 @@
         "minutes": 35,
         "text_en": "Shinjuku, then the Keio line to Fuchukeiba-seimonmae",
         "text_zh": "到新宿，轉京王線到府中競馬正門前"
+      },
+      {
+        "to": "rikugien",
+        "mode": "train",
+        "lines": [
+          "keio",
+          "yamanote"
+        ],
+        "text_en": "Keio line back to Shinjuku, then the JR Yamanote line to Komagome",
+        "text_zh": "坐京王線回新宿，再轉 JR 山手線到駒込"
       },
       {
         "to": "tokiwa",
@@ -220,28 +265,31 @@
     "date": "2026-11-30",
     "weekday": "Mon",
     "title": "teamLab, Daikanyama, Yokohama",
-    "anchor": "teamLab's first slot, the Dior Bamboo Pavilion at midday, then Yokohama's Christmas market at dusk.",
+    "anchor": "teamLab at 11:00, the Dior Bamboo Pavilion after lunch, then Yokohama's Christmas market at dusk.",
     "notes": [
-      "08:00 Hibiya line from Naka-Okachimachi straight to Kamiyacho, about 20 minutes. teamLab is two minutes from exit 5.",
-      "Allow 1.5–2.5 hours. Check teamLab's calendar when booking: it closes some days without a fixed pattern.",
-      "11:15 Hibiya line from Kamiyacho to Naka-Meguro, direct, straight after teamLab. Onibus Coffee is a minute from the station; Daikanyama is about 10 minutes' walk up.",
-      "Daikanyama: lunch at Have More Curry (curry top 100), then the Dior Bamboo Pavilion (daily 11:00–19:00, walk-in; Café Dior needs an online booking by 23:00 the day before, not booked), then designer resale at Hedy and Eva Fashion Art. Monday hours for Hedy and Eva aren't checked.",
-      "14:45 Toyoko line from Daikanyama straight through to Bashamichi, about 40 minutes, in time for the 16:00 Air Cabin.",
+      "A slow start after the races. 09:30 Hibiya line from Naka-Okachimachi straight to Kamiyacho, about 20 minutes; teamLab is two minutes from exit 5.",
+      "10:00, before teamLab: a tea tasting at SABOE in Azabudai Hills, or Kuro Mame in Toranomon, where the barista picks your coffee.",
+      "teamLab booked for 11:00. Allow 1.5–2.5 hours.",
+      "About 13:00 Hibiya line from Kamiyacho to Naka-Meguro, direct. Daikanyama is about 10 minutes' walk up; Onibus Coffee is a minute from the station.",
+      "Daikanyama: a late lunch at Have More Curry (curry top 100), then the Dior Bamboo Pavilion (daily 11:00–19:00, walk-in; Café Dior needs an online booking by 23:00 the day before, not booked), then designer resale at Hedy and Eva Fashion Art. Monday hours for Hedy and Eva aren't checked.",
+      "15:45 Toyoko line from Daikanyama straight through to Bashamichi, about 40 minutes, in time for the Air Cabin at about 16:30.",
       "Monday is the market's calmest day, and the cable car catches sunset around 16:30.",
       "Home: JR from Sakuragicho to Okachimachi or Akihabara, about 50 minutes.",
       "Or dinner back near the hotel instead of Noge: Namaiki, a yakiniku top-100 two blocks away, open until 23:30."
     ],
     "places": [
+      "saboe",
+      "kuromame",
       "teamlab",
-      "air-cabin",
-      "akarenga-xmas",
-      "noge",
-      "namaiki",
       "onibus",
       "have-more-curry",
       "dior-pavilion",
       "hedy",
-      "eva-fashion-art"
+      "eva-fashion-art",
+      "air-cabin",
+      "akarenga-xmas",
+      "noge",
+      "namaiki"
     ],
     "must": [
       "teamlab",
@@ -249,17 +297,7 @@
     ],
     "legs": [
       {
-        "to": "teamlab",
-        "mode": "train",
-        "lines": [
-          "hibiya"
-        ],
-        "minutes": 20,
-        "text_en": "Naka-Okachimachi straight to Kamiyacho; teamLab is two minutes from exit 5",
-        "text_zh": "由仲御徒町直達神谷町；teamLab 離 5 號出口兩分鐘"
-      },
-      {
-        "to": "onibus",
+        "to": "have-more-curry",
         "mode": "train",
         "lines": [
           "hibiya"
@@ -386,22 +424,34 @@
   {
     "date": "2026-12-02",
     "weekday": "Wed",
-    "title": "Gyoen, Harajuku to Aoyama, a night out",
-    "anchor": "Shinjuku Gyoen in the morning, designer resale from Harajuku to Aoyama, Sakurai's tea counter at 16:15, then racing or a hidden bar.",
+    "title": "Gyoen, Sakurai's tea, Mori at night",
+    "anchor": "Shinjuku Gyoen in the morning, Sakurai's tea counter at 14:00, designer resale from Harajuku to Aoyama, then the Mori Art Museum and Roppongi's lights.",
     "notes": [
       "Nezu Museum is closed between exhibitions from 24 Nov to 5 Dec, garden included. This day replaces it.",
       "09:00 Marunouchi line from Awajicho straight to Shinjuku-gyoemmae. ¥500.",
-      "Optional, 11:00: BEAMS JAPAN in Shinjuku, five floors of made-in-Japan, about ten minutes' walk from the Gyoen's Shinjuku gate. Then the Fukutoshin line from Shinjuku-sanchome to Meiji-jingumae, two stops.",
-      "Lunch: Kaiten Sushi Ginza Onodera by Omotesando, about ¥300 a plate. Then Vintage Qoo before 14:00, Kindal, RAGTAG on Cat Street, and BEAMS and United Arrows in Jingumae 3-chome.",
-      "15:45 Koffee Mameya's standing bean counter, or Ippodo's Aoyama tearoom (optional booking). 16:15 Sakurai's eight-seat tea counter: not booked yet, book on TableCheck. The Teien Marimekko option drops.",
-      "After Sakurai: AURALEE's Aoyama store (12:00–20:00), then walk back down Omotesando under Fendi's 900,000 LEDs to evening A or B.",
-      "Evening A: Ōi night racing, ¥100, an SII race on the card, last race around 20:50, then Bar Trench. Pick this if the Japan Cup lottery fails.",
-      "Evening B: a top-100 sushi counter in Nakameguro, then Bar Benfiddich (TableCheck). Or Janai Coffee in Ebisu, or Gen Yamamoto.",
-      "More evenings: Kinju, a yakiniku top-100 in Nakameguro open until 03:30, fits Evening B; Nishio-san's Shizuoka oden in Shinjuku-sanchome goes before Benfiddich (same-day phone booking, cash). For a quiet night, Ishibashi's sukiyaki is a minute from Suehirocho (last order 20:00, cash only)."
+      "About 11:00 the Fukutoshin line from Shinjuku-sanchome to Meiji-jingumae, two stops. Lunch at Kaiten Sushi Ginza Onodera by Omotesando, about ¥300 a plate, then Vintage Qoo before 14:00 to beat the crowd, and Kindal.",
+      "14:00 Sakurai's eight-seat tea counter, booked: a tea course served like an omakase, in Minami-Aoyama.",
+      "After Sakurai: RAGTAG on Cat Street, BEAMS and United Arrows in Jingumae 3-chome, then AURALEE's Aoyama store (12:00–20:00), and back down Omotesando under Fendi's 900,000 LEDs.",
+      "Evening, moved from Friday: the Mori Art Museum's Mariko Mori retrospective, open until 22:00 tonight (last entry 21:30), timed tickets online. The Ginza line from Omotesando to Aoyama-itchome, then the Oedo line to Roppongi. Then the Roppongi Hills Christmas Market (until 21:00) and the Keyakizaka lights (until 23:00).",
+      "Dinner at the market: glühwein, sausages and stollen. The old evening plans stay below as ideas: Ōi night racing, and the Nakameguro sushi counters and Bar Benfiddich, which need booking.",
+      "More evenings: Kinju, a yakiniku top-100 in Nakameguro open until 03:30; Nishio-san's Shizuoka oden in Shinjuku-sanchome before Benfiddich (same-day phone booking, cash). For a quiet night, Ishibashi's sukiyaki is a minute from Suehirocho (last order 20:00, cash only)."
     ],
     "places": [
       "gyoen",
+      "onodera-omotesando",
+      "vintage-qoo",
+      "kindal-harajuku",
       "sakurai",
+      "ragtag-harajuku",
+      "beams-harajuku",
+      "united-arrows-harajuku",
+      "auralee",
+      "fendi-illumination",
+      "mori-art",
+      "roppongi-xmas",
+      "keyakizaka",
+      "mameya",
+      "ippodo-aoyama",
       "ohi",
       "trench",
       "tsubomi",
@@ -411,22 +461,11 @@
       "genyamamoto",
       "kinju",
       "nishio",
-      "ishibashi",
-      "beams-japan",
-      "onodera-omotesando",
-      "vintage-qoo",
-      "kindal-harajuku",
-      "ragtag-harajuku",
-      "beams-harajuku",
-      "united-arrows-harajuku",
-      "mameya",
-      "ensigne-dangle",
-      "ippodo-aoyama",
-      "auralee",
-      "fendi-illumination"
+      "ishibashi"
     ],
     "must": [
-      "gyoen"
+      "sakurai",
+      "mori-art"
     ],
     "legs": [
       {
@@ -446,6 +485,16 @@
         ],
         "text_en": "Shinjuku-sanchome to Meiji-jingumae, two stops",
         "text_zh": "新宿三丁目到明治神宮前，兩站"
+      },
+      {
+        "to": "mori-art",
+        "mode": "train",
+        "lines": [
+          "ginza",
+          "oedo"
+        ],
+        "text_en": "Omotesando to Aoyama-itchome, then the Oedo line to Roppongi",
+        "text_zh": "由表參道到青山一丁目，再轉大江戶線到六本木"
       }
     ]
   },
@@ -456,18 +505,19 @@
     "anchor": "Tsukiji's breakfast and market, the Daitoku-ji show, Ginza's brand spaces and Marunouchi's lights, then Narita for the 22:00 flight.",
     "notes": [
       "07:30 check out and leave the bags at the front desk; collect them at 17:30.",
-      "Tsukiji is open today (it shuts on 29 Nov and 2 Dec). Hibiya line from Naka-Okachimachi to Tsukiji, direct. Breakfast at Tsumugi in Tsukiji Hongwanji at 08:00: 16 small plates, rice porridge and miso, ¥2,200 with tea. Not booked yet: half of its 110 places a day are bookable online.",
+      "Tsukiji is open today (it shuts on 29 Nov and 2 Dec). Hibiya line from Naka-Okachimachi to Tsukiji, direct. Breakfast at Tsumugi in Tsukiji Hongwanji at 08:00: 16 small plates, rice porridge and miso, ¥2,200 with tea. Not booked: half of its 110 places a day are bookable online, the other half are walk-in.",
       "09:00 the outer market and Tsukiji Uogashi: tamagoyaki at Yamachō, a matcha whisk at Yamanoi Shōten. Eating while walking is banned: eat at the stall. Most shops close around 14:00.",
       "The Daitoku-ji show is in its last week: Muqi's Dragon and Tiger and a National Treasure Ido tea bowl. Hibiya line from Tsukiji to Ueno, direct, for 10:15. Swap: Hamarikyu's teahouse instead, 10 minutes' walk from Tsukiji.",
       "Sushi lunch in Ginza at 12:00, walk-in: Nemuro Hanamaru (Tokyu Plaza Ginza 10F; put your name down and wander) or Kaiten Toyama. Hibiya line from Ueno to Ginza, direct.",
       "Afternoon in Ginza: Hermès Le Forum (Ann Veronica Janssens, free), Dover Street Market, Louis Vuitton's Le Café V, then tea and wagashi at HIGASHIYA GINZA at 15:00 and G.Itoya on the way to Marunouchi.",
-      "Naka-dōri's 1.2 km of lit trees come on at 16:00. Tokyo to Akihabara is four minutes.",
+      "Naka-dōri's 1.2 km of lit trees come on at 16:00. On Gyoko-dōri, between Tokyo station and the palace, a Christmas market with Harry Potter decorations and, from 27 Nov, 15 Christmas huts; the Hogwarts Snow Tree is in Marucube, Marunouchi Building 1F. Tokyo to Akihabara is four minutes.",
       "Leave the hotel by 18:15 for Narita, 30 minutes earlier than before, for the tax-refund kiosk: Skyliner from Keisei-Ueno, about 41 minutes.",
-      "If the Japan Cup takes Sunday, Kuramae and 2k540 can go to Clara's morning on Fri 4 Dec."
+      "With the Japan Cup on Sunday, Kuramae and 2k540 can go to Clara's morning on Fri 4 Dec."
     ],
     "places": [
       "tnm-daitokuji",
       "marunouchi-il",
+      "marunouchi-xmas",
       "nmwa-turner",
       "tsumugi",
       "tsukiji",

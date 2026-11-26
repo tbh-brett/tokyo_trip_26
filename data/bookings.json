@@ -1,17 +1,10 @@
 [
   {
-    "id": "jra-register",
+    "id": "tornado",
     "when": "Now",
-    "what": "Register on JRA's ticket site",
-    "detail": "Weeks before the Japan Cup lottery, check it accepts a Hong Kong card and phone number. The site is in Japanese and needs a credit card and email.",
-    "where": "JRA ticket site"
-  },
-  {
-    "id": "louvre",
-    "when": "Now",
-    "what": "Louvre show at the National Art Center, Fri 27 Nov",
-    "detail": "Advance ticket, ¥2,200. No time slot needed for 27 Nov.",
-    "where": "National Art Center site"
+    "what": "TORNADO hair salon, Fri 27 Nov: Clara 17:30, Brett 18:30",
+    "detail": "Clara: cut, colour and treatment, ¥18,450, about 2.5 hours; 17:30 is the latest start for it on a Friday. Brett: cut, ¥5,850, about an hour. First-visit coupons: no same-day cancellation, and no more than 10 minutes late.",
+    "where": "Hot Pepper Beauty, or call 03-6804-2517"
   },
   {
     "id": "rikugien-tickets",
@@ -23,22 +16,22 @@
   {
     "id": "teamlab",
     "when": "Now",
-    "what": "teamLab Borderless, Mon 30 Nov, first slot",
-    "detail": "The opening slot is the least crowded. Prices move with demand, ¥3,600–4,800. Check the calendar for closed days.",
+    "what": "teamLab Borderless, Mon 30 Nov, 11:00",
+    "detail": "Booked. Allow 1.5–2.5 hours.",
     "where": "teamLab's site"
   },
   {
     "id": "sakurai",
     "when": "Now",
-    "what": "櫻井焙茶研究所 tea counter, Wed 2 Dec, 16:15",
-    "detail": "Eight seats, a tea course run like an omakase, up to four people.",
+    "what": "櫻井焙茶研究所 tea counter, Wed 2 Dec, 14:00",
+    "detail": "Booked. Eight seats, a tea course run like an omakase.",
     "where": "TableCheck"
   },
   {
     "id": "tsumugi",
     "when": "Now",
     "what": "Tsumugi breakfast, Thu 3 Dec, 08:00",
-    "detail": "110 a day, half the seats bookable online. ¥2,200 with tea.",
+    "detail": "Not booked: half of the 110 places a day are bookable online, the other half walk-in. ¥2,200 with tea.",
     "where": "Tsumugi's online booking"
   },
   {
@@ -56,13 +49,6 @@
     "where": "TableCheck"
   },
   {
-    "id": "butagumi",
-    "when": "27 Oct",
-    "what": "Dinner at 西麻布 豚組, Fri 27 Nov",
-    "detail": "Many restaurants open one month ahead, and it is a Friday.",
-    "where": "Restaurant's booking page"
-  },
-  {
     "id": "december-opens",
     "when": "1 Nov",
     "what": "★ The key date — December opens",
@@ -72,57 +58,29 @@
   {
     "id": "benfiddich",
     "when": "1 Nov",
-    "what": "Bar Benfiddich, Wed 2 Dec",
-    "detail": "For evening B. No menu: you describe a mood and he builds it.",
+    "what": "Bar Benfiddich (optional)",
+    "detail": "Optional, any night: no menu; you describe a mood and he builds it.",
     "where": "TableCheck"
-  },
-  {
-    "id": "dinner-wed",
-    "when": "2 Nov",
-    "what": "Sushi counter in Nakameguro, Wed 2 Dec",
-    "detail": "鮨 つぼみ or 鮨 尚充, ¥15–28k, one month ahead. Book both, keep whichever answers. For evening B.",
-    "where": "OMAKASE (prepaid) or TableCheck"
   },
   {
     "id": "shibuya-sky",
     "when": "Now",
     "what": "Shibuya Sky sunset slot, Sat 28 Nov",
-    "detail": "On sale since 14 Nov. Aim for a 15:30–16:00 entry. Sunset slots can sell out within hours.",
+    "detail": "Optional now: Saturday's sunset is the free TMG observatory. Aim for a 15:30–16:00 entry if a slot is left.",
     "where": "Shibuya Sky's site"
   },
   {
-    "id": "jc-reserved",
-    "when": "17 Nov",
-    "what": "Japan Cup reserved-seat lottery",
-    "detail": "Only if you want a seat. General round 17–19 Nov, result 20 Nov.",
-    "where": "JRA ticket site"
+    "id": "mori-art",
+    "when": "Now",
+    "what": "Mori Art Museum, Wed 2 Dec evening",
+    "detail": "Timed tickets online. Open until 22:00 that night, last entry 21:30.",
+    "where": "Mori Art Museum's site"
   },
   {
     "id": "jc-general",
     "when": "22 Nov",
-    "what": "Japan Cup general admission lottery",
-    "detail": "22–24 Nov, about 80,000 places, result 25 Nov. Leftovers and cancellations first come from 23 Nov.",
+    "what": "Japan Cup general admission, Sun 29 Nov",
+    "detail": "Won: ¥1,000 each. Before the day, send the second QR ticket to the other person with チケット分配.",
     "where": "JRA ticket site"
-  },
-  {
-    "id": "mori-art",
-    "when": "Any time",
-    "what": "Mori Art Museum time slot",
-    "detail": "Only if you add it to Fri 27 Nov, and only after checking it is open late that night.",
-    "where": "Mori Art Museum's site"
-  },
-  {
-    "id": "gen-yamamoto",
-    "when": "Any time",
-    "what": "Gen Yamamoto",
-    "detail": "Only if Wednesday evening goes that way. Eight seats; asks for a week's notice, book further out.",
-    "where": "Shop's own booking page"
-  },
-  {
-    "id": "ippodo-aoyama",
-    "when": "Any time",
-    "what": "Ippodo Aoyama tearoom, Wed 2 Dec (optional)",
-    "detail": "A second sit-down tea, instead of Koffee Mameya at 15:45.",
-    "where": "TableCheck"
   }
 ]
