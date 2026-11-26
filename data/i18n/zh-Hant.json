@@ -22,6 +22,7 @@
     "akaishi": { "why": "營業到深夜，拿坡里意粉到咖喱甚麼都有。淺草的深夜喫茶店。" },
     "sensoji": { "recognition": "東京最古老的寺院", "why": "入夜後本堂和五重塔亮燈至 23:00，沒有白天的人潮。", "note": "本堂 10 月至 3 月 06:30–17:00 開放；燈飾在室外。", "price": "免費" },
     "hoppy-dori": { "recognition": "淺草的燉菜街", "why": "戶外座位吃牛筋和內臟燉菜，毋須預約：在淺草寺旁輕鬆吃第一晚的晚餐。", "price": "未查" },
+    "okamoto": { "recognition": "1959 年起的燉菜", "why": "ホッピー通り上室內外共 94 個座位，供應 1959 年至今的牛筋內臟燉菜。有英文菜單和會說英語的店員。", "note": "每日營業：星期一至六 11:00–23:00（最後點餐 22:30），星期日至 22:30（最後點餐 22:00）。連任飲的套餐 ¥3,000 起。可用信用卡。在 Gurunavi 預約或致電 050-5485-9734。", "price": "平均約 ¥2,000" },
     "tengoku": { "why": "班戟上烙著「天国」（天堂）二字。小小一家，正是淺草早晨的精髓。" },
     "kugutsusou": { "why": "吉祥寺地底的洞穴，由一個木偶劇團經營。在幾近漆黑中吃咖喱、喝咖啡。" },
     "troischambres": { "why": "下北澤成熟的一角：古典音樂、蕾絲、像樣的蛋糕。逛完古著店的解藥。" },
@@ -219,6 +220,7 @@
         "Clara 由京成上野直接去：在上野（G16）坐銀座線到表參道（G02），不用轉車，約 25 分鐘，再由 A2 出口步行 3 分鐘。Brett 把兩個行李箱帶回酒店，再由末廣町（G14）坐銀座線過去。航班延誤的話就致電沙龍：優惠券不接受當日取消，遲到超過 10 分鐘可能被取消預約。",
         "剪完髮：由表參道（G02）坐銀座線直達淺草（G19），約 30 分鐘。淺草寺的本堂和五重塔由日落亮燈至 23:00，沒有白天的人潮。",
         "在淺草寺旁的ホッピー通り（煮込み通り）吃晚餐：坐在戶外吃牛筋和內臟燉菜，毋須預約。回程：由淺草（G19）坐銀座線到末廣町（G14），不用轉車。",
+        "如果攤檔坐滿：同一條街的浅草酒場 岡本有 94 個座位，室內和室外都有，開到 23:00（最後點餐 22:30）。或者回程時去上野廣小路（G15）附近的多古久吃關東煮，末廣町前一個站：開到 23:00，14 個座位，只收現金。",
         "Clara 的六本木之夜改到星期三：森美術館今天 17:00 關門（美術館官方網站），而沙龍佔了羅浮宮展的時段。羅浮宮展（尚未購票）取消；展覽至 12 月 13 日。",
         "或者照 Clara 原本的計劃，今晚改去六本木，不去淺草：六本木新城聖誕市集開到 21:00，けやき坂燈飾亮到 23:00。"
       ]
@@ -392,6 +394,8 @@
     "nov26-1127-brett": { "note_en": "Brett: cut, ¥5,850, about an hour. Bags to the hotel first, then the Ginza line from Suehirocho (G14) to Omotesando (G02). Then Cat Street, close by, while Clara finishes.", "note": "Brett：剪髮，¥5,850，約一小時。先把行李放回酒店，再由末廣町（G14）坐銀座線到表參道（G02）。剪完可到附近的貓街逛逛，等 Clara 完成。" },
     "nov26-1127-sensoji": { "note_en": "The main hall and the five-storey pagoda are lit until 23:00.", "note": "本堂和五重塔亮燈至 23:00。" },
     "nov26-1127-hoppy": { "note_en": "Walk-in stews at outdoor tables. Home: the Ginza line from Asakusa (G19) to Suehirocho (G14), no change.", "note": "毋須預約，坐在戶外吃燉菜。回程：由淺草（G19）坐銀座線到末廣町（G14），不用轉車。" },
+    "nov26-1127-okamoto": { "note_en": "Or here, on the same street, if the stalls are full: 94 seats indoors and out, open until 23:00 (last order 22:30), English menu. Book on Gurunavi or call 050-5485-9734.", "note": "如果攤檔坐滿，可改去同一條街的這間：室內外共 94 個座位，開到 23:00（最後點餐 22:30），有英文菜單。在 Gurunavi 預約或致電 050-5485-9734。" },
+    "nov26-1127-takokyu": { "note_en": "Or oden on the way home: get off the Ginza line at Ueno-hirokoji (G15), one stop before Suehirocho. Open until 23:00, 14 seats, cash only. Call 03-3831-5088 from 12:00 on the day to book.", "note": "或者回程時吃關東煮：坐銀座線在上野廣小路（G15）下車，末廣町前一個站。開到 23:00，14 個座位，只收現金。當日 12:00 起致電 03-3831-5088 訂位。" },
     "7d985a01-0199-4eeb-afb0-8cabfe5abc3d": { "note_en": "Moved from Friday: it closes at 17:00 on 27 Nov. Open until 22:00 tonight, last entry 21:30. Timed tickets online, not bought yet.", "note": "由星期五改到這裡：11 月 27 日 17:00 關門。今晚開到 22:00，最後入場 21:30。網上購買時段門票，尚未購票。" },
     "e85bb3d8-f37c-4a24-82f5-9aaac5d3818c": { "note_en": "Until 21:00: glühwein, sausages and stollen for dinner.", "note": "開到 21:00：熱紅酒、香腸和史多倫麵包當晚餐。" },
     "nov26-1128-souen": { "note_en": "Walk-in. Seasonal blends, matcha or bancha by the cup.", "note": "毋須預約。按杯點季節調配茶、抹茶或番茶。" },

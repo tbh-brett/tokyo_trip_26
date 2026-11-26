@@ -732,6 +732,40 @@
     "source": "general-knowledge"
   },
   {
+    "id": "okamoto",
+    "name_ja": "浅草酒場 岡本 ホッピー通り店",
+    "name_en": "Asakusa Sakaba Okamoto, Hoppy Street",
+    "kind": "eat",
+    "zone": "asakusa",
+    "station": "Asakusa",
+    "line": "ginza",
+    "recognition": "Stew since 1959",
+    "why": "94 seats on Hoppy Street, indoors and out, serving the beef-tendon and offal stew they've made since 1959. English menu and English-speaking staff.",
+    "note": "Open daily: Mon–Sat 11:00–23:00 (last order 22:30), Sun until 22:30 (last order 22:00). Courses with all-you-can-drink from ¥3,000. Cards OK. Book on Gurunavi or call 050-5485-9734.",
+    "price": "About ¥2,000 on average",
+    "slots": [
+      "lunch",
+      "dinner",
+      "late"
+    ],
+    "hours": [
+      [
+        "11:00",
+        "23:00"
+      ]
+    ],
+    "closed_days": [],
+    "hours_verified": true,
+    "book_ahead": false,
+    "address_ja": "〒111-0032 東京都台東区浅草1-40-7",
+    "address_precision": "street",
+    "address_verified": false,
+    "lat": null,
+    "lng": null,
+    "coords_verified": false,
+    "source": "https://r.gnavi.co.jp/gcps200/"
+  },
+  {
     "id": "tengoku",
     "name_ja": "珈琲 天国",
     "name_en": "Coffee Tengoku",
